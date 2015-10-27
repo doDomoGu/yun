@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
@@ -15,9 +14,9 @@ class SiteController extends BaseController
     public function behaviors()
     {
         return [
-            'access' => [
+            /*'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout','index'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
@@ -25,7 +24,7 @@ class SiteController extends BaseController
                         'roles' => ['@'],
                     ],
                 ],
-            ],
+            ],*/
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -55,8 +54,6 @@ class SiteController extends BaseController
 
     public function actionIndex()
     {
-
-
         return $this->render('index');
     }
 

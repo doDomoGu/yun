@@ -37,10 +37,11 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             //'enableStrictParsing' => true,
-            'showScriptName' => false,
-            /*'rules' => [
+            //'showScriptName' => false,
+            'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-            ],*/
+                '<controller:\w+>sdd' => '<controller>/index',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
