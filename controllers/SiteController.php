@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
+
 
 class SiteController extends BaseController
 {
@@ -54,6 +56,9 @@ class SiteController extends BaseController
 
     public function actionIndex()
     {
+        /*$username = 'admin';
+        $user = User::findByUsername($username);
+        var_dump($user->getId());exit;*/
         return $this->render('index');
     }
 
