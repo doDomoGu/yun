@@ -1,6 +1,7 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
+$urlRules = require(__DIR__ . '/url_rules.php');
 
 $config = [
     'id' => 'basic',
@@ -38,11 +39,7 @@ $config = [
             'enablePrettyUrl' => true,
             //'enableStrictParsing' => true,
             //'showScriptName' => false,
-            'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-                '/'=>'site/index',
-                //'<controller:\w+>/about22' => '<controller>/about',
-            ],
+            'rules' => $urlRules,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

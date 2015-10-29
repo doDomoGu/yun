@@ -40,7 +40,7 @@ if(Yii::$app->user->isGuest){
         'items' => [
                 [
                     'label' => '个人中心(' . Yii::$app->user->identity->username.')',
-                    'url'   => ['/user']
+                    'url'   => ['/user/index']
                 ],
                 [
                     'label' => '退出',

@@ -10,7 +10,6 @@ class UserController extends BaseController
 {
     public function actionIndex()
     {
-        echo 'message';exit;
         return $this->render('index');
     }
 
