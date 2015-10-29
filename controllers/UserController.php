@@ -10,7 +10,10 @@ class UserController extends BaseController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
+
+
+        return $this->render('index',array('user'=>$user));
     }
 
 }
