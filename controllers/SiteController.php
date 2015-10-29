@@ -12,7 +12,6 @@ use app\models\User;
 
 class SiteController extends BaseController
 {
-    public $layout = 'main_site';
     public function behaviors()
     {
         return [

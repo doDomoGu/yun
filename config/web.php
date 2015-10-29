@@ -40,7 +40,8 @@ $config = [
             //'showScriptName' => false,
             'rules' => [
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
-                '<controller:\w+>sdd' => '<controller>/index',
+                '/'=>'site/index',
+                //'<controller:\w+>/about22' => '<controller>/about',
             ],
         ],
         'log' => [
