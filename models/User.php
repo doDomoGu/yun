@@ -24,5 +24,5 @@ class User extends \yii\db\ActiveRecord
 `status` tinyint(1) NOT NULL DEFAULT '0',
 PRIMARY KEY (`id`),
 UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8*/
+) ENGINE=InnoDB DEFAULT CHARSET=utf8*/
 }
