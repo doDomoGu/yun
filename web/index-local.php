@@ -11,6 +11,17 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
-$config = require(__DIR__ . '/../tests/codeception/config/acceptance.php');
+
+
+$urlRules = require(__DIR__ . '/../config/url_rules.php');
+$mail = require(__DIR__ . '/../config/local/mail.php');
+$db = require(__DIR__ . '/../config/local/db.php');
+$params = yii\helpers\ArrayHelper::merge(
+    require(__DIR__ . '/../config/params.php'),
+    require(__DIR__ . '/../config/local/params.php')
+);
+$config = require(__DIR__ . '/../config/web.php');
+
+//$config = require(__DIR__ . '/../tests/codeception/config/acceptance.php');
 
 (new yii\web\Application($config))->run();
