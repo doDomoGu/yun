@@ -20,7 +20,7 @@
                         <td class="text-right">邮箱</td>
                         <td>
                             <?=$user->username?>
-                            <a class="btn btn-xs btn-primary " href="/user/resetPassword">修改密码</a>
+                            <a class="btn btn-xs btn-primary " href="<?=Yii::$app->urlManager->createUrl(['user/change-password']);?>">修改密码</a>
                         </td>
                     </tr>
                     <tr>

@@ -11,16 +11,12 @@ class BaseController extends Controller
         if (!parent::beforeAction($action)) {
             return false;
         }
-        //美化Url去除index.php脚本字符
-        \Yii::$app->urlManager->showScriptName = false;
-//var_dump(Yii::$app);exit;
-//var_dump(Yii::$app->actionMethod);exit;
+
         if(!$this->checkLogin()){
             return false;
         }
 
 
-        Yii::$app->language = 'zh-CN';
         return true;
     }
 

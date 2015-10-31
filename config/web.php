@@ -4,7 +4,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-
+    'language' => 'zh-CN',
     /*'catchAll' => [
         'stop/notice',
         'param1' => 'value1',
@@ -29,7 +29,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             //'enableStrictParsing' => true,
-            //'showScriptName' => false,
+            'showScriptName' => false,
             'rules' => $urlRules,
         ],
         'log' => [

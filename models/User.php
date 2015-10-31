@@ -4,7 +4,10 @@ namespace app\models;
 
 class User extends \yii\db\ActiveRecord
 {
-
+    public function validatePassword($password)
+    {
+        return $this->password === md5($password);
+    }
 /*CREATE TABLE `user` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `username` varchar(100) NOT NULL,

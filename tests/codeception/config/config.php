@@ -14,13 +14,13 @@ return [
     ],
     'components' => [
         'db' => [
-            //'dsn' => 'mysql:host=localhost;dbname=songtangyun2',
+            'dsn' => 'mysql:host=localhost;dbname=yii2test',
         ],
         'mailer' => [
-            //'useFileTransport' => true,
+            'useFileTransport' => true,
         ],
         'urlManager' => [
-            //'showScriptName' => true,
+            'showScriptName' => true,
         ],
     ],
 ];
