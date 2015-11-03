@@ -53,6 +53,7 @@ class ManageController extends BaseController
         /*$username = 'admin';
         $user = User::findByUsername($username);
         var_dump($user->getId());exit;*/
+
         return $this->render('index');
     }
 

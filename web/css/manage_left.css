@@ -1,0 +1,15 @@
+.list-group-item a{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.submenu a:hover, .submenu a:active, .submenu a.active, .submenu a.active:hover, .submenu a.active:active {
+    background: #44b5f6;
+    border-color: #44b5f6;
+    border-radius: 0;
+    color: #fff;
+}
