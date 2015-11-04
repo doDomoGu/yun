@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\News;
 use Yii;
 
 
@@ -56,5 +57,12 @@ class ManageController extends BaseController
 
         return $this->render('index');
     }
+
+    public function actionNews(){
+        $list = News::find()->all();
+
+        return $this->render('news',['list'=>$list]);
+    }
+
 
 }
