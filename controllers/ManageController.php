@@ -64,5 +64,23 @@ class ManageController extends BaseController
         return $this->render('news',['list'=>$list]);
     }
 
+    public function actionNewsAdd(){
+        $model = new NewsForm();
+        $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
+        $model->id = $user->id;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $user->password = md5($model->password_new);
+            if($user->save()){
+                Yii::$app->user->logout();
+                Yii::$app->response->redirect('/site/login')->send();
+            }
+        }
+        $params['model'] = $model;
+        return $this->render('change_password',$params);
+    }
+
+    public function actionNewsEdit(){
+
+    }
 
 }
