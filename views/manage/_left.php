@@ -4,14 +4,14 @@
         管理中心
     </a>
     <div class="submenu">
-        <a class="list-group-item <?=Yii::$app->controller->route==='manage/news'?'active':''?>" href="/manage/news">
+        <a class="list-group-item <?=substr(Yii::$app->controller->route,0,11)==='manage/news'?'active':''?>" href="/manage/news">
             首页新闻
         </a>
-        <a class="list-group-item" href="/manage/recruitment">
+        <a class="list-group-item <?=substr(Yii::$app->controller->route,0,18)==='manage/recruitment'?'active':''?>" href="/manage/recruitment">
             招聘信息
         </a>
-        <a class="list-group-item" href="/manage/recruitment">
+        <!--<a class="list-group-item" href="/manage/recruitment">
             管理中心
-        </a>
+        </a>-->
     </div>
 </div>

@@ -8,46 +8,41 @@ use yii\base\Model;
 class NewsForm extends Model
 {
     public $id;
-    public $password;
-    public $password_new;
-    public $password_new2;
+    public $title;
+    public $content;
+    public $img_url;
+    public $link_url;
+    public $ord;
+    public $status;
+    public $add_time;
+    public $edit_time;
+/*`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`title` varchar(255) NOT NULL COMMENT '标题',
+`content` text NOT NULL COMMENT '内容',
+`img_url` varchar(1000) NOT NULL COMMENT '图片地址',
+`link_url` varchar(1000) NOT NULL COMMENT '链接地址',
+`ord` tinyint(4) unsigned NOT NULL COMMENT '排序',
+`status` tinyint(1) unsigned NOT NULL COMMENT '状态',
+`add_time` datetime NOT NULL,
+`edit_time` datetime NOT NULL,*/
 
-    private $_user = false;
+    public function attributeLabels(){
+        return [
+            'title' => '标题',
+            'content' => '内容',
+            'img_url' => '图片',
+            'link_url' => '链接',
+            'ord' => '排序',
+            'status' => '状态',
+        ];
+    }
 
     public function rules()
     {
         return [
-            [['password', 'password_new', 'password_new2'], 'required'],
-            ['password','validatePassword'],
-            ['password_new2','compare','compareAttribute'=>'password_new']
+            [['title', 'content', 'ord', 'status'], 'required'],
+            [['ord', 'status'], 'integer'],
         ];
     }
 
-    public function validatePassword($attribute)
-    {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
-            }
-        }
-    }
-
-    public function getUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = User::find()->where(['id'=>$this->id])->one();
-        }
-
-        return $this->_user;
-    }
-
-    public function attributeLabels(){
-        return [
-            'password' => '原密码',
-            'password_new' => '新密码',
-            'password_new2' => '新密码（确认）',
-        ];
-    }
 }

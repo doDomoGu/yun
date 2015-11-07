@@ -18,6 +18,7 @@ class UserController extends BaseController
     }
 
     public function actionChangePassword(){
+        $this->view->title = '修改密码';
         $model = new UserChangePwdForm();
         $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
         $model->id = $user->id;

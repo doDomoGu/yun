@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\News;
+use app\models\NewsForm;
 use Yii;
 
 
@@ -59,15 +60,16 @@ class ManageController extends BaseController
     }
 
     public function actionNews(){
+        $this->view->title = '首页新闻管理';
         $list = News::find()->all();
 
-        return $this->render('news',['list'=>$list]);
+        return $this->render('news/list',['list'=>$list]);
     }
 
     public function actionNewsAdd(){
         $model = new NewsForm();
-        $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
-        $model->id = $user->id;
+        /*$user = User::find()->where(['id'=>Yii::$app->user->id])->one();
+        $model->id = $user->id;*/
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $user->password = md5($model->password_new);
             if($user->save()){
@@ -76,11 +78,18 @@ class ManageController extends BaseController
             }
         }
         $params['model'] = $model;
-        return $this->render('change_password',$params);
+        return $this->render('news/add',$params);
     }
 
     public function actionNewsEdit(){
 
+    }
+
+    public function actionRecruitment(){
+        $this->view->title = '首页新闻管理';
+        $list = News::find()->all();
+
+        return $this->render('news/list',['list'=>$list]);
     }
 
 }
