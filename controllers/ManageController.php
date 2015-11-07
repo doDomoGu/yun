@@ -60,30 +60,61 @@ class ManageController extends BaseController
     }
 
     public function actionNews(){
-        $this->view->title = '首页新闻管理';
-        $list = News::find()->all();
+        $this->view->title = '首页新闻 - 管理列表';
+        $list = News::find()->orderBy('status desc, ord desc, edit_time desc')->all();
 
         return $this->render('news/list',['list'=>$list]);
     }
 
-    public function actionNewsAdd(){
+    public function actionNewsAddAndEdit(){
         $model = new NewsForm();
-        /*$user = User::find()->where(['id'=>Yii::$app->user->id])->one();
-        $model->id = $user->id;*/
+        $news = null;
+        $id = Yii::$app->request->get('id');
+        if($id!=''){
+            $news = News::find()->where(['id'=>$id])->one();
+            if($news){
+                $this->view->title = '首页新闻 - 修改';
+                $model->setAttributes($news->attributes);
+                $news->setScenario('update');
+            }else{
+                Yii::$app->response->redirect('news')->send();
+            }
+        }else{
+            $this->view->title = '首页新闻 - 添加';
+        }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $user->password = md5($model->password_new);
-            if($user->save()){
-                Yii::$app->user->logout();
-                Yii::$app->response->redirect('/site/login')->send();
+            if($news == null){
+                $news = new News();
+                $news->setScenario('create');
+            }
+
+            $news->setAttributes($model->attributes);
+            if($news->save()){
+                Yii::$app->response->redirect('news')->send();
+            }
+        }
+
+        $params['model'] = $model;
+        return $this->render('news/add_and_edit',$params);
+    }
+
+    /*public function actionNewsEdit(){
+        $this->view->title = '首页新闻 - 修改';
+        $id = Yii::$app->request->get('id');
+
+        $model = new NewsForm();
+        $news = News::find()->where(['id'=>$id])->one();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            $news->setAttributes($model->attributes);
+            if($news->save()){
+                Yii::$app->response->redirect('news')->send();
             }
         }
         $params['model'] = $model;
         return $this->render('news/add',$params);
-    }
-
-    public function actionNewsEdit(){
-
-    }
+    }*/
 
     public function actionRecruitment(){
         $this->view->title = '首页新闻管理';

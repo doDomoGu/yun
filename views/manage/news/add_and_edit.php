@@ -10,6 +10,9 @@ $this->params['breadcrumbs'][] = $this->title;*/
         <?=$this->render('../_left')?>
     </div>
     <div class="col-lg-9">
+        <h2>
+            <?=$this->title?>
+        </h2>
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
             'options' => ['class' => 'form-horizontal'],
@@ -24,6 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;*/
         <?= $form->field($model, 'content') ?>
 
         <?= $form->field($model, 'img_url') ?>
+        <?= $form->field($model, 'link_url') ?>
+        <?= $form->field($model, 'ord') ?>
+        <?= $form->field($model, 'status') ?>
 
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">

@@ -41,7 +41,9 @@ class NewsForm extends Model
     {
         return [
             [['title', 'content', 'ord', 'status'], 'required'],
-            [['ord', 'status'], 'integer'],
+            [['id', 'ord', 'status'], 'integer'],
+            [['add_time', 'edit_time', 'img_url', 'link_url'], 'safe']
+
         ];
     }
 
