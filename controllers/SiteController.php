@@ -43,7 +43,6 @@ class SiteController extends BaseController
             ],
             'test' => [
                 'class' => 'app\controllers\site\TestAction',
-                /*'view' => 'error'*/
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
