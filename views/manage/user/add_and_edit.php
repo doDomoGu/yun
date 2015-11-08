@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
             <?=$this->title?>
         </h2>
         <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
+            'id' => 'user-form',
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
                 'template' => "{label}\n<div class=\"col-lg-5\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>",
@@ -22,12 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;*/
             ],
         ]); ?>
 
-        <?= $form->field($model, 'title') ?>
+        <?= $form->field($model, 'username') ?>
 
-        <?= $form->field($model, 'content') ?>
+        <?= $form->field($model, 'password') ?>
 
-        <?= $form->field($model, 'img_url') ?>
-        <?= $form->field($model, 'link_url') ?>
+        <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'position_id') ?>
+        <?= $form->field($model, 'gender') ?>
+        <?= $form->field($model, 'mobile') ?>
+        <?= $form->field($model, 'phone') ?>
+        <?= $form->field($model, 'describe')->textarea() ?>
         <?= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
         ])->dropDownList([5=>5,4=>4,3=>3,2=>2,1=>1])  ?>

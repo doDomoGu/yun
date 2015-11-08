@@ -49,6 +49,9 @@ class ManageController extends BaseController
             'user' => [
                 'class' => 'app\controllers\manage\userAction',
             ],
+            'user-add-and-edit' => [
+                'class' => 'app\controllers\manage\userAddAndEditAction',
+            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,

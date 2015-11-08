@@ -14,7 +14,7 @@ class NewsAddAndEditAction extends Action{
         if($id!=''){
             $news = News::find()->where(['id'=>$id])->one();
             if($news){
-                $this->controller->view->title = '首页新闻 - 修改';
+                $this->controller->view->title = '首页新闻 - 编辑';
                 $model->setAttributes($news->attributes);
                 $news->setScenario('update');
             }else{

@@ -8,6 +8,38 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->password === md5($password);
     }
+
+    public function attributeLabels(){
+        return [
+            'username' => '用户名(邮箱)',
+            'password' => '密码',
+            'reg_code' => '注册码',
+            'forgetpw_code' => '忘记密码验证码',
+            'name' => '姓名',
+            //'is_admin' => '是否为管理员',
+            'position_id' => '职位',
+            'gender' => '性别',
+            'birthday' => '生日',
+            'join_date' => '入职日期',
+            'mobile' => '联系手机',
+            'phone' => '联系电话',
+            'describe' => '其他备注',
+            'ord' => '排序',
+            'status' => '状态'
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            [['username', 'password', 'name', 'ord', 'status'], 'required'],
+            [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
+            [['reg_code', 'forgetpw_code'],'default','value'=>''],
+            [['reg_code', 'forgetpw_code', 'join_date', 'mobile', 'phone', 'describe'], 'safe']
+
+        ];
+    }
+
 /*CREATE TABLE `user` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `username` varchar(100) NOT NULL,

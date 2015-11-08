@@ -14,7 +14,7 @@ class RecruitmentAddAndEditAction extends Action{
         if($id!=''){
             $recruitment = Recruitment::find()->where(['id'=>$id])->one();
             if($recruitment){
-                $this->controller->view->title = '招聘信息 - 修改';
+                $this->controller->view->title = '招聘信息 - 编辑';
                 $model->setAttributes($recruitment->attributes);
                 $recruitment->setScenario('update');
             }else{
