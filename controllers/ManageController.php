@@ -44,6 +44,12 @@ class ManageController extends BaseController
             'news-add-and-edit' => [
                 'class' => 'app\controllers\manage\newsAddAndEditAction',
             ],
+            'recruitment' => [
+                'class' => 'app\controllers\manage\recruitmentAction',
+            ],
+            'recruitment-add-and-edit' => [
+                'class' => 'app\controllers\manage\recruitmentAddAndEditAction',
+            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
@@ -59,33 +65,4 @@ class ManageController extends BaseController
 
         return $this->render('index');
     }
-
-    public function actionRecruitment(){
-        $this->view->title = '首页新闻管理';
-        $list = News::find()->all();
-
-        return $this->render('news/list',['list'=>$list]);
-    }
-
-
-    /*public function actionNewsEdit(){
-        $this->view->title = '首页新闻 - 修改';
-        $id = Yii::$app->request->get('id');
-
-        $model = new NewsForm();
-        $news = News::find()->where(['id'=>$id])->one();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
-            $news->setAttributes($model->attributes);
-            if($news->save()){
-                Yii::$app->response->redirect('news')->send();
-            }
-        }
-        $params['model'] = $model;
-        return $this->render('news/add',$params);
-    }*/
-
-
-
 }

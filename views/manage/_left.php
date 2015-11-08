@@ -10,8 +10,14 @@
         <a class="list-group-item <?=substr(Yii::$app->controller->route,0,18)==='manage/recruitment'?'active':''?>" href="/manage/recruitment">
             招聘信息
         </a>
-        <!--<a class="list-group-item" href="/manage/recruitment">
-            管理中心
-        </a>-->
+        <a class="list-group-item <?=substr(Yii::$app->controller->route,0,18)==='manage/recruitment3'?'active':''?>" href="/manage/recruitment">
+            招聘信息
+        </a>
+        <a class="list-group-item <?=substr(Yii::$app->controller->route,0,18)==='manage/recruitment4'?'active':''?>" href="/manage/recruitment">
+            招聘信息
+        </a>
+        <a class="list-group-item <?=substr(Yii::$app->controller->route,0,18)==='manage/recruitment5'?'active':''?>" href="/manage/recruitment">
+            招聘信息
+        </a>
     </div>
 </div>

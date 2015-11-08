@@ -25,7 +25,11 @@ echo Nav::widget([
         ['label' => '首页', 'url' => ['site/index']],
         /*['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],*/
-        ['label' => '管理中心', 'url' => ['/manage/index']],
+        [
+            'label' => '管理中心',
+            'url' => ['/manage/index'],
+            'active' => substr(Yii::$app->controller->route,0,6)==='manage'?true:false
+        ],
     ]
 ]);
 
