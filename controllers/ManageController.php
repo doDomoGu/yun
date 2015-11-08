@@ -62,7 +62,7 @@ class ManageController extends BaseController
         /*$username = 'admin';
         $user = User::findByUsername($username);
         var_dump($user->getId());exit;*/
-
+        $this->view->title = '管理中心';
         return $this->render('index');
     }
 }

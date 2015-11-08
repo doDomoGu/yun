@@ -26,9 +26,9 @@ echo Nav::widget([
         /*['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],*/
         [
-            'label' => '管理中心',
+            'label' => '管理中心*',
             'url' => ['/manage/index'],
-            'active' => substr(Yii::$app->controller->route,0,6)==='manage'?true:false
+            'active' => strpos(Yii::$app->controller->route,'manage')===0?true:false
         ],
     ]
 ]);
@@ -46,7 +46,8 @@ if(Yii::$app->user->isGuest){
         'items' => [
                 [
                     'label' => '个人中心(' . Yii::$app->user->identity->username.')',
-                    'url'   => ['/user/index']
+                    'url'   => ['/user/index'],
+                    'active' => strpos(Yii::$app->controller->route,'user')===0?true:false
                 ],
                 [
                     'label' => '退出',
