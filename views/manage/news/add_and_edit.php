@@ -28,8 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;*/
 
         <?= $form->field($model, 'img_url') ?>
         <?= $form->field($model, 'link_url') ?>
-        <?= $form->field($model, 'ord') ?>
-        <?= $form->field($model, 'status') ?>
+        <?= $form->field($model, 'ord',[
+            'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
+        ])->dropDownList([5=>5,4=>4,3=>3,2=>2,1=>1])  ?>
+        <?= $form->field($model, 'status',[
+            'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
+        ])->dropDownList([0=>'禁用',1=>'启用']) ?>
 
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
