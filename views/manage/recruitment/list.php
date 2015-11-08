@@ -30,7 +30,7 @@ use yii\bootstrap\BaseHtml;
                     <td><?=$l->ord?></td>
                     <td><?=$l->add_time?></td>
                     <td><?=$l->edit_time?></td>
-                    <td><?=BaseHtml::a('编辑',['recruitment-add-and-edit','id'=>$l->id])?></td>
+                    <td><?=BaseHtml::a('编辑',['recruitment-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>

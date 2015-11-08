@@ -30,7 +30,7 @@ use yii\bootstrap\BaseHtml;
                     <td><?=$l->position_id?></td>
                     <td><?=$l->mobile?></td>
                     <td><?=$l->status==1?'正常':'禁用'?></td>
-                    <td><?=BaseHtml::a('编辑',['user-add-and-edit','id'=>$l->id])?></td>
+                    <td><?=BaseHtml::a('编辑',['user-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>
