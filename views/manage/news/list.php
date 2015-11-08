@@ -30,7 +30,7 @@ use yii\bootstrap\BaseHtml;
                     <td><?=$l->ord?></td>
                     <td><?=$l->add_time?></td>
                     <td><?=$l->edit_time?></td>
-                    <td><?=BaseHtml::a('修改',['news-add-and-edit','id'=>$l->id])?></td>
+                    <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id])?></td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>

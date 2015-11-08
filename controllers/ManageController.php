@@ -34,10 +34,6 @@ class ManageController extends BaseController
     public function actions()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-                /*'view' => 'error'*/
-            ],
             'news' => [
                 'class' => 'app\controllers\manage\newsAction',
             ],
@@ -49,6 +45,9 @@ class ManageController extends BaseController
             ],
             'recruitment-add-and-edit' => [
                 'class' => 'app\controllers\manage\recruitmentAddAndEditAction',
+            ],
+            'user' => [
+                'class' => 'app\controllers\manage\userAction',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
