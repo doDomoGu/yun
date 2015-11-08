@@ -6,7 +6,7 @@ use yii\bootstrap\BaseHtml;
         <?=$this->render('../_left')?>
     </div>
     <div class="col-lg-9">
-        <?=BaseHtml::a('添加新闻',['news-add-and-edit'],['class'=>'btn btn-primary'])?>
+        <?=BaseHtml::a('添加招聘信息',['recruitment-add-and-edit'],['class'=>'btn btn-primary'])?>
         <p></p>
         <table class="table table-bordered">
             <thead>
@@ -30,7 +30,7 @@ use yii\bootstrap\BaseHtml;
                     <td><?=$l->ord?></td>
                     <td><?=$l->add_time?></td>
                     <td><?=$l->edit_time?></td>
-                    <td><?=BaseHtml::a('修改',['news-add-and-edit','id'=>$l->id])?></td>
+                    <td><?=BaseHtml::a('修改',['recruitment-add-and-edit','id'=>$l->id])?></td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>

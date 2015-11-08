@@ -3,39 +3,39 @@ namespace app\controllers\manage;
 
 use Yii;
 use yii\base\Action;
-use app\models\NewsForm;
-use app\models\News;
+use app\models\RecruitmentForm;
+use app\models\Recruitment;
 
-class NewsAddAndEditAction extends Action{
+class RecruitmentAddAndEditAction extends Action{
     public function run(){
-        $model = new NewsForm();
-        $news = null;
+        $model = new RecruitmentForm();
+        $recruitment = null;
         $id = Yii::$app->request->get('id');
         if($id!=''){
-            $news = News::find()->where(['id'=>$id])->one();
-            if($news){
-                $this->controller->view->title = '首页新闻 - 修改';
-                $model->setAttributes($news->attributes);
-                $news->setScenario('update');
+            $recruitment = Recruitment::find()->where(['id'=>$id])->one();
+            if($recruitment){
+                $this->controller->view->title = '招聘信息 - 修改';
+                $model->setAttributes($recruitment->attributes);
+                $recruitment->setScenario('update');
             }else{
-                Yii::$app->response->redirect('news')->send();
+                Yii::$app->response->redirect('recruitment')->send();
             }
         }else{
-            $this->controller->view->title = '首页新闻 - 添加';
+            $this->controller->view->title = '招聘信息 - 添加';
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if($news == null){
-                $news = new News();
-                $news->setScenario('create');
+            if($recruitment == null){
+                $recruitment = new Recruitment();
+                $recruitment->setScenario('create');
             }
 
-            $news->setAttributes($model->attributes);
-            if($news->save()){
-                Yii::$app->response->redirect('news')->send();
+            $recruitment->setAttributes($model->attributes);
+            if($recruitment->save()){
+                Yii::$app->response->redirect('recruitment')->send();
             }
         }
 
         $params['model'] = $model;
-        return $this->controller->render('news/add_and_edit',$params);
+        return $this->controller->render('recruitment/add_and_edit',$params);
     }
 }
