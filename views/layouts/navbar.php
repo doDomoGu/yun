@@ -1,6 +1,7 @@
 <?php
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\BaseHtml;
 ?>
 
 <?php if(Yii::$app->user->isGuest):?>
@@ -12,7 +13,7 @@ use yii\bootstrap\NavBar;
 
 <?php
 NavBar::begin([
-    'brandLabel' => 'LOGO',
+    'brandLabel' => BaseHtml::img('/images/logo.png',['style'=>'width:98px;']),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-inverse navbar-fixed-top',
@@ -22,8 +23,8 @@ echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => [
         ['label' => '首页', 'url' => ['site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        /*['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'Contact', 'url' => ['/site/contact']],*/
         ['label' => '管理中心', 'url' => ['/manage/index']],
     ]
 ]);
