@@ -70,8 +70,8 @@ UNIQUE KEY `username_UNIQUE` (`username`)
         return [
             [['username', 'password', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
+            ['username','email'],
             [['reg_code', 'forgetpw_code', 'join_date', 'mobile', 'phone', 'describe'], 'safe']
-
         ];
     }
 

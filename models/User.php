@@ -34,6 +34,7 @@ class User extends \yii\db\ActiveRecord
         return [
             [['username', 'password', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
+            ['username','email'],
             [['reg_code', 'forgetpw_code'],'default','value'=>''],
             [['reg_code', 'forgetpw_code', 'join_date', 'mobile', 'phone', 'describe'], 'safe']
 
