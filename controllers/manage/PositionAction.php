@@ -15,10 +15,9 @@ class PositionAction extends Action{
         }
 
 
-        $this->controller->view->title = '首页新闻 - 管理列表';
-        $list = [];
-        //$list = News::find()->orderBy('status desc, ord desc, edit_time desc')->all();
+        $this->controller->view->title = '职位/部门 - 列表';
+        $list = Position::find()->orderBy('')->limit(10)->all();
 
-        return $this->controller->render('news/list',['list'=>$list]);
+        return $this->controller->render('position/list',['list'=>$list]);
     }
 }
