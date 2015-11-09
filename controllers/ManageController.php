@@ -8,6 +8,7 @@ use Yii;
 
 class ManageController extends BaseController
 {
+    public $layout = 'main_manage';
     public function behaviors()
     {
         return [

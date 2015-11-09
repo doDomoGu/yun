@@ -5,11 +5,6 @@
 $this->params['breadcrumbs'][] = ['label'=>'个人中心','url'=>'/user'];
 $this->params['breadcrumbs'][] = $this->title;*/
 ?>
-<div class="row">
-    <div class="col-lg-3">
-        <?=$this->render('../_left')?>
-    </div>
-    <div class="col-lg-9">
         <h2>
             <?=$this->title?>
         </h2>
@@ -42,5 +37,3 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </div>
 
         <?php ActiveForm::end(); ?>
-    </div>
-</div>

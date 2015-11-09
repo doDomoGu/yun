@@ -5,11 +5,7 @@
 $this->params['breadcrumbs'][] = ['label'=>'个人中心','url'=>'/user'];
 $this->params['breadcrumbs'][] = $this->title;*/
 ?>
-<div class="row">
-    <div class="col-lg-3">
-        <?=$this->render('../_left')?>
-    </div>
-    <div class="col-lg-9">
+
         <h2>
             <?=$this->title?>
         </h2>
@@ -28,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
 
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'position_id') ?>
-        <?= $form->field($model, 'gender') ?>
+        <?= $form->field($model, 'gender')->dropDownList([0=>'N/A',1=>'男',2=>'女']) ?>
         <?= $form->field($model, 'mobile') ?>
         <?= $form->field($model, 'phone') ?>
         <?= $form->field($model, 'describe')->textarea() ?>
@@ -46,5 +42,3 @@ $this->params['breadcrumbs'][] = $this->title;*/
         </div>
 
         <?php ActiveForm::end(); ?>
-    </div>
-</div>

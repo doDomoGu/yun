@@ -10,7 +10,7 @@ class CommonFunc extends Component {
         }elseif($type==2){
             return '女';
         }else{
-            return '--';
+            return 'N/A';
         }
     }
 

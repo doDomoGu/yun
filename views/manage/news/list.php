@@ -1,11 +1,6 @@
 <?php
 use yii\bootstrap\BaseHtml;
 ?>
-<div class="row">
-    <div class="col-lg-3">
-        <?=$this->render('../_left')?>
-    </div>
-    <div class="col-lg-9">
         <?=BaseHtml::a('添加新闻',['news-add-and-edit'],['class'=>'btn btn-primary'])?>
         <p></p>
         <table class="table table-bordered">
@@ -36,5 +31,3 @@ use yii\bootstrap\BaseHtml;
             <?php endif;?>
             </tbody>
         </table>
-    </div>
-</div>

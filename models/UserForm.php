@@ -57,8 +57,8 @@ UNIQUE KEY `username_UNIQUE` (`username`)
             'gender' => '性别',
             'birthday' => '生日',
             'join_date' => '入职日期',
-            'mobile' => '联系手机',
-            'phone' => '联系电话',
+            'mobile' => '联系电话(手机)',
+            'phone' => '联系电话(座机)',
             'describe' => '其他备注',
             'ord' => '排序',
             'status' => '状态'
