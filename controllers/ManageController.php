@@ -42,16 +42,16 @@ class ManageController extends BaseController
                 'class' => 'app\controllers\manage\NewsAddAndEditAction',
             ],
             'recruitment' => [
-                'class' => 'app\controllers\manage\recruitmentAction',
+                'class' => 'app\controllers\manage\RecruitmentAction',
             ],
             'recruitment-add-and-edit' => [
-                'class' => 'app\controllers\manage\recruitmentAddAndEditAction',
+                'class' => 'app\controllers\manage\RecruitmentAddAndEditAction',
             ],
             'user' => [
-                'class' => 'app\controllers\manage\userAction',
+                'class' => 'app\controllers\manage\UserAction',
             ],
             'user-add-and-edit' => [
-                'class' => 'app\controllers\manage\userAddAndEditAction',
+                'class' => 'app\controllers\manage\UserAddAndEditAction',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
