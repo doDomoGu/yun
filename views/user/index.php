@@ -19,12 +19,13 @@
                     <td class="text-right">邮箱</td>
                     <td>
                         <?=$user->username?>
+                        &nbsp;&nbsp;
                         <a class="btn btn-xs btn-primary " href="<?=Yii::$app->urlManager->createUrl(['user/change-password']);?>">修改密码</a>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-right">职位</td>
-                    <td><?=$user->name?>  --------</td>
+                    <td><?=CommonFunc::getPositionRoute($user->position_id)?></td>
                 </tr>
                 <tr>
                     <td class="text-right">性别</td>
