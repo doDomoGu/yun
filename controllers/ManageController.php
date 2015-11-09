@@ -36,10 +36,10 @@ class ManageController extends BaseController
     {
         return [
             'news' => [
-                'class' => 'app\controllers\manage\newsAction',
+                'class' => 'app\controllers\manage\NewsAction',
             ],
             'news-add-and-edit' => [
-                'class' => 'app\controllers\manage\newsAddAndEditAction',
+                'class' => 'app\controllers\manage\NewsAddAndEditAction',
             ],
             'recruitment' => [
                 'class' => 'app\controllers\manage\recruitmentAction',
