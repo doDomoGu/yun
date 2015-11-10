@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 
+use app\models\News;
+use app\models\Position;
+use app\models\Recruitment;
+use app\models\User;
 use Yii;
 
 
@@ -65,10 +69,13 @@ class ManageController extends BaseController
 
     public function actionIndex()
     {
-        /*$username = 'admin';
-        $user = User::findByUsername($username);
-        var_dump($user->getId());exit;*/
+        /*$username = 'admin';*/
+        $params['newsCount'] = News::find()->where('status = 1')->count();
+        $params['recruitmentCount'] = Recruitment::find()->where('status = 1')->count();
+        $params['positionCount'] = Position::find()->where('status = 1')->count();
+        $params['userCount'] = User::find()->where('status = 1')->count();
+
         $this->view->title = '管理中心';
-        return $this->render('index');
+        return $this->render('index',$params);
     }
 }
