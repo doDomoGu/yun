@@ -5,6 +5,9 @@
 ?>
         <?=BaseHtml::a('添加职位/部门',['position-add-and-edit'],['class'=>'btn btn-primary'])?>
         <p></p>
+
+        业态选择：<?=BaseHtml::dropDownList('select-1','',['class'=>'btn btn-primary'])?>
+        <p></p>
         <table class="table table-bordered">
             <thead>
                 <tr>
