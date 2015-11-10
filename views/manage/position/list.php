@@ -1,5 +1,7 @@
 <?php
-use yii\bootstrap\BaseHtml;
+
+    use yii\bootstrap\BaseHtml;
+    use app\components\PositionFunc;
 ?>
         <?=BaseHtml::a('添加职位/部门',['position-add-and-edit'],['class'=>'btn btn-primary'])?>
         <p></p>
@@ -20,7 +22,7 @@ use yii\bootstrap\BaseHtml;
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->ord?></td>
                     <td><?=$l->name?></td>
-                    <td><?=$l->is_leaf?'职位':'部门'?></td>
+                    <td><?=PositionFunc::getIsLeaf($l->is_leaf)?></td>
                     <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>
             <?php endforeach;?>

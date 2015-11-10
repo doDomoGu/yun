@@ -1,5 +1,6 @@
 <?php
     use app\components\CommonFunc;
+    use app\components\PositionFunc;
 ?>
 <div class="row">
     <div class="col-md-3">
@@ -25,7 +26,7 @@
                 </tr>
                 <tr>
                     <td class="text-right">职位</td>
-                    <td><?=CommonFunc::getPositionRoute($user->position_id)?></td>
+                    <td><?=PositionFunc::getFullRoute($user->position_id)?></td>
                 </tr>
                 <tr>
                     <td class="text-right">性别</td>

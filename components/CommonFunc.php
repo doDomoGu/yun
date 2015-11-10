@@ -1,7 +1,6 @@
 <?php
 namespace app\components;
 
-use app\models\Position;
 use yii\base\Component;
 
 class CommonFunc extends Component {
@@ -48,17 +47,4 @@ class CommonFunc extends Component {
         return array($y, $m, $d);
     }
 
-
-    public static function getPositionRoute($pid,$separator=' > '){
-        $str = '';
-        $position = Position::find()->where('id = '.$pid)->one();
-        if($position!==NULL){
-            $str.= self::getPositionRoute($position->p_id,$separator);
-            if($str!=null){
-                $str.= $separator;
-            }
-            $str.= $position->name;
-        }
-        return $str;
-    }
 }

@@ -1,6 +1,7 @@
 <?php
     use yii\bootstrap\BaseHtml;
     use app\components\CommonFunc;
+    use app\components\PositionFunc;
 ?>
 
         <?=BaseHtml::a('新增职员',['user-add-and-edit'],['class'=>'btn btn-primary'])?>
@@ -26,7 +27,7 @@
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->username?></td>
                     <td><?=$l->name?></td>
-                    <td><?=CommonFunc::getPositionRoute($l->position_id)?></td>
+                    <td><?=PositionFunc::getFullRoute($l->position_id)?></td>
                     <td><?=CommonFunc::getGender($l->gender)?></td>
                     <td><?=$l->mobile?></td>
                     <td><?=$l->phone?></td>
