@@ -30,7 +30,7 @@
                     <td><?=$l->ord?></td>
                     <td><?=$l->name?> <span class="badge" title="<?=PositionFunc::getFullRoute($l->id)?>">i</span></td>
                     <td><?=PositionFunc::getIsLeaf($l->is_leaf)?></td>
-                    <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
+                    <td><?=BaseHtml::a('编辑(暂时不可用)',['','id'=>$l->id],['class'=>'btn btn-primary btn-xs disabled'])?></td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>
