@@ -14,14 +14,35 @@ class PositionAction extends Action{
             $p->install();
             exit;
         }
-$time = microtime(true);
+        $p_id = (int)Yii::$app->request->get('p_id');
+
         $posList_1 = PositionFunc::getDropDownList(0,true,false,true,1);
-        $time2 = microtime(true);
-        var_dump($time2-$time);echo "<Br/><br/>";
-var_dump($posList_1);exit;
+
+        $posList_2 = [];
+
+
+        $curPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
+
+        if($curPos){
+            $parents = PositionFunc::getParents($p_id);
+            $posLvl_1 = isset($parents[1])?$parents[1]:null;
+            $posLvl_2 = isset($parents[2]) && $posLvl_1?$parents[2]:null;
+            if($posLvl_1){
+                $posList_2 = PositionFunc::getDropDownList($posLvl_1->id,true,false,true,1);
+            }
+        }else{
+            $posLvl_1 = null;
+            $posLvl_2 = null;
+        }
         $this->controller->view->title = '职位/部门 - 列表';
         $list = Position::find()->orderBy('')->limit(10)->all();
+        $params['list'] = $list;
+        $params['posList_1'] = $posList_1;
+        $params['posList_2'] = $posList_2;
+        $params['posLvl_1'] = $posLvl_1;
+        $params['posLvl_2'] = $posLvl_2;
 
-        return $this->controller->render('position/list',['list'=>$list]);
+
+        return $this->controller->render('position/list',$params);
     }
 }

@@ -75,6 +75,7 @@ class ManageController extends BaseController
         $params['positionCount'] = Position::find()->where('status = 1')->count();
         $params['userCount'] = User::find()->where('status = 1')->count();
 
+
         $this->view->title = '管理中心';
         return $this->render('index',$params);
     }
