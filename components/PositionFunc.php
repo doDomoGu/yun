@@ -15,7 +15,7 @@ class PositionFunc extends Component {
      * return string/null
      */
     public static function getFullRoute($position_id,$separator=' > '){
-        $position = Position::find()->where('id = '.$position_id)->one();
+        $position = Position::find()->where(['id'=>$position_id])->one();
         if($position!==NULL){
             $str = '';
             $str.= self::getFullRoute($position->p_id,$separator);
@@ -90,7 +90,7 @@ class PositionFunc extends Component {
      */
     public static function getListArr($p_id=0,$showLeaf=true,$showTree=false,$includeSelf=false,$level=false){
         $arr = [];
-        $level = (int)$level;
+        $level = $level===false?false:intval($level);
         if($level>0 || $level===false){  //level正整数 或者 false不限制
             $position = NULL;
             if($p_id>0){
@@ -108,7 +108,7 @@ class PositionFunc extends Component {
             if(!empty($list)){
                 $nlevel = $level===false?false: intval($level - 1);
                 foreach($list as $l){
-                    $arr[$l->id] = $l->attributes;
+                    /*$arr[$l->id] = $l->attributes;
                     if($showTree){
                         $prefix = '';
                         if($l['level']>1){
@@ -122,17 +122,37 @@ class PositionFunc extends Component {
                             }
                         }
                         $arr[$l->id]['name'] = $prefix.$l['name'];
+                    }*/
+
+                    $arr[$l->id] = $l;
+                    if($showTree){
+                        $prefix = '';
+                        if($l->level>1){
+                            for($i=1;$i<$l->level;$i++){
+                                $prefix.='&emsp;';
+                            }
+                            if($l->is_last>0){
+                                $prefix.='└─ ';
+                            } else{
+                                $prefix.='├─ ';
+                            }
+                        }
+                        $arr[$l->id]->name = $prefix.$l->name;
                     }
+
                     if($nlevel === false || $nlevel > 0){
                         $children = self::getListArr($l->id,$showLeaf,$showTree,false,$nlevel);
                         $childrenIds = array();
                         if(!empty($children)){
                             foreach($children as $child){
-                                $arr[$child['id']] = $child;
-                                $childrenIds[]=$child['id'];
+                                /*$arr[$child['id']] = $child;
+                                $childrenIds[]=$child['id'];*/
+
+                                $arr[$child->id] = $child;
+                                $childrenIds[]=$child->id;
                             }
                         }
-                        $arr[$l->id]['childrenIds'] = $childrenIds;
+                        $arr[$l->id]->childrenIds = $childrenIds;
                     }
 
                 }

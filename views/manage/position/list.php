@@ -1,15 +1,15 @@
 <?php
-
     use yii\bootstrap\BaseHtml;
     use app\components\PositionFunc;
+    \app\assets\AppAsset::addJsFile($this,'js/manage-position.js');
 ?>
         <?=BaseHtml::a('添加职位/部门',['position-add-and-edit'],['class'=>'btn btn-primary'])?>
         <p></p>
 
-        业态选择：<?=BaseHtml::dropDownList('select-1',$posLvl_1->id,$posList_1)?>
+        业态选择：<?=BaseHtml::dropDownList('pos-select-1',$posLvl_1->id,$posList_1,['encode'=>false,'id'=>'pos-select-1','prompt'=>'===请选择==='])?>
         <?php if(!empty($posList_2)):?>
         <p></p>
-        地方选择：<?=BaseHtml::dropDownList('select-2',$posLvl_2->id,$posList_2,['encode'=>false])?>
+        地方选择：<?=BaseHtml::dropDownList('pos-select-2',$posLvl_2->id,$posList_2,['encode'=>false,'id'=>'pos-select-2','prompt'=>'===请选择==='])?>
         <?php endif;?>
         <p></p>
         <table class="table table-bordered">
@@ -28,7 +28,7 @@
                 <tr>
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->ord?></td>
-                    <td><?=$l->name?></td>
+                    <td><?=$l->name?> <span class="badge" title="<?=PositionFunc::getFullRoute($l->id)?>">i</span></td>
                     <td><?=PositionFunc::getIsLeaf($l->is_leaf)?></td>
                     <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>

@@ -1,4 +1,4 @@
-<?php \app\assets\AppAsset::addCssFile($this,'css/manage_left.css');?>
+<?php \app\assets\AppAsset::addCssFile($this,'css/manage-left.css');?>
 <div class="list-group">
     <a class="list-group-item active" href="/manage">
         管理中心

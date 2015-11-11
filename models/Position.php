@@ -5,6 +5,8 @@ use yii;
 
 class Position extends \yii\db\ActiveRecord
 {
+    public $childrenIds;
+
     public function rules()
     {
         return [

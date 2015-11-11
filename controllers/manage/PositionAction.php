@@ -14,12 +14,15 @@ class PositionAction extends Action{
             $p->install();
             exit;
         }
+        $this->controller->view->title = '职位/部门 - 列表';
+
         $p_id = (int)Yii::$app->request->get('p_id');
 
-        $posList_1 = PositionFunc::getDropDownList(0,true,false,true,1);
+        $posList_1 = PositionFunc::getDropDownList(0,true,false,1);
 
         $posList_2 = [];
 
+        $list = [];
 
         $curPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
 
@@ -28,14 +31,22 @@ class PositionAction extends Action{
             $posLvl_1 = isset($parents[1])?$parents[1]:null;
             $posLvl_2 = isset($parents[2]) && $posLvl_1?$parents[2]:null;
             if($posLvl_1){
-                $posList_2 = PositionFunc::getDropDownList($posLvl_1->id,true,false,true,1);
+               $posList_2 = PositionFunc::getDropDownList($posLvl_1->id,true,false,1);
             }
         }else{
             $posLvl_1 = null;
             $posLvl_2 = null;
         }
-        $this->controller->view->title = '职位/部门 - 列表';
-        $list = Position::find()->orderBy('')->limit(10)->all();
+
+
+        if($curPos && $curPos->level==2){
+
+
+            $list = PositionFunc::getListArr($p_id,true,true,false);
+            //$where = ['p_id'=>$p_id];
+        }
+        //$list = Position::find()->where($where)->orderBy('ord desc,id desc')->limit(10)->all();
+
         $params['list'] = $list;
         $params['posList_1'] = $posList_1;
         $params['posList_2'] = $posList_2;
