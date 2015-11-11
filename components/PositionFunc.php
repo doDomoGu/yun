@@ -195,9 +195,29 @@ class PositionFunc extends Component {
         }
 
         return $arr;
-
-
-        //return Position::find()->where($where)->orderBy($orderBy)->all();
     }
 
+    /*
+    * 函数 handleIsLast , 修改了职位信息后，批量更新is_last字段
+    *
+    * @param integer p_id  父id
+    * no return
+    */
+    public static function handleIsLast($p_id=0){
+        $where['p_id']=$p_id;
+        $where['status']=1;
+        $positions = Position::find()->where($where)->orderBy('ord Desc,id DESC')->all();
+        if(!empty($positions)){
+            Position::updateAll(['is_last'=>0],['p_id'=>$p_id]);
+            $count = count($positions);
+            $i = 0;
+            foreach($positions as $p){
+                $i++;
+                self::handleIsLast($p->id);
+                if($i==$count){
+                    Position::updateAll(['is_last'=>1],['id'=>$p->id]);
+                }
+            }
+        }
+    }
 }

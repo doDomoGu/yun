@@ -14,6 +14,12 @@ class PositionAction extends Action{
             $p->install();
             exit;
         }
+        if(Yii::$app->request->get('handleIsLast')){
+            PositionFunc::handleIsLast();
+            exit;
+        }
+
+
         $this->controller->view->title = '职位/部门 - 列表';
 
         $p_id = (int)Yii::$app->request->get('p_id');
