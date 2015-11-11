@@ -102,13 +102,7 @@ class PositionFunc extends Component {
                 }
             }
 
-
-            $where['p_id'] = $p_id;
-            $where['status'] = 1;
-            if($showLeaf==false)
-                $where['is_leaf'] = 0;
-            $orderBy = 'ord DESC,id DESC';
-            $list = Position::find()->where($where)->orderBy($orderBy)->all();
+            $list = self::getChildren($p_id,$showLeaf);
 
             if(!empty($list)){
                 $nlevel = $level===false?false: intval($level - 1);
@@ -144,5 +138,22 @@ class PositionFunc extends Component {
             }
         }
         return $arr;
+    }
+
+    /*
+     * 函数getChildren ,实现根据 p_id 获取子层级 （单层）
+     *
+     * @param integer p_id 父id (默认 0 )
+     * @param boolean showLeaf 是否显示叶子层级的标志位 (默认true)
+     * @param boolean status 状态 (默认1)
+     * @param string orderBy  排序方法
+     * return array
+     */
+    public static function getChildren($p_id,$showLeaf,$status=1,$orderBy='ord DESC,id DESC'){
+        $where['p_id'] = $p_id;
+        $where['status'] = $status;
+        if($showLeaf==false)
+            $where['is_leaf'] = 0;
+        return Position::find()->where($where)->orderBy($orderBy)->all();
     }
 }
