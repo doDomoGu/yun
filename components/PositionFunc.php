@@ -62,17 +62,17 @@ class PositionFunc extends Component {
         if(!empty($list)){
             foreach($list as $l){
                 $prefix = '';
-                if($l['p_id']>0){
-                    for($i=0;$i<$l['level'];$i++){
+                if($l->p_id>0){
+                    for($i=0;$i<$l->level;$i++){
                         $prefix .='&emsp;';
                     }
-                    if($l['is_last']>0){
+                    if($l->is_last>0){
                         $prefix .='└';
                     }else{
                         $prefix .='├';
                     }
                 }
-                $arr[$l['id']] = $prefix.$l['name'];
+                $arr[$l->id] = $prefix.$l->name;
             }
         }
         return $arr;
@@ -95,7 +95,7 @@ class PositionFunc extends Component {
             $position = NULL;
             if($p_id>0){
                 //根据p_id(父id)查找对应父对象
-                $position = Position::find()->where('id = '.$p_id)->one();
+                $position = Position::find()->where(['id'=>$p_id])->one();
                 if($position==NULL || $position->status==0){ //不存在或者状态禁用则返回空数组
                     return [];
                 }else if($includeSelf===true){ //将自己本身添加至数组

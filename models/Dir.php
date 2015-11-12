@@ -36,6 +36,17 @@ PRIMARY KEY (`id`)
             if($exist){
                 throw new yii\base\Exception('Dir has installed');
             }
+            $arr0 = array(
+                array('n'=>'企业运营中心','c'=>[]),
+                array('n'=>'发展资源中心','c'=>[]),
+                array('n'=>'工具应用中心','c'=>[]),
+                array('n'=>'项目资源中心','c'=>[]),
+                array('n'=>'学习共享中心','c'=>[]),
+            );
+
+            self::initDirTop($arr0);
+
+
 
 
             //业态 业务平台
@@ -128,7 +139,7 @@ PRIMARY KEY (`id`)
                 )
             );
 
-            self::initDir($arr1,0,1,1);
+            self::initDir($arr1,1,2,1);
 
             $arr2 = array(
                 array('n'=>'颂唐-人才资源中心','c'=>array(
@@ -156,7 +167,7 @@ PRIMARY KEY (`id`)
                 )
             );
 
-            self::initDir($arr2,0,1,2);
+            self::initDir($arr2,2,2,2);
 
             $arr3 = array(
                 array('n'=>'颂唐地产','c'=>array(
@@ -202,7 +213,7 @@ PRIMARY KEY (`id`)
                 array('n'=>'华麦建筑','c'=>array())
             );
 
-            self::initDir($arr3,0,1,3);
+            self::initDir($arr3,3,2,3);
 
             $arr4 = array(
                 array('n'=>'执行项目资料中心','c'=>array(
@@ -240,7 +251,7 @@ PRIMARY KEY (`id`)
                 )
                 )
             );
-            self::initDir($arr4,0,1,4);
+            self::initDir($arr4,4,2,4);
 
             $arr5 = array(
                 array('n'=>'公司推荐学习资料库'),
@@ -248,7 +259,7 @@ PRIMARY KEY (`id`)
 
             );
 
-            self::initDir($arr5,0,1,5);
+            self::initDir($arr5,5,2,5);
             return true;
         }catch (\Exception $e)
         {
@@ -279,6 +290,23 @@ PRIMARY KEY (`id`)
             if(isset($a['c'])){
                 self::initDir($a['c'],Yii::$app->db->lastInsertID,$level+1,$type);
             }
+            $ord--;
+            $i++;
+        }
+    }
+
+    public static function initDirTop($arr){
+        $sqlbase = "INSERT IGNORE INTO `dir`(`name`,`p_id`,`type`,`is_leaf`,`level`,`is_last`,`ord`,`status`)
+                VALUES";
+        $ord = 99;
+        $i = 1;
+        foreach($arr as $a){
+            $isLast = $i == count($arr)?1:0;
+            $leaf = isset($a['l']) && $a['l']==1?1:0;
+            $sql =$sqlbase."('".$a['n']."',0,$i,$leaf,1,$isLast,$ord,1)";
+            $cmd = Yii::$app->db->createCommand($sql);
+            $cmd->execute();
+            
             $ord--;
             $i++;
         }

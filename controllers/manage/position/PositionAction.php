@@ -22,7 +22,7 @@ class PositionAction extends Action{
 
         $this->controller->view->title = '职位/部门 - 列表';
 
-        $p_id = (int)Yii::$app->request->get('p_id');
+        $p_id = Yii::$app->request->get('p_id',false);
 
         $posList_1 = PositionFunc::getDropDownList(0,true,false,1);
 

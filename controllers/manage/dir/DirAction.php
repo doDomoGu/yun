@@ -14,14 +14,63 @@ class DirAction extends Action{
             $p->install();
             exit;
         }
-        if(Yii::$app->request->get('handleIsLast')){
+        /*if(Yii::$app->request->get('handleIsLast')){
             DirFunc::handleIsLast();
             exit;
+        }*/
+
+        $this->controller->view->title = '板块目录 - 列表';
+
+        $type_id = Yii::$app->request->get('type_id',false);  //板块
+
+        $dir_id = Yii::$app->request->get('dir_id',false);  //目录
+
+        $typeArr = DirFunc::getCatalogType(true); //板块ID数组
+
+        $list = array();
+
+        if($dir_id!==false && $dir_id>0){ //如果dir_id不为空，可根据dir_id获取type_id
+            $curDir = Dir::find()->where(['id'=>$dir_id])->one();
+            if($curDir){
+                $type_id = $curDir->type;
+            }
         }
 
 
-        $this->controller->view->title = '板块目录 - 列表';
-exit;
+        //if(in_array($type_id,$typeArr)){   //板块匹配
+            $params['dirList'] = array();
+            $params['dir_pid'] = array();
+            /*if($dir_id!=false && $dir_id>0){ //如果dir_id>0 遍历获取他的所有父级下拉框列表
+                $_parent = $parent;
+                for($i=intval($parent->level+1);$i>1;$i--){
+
+                    $children = Dir::model()->findByAttributes(array('p_id'=>$_parent->id));
+                    if($_parent->is_leaf==0 && $children){
+                        ${'dirList_'.$i} = $dir->getDropDownListOne($_parent->id,$type_id,true,false);
+                        $params['dirList'][$i] = ${'dirList_'.$i};
+                    }
+                    if($_parent->id>0){
+                        $params['dir_pid'][$i-1] = $_parent->id;
+                    }
+                    if($_parent->p_id>0){
+                        $_parent = Dir::model()->findByPK($_parent->p_id);
+                    }
+
+                }
+
+            }*/
+            $dirList_1 = DirFunc::getDropDownList(0,false,false,1); //第一层目录
+            var_dump($dirList_1);exit;
+
+            $params['dirList'][1] = $dirList_1;
+
+
+            asort($params['dirList'],SORT_NUMERIC);
+            asort($params['dir_pid'],SORT_NUMERIC);
+
+            $list = $dir->getListArr($dir_id,$type_id,true,true,true);
+        //}
+        exit;
         $p_id = (int)Yii::$app->request->get('p_id');
 
         $posList_1 = PositionFunc::getDropDownList(0,true,false,1);
