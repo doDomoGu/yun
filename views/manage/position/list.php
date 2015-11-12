@@ -3,7 +3,7 @@
     use app\components\PositionFunc;
     \app\assets\AppAsset::addJsFile($this,'js/manage-position.js');
 ?>
-        <?=BaseHtml::a('添加职位/部门',['position-add-and-edit'],['class'=>'btn btn-primary'])?>
+        <?=BaseHtml::a('添加职位/部门（暂时不可用）',['position-add-and-edit'],['class'=>'btn btn-primary disabled'])?>
         <p></p>
 
         业态选择：<?=BaseHtml::dropDownList('pos-select-1',$posLvl_1->id,$posList_1,['encode'=>false,'id'=>'pos-select-1','prompt'=>'===请选择==='])?>

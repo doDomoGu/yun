@@ -6,7 +6,6 @@ use yii\base\Component;
 use yii\helpers\BaseArrayHelper;
 
 class PositionFunc extends Component {
-
     /*
      * 函数getFullRoute ,实现根据position_id(Position表 id字段)获取完整的部门/职位的中文路径
      *
@@ -108,21 +107,6 @@ class PositionFunc extends Component {
             if(!empty($list)){
                 $nlevel = $level===false?false: intval($level - 1);
                 foreach($list as $l){
-                    /*$arr[$l->id] = $l->attributes;
-                    if($showTree){
-                        $prefix = '';
-                        if($l['level']>1){
-                            for($i=1;$i<$l['level'];$i++){
-                                $prefix.='&emsp;';
-                            }
-                            if($l['is_last']>0){
-                                $prefix.='└─ ';
-                            } else{
-                                $prefix.='├─ ';
-                            }
-                        }
-                        $arr[$l->id]['name'] = $prefix.$l['name'];
-                    }*/
 
                     $arr[$l->id] = $l;
                     if($showTree){
@@ -145,9 +129,6 @@ class PositionFunc extends Component {
                         $childrenIds = array();
                         if(!empty($children)){
                             foreach($children as $child){
-                                /*$arr[$child['id']] = $child;
-                                $childrenIds[]=$child['id'];*/
-
                                 $arr[$child->id] = $child;
                                 $childrenIds[]=$child->id;
                             }
@@ -193,17 +174,17 @@ class PositionFunc extends Component {
             $arr2 = self::getParents($curPos->p_id);
             $arr = BaseArrayHelper::merge($arr,$arr2);
         }
-
+        ksort($arr);
         return $arr;
     }
 
     /*
-    * 函数 handleIsLast , 修改了职位信息后，批量更新is_last字段
+    * 函数 handleIsLastAndIsLeaf , 修改了职位信息后，批量更新is_last，is_leaf字段
     *
     * @param integer p_id  父id
     * no return
     */
-    public static function handleIsLast($p_id=0){
+    public static function handleIsLastAndIsLeaf($p_id=0){
         $where['p_id']=$p_id;
         $where['status']=1;
         $positions = Position::find()->where($where)->orderBy('ord Desc,id DESC')->all();
@@ -213,11 +194,13 @@ class PositionFunc extends Component {
             $i = 0;
             foreach($positions as $p){
                 $i++;
-                self::handleIsLast($p->id);
+                self::handleIsLastAndIsLeaf($p->id);
                 if($i==$count){
                     Position::updateAll(['is_last'=>1],['id'=>$p->id]);
                 }
             }
+        }else{
+            Position::updateAll(['is_leaf'=>1],['id'=>$p_id]);
         }
     }
 }
