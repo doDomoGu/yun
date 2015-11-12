@@ -40,25 +40,28 @@ class ManageController extends BaseController
     {
         return [
             'news' => [
-                'class' => 'app\controllers\manage\NewsAction',
+                'class' => 'app\controllers\manage\news\NewsAction',
             ],
             'news-add-and-edit' => [
-                'class' => 'app\controllers\manage\NewsAddAndEditAction',
+                'class' => 'app\controllers\manage\news\NewsAddAndEditAction',
             ],
             'recruitment' => [
-                'class' => 'app\controllers\manage\RecruitmentAction',
+                'class' => 'app\controllers\manage\recruitment\RecruitmentAction',
             ],
             'recruitment-add-and-edit' => [
-                'class' => 'app\controllers\manage\RecruitmentAddAndEditAction',
+                'class' => 'app\controllers\manage\recruitment\RecruitmentAddAndEditAction',
             ],
             'user' => [
-                'class' => 'app\controllers\manage\UserAction',
+                'class' => 'app\controllers\manage\user\UserAction',
             ],
             'user-add-and-edit' => [
-                'class' => 'app\controllers\manage\UserAddAndEditAction',
+                'class' => 'app\controllers\manage\user\UserAddAndEditAction',
             ],
             'position' => [
-                'class' => 'app\controllers\manage\PositionAction',
+                'class' => 'app\controllers\manage\position\PositionAction',
+            ],
+            'dir' => [
+                'class' => 'app\controllers\manage\dir\DirAction',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
