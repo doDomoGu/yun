@@ -13,7 +13,7 @@
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/position')===0?'active':''?>" href="/manage/position">
             部门/职位
         </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/directory')===0?'active':''?>" href="/manage/directory">
+        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/dir')===0?'active':''?>" href="/manage/dir">
             板块目录
         </a>
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/user')===0?'active':''?>" href="/manage/user">
