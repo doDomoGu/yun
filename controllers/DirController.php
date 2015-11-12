@@ -10,9 +10,11 @@ class DirController extends BaseController
 
     public function actionIndex()
     {
-        /*$username = 'admin';
-        $user = User::findByUsername($username);
-        var_dump($user->getId());exit;*/
+        $dir_id = Yii::$app->request->get('dir_id',false);
+        if($dir_id){
+
+        }
+
         return $this->render('index');
     }
 

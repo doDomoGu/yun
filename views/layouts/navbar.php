@@ -2,6 +2,7 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\bootstrap\BaseHtml;
+use yii\helpers\ArrayHelper;
 ?>
 
 <?php if(Yii::$app->user->isGuest):?>
@@ -12,6 +13,25 @@ use yii\bootstrap\BaseHtml;
 
 
 <?php
+    //导航栏菜单项
+    $navbarItems = [[
+        'label' => '首页',
+        'url' => ['site/index']
+    ]];
+
+    $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
+
+    $navbarItems = ArrayHelper::merge($navbarItems,[[
+        'label' => '管理中心*',
+        'url' => ['/manage/index'],
+        'active' => strpos(Yii::$app->controller->route,'manage')===0?true:false
+    ]]);
+/*echo "<pre>";
+var_dump($navbarItems);exit;*/
+?>
+
+
+<?php
 NavBar::begin([
     'brandLabel' => BaseHtml::img('/images/logo.png',['style'=>'width:98px;']),
     'brandUrl' => Yii::$app->homeUrl,
@@ -19,18 +39,10 @@ NavBar::begin([
         'class' => 'navbar-inverse navbar-fixed-top',
     ],
 ]);
+
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
-    'items' => [
-        ['label' => '首页', 'url' => ['site/index']],
-        /*['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],*/
-        [
-            'label' => '管理中心*',
-            'url' => ['/manage/index'],
-            'active' => strpos(Yii::$app->controller->route,'manage')===0?true:false
-        ],
-    ]
+    'items' => $navbarItems
 ]);
 
 if(Yii::$app->user->isGuest){

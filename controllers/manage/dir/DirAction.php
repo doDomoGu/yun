@@ -29,7 +29,7 @@ class DirAction extends Action{
 
         $dirList_2 = [];
 
-        $typeArr = DirFunc::getCatalogType(true); //板块ID数组
+        //$typeArr = DirFunc::getCatalogType(true); //板块ID数组
 
         $list = [];
 
@@ -49,12 +49,8 @@ class DirAction extends Action{
             $dirLvl_2 = null;
         }
         if($curDir && $curDir->level==2){
-
-
             $list = DirFunc::getListArr($dir_id,true,true,false);
-            //$where = ['p_id'=>$p_id];
         }
-        //$list = Position::find()->where($where)->orderBy('ord desc,id desc')->limit(10)->all();
 
         $params['list'] = $list;
         $params['dirList_1'] = $dirList_1;
