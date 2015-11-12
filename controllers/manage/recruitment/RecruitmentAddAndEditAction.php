@@ -1,5 +1,5 @@
 <?php
-namespace app\controllers\manage;
+namespace app\controllers\manage\recruitment;
 
 use Yii;
 use yii\base\Action;

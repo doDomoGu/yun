@@ -1,27 +1,27 @@
 <?php
-namespace app\controllers\manage;
+namespace app\controllers\manage\dir;
 
-use app\components\PositionFunc;
+use app\components\DirFunc;
 use yii\base\Action;
-use app\models\Position;
+use app\models\Dir;
 
 use Yii;
 
-class PositionAction extends Action{
+class DirAction extends Action{
     public function run(){
         if(Yii::$app->request->get('install')){
-            $p = new Position();
+            $p = new Dir();
             $p->install();
             exit;
         }
         if(Yii::$app->request->get('handleIsLast')){
-            PositionFunc::handleIsLast();
+            DirFunc::handleIsLast();
             exit;
         }
 
 
-        $this->controller->view->title = '职位/部门 - 列表';
-
+        $this->controller->view->title = '板块目录 - 列表';
+exit;
         $p_id = (int)Yii::$app->request->get('p_id');
 
         $posList_1 = PositionFunc::getDropDownList(0,true,false,1);

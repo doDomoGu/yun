@@ -1,5 +1,5 @@
 <?php
-namespace app\controllers\manage;
+namespace app\controllers\manage\position;
 
 use app\components\PositionFunc;
 use yii\base\Action;

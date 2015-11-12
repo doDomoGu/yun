@@ -1,5 +1,5 @@
 <?php
-namespace app\controllers\manage;
+namespace app\controllers\manage\news;
 
 use yii\base\Action;
 use app\models\News;
