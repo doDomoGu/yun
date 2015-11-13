@@ -7,16 +7,11 @@
     app\assets\AppAsset::addJsFile($this,'js/dir-list.js');
 
 ?>
-<input type="hidden" id="image_domain" value="<?=yii::$app->params['qiniu-domain']?>" />
+<input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
 <input type="hidden" id="pickfileId" value="pickfile" />
-<input type="hidden" id="imgurlId" value="thumb" />
+<input type="hidden" id="fileurlId" value="fileurl" />
 
 <p>
-    <button class="btn btn-primary">
-        <span aria-hidden="true" class="glyphicon glyphicon-upload"></span>
-        上传
-    </button>
-
     <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>yii\helpers\Url::to('index.php?r=branches/create'),'class'=> 'btn btn-info','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadModal"])?>
 
     <button class="btn btn-primary">
@@ -59,11 +54,13 @@
 ?>
     <div id="uploadModalContent">
         <div id="pickfile_container">
-            <input type="file" id="pickfile">
-            <div class="clearfix">
-                <input type="hidden" id="<?=$attr_name?>" name="form[<?=$attr_name?>]" value="<?=$model->$attr_name?>" >
-            </div>
-            <div class="clearfix" id="<?=$attr_name?>_upload_txt"></div>
+            <p>
+                <input type="file" id="pickfile">
+            </p>
+            <p>
+                <input id="fileurl" name="fileurl" value="" class="col-lg-6">
+            </p>
+            <div class="clearfix" id="fileurl_upload_txt"></div>
         </div>
     </div>
 <?php
