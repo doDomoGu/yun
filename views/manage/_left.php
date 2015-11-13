@@ -19,11 +19,11 @@
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/user')===0?'active':''?>" href="/manage/user">
             公司职员
         </a>
-        <!--<a class="list-group-item <?/*=strpos(Yii::$app->controller->route,'manage/manager')===0?'active':''*/?>" href="/manage/manager">
+        <button class="list-group-item disabled <?=strpos(Yii::$app->controller->route,'manage/manager')===0?'active':''?>" href="/manage/manager">
             管理员设置
-        </a>-->
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
+        </button>
+        <button class="list-group-item disabled <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
             消息通知
-        </a>
+        </button>
     </div>
 </div>

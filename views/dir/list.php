@@ -26,13 +26,13 @@
 <?php foreach($list as $l):?>
     <div class="col-md-3 dir-item text-center">
         <div class="icon">
-            <a href="/dir?dir_id=<?=$l->id?>">
+            <a href="/dir/download?id=<?=$l->id?>" data-method="post">
                 <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
                 <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
             </a>
         </div>
         <div class="name">
-            <a href="/dir?dir_id=<?=$l->id?>">
+            <a href="/dir/download?id=<?=$l->id?>" data-method="post">
                 <?=$l->filename?>
             </a>
         </div>

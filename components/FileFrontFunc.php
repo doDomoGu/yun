@@ -38,14 +38,13 @@ class FileFrontFunc extends Component {
             return 'unknown';
         }
     }
-    /*public static function getFolderType($name){
-        $folderType = self::folder_type(true);
-        if(isset($folderType[$name])){
-            return $folderType[$name];
-        }else{
-            return 0;
-        }
-    }*/
+
+    public static function getFilePath($path,$beaut=true){
+        if($beaut)
+            return yii::$app->params['qiniu-domain-beaut'].$path;
+        else
+            return yii::$app->params['qiniu-domain'].$path;
+    }
 
     public static function getFilesByDirId($dir_id){
         return File::find()->where(['dir_id'=>$dir_id,'status'=>1,'flag'=>1])->orderBy('add_time desc')->all();

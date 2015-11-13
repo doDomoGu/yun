@@ -23,6 +23,7 @@ class DirController extends BaseController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'save' => ['post'],
+                    'download' => ['post'],
                 ],
             ],
         ];
@@ -106,6 +107,31 @@ class DirController extends BaseController
         $file->save();
         //yii::$app->response->redirect(['/dir','dir_id'=>$post['dir_id']])->send();
         echo json_encode(['result'=>true]);exit;
+
+    }
+
+    public function actionDownload(){
+        $id = yii::$app->request->get('id');
+        $file = File::find()->where(['id'=>$id,'status'=>1,'flag'=>1])->one();
+
+        if($file){
+            $file_path = FileFrontFunc::getFilePath($file->filename_real);
+
+            //Header("HTTP/1.1 303 See Other");
+            /*Header("Location: $file_path");
+var_dump($file_path);exit;
+            Yii::$app->end();*/
+
+            Header("Content-type: application/octet-stream");
+            Header("Accept-Ranges: bytes");
+            //Header("Accept-Length: ".filesize($file_path));
+            Header("Content-Disposition: attachment; filename=" . $file->filename);
+
+            readfile($file_path);
+            Yii::$app->end();
+        }else{
+            echo 'no file';
+        }
 
     }
 
