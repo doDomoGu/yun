@@ -5,13 +5,13 @@ use yii;
 
 class File extends \yii\db\ActiveRecord
 {
-    public $childrenIds;
+    //public $childrenIds;
 
     public function rules()
     {
         return [
-            ['name', 'required'],
-            [['id, type, more_cate, status, p_id, ord, is_leaf, is_last, level'], 'integer'],
+            ['filename', 'required'],
+            [['id, filesize, filetype, folder_id, type, more_cate, status, p_id, ord, is_leaf, is_last, level'], 'integer'],
             ['name', 'string', 'max'=>100],
             [['describe'],'safe']
         ];
@@ -36,7 +36,7 @@ class File extends \yii\db\ActiveRecord
 `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0:删除;1:正常',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
-}*/
+*/
     public function install() {
         try {
             $exist = Dir::find()->one();

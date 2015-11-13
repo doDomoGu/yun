@@ -16,14 +16,14 @@ AppAsset::register($this);  /* 注册appAsset */
 <div class="wrap">
     <?php echo $this->render('navbar'); /* 引入导航栏 */?>
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <div class="row">
             <div class="col-lg-2">
                 <?=$this->render('/dir/_left')?>
             </div>
             <div class="col-lg-10">
+                <?= Breadcrumbs::widget([
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                ]) ?>
                 <?= $content ?>
             </div>
         </div>
