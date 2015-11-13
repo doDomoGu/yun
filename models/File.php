@@ -1,7 +1,6 @@
 <?php
 
 namespace app\models;
-use yii;
 
 class File extends \yii\db\ActiveRecord
 {
@@ -10,10 +9,10 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['filename, filename_real, uid, filesize, filetype', 'required'],
-            [['id, filesize, filetype, status, dir_id, p_id, uid, ord, flag, status, clicks'], 'integer'],
+            [['filename', 'filename_real', 'uid', 'filesize', 'filetype'], 'required'],
+            [['id', 'filesize', 'filetype', 'status', 'dir_id', 'p_id', 'uid', 'ord', 'flag', 'status', 'clicks'], 'integer'],
             [['add_time', 'edit_time'],'default','value'=>date('Y-m-d H:i:s')],
-            [['describe, add_time, edit_time'],'safe']
+            [['describe', 'add_time', 'edit_time'],'safe']
         ];
     }
 /*CREATE TABLE `file` (
@@ -30,7 +29,7 @@ class File extends \yii\db\ActiveRecord
 `clicks` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '打开数',
 `add_time` datetime NOT NULL,
 `edit_time` datetime NOT NULL,
-`describe` text NOT NULL,
+`describe` text ,
 `ord` int(4) unsigned DEFAULT '0' COMMENT '排序,倒序从大到小',
 `flag` tinyint(1) unsigned DEFAULT '0' COMMENT '标志位',
 `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0:删除;1:正常',

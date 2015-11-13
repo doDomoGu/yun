@@ -20,15 +20,24 @@ class FileFrontFunc extends Component {
     }
 
     public static function getFileType($filename){
-        $fileType = self::file_type(true);
+        $fileTypes = self::file_type(true);
         $ext = substr(strrchr($filename,'.'),1);
-        if($ext!==false && isset($fileType[$ext])){
-            return $fileType[$ext];
+        if($ext!==false && isset($fileTypes[$ext])){
+            return $fileTypes[$ext];
         }else{
             return 99;
         }
     }
 
+    public static function getFileExt($fileType){
+        $fileTypes = self::file_type();
+        $fileType = intval($fileType);
+        if(isset($fileTypes[$fileType])){
+            return $fileTypes[$fileType];
+        }else{
+            return 'unknown';
+        }
+    }
     /*public static function getFolderType($name){
         $folderType = self::folder_type(true);
         if(isset($folderType[$name])){
@@ -37,5 +46,9 @@ class FileFrontFunc extends Component {
             return 0;
         }
     }*/
+
+    public static function getFilesByDirId($dir_id){
+        return File::find()->where(['dir_id'=>$dir_id,'status'=>1,'flag'=>1])->orderBy('add_time desc')->all();
+    }
 
 }

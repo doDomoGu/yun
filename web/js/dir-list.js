@@ -2,7 +2,7 @@
 var qiniuDomain = $('#qiniuDomain').val();
 var pickfileId = $('#pickfileId').val();
 var fileurlId = $('#fileurlId').val();
-
+var _file;
 var uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',    //上传模式,依次退化
     browse_button: pickfileId,       //上传选择的点选按钮，**必需**
@@ -28,6 +28,7 @@ var uploader = Qiniu.uploader({
         'FilesAdded': function(up, files) {
             plupload.each(files, function(file) {
                 // 文件添加进队列后,处理相关的事情
+                _file = file;
             });
             $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');
 
@@ -42,7 +43,7 @@ var uploader = Qiniu.uploader({
             var res = $.parseJSON(info);
             /*alert(res.key);
              alert(info);*/
-            $('#'+fileurlId+'').val(qiniuDomain+res.key);
+            $('#'+fileurlId+'').val(res.key);
             //$('#'+fileurlId+'_preview').attr('src','').attr('src',qiniu_domain+res.key);
             $('#'+fileurlId+'_upload_txt').html('<span style="color:green;">上传成功</span>');
             // 每个文件上传成功后,处理相关的事情
@@ -55,6 +56,33 @@ var uploader = Qiniu.uploader({
             // var domain = up.getOption('domain');
             // var res = parseJSON(info);
             // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+            //$('#save-submit').click();
+
+//console.log(res);
+            _dir_id = $('#dir_id').val();
+            _p_id = $('#p_id').val();
+            $.ajax({
+                url: '/dir/save',
+                type: 'post',
+                data: {
+                    dir_id:_dir_id,
+                    filename_real:res.key,
+                    filename:_file.name,
+                    filesize:_file.size,
+                    p_id:_p_id
+                },
+                dataType:'json',
+                success: function (data) {
+                    if(data.result){
+                        if(_dir_id>0){
+                            location.href='/dir?dir_id='+_dir_id;
+                        }
+                        if(_p_id>0){
+                            location.href='/dir?p_id='+_p_id;
+                        }
+                    }
+                }
+            });
 
 
         },

@@ -6,6 +6,8 @@ namespace app\controllers;
 use app\components\DirFunc;
 use app\components\FileFrontFunc;
 use app\models\Dir;
+use app\models\File;
+use yii\filters\VerbFilter;
 use Yii;
 use app\components\QiniuUpload;
 
@@ -13,9 +15,24 @@ class DirController extends BaseController
 {
     public $layout = 'main_dir';
 
+    public function behaviors()
+    {
+        return [
+
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'save' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $dir_id = Yii::$app->request->get('dir_id',false);
+
+        $p_id = Yii::$app->request->get('p_id',false);
 
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
 
@@ -33,9 +50,11 @@ class DirController extends BaseController
 
 
                 //$list = DirFunc::getChildren($dir_id);
-                $list = [];
+                $list = FileFrontFunc::getFilesByDirId($dir_id);
                 $params['list'] = $list;
                 $params['dir_id'] = $dir_id;
+                $p_id = 0;
+                $params['p_id'] = $p_id;
                 return $this->render('list',$params);
             }else{
                 $list = DirFunc::getChildren($dir_id);
@@ -53,14 +72,47 @@ class DirController extends BaseController
 
     }*/
 
-    public function actionUpload(){
+    public function actionSave(){
+        $post = yii::$app->request->post();
+
+        $file = new File();
+        $insert['filename'] = $post['filename'];
+        $insert['filesize'] = $post['filesize'];
+        $insert['filetype'] = FileFrontFunc::getFileType($post['filename']);;
+        $insert['dir_id'] = $post['dir_id'];
+        $insert['p_id'] = $post['p_id'];
+        $insert['filename_real'] = $post['filename_real'];
+        $insert['uid'] = yii::$app->user->id;
+        $insert['clicks'] = 0;
+        $insert['ord'] = 1;
+        $insert['status'] = 1;
+        $insert['flag'] = 1;
+
+        //$file->insert(true,$insert);
+        $file->setAttributes($insert);
+
+        /*$file->filename = $post['filename'];
+        $file->filesize = $post['filesize'];
+        $file->filetype = FileFrontFunc::getFileType($post['filename']);
+        $file->dir_id = $post['dir_id'];
+        $file->p_id = $post['p_id'];
+        $file->filename_real = $post['filename_real'];
+        $file->uid = yii::$app->user->id;
+        $file->clicks = 0;
+        $file->ord = 1;
+        $file->status = 1;
+        $file->flag = 1;*/
+
+        $file->save();
+        //yii::$app->response->redirect(['/dir','dir_id'=>$post['dir_id']])->send();
+        echo json_encode(['result'=>true]);exit;
 
     }
 
     public function actionGetUptoken(){
         $up=new QiniuUpload(yii::$app->params['qiniu-bucket']);
         $upToken=$up->createtoken();
-        echo json_encode(array('uptoken'=>$upToken));exit;
+        echo json_encode(['uptoken'=>$upToken]);exit;
     }
 
 }
