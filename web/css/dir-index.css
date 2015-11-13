@@ -1,0 +1,7 @@
+.dir-item:hover{
+    background: #AAAAAA;
+}
+
+.dir-item .icon img{
+    width:50%;
+}
