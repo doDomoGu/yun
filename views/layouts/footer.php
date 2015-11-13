@@ -5,6 +5,7 @@
         <p class="pull-right"><?/*= Yii::powered() */?></p>
     </div>-->
     <div class="container">
+        <img src="/images/logo-footer.jpg" />
         <!--<ul class="list-unstyled">
         <?php /*for($i=1;$i<=12;$i++):*/?>
             <?php /*$imgId = $i<10?'0'.$i:$i;*/?>
