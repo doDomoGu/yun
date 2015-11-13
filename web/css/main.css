@@ -90,6 +90,18 @@ a.desc:after {
     padding:2px 15px;
 }
 
+.navbar-red {
+    background: #e00024;
+}
+
+.navbar-red .navbar-nav > li > a {
+    color: #d3d3d3;
+}
+
+.navbar-red .navbar-nav > li > a:hover, .navbar-red .navbar-nav > li > a:focus {
+    background-color: transparent;
+    color: #fff;
+}
 
 .footer {
     height: 100px;

@@ -33,10 +33,10 @@ var_dump($navbarItems);exit;*/
 
 <?php
 NavBar::begin([
-    'brandLabel' => BaseHtml::img('/images/logo.png',['style'=>'height:46px;']),
+    'brandLabel' => BaseHtml::img('/images/logo.jpg',['style'=>'height:46px;']),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar-inverse navbar-fixed-top',
+        'class' => 'navbar-default navbar-red navbar-fixed-top',
     ],
 ]);
 
