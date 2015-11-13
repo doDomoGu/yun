@@ -5,7 +5,7 @@
     <table class="table table-bordered table-hover">
         <?php foreach($recruitment_list as $l):?>
         <tr>
-            <td><?=$l->title?> <br/>(<?=date('Y-m-d',strtotime($l->add_time))?>)</td>
+            <td><b><?=$l->title?></b><br/><span>(<?=date('Y-m-d',strtotime($l->add_time))?>)</span></td>
         </tr>
         <?php endforeach;?>
 

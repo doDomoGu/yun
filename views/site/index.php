@@ -1,6 +1,6 @@
 <?php \app\assets\AppAsset::addCssFile($this,'css/site-index.css');?>
 <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-2" id="news_list">
         <?=$this->render('/site/_left',['news_list'=>$news_list])?>
     </div>
     <div class="col-lg-8">
@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-2" id="recruitment_list">
         <?=$this->render('/site/_right',['recruitment_list'=>$recruitment_list])?>
     </div>
 </div>
