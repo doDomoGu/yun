@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\components\DirFunc;
+use app\models\News;
+use app\models\Recruitment;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -56,7 +59,17 @@ class SiteController extends BaseController
         /*$username = 'admin';
         $user = User::findByUsername($username);
         var_dump($user->getId());exit;*/
-        return $this->render('index');
+
+        $params['recruitment_list'] = Recruitment::find()->where(['status'=>1])->orderBy('ord desc')->all();
+        $params['news_list'] = News::find()->where(['status'=>1])->orderBy('ord desc')->all();
+
+        $params['list_1'] = DirFunc::getChildren(1);
+        $params['list_2'] = DirFunc::getChildren(2);
+        $params['list_3'] = DirFunc::getChildren(3);
+        $params['list_4'] = DirFunc::getChildren(4);
+        $params['list_5'] = DirFunc::getChildren(5);
+
+        return $this->render('index',$params);
     }
 
     public function actionLogin()
