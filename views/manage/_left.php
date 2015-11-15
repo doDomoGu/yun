@@ -19,9 +19,9 @@
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/user')===0?'active':''?>" href="/manage/user">
             公司职员
         </a>
-        <button class="list-group-item disabled <?=strpos(Yii::$app->controller->route,'manage/manager')===0?'active':''?>" href="/manage/manager">
+        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/admin')===0?'active':''?>" href="/manage/admin">
             管理员设置
-        </button>
+        </a>
         <button class="list-group-item disabled <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
             消息通知
         </button>

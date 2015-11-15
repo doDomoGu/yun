@@ -63,6 +63,9 @@ class ManageController extends BaseController
             'dir' => [
                 'class' => 'app\controllers\manage\dir\DirAction',
             ],
+            'admin' => [
+                'class' => 'app\controllers\manage\admin\AdminAction',
+            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
