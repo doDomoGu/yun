@@ -8,10 +8,11 @@ use yii\bootstrap\BaseHtml;
                 <tr>
                     <th>#</th>
                     <th>标题</th>
+                    <th>图片预览</th>
                     <th>状态</th>
                     <th>排序</th>
-                    <th>添加时间</th>
-                    <th>修改时间</th>
+                    <!--<th>添加时间</th>
+                    <th>修改时间</th>-->
                     <th>操作</th>
                 </tr>
             </thead>
@@ -21,10 +22,11 @@ use yii\bootstrap\BaseHtml;
                 <tr>
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->title?></td>
+                    <td><?=\yii\bootstrap\Html::img($l->img_url,['width'=>200,'title'=>$l->img_url,'alt'=>$l->img_url,'style'=>'border:1px solid #333;'])?></td>
                     <td><?=$l->status==1?'启用':'禁用'?></td>
                     <td><?=$l->ord?></td>
-                    <td><?=$l->add_time?></td>
-                    <td><?=$l->edit_time?></td>
+                    <!--<td><?/*=$l->add_time*/?></td>
+                    <td><?/*=$l->edit_time*/?></td>-->
                     <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>
             <?php endforeach;?>

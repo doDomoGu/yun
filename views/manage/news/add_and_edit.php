@@ -1,10 +1,14 @@
 <?php
     use yii\helpers\Html;
     use yii\bootstrap\ActiveForm;
-/*
-$this->params['breadcrumbs'][] = ['label'=>'个人中心','url'=>'/user'];
-$this->params['breadcrumbs'][] = $this->title;*/
+
+    app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
+    app\assets\AppAsset::addJsFile($this,'js/qiniu/qiniu.js');
+    app\assets\AppAsset::addJsFile($this,'js/news-add-and-edit.js');
 ?>
+<input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
+<input type="hidden" id="pickfileId" value="pickfile" />
+<input type="hidden" id="fileurlId" value="fileurl" />
         <h2>
             <?=$this->title?>
         </h2>
@@ -21,11 +25,30 @@ $this->params['breadcrumbs'][] = $this->title;*/
 
         <?= $form->field($model, 'content') ?>
 
-        <?= $form->field($model, 'img_url') ?>
+        <?= $form->field($model, 'img_url',['template'=>"{label}\n<div class=\"col-lg-3\">
+    <div>
+    <img id=\"img-upload\" src=\"".$model->img_url."\" style=\"border:1px solid #333;\" />
+    </div>
+    <div id=\"pickfile_container\">
+    <p>
+        <input type=\"file\" id=\"pickfile\">
+    </p>
+    <p>
+    <input type=\"hidden\" value=\"\" name=\"NewsForm[img_url]\" class=\"form-control\" id=\"newsform-img_url\">
+
+    </p>
+    <div class=\"clearfix\" id=\"fileurl_upload_txt\"></div>
+</div></div>\n<div class=\"col-lg-5\">{error}</div>"
+        ]) ?>
+
+
+
         <?= $form->field($model, 'link_url') ?>
+
         <?= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
         ])->dropDownList([5=>5,4=>4,3=>3,2=>2,1=>1])  ?>
+
         <?= $form->field($model, 'status',[
             'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
         ])->dropDownList([0=>'禁用',1=>'启用']) ?>

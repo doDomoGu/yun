@@ -33,7 +33,7 @@ class NewsForm extends Model
         return [
             [['title', 'content', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status'], 'integer'],
-            [['add_time', 'edit_time', 'img_url', 'link_url'], 'safe']
+            [['add_time', 'edit_time', 'link_url', 'img_url'], 'safe']
 
         ];
     }
