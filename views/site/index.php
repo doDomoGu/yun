@@ -1,4 +1,6 @@
-<?php \app\assets\AppAsset::addCssFile($this,'css/site-index.css');?>
+<?php
+    app\assets\AppAsset::addCssFile($this,'css/site-index.css');
+?>
 <div class="row">
     <div class="col-lg-2" id="news_list">
         <?=$this->render('/site/_left',['news_list'=>$news_list])?>
