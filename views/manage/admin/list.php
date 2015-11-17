@@ -1,7 +1,7 @@
 <?php
     use yii\bootstrap\BaseHtml;
     use app\components\PositionFunc;
-    //\app\assets\AppAsset::addJsFile($this,'js/manage-dir.js');
+    /*app\assets\AppAsset::addJsFile($this,'js/main/manage-admin.js');*/
 ?>
         <?/*=BaseHtml::a('添加目录（暂时不可用）',['dir-add-and-edit'],['class'=>'btn btn-primary disabled'])*/?><!--
         <p></p>
@@ -15,14 +15,40 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <form id="searchForm" method="post">
                     <th>#</th>
-                    <th>用户名(邮箱)</th>
-                    <th>姓名</th>
-                    <th>所属职位</th>
-                    <th>状态</th>
-                    <th>是否是管理员</th>
-                    <th>操作</th>
+                    <th><input id="s_username" name="search[username]" value="<?=$search['username']?>" size="14" /></th>
+                    <th><input id="s_name" name="search[name]" value="<?=$search['name']?>" size="10"  /></th>
+                    <th>---</th>
+                    <th>
+                        <select id="s_status" name="search[status]" >
+                            <option value="">----</option>
+                            <option value="0" <?=$search['status']!=='' && $search['status']==0?'selected="selected"':''?>>禁用</option>
+                            <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>启用</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select id="s_is_admin" name="search[is_admin]" >
+                            <option value="">----</option>
+                            <option value="0" <?=$search['is_admin']!=='' && $search['is_admin']==0?'selected="selected"':''?>>否</option>
+                            <option value="1" <?=$search['is_admin']!=='' && $search['is_admin']==1?'selected="selected"':''?>>是</option>
+                        </select>
+                    </th>
+                    <th><button id="searchBtn">检索</button></th>
+                    <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                    </form>
                 </tr>
+            </thead>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>用户名(邮箱)</th>
+                <th>姓名</th>
+                <th>所属职位</th>
+                <th>状态</th>
+                <th>是否是管理员</th>
+                <th>操作</th>
+            </tr>
             </thead>
             <tbody>
             <?php if(!empty($list)):?>

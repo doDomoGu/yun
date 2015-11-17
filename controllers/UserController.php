@@ -33,4 +33,20 @@ class UserController extends BaseController
         return $this->render('change_password',$params);
     }
 
+
+    public function actionChangeHeadImg(){
+        $this->view->title = '修改头像';
+        $model = new UserChangePwdForm();
+        $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
+        $model->id = $user->id;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $user->password = md5($model->password_new);
+            if($user->save()){
+                Yii::$app->user->logout();
+                Yii::$app->response->redirect('/site/login')->send();
+            }
+        }
+        $params['model'] = $model;
+        return $this->render('change_password',$params);
+    }
 }
