@@ -24,7 +24,7 @@
                         <select id="s_status" name="search[status]" >
                             <option value="">----</option>
                             <option value="0" <?=$search['status']!=='' && $search['status']==0?'selected="selected"':''?>>禁用</option>
-                            <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>启用</option>
+                            <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>正常</option>
                         </select>
                     </th>
                     <th>
@@ -58,9 +58,19 @@
                     <td><?=$l->username?></td>
                     <td><?=$l->name?> </td>
                     <td><?=PositionFunc::getFullRoute($l->id)?></td>
-                    <td><?=$l->status?></td>
-                    <td><?=$l->is_admin?></td>
-                    <td><?=BaseHtml::a('编辑(暂时不可用)',['','id'=>$l->id],['class'=>'btn btn-primary btn-xs disabled'])?></td>
+                    <td><?=$l->status?'正常':'禁用'?></td>
+                    <td><?=$l->is_admin?'是':'否'?></td>
+                    <td>
+                        <?php if($l->position_id==1||$l->id==yii::$app->user->id):?>
+                            管理员职位 或者 自己 不可更改
+                        <?php else:?>
+                            <?php if($l->is_admin==1):?>
+                                <?=BaseHtml::a('取消授权',['admin-set','id'=>$l->id,'is_admin'=>0],['class'=>'btn btn-danger btn-xs','data-method'=>'post'])?>
+                            <?php else:?>
+                                <?=BaseHtml::a('授权为管理员',['admin-set','id'=>$l->id,'is_admin'=>1],['class'=>'btn btn-success btn-xs','data-method'=>'post'])?>
+                            <?php endif;?>
+                        <?php endif;?>
+                    </td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>

@@ -9,7 +9,7 @@ use Yii;
 
 class AdminAction extends Action{
     public function run(){
-        $this->controller->view->title = '管理员列表 - 管理';
+        $this->controller->view->title = '管理员设置 - 管理中心';
         $search = [
             'username' => '',
             'name' => '',

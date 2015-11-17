@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-
+use yii\filters\VerbFilter;
 use app\models\News;
 use app\models\Position;
 use app\models\Recruitment;
@@ -27,12 +27,12 @@ class ManageController extends BaseController
                     ],
                 ],
             ],*/
-            /*'verbs' => [
+            'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'admin-set' => ['post'],
                 ],
-            ],*/
+            ],
         ];
     }
 
@@ -65,6 +65,9 @@ class ManageController extends BaseController
             ],
             'admin' => [
                 'class' => 'app\controllers\manage\admin\AdminAction',
+            ],
+            'admin-set' => [
+                'class' => 'app\controllers\manage\admin\AdminSetAction',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
