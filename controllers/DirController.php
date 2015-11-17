@@ -137,7 +137,8 @@ var_dump($file_path);exit;
 
     public function actionGetUptoken(){
         $up=new QiniuUpload(yii::$app->params['qiniu-bucket']);
-        $upToken=$up->createtoken();
+        $saveKey = yii::$app->request->get('saveKey','');
+        $upToken=$up->createtoken($saveKey);
         echo json_encode(['uptoken'=>$upToken]);exit;
     }
 

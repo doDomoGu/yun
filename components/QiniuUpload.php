@@ -32,9 +32,14 @@ class QiniuUpload extends Component {
         $this->bucket= $bucket;
     }
     //生成token
-    public function createtoken(){
+    //saveKey 上传策略 资源文件名格式
+    public function createtoken($saveKey=''){
         $auth = new Auth($this->accessKey,$this->secretKey);
-        $token = $auth->uploadToken($this->bucket);
+        if($saveKey){
+            $token = $auth->uploadToken($this->bucket,'',3600,array('saveKey'=>$saveKey));
+        }else{
+            $token = $auth->uploadToken($this->bucket);
+        }
         return $token;
     }
 

@@ -6,13 +6,13 @@ var _file;
 var uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',    //上传模式,依次退化
     browse_button: pickfileId,       //上传选择的点选按钮，**必需**
-    uptoken_url: '/dir/get-uptoken',
+    uptoken_url: '/dir/get-uptoken?saveKey=news/$(fname)',
     //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
     // uptoken : '<Your upload token>',
     //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
-    unique_names: true,
+    unique_names: false,
     // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
-    // save_key: true,
+    //save_key: '$(var)',
     // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
     domain: qiniuDomain,
     //bucket 域名，下载资源时用到，**必需**
