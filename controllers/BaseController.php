@@ -6,12 +6,13 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
+    public $titleSuffix;
     //public $layout = 'main';
     public function beforeAction($action){
         if (!parent::beforeAction($action)) {
             return false;
         }
-
+        $this->titleSuffix = '_'.yii::$app->id;
         if(!$this->checkLogin()){
             return false;
         }

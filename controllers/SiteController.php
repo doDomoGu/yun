@@ -68,7 +68,7 @@ class SiteController extends BaseController
         $params['list_3'] = DirFunc::getChildren(3);
         $params['list_4'] = DirFunc::getChildren(4);
         $params['list_5'] = DirFunc::getChildren(5);
-
+        $this->view->title = yii::$app->id;
         return $this->render('index',$params);
     }
 

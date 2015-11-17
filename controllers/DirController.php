@@ -38,6 +38,7 @@ class DirController extends BaseController
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
 
         if($curDir){
+            $this->view->title = $curDir->name.$this->titleSuffix;
             //面包屑
             $parents = DirFunc::getParents($dir_id);
             foreach($parents as $parent){
@@ -63,6 +64,7 @@ class DirController extends BaseController
                 return $this->render('index',$params);
             }
         }else{
+
             $this->layout = 'main';
             return $this->render('error');
         }
