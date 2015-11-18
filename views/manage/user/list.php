@@ -8,6 +8,34 @@
         <p></p>
         <table class="table table-bordered">
             <thead>
+            <tr>
+                <form id="searchForm" method="post">
+                    <th>#</th>
+                    <th><input id="s_username" name="search[username]" value="<?=$search['username']?>" size="14" /></th>
+                    <th><input id="s_name" name="search[name]" value="<?=$search['name']?>" size="10"  /></th>
+                    <th>---</th>
+                    <th>
+                        ---
+                    </th>
+                    <th>
+                        <input id="s_mobile" name="search[mobile]" value="<?=$search['mobile']?>" size="10"  />
+                    </th>
+                    <th>
+                        <input id="s_phone" name="search[phone]" value="<?=$search['phone']?>" size="10"  />
+                    </th>
+                    <th>
+                        <select id="s_status" name="search[status]" >
+                            <option value="">----</option>
+                            <option value="0" <?=$search['status']!=='' && $search['status']==0?'selected="selected"':''?>>禁用</option>
+                            <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>正常</option>
+                        </select>
+                    </th>
+                    <th><button id="searchBtn">检索</button></th>
+                    <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                </form>
+            </tr>
+            </thead>
+            <thead>
                 <tr>
                     <th>#</th>
                     <th>用户名(邮箱)</th>
