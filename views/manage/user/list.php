@@ -15,7 +15,12 @@
                     <th><input id="s_name" name="search[name]" value="<?=$search['name']?>" size="10"  /></th>
                     <th>---</th>
                     <th>
-                        ---
+                        <select id="s_gender" name="search[gender]" >
+                            <option value="">----</option>
+                            <option value="0" <?=$search['gender']!=='' && $search['gender']==0?'selected="selected"':''?>>N/A</option>
+                            <option value="1" <?=$search['gender']!=='' && $search['gender']==1?'selected="selected"':''?>>男</option>
+                            <option value="2" <?=$search['gender']!=='' && $search['gender']==2?'selected="selected"':''?>>女</option>
+                        </select>
                     </th>
                     <th>
                         <input id="s_mobile" name="search[mobile]" value="<?=$search['mobile']?>" size="10"  />
