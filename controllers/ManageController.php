@@ -13,6 +13,17 @@ use Yii;
 class ManageController extends BaseController
 {
     public $layout = 'main_manage';
+    public function beforeAction($action){
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        if($this->checkIsAdmin()){
+            return true;
+        }else{
+            $this->redirect(Yii::$app->urlManager->createUrl('/'));
+        }
+    }
+
     public function behaviors()
     {
         return [

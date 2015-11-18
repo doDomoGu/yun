@@ -21,11 +21,13 @@ use yii\helpers\ArrayHelper;
 
     $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
 
-    $navbarItems = ArrayHelper::merge($navbarItems,[[
-        'label' => '管理中心*',
-        'url' => ['/manage/index'],
-        'active' => strpos(Yii::$app->controller->route,'manage')===0?true:false
-    ]]);
+    if($this->context->checkIsAdmin()){
+        $navbarItems = ArrayHelper::merge($navbarItems,[[
+            'label' => '管理中心*',
+            'url' => ['/manage/index'],
+            'active' => strpos(Yii::$app->controller->route,'manage')===0?true:false
+        ]]);
+    }
 /*echo "<pre>";
 var_dump($navbarItems);exit;*/
 ?>
