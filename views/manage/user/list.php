@@ -13,7 +13,9 @@
                     <th>#</th>
                     <th><input id="s_username" name="search[username]" value="<?=$search['username']?>" size="14" /></th>
                     <th><input id="s_name" name="search[name]" value="<?=$search['name']?>" size="10"  /></th>
-                    <th>---</th>
+                    <th>
+                        <?=$this->render('/manage/_position')?>
+                    </th>
                     <th>
                         <select id="s_gender" name="search[gender]" >
                             <option value="">----</option>
