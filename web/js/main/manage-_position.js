@@ -1,25 +1,37 @@
 var p_id;
-//var p_id2;
+$(function(){
+    $.ajax({
+        url: '/manage/position-select-ajax',
+        type: 'get',
+        data: {
+
+        },
+        //dataType:'json',
+        success: function (data) {
+            $('#pos-select-div').html(data);
+        }
+    });
 
 
-$('.pos-select-group').change(function(){
-    p_id = $(this).val();
-
-
-    $('#test_pos_id').html(p_id);
+    $('#pos-select-div').on('change','.pos-select-group',function(){
+        p_id = $(this).val();
+        $('#test_pos_id').html(p_id);
+        $(this).nextAll().remove();
+        if(p_id>0){
+            $.ajax({
+                url: '/manage/position-select-ajax',
+                type: 'get',
+                data: {
+                    p_id:p_id
+                },
+                //dataType:'json',
+                success: function (data) {
+                    if(data!=''){
+                        $('#pos-select-div').append(data);
+                    }
+                }
+            });
+        }
+    });
 });
 
-/*
-$('#pos-select-2').change(function(){
-    p_id2 = $(this).val();
-    if(p_id2>0)
-        location.href = 'position?p_id='+p_id2;
-    else{
-        p_id = $('#pos-select-1').val();
-        if(p_id>0)
-            location.href = 'position?p_id='+p_id;
-        else
-            location.href = 'position';
-    }
-
-});*/

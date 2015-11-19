@@ -16,6 +16,7 @@ class UserAction extends Action{
             'mobile' => '',
             'status' => '',
             'gender' => '',
+            'position_id' => '',
         ];
         $searchPost = yii::$app->request->post('search',false);
 
@@ -27,7 +28,7 @@ class UserAction extends Action{
                 if(in_array($k,['username','name','phone','mobile'])){
                     if($s!='')
                         $list->andWhere(['like',$k,$s]);
-                }else if(in_array($k,['status','gender'])){
+                }else if(in_array($k,['status','gender','position_id'])){
                     if($s!=='')
                         $list->andWhere([$k=>$s]);
                 }

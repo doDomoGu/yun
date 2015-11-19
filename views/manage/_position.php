@@ -7,13 +7,13 @@
     $posList = \app\components\PositionFunc::getDropDownList(0,true,false,1);
 
 ?>
+<div id="pos-select-div">
 
-<?=BaseHtml::dropDownList(
+</div>
+<?/*=BaseHtml::dropDownList(
     'pos-select',
     '',
     $posList,
     ['encode'=>false,'id'=>'pos-select','prompt'=>'===请选择===','class'=>'pos-select-group']
-)?>
-
-<br/>
-<span id="test_pos_id"></span>
+)*/?>
+<div id="test_pos_id"></div>

@@ -71,6 +71,9 @@ class ManageController extends BaseController
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',
             ],
+            'position-select-ajax' => [
+                'class' => 'app\controllers\manage\position\PositionSelectAjaxAction',
+            ],
             'dir' => [
                 'class' => 'app\controllers\manage\dir\DirAction',
             ],

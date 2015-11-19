@@ -2,6 +2,8 @@
     use yii\bootstrap\BaseHtml;
     use app\components\CommonFunc;
     use app\components\PositionFunc;
+
+    app\assets\AppAsset::addJsFile($this,'js/main/manage-user.js');
 ?>
 
         <?=BaseHtml::a('新增职员',['user-add-and-edit'],['class'=>'btn btn-primary'])?>
@@ -15,6 +17,7 @@
                     <th><input id="s_name" name="search[name]" value="<?=$search['name']?>" size="10"  /></th>
                     <th>
                         <?=$this->render('/manage/_position')?>
+                        <input type="hidden" id="s_position_id" name="search[position_id]" value="<?=$search['position_id']?>" />
                     </th>
                     <th>
                         <select id="s_gender" name="search[gender]" >
@@ -37,7 +40,7 @@
                             <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>正常</option>
                         </select>
                     </th>
-                    <th><button id="searchBtn">检索</button></th>
+                    <th><button type="button" id="searchBtn" >检索</button></th>
                     <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
                 </form>
             </tr>
