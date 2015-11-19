@@ -30,9 +30,17 @@
                     <td><?=$l->ord?></td>
                     <td><?=$l->name?> <span class="badge" title="<?=PositionFunc::getFullRoute($l->id)?>">i</span></td>
                     <td><?=PositionFunc::getIsLeaf($l->is_leaf)?></td>
-                    <td><?=BaseHtml::a('编辑(暂时不可用)',['','id'=>$l->id],['class'=>'btn btn-primary btn-xs disabled'])?></td>
+                    <td>
+                        <?=BaseHtml::a('编辑(暂时不可用)',['','id'=>$l->id],['class'=>'btn btn-primary btn-xs disabled'])?>
+                        <?=BaseHtml::button('查看职员',['class'=>'btn btn-success btn-xs viewUserBtn','p_id'=>$l->id])?>
+                    </td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>
             </tbody>
         </table>
+
+<form id="view-user-form" action="/manage/user" method="post" target="_blank">
+    <input type="hidden"  id="form-p_id" name="search[position_id]" />
+    <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+</form>

@@ -23,3 +23,8 @@ $('#pos-select-2').change(function(){
     }
 
 });
+
+$('.viewUserBtn').click(function(){
+   $('#form-p_id').val($(this).attr('p_id'));
+   $('#view-user-form').submit();
+});
