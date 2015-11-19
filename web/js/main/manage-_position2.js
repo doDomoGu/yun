@@ -1,12 +1,11 @@
 var p_id;
-var p_id2;
+//var p_id2;
 $(function(){
-    p_id = $('#s_position_id').val();
     $.ajax({
         url: '/manage/position-select-ajax',
         type: 'get',
         data: {
-            p_id:p_id
+
         },
         //dataType:'json',
         success: function (data) {
@@ -16,27 +15,23 @@ $(function(){
 
 
     $('#pos-select-div').on('change','.pos-select-group',function(){
-        p_id2 = $(this).val();
-
-        if(p_id2>0){
-
-            $('#pos_id_div').html(p_id2);
-
-            //$(this).nextAll().remove();
-
+        p_id = $(this).val();
+        $('#pos_id_div').html(p_id);
+        $(this).nextAll().remove();
+        if(p_id>0){
             $.ajax({
                 url: '/manage/position-select-ajax',
                 type: 'get',
                 data: {
-                    p_id:p_id2
+                    p_id:p_id
                 },
                 //dataType:'json',
                 success: function (data) {
-                    $('#pos-select-div').html(data);
+                    if(data!=''){
+                        $('#pos-select-div').append(data);
+                    }
                 }
             });
-        }else{
-            $(this).nextAll().remove();
         }
     });
 });

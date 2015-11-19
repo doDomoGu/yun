@@ -4,7 +4,7 @@
     app\assets\AppAsset::addJsFile($this,'js/main/manage-_position.js');
 
 
-    $posList = \app\components\PositionFunc::getDropDownList(0,true,false,1);
+    //$posList = \app\components\PositionFunc::getDropDownList(0,true,false,1);
 
 ?>
 <div id="pos-select-div">
@@ -16,4 +16,4 @@
     $posList,
     ['encode'=>false,'id'=>'pos-select','prompt'=>'===请选择===','class'=>'pos-select-group']
 )*/?>
-<div id="test_pos_id"></div>
+<div id="pos_id_div" class="hidden"></div>
