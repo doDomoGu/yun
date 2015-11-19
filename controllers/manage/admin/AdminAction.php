@@ -15,8 +15,7 @@ class AdminAction extends Action{
             'name' => '',
             'status' => '',
             'is_admin' => '',
-
-
+            'position_id' => '',
         ];
         $searchPost = yii::$app->request->post('search',false);
 
@@ -28,7 +27,7 @@ class AdminAction extends Action{
                 if(in_array($k,['username','name'])){
                     if($s!='')
                         $list->andWhere(['like',$k,$s]);
-                }else if(in_array($k,['status','is_admin'])){
+                }else if(in_array($k,['status','is_admin','position_id'])){
                     if($s!=='')
                         $list->andWhere([$k=>$s]);
                 }

@@ -18,6 +18,7 @@
         $list,
         $option
     )?>
+        <br/>
     <?php endif;?>
 <?php $i++;?>
 <?php endforeach;?>

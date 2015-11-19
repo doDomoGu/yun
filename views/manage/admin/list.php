@@ -1,7 +1,7 @@
 <?php
     use yii\bootstrap\BaseHtml;
     use app\components\PositionFunc;
-    /*app\assets\AppAsset::addJsFile($this,'js/main/manage-admin.js');*/
+    app\assets\AppAsset::addJsFile($this,'js/main/manage-admin.js');
 ?>
         <?/*=BaseHtml::a('添加目录（暂时不可用）',['dir-add-and-edit'],['class'=>'btn btn-primary disabled'])*/?><!--
         <p></p>
@@ -19,7 +19,10 @@
                     <th>#</th>
                     <th><input id="s_username" name="search[username]" value="<?=$search['username']?>" size="14" /></th>
                     <th><input id="s_name" name="search[name]" value="<?=$search['name']?>" size="10"  /></th>
-                    <th><?=$this->render('/manage/_position')?></th>
+                    <th>
+                        <?=$this->render('/manage/_position')?>
+                        <input type="hidden" id="s_position_id" name="search[position_id]" value="<?=$search['position_id']?>" />
+                    </th>
                     <th>
                         <select id="s_status" name="search[status]" >
                             <option value="">----</option>
@@ -57,7 +60,7 @@
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->username?></td>
                     <td><?=$l->name?> </td>
-                    <td><?=PositionFunc::getFullRoute($l->id)?></td>
+                    <td><?=PositionFunc::getFullRoute($l->position_id)?></td>
                     <td><?=$l->status?'正常':'禁用'?></td>
                     <td><?=$l->is_admin?'是':'否'?></td>
                     <td>
