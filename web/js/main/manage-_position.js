@@ -20,7 +20,7 @@ $(function(){
 
         if(p_id2>0){
 
-            $('#pos_id_div').html(p_id2);
+
 
             //$(this).nextAll().remove();
 
@@ -36,8 +36,11 @@ $(function(){
                 }
             });
         }else{
+            if($(this).index()>0)
+                p_id2 = $(this).prev().val();
             $(this).nextAll().remove();
         }
+        $('#pos_id_div').html(p_id2);
     });
 });
 
