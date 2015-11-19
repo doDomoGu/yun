@@ -90,17 +90,18 @@ class PositionFunc extends Component {
     public static function getListArr($p_id=0,$showLeaf=true,$showTree=false,$includeSelf=false,$level=false){
         $arr = [];
         $level = $level===false?false:intval($level);
-        if($level>0 || $level===false){  //level正整数 或者 false不限制
-            $position = NULL;
-            if($p_id>0){
-                //根据p_id(父id)查找对应父对象
-                $position = Position::find()->where(['id'=>$p_id])->one();
-                if($position==NULL || $position->status==0){ //不存在或者状态禁用则返回空数组
-                    return [];
-                }else if($includeSelf===true){ //将自己本身添加至数组
-                    $arr[$position->id]= $position->attributes;
-                }
+        $position = NULL;
+        if($p_id>0){
+            //根据p_id(父id)查找对应父对象
+            $position = Position::find()->where(['id'=>$p_id])->one();
+            if($position==NULL || $position->status==0){ //不存在或者状态禁用则返回空数组
+                return [];
+            }else if($includeSelf===true){ //将自己本身添加至数组
+                $arr[$position->id]= $position;
             }
+        }
+
+        if($level>0 || $level===false){  //level正整数 或者 false不限制
 
             $list = self::getChildren($p_id,$showLeaf);
 

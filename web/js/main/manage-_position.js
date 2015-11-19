@@ -2,10 +2,11 @@ var p_id;
 //var p_id2;
 
 
-$('#pos-select').change(function(){
+$('.pos-select-group').change(function(){
     p_id = $(this).val();
 
-    alert(p_id);
+
+    $('#test_pos_id').html(p_id);
 });
 
 /*

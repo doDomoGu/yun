@@ -44,13 +44,15 @@ class PositionAction extends Action{
             $posLvl_2 = null;
         }
 
-
-        if($curPos && $curPos->level==2){
-
-
-            $list = PositionFunc::getListArr($p_id,true,true,false);
-            //$where = ['p_id'=>$p_id];
+        if($curPos){
+            if($curPos->level==2){
+                $list = PositionFunc::getListArr($p_id,true,true,true);
+                //$where = ['p_id'=>$p_id];
+            }else{
+                $list = PositionFunc::getListArr($p_id,true,true,true,0);
+            }
         }
+
         //$list = Position::find()->where($where)->orderBy('ord desc,id desc')->limit(10)->all();
 
         $params['list'] = $list;
