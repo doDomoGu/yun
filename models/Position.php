@@ -11,7 +11,7 @@ class Position extends \yii\db\ActiveRecord
     {
         return [
             ['name', 'required'],
-            [['id, status, p_id, ord, is_leaf, is_last, level, is_class'], 'integer'],
+            [['id', 'status', 'p_id', 'ord', 'is_leaf', 'is_last', 'level', 'is_class'], 'integer'],
             ['name', 'string', 'max'=>100],
             [['describe'],'safe']
         ];

@@ -31,7 +31,7 @@
                     <td><?=$l->name?> <span class="badge" title="<?=PositionFunc::getFullRoute($l->id)?>">i</span></td>
                     <td><?=PositionFunc::getIsLeaf($l->is_leaf)?></td>
                     <td>
-                        <?=BaseHtml::a('编辑(暂时不可用)',['','id'=>$l->id],['class'=>'btn btn-primary btn-xs disabled'])?>
+                        <?=BaseHtml::a('编辑',['position-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                         <?=BaseHtml::button('查看职员',['class'=>'btn btn-success btn-xs viewUserBtn','p_id'=>$l->id])?>
                     </td>
                 </tr>

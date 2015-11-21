@@ -71,12 +71,15 @@ class ManageController extends BaseController
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',
             ],
+            'position-add-and-edit' => [
+                'class' => 'app\controllers\manage\position\PositionAddAndEditAction',
+            ],
             'position-select-ajax' => [
                 'class' => 'app\controllers\manage\position\PositionSelectAjaxAction',
             ],
-            'position-select-ajax2' => [
+            /*'position-select-ajax2' => [
                 'class' => 'app\controllers\manage\position\PositionSelectAjax2Action',
-            ],
+            ],*/
             'dir' => [
                 'class' => 'app\controllers\manage\dir\DirAction',
             ],
