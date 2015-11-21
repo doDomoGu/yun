@@ -36,7 +36,7 @@ class PositionFunc extends Component {
      */
     public static function getIsLeaf($is_leaf=NULL){
         if($is_leaf===1){
-            return '<span class="label label-primary">职位</span>';
+            return '<span class="label label-info">职位</span>';
         }elseif($is_leaf===0){
             return '<span class="label label-default">部门</span>';
         }else{

@@ -47,4 +47,43 @@ class CommonFunc extends Component {
         return array($y, $m, $d);
     }
 
+    /*
+     * 权限类型
+     * param reverse  键值交换,默认false为 数字对应名称
+     * param lang   显示语言 默认为en
+     */
+
+    public static function permission_type($reverse=false,$lang='en'){
+        /*        $arr = array(
+                    1=>'查看,下载',
+                    2=>'上传',
+                    3=>'删除'
+                );*/
+        if($lang=='zh_cn'){
+            $arr = array(
+                1=>'上传',
+                2=>'查看',  //下载，查看
+                3=>'修改',
+                4=>'删除',
+                5=>'查看(个人)',  //限制个人
+                6=>'修改(个人)',  //限制个人
+                7=>'删除(个人)',  //限制个人
+            );
+        }else{
+            $arr = array(
+                1=>'upload',
+                2=>'download',  //下载，查看
+                3=>'edit',
+                4=>'delete',
+                5=>'download_person',  //限制个人
+                6=>'edit_person',  //限制个人
+                7=>'delete_person',  //限制个人
+            );
+        }
+        if($reverse){
+            $arr = array_flip($arr);
+        }
+        return $arr;
+    }
+
 }

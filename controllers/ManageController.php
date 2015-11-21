@@ -80,6 +80,9 @@ class ManageController extends BaseController
             /*'position-select-ajax2' => [
                 'class' => 'app\controllers\manage\position\PositionSelectAjax2Action',
             ],*/
+            'position-dir-permission' => [
+                'class' => 'app\controllers\manage\position\PositionDirPermissionAction',
+            ],
             'dir' => [
                 'class' => 'app\controllers\manage\dir\DirAction',
             ],
