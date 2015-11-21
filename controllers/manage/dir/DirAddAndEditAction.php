@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\manage\dir;
 
+use app\components\DirFunc;
 use Yii;
 use yii\base\Action;
 use app\models\DirForm;
@@ -17,7 +18,7 @@ class DirAddAndEditAction extends Action{
                 $this->controller->view->title = '板块目录 - 编辑';
                 $model->setAttributes($dir->attributes);
             }else{
-                Yii::$app->response->redirect('news')->send();
+                Yii::$app->response->redirect('dir')->send();
             }
         }else{
             $this->controller->view->title = '板块目录 - 添加';
@@ -29,7 +30,14 @@ class DirAddAndEditAction extends Action{
 
             $dir->setAttributes($model->attributes);
             if($dir->save()){
-                Yii::$app->response->redirect('dir')->send();
+                $parents = DirFunc::getParents($dir->id);
+                $redirect = ['manage/dir'];
+                if(isset($parents[2])){
+                    $redirect['dir_id'] = $parents[2]->id;
+                }elseif(isset($parents[1])){
+                    $redirect['dir_id'] = $parents[1]->id;
+                }
+                Yii::$app->response->redirect($redirect)->send();
             }
         }
 
