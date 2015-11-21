@@ -143,19 +143,19 @@ class DirFunc extends Component {
 
     public static function getListArr($p_id=0,$showLeaf=true,$showTree=false,$includeSelf=false,$level=false){
         $arr = [];
+        $dir = NULL;
+        if($p_id>0){
+            //根据p_id(父id)查找对应父对象
+            $dir = Dir::find()->where(['id'=>$p_id])->one();
+            if($dir==NULL || $dir->status==0){ //不存在或者状态禁用则返回空数组
+                return [];
+            }else if($includeSelf===true){ //将自己本身添加至数组
+                $arr[$dir->id]= $dir;
+            }
+        }
+
         $level = $level===false?false:intval($level);
         if($level>0 || $level===false){  //level正整数 或者 false不限制
-            $dir = NULL;
-            if($p_id>0){
-                //根据p_id(父id)查找对应父对象
-                $dir = Dir::find()->where(['id'=>$p_id])->one();
-                if($dir==NULL || $dir->status==0){ //不存在或者状态禁用则返回空数组
-                    return [];
-                }else if($includeSelf===true){ //将自己本身添加至数组
-                    $arr[$dir->id]= $dir->attributes;
-                }
-            }
-
             $list = self::getChildren($p_id,$showLeaf);
 
             if(!empty($list)){

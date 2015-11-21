@@ -25,7 +25,7 @@ class DirAction extends Action{
 
         $dir_id = Yii::$app->request->get('dir_id',false);  //目录
 
-        $dirList_1 = DirFunc::getDropDownList(0,false,false,1); //第一层目录
+        $dirList_1 = DirFunc::getDropDownList(0,true,false,1); //第一层目录
 
         $dirList_2 = [];
 
@@ -48,8 +48,13 @@ class DirAction extends Action{
             $dirLvl_1 = null;
             $dirLvl_2 = null;
         }
-        if($curDir && $curDir->level==2){
-            $list = DirFunc::getListArr($dir_id,true,true,false);
+
+        if($curDir){
+            if($curDir->level==2){
+                $list = DirFunc::getListArr($dir_id,true,true,true);
+            }else{
+                $list = DirFunc::getListArr($dir_id,true,true,true,0);
+            }
         }
 
         $params['list'] = $list;

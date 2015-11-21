@@ -80,6 +80,9 @@ class ManageController extends BaseController
             'dir' => [
                 'class' => 'app\controllers\manage\dir\DirAction',
             ],
+            'dir-add-and-edit' => [
+                'class' => 'app\controllers\manage\dir\DirAddAndEditAction',
+            ],
             'admin' => [
                 'class' => 'app\controllers\manage\admin\AdminAction',
             ],

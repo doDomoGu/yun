@@ -10,10 +10,9 @@ class Dir extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['name', 'required'],
-            [['id, type, more_cate, status, p_id, ord, is_leaf, is_last, level'], 'integer'],
-            ['name', 'string', 'max'=>100],
-            [['describe'],'safe']
+            [['name', 'p_id'], 'required'],
+            [['id', 'type', 'ord', 'level', 'is_leaf', 'is_last', 'p_id', 'status'], 'integer'],
+            [['describe'], 'safe']
         ];
     }
 /*CREATE TABLE `dir` (
