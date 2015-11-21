@@ -33,6 +33,9 @@
                     <td>
                         <?=BaseHtml::a('编辑',['position-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                         <?=BaseHtml::button('查看职员',['class'=>'btn btn-success btn-xs viewUserBtn','p_id'=>$l->id])?>
+                        <?php if($l->is_leaf)
+                            echo BaseHtml::a('目录权限',['position-dir-permission','position_id'=>$l->id],['class'=>'btn btn-warning btn-xs']);
+                        ?>
                     </td>
                 </tr>
             <?php endforeach;?>
