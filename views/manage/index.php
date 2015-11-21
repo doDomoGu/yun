@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td>
-            <h3>职员 <?=BaseHtml::a($userCount,['manage/user'])?> 位</h3>
+            <h3>职员 <?=BaseHtml::a($userCount,['manage/user'])?> 位 ( 共 <?=$userCountAll?> 位， <?=$userCountDisable?> 位禁用 )</h3>
         </td>
     </tr>
     </tbody>

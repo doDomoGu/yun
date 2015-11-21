@@ -102,10 +102,16 @@ class ManageController extends BaseController
     public function actionIndex()
     {
         /*$username = 'admin';*/
+
         $params['newsCount'] = News::find()->where('status = 1')->count();
+
         $params['recruitmentCount'] = Recruitment::find()->where('status = 1')->count();
+
         $params['positionCount'] = Position::find()->where('status = 1')->count();
+
         $params['userCount'] = User::find()->where('status = 1')->count();
+        $params['userCountAll'] = User::find()->where('')->count();
+        $params['userCountDisable'] = User::find()->where('status = 0')->count();
 
 
         $this->view->title = '管理中心';
