@@ -113,28 +113,36 @@ class DirController extends BaseController
     }
 
     public function actionDownload(){
+
+
         $id = yii::$app->request->get('id');
         $file = File::find()->where(['id'=>$id,'status'=>1,'flag'=>1])->one();
 
         if($file){
-            $file_path = FileFrontFunc::getFilePath($file->filename_real);
+            if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,1)){
 
-            //Header("HTTP/1.1 303 See Other");
-            /*Header("Location: $file_path");
-var_dump($file_path);exit;
-            Yii::$app->end();*/
+                $file_path = FileFrontFunc::getFilePath($file->filename_real);
 
-            Header("Content-type: application/octet-stream");
-            Header("Accept-Ranges: bytes");
-            //Header("Accept-Length: ".filesize($file_path));
-            Header("Content-Disposition: attachment; filename=" . $file->filename);
+                //Header("HTTP/1.1 303 See Other");
+                /*Header("Location: $file_path");
+    var_dump($file_path);exit;
+                Yii::$app->end();*/
 
-            readfile($file_path);
-            Yii::$app->end();
+                Header("Content-type: application/octet-stream");
+                Header("Accept-Ranges: bytes");
+                //Header("Accept-Length: ".filesize($file_path));
+                Header("Content-Disposition: attachment; filename=" . $file->filename);
+
+                readfile($file_path);
+
+            }else{
+                echo 'no permission';
+            }
+
         }else{
             echo 'no file';
         }
-
+        Yii::$app->end();
     }
 
     public function actionGetUptoken(){

@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use app\models\PositionDirPermission;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
@@ -47,6 +48,16 @@ class BaseController extends Controller
             return true;
         }else{
 
+            return false;
+        }
+    }
+
+    //检测职位对目录的操作权限
+    public function checkPositionDirPermission($position_id,$dir_ir,$type){
+        $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_ir,'type'=>$type])->one();
+        if($pm){
+            return true;
+        }else{
             return false;
         }
     }
