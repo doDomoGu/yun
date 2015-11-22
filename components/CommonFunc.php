@@ -62,21 +62,21 @@ class CommonFunc extends Component {
         if($lang=='zh_cn'){
             $arr = array(
                 1=>'上传',
-                2=>'查看',  //下载，查看
-                3=>'修改',
+                2=>'下载',  //下载，查看
+                //3=>'修改',
                 4=>'删除',
-                5=>'查看(个人)',  //限制个人
-                6=>'修改(个人)',  //限制个人
+                5=>'下载(个人)',  //限制个人
+                //6=>'修改(个人)',  //限制个人
                 7=>'删除(个人)',  //限制个人
             );
         }else{
             $arr = array(
                 1=>'upload',
                 2=>'download',  //下载，查看
-                3=>'edit',
+                //3=>'edit',
                 4=>'delete',
                 5=>'download_person',  //限制个人
-                6=>'edit_person',  //限制个人
+                //6=>'edit_person',  //限制个人
                 7=>'delete_person',  //限制个人
             );
         }
