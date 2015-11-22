@@ -13,7 +13,7 @@
 <input type="hidden" id="fileurlId" value="fileurl" />
 
 <p>
-    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>yii\helpers\Url::to('index.php?r=branches/create'),'class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadModal"])?>
+    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadModal"])?>
 
     <button class="btn btn-primary disabled">
         <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>

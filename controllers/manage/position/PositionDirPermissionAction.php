@@ -85,11 +85,11 @@ class PositionDirPermissionAction extends Action{
             PositionDirPermission::deleteAll(['position_id'=>$position_id,'dir_id'=>$k]);
             $typeArr = [];
             if(isset($p['all'])){
-                $typeArr = [1,2,4,5,7];
+                $typeArr = [11,12,21,22,31,32];
             }else{
 
                 foreach($p as $k2=>$a){
-                    if(in_array($k2,[1,2,4,5,7])){
+                    if(in_array($k2,[11,12,21,22,31,32])){
                         $typeArr[] = $k2;
                     }
                 }
