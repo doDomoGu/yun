@@ -1,5 +1,14 @@
+.dir-item {
+    cursor: pointer;
+    display: block;
+}
+
 .dir-item:hover{
     background: #eee;
+}
+
+.dir-item .name.hover {
+    color:#337ab7;
 }
 
 .dir-item .icon img{

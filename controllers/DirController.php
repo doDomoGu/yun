@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\components\DirFunc;
 use app\components\FileFrontFunc;
+use app\components\PermissionFunc;
 use app\models\Dir;
 use app\models\File;
 use yii\filters\VerbFilter;
@@ -19,13 +20,13 @@ class DirController extends BaseController
     {
         return [
 
-            'verbs' => [
+            /*'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'save' => ['post'],
                     'download' => ['post'],
                 ],
-            ],
+            ],*/
         ];
     }
 
@@ -113,13 +114,11 @@ class DirController extends BaseController
     }
 
     public function actionDownload(){
-
-
         $id = yii::$app->request->get('id');
         $file = File::find()->where(['id'=>$id,'status'=>1,'flag'=>1])->one();
 
         if($file){
-            if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,2)){
+            if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,PermissionFunc::DOWNLOAD)){
 
                 $file_path = FileFrontFunc::getFilePath($file->filename_real);
 

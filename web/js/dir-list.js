@@ -1,3 +1,14 @@
+$('.dir-item').mouseenter(function(){
+    $(this).find('.name').addClass('hover');
+}).mouseleave(function(){
+    $(this).find('.name').removeClass('hover');
+});
+
+$('.dir-item').click(function(){
+    location.href='/dir/download?id='+$(this).attr('data-id');
+});
+
+
 
 var qiniuDomain = $('#qiniuDomain').val();
 var pickfileId = $('#pickfileId').val();

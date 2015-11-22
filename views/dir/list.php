@@ -24,17 +24,13 @@
 <?php if(!empty($list)):?>
 <div class="row">
 <?php foreach($list as $l):?>
-    <div class="col-md-3 dir-item text-center">
+    <div class="col-md-3 dir-item text-center" data-id="<?=$l->id?>">
         <div class="icon">
-            <a href="/dir/download?id=<?=$l->id?>" data-method="post">
                 <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
-                <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
-            </a>
+            <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
         </div>
         <div class="name">
-            <a href="/dir/download?id=<?=$l->id?>" data-method="post">
                 <?=$l->filename?>
-            </a>
         </div>
     </div>
 <?php endforeach;?>

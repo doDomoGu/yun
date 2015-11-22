@@ -24,8 +24,8 @@
         <th>类型</th>
         <th width="80" class="text-center">全选</th>
 
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('upload')?></th>
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('download')?></th>
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('upload_common')?></th>
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('download_common')?></th>
         <!--<th>修改</th>-->
         <!--<th width="80" class="text-center"><?/*=PermissionFunc::getPermissionTypeNameCn('delete')*/?></th>-->
 
