@@ -21,18 +21,13 @@ class DirAction extends Action{
 
         $this->controller->view->title = '板块目录 - 列表';
 
-        //$type_id = Yii::$app->request->get('type_id',false);  //板块
-
         $dir_id = Yii::$app->request->get('dir_id',false);  //目录
 
         $dirList_1 = DirFunc::getDropDownList(0,true,false,1); //第一层目录
 
         $dirList_2 = [];
 
-        //$typeArr = DirFunc::getCatalogType(true); //板块ID数组
-
         $list = [];
-
 
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
 
