@@ -119,7 +119,7 @@ class DirController extends BaseController
         $file = File::find()->where(['id'=>$id,'status'=>1,'flag'=>1])->one();
 
         if($file){
-            if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,1)){
+            if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,2)){
 
                 $file_path = FileFrontFunc::getFilePath($file->filename_real);
 

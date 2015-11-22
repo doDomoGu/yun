@@ -54,31 +54,40 @@ class CommonFunc extends Component {
      */
 
     public static function permission_type($reverse=false,$lang='en'){
-        /*        $arr = array(
-                    1=>'查看,下载',
-                    2=>'上传',
-                    3=>'删除'
-                );*/
         if($lang=='zh_cn'){
-            $arr = array(
-                1=>'上传',
-                2=>'下载',  //下载，查看
-                //3=>'修改',
-                4=>'删除',
-                5=>'下载(个人)',  //限制个人
-                //6=>'修改(个人)',  //限制个人
-                7=>'删除(个人)',  //限制个人
-            );
+            $arr = [
+                11=>'上传(公共)',  //普通通用权限
+                12=>'下载(公共)',  //下载，查看
+                13=>'修改(公共)',
+                14=>'删除(公共)',
+
+                21=>'上传(个人)',  //限制个人 自己的文件其他人不可见（除拥有最高权限）
+                22=>'下载(个人)',
+                23=>'修改(个人)',
+                24=>'删除(个人)',
+                
+                31=>'上传(最高)',  //最高权限 可看全部，特别是属于个人的文件
+                32=>'下载(最高)',
+                33=>'修改(最高)',
+                34=>'删除(最高)',
+            ];
         }else{
-            $arr = array(
-                1=>'upload',
-                2=>'download',  //下载，查看
-                //3=>'edit',
-                4=>'delete',
-                5=>'download_person',  //限制个人
-                //6=>'edit_person',  //限制个人
-                7=>'delete_person',  //限制个人
-            );
+            $arr = [
+                11=>'upload',
+                12=>'download',
+                13=>'edit',
+                14=>'delete',
+
+                21=>'upload_person',
+                22=>'download_person',
+                23=>'edit_person',
+                24=>'delete_person',
+
+                31=>'upload_all',
+                32=>'download_all',
+                33=>'edit_all',
+                34=>'delete_all',
+            ];
         }
         if($reverse){
             $arr = array_flip($arr);
