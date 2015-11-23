@@ -2,8 +2,30 @@
     height:240px;
     display: block;
 }*/
+#news_list/*, #site-index*/ {
+    margin-bottom: 20px;
+}
+#site-index .item-one {
+    width:220px;
+    margin:0 10px 10px 0;
+    display: block;
+    float:left;
+    height:300px;
+}
+
+#site-index .item-one.item-last{
+    margin-right:0;
+}
+
 .wrap > .container {
     padding: 50px 15px 20px;
+}
+
+#recruitment_list {
+    position:fixed;
+    top:60px;
+    right:10px;
+    width:300px;
 }
 
 .slideBox{ width:100%; height:302px; overflow:hidden; position:relative; border:1px solid #ddd;  }
