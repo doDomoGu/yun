@@ -1,21 +1,24 @@
 <?php
     app\assets\AppAsset::addCssFile($this,'css/site-index.css');
+    app\assets\AppAsset::addJsFile($this,'js/main/site-index.js');
 ?>
 <div id="news_list">
     <?=$this->render('/site/_news',['news_list'=>$news_list])?>
 </div>
 <div class="clearfix"></div>
 <div id="site-index">
-    <div class="item-one">
+    <?php for($i=1;$i<=count($list_dirOne);$i++):?>
+
+    <div class="item-one <?=$i==count($list_dirOne)?'item-last':''?>">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
-                    <?=yii\bootstrap\Html::a('企业运营中心',['/dir','dir_id'=>1])?>
+                    <?=yii\bootstrap\Html::a($list_dirOne[$i]->name,['/dir','dir_id'=>$list_dirOne[$i]->id])?>
                 </h3>
             </div>
             <table class="table table-bordered table-hover">
-                <?php foreach($list_1 as $l):?>
-                    <tr>
+                <?php foreach(${'list_'.$i} as $l):?>
+                    <tr class="item-count-<?=count(${'list_'.$i})?>">
                         <td class="text-center">
                             <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
                         </td>
@@ -25,82 +28,7 @@
             </table>
         </div>
     </div>
-    <div class="item-one">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">
-                    <?=yii\bootstrap\Html::a('发展中心',['/dir','dir_id'=>2])?>
-                </h3>
-            </div>
-            <table class="table table-bordered table-hover">
-                <?php foreach($list_2 as $l):?>
-                    <tr>
-                        <td class="text-center">
-                            <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
-                        </td>
-                    </tr>
-                <?php endforeach;?>
-
-            </table>
-        </div>
-    </div>
-    <div class="item-one">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">
-                    <?=yii\bootstrap\Html::a('工具应用中心',['/dir','dir_id'=>3])?>
-                </h3>
-            </div>
-            <table class="table table-bordered table-hover">
-                <?php foreach($list_3 as $l):?>
-                    <tr>
-                        <td class="text-center">
-                            <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
-                        </td>
-                    </tr>
-                <?php endforeach;?>
-
-            </table>
-        </div>
-    </div>
-    <div class="item-one">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">
-                    <?=yii\bootstrap\Html::a('项目资源中心',['/dir','dir_id'=>4])?>
-                </h3>
-            </div>
-            <table class="table table-bordered table-hover">
-                <?php foreach($list_4 as $l):?>
-                    <tr>
-                        <td class="text-center">
-                            <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
-                        </td>
-                    </tr>
-                <?php endforeach;?>
-
-            </table>
-        </div>
-    </div>
-    <div class="item-one item-last">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">
-                    <?=yii\bootstrap\Html::a('学习共享中心',['/dir','dir_id'=>5])?>
-                </h3>
-            </div>
-            <table class="table table-bordered table-hover">
-                <?php foreach($list_5 as $l):?>
-                    <tr>
-                        <td class="text-center">
-                            <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
-                        </td>
-                    </tr>
-                <?php endforeach;?>
-
-            </table>
-        </div>
-    </div>
+    <?php endfor;?>
 </div>
 <div class="clearfix"></div>
 <div id="recruitment_list">

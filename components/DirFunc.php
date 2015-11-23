@@ -204,12 +204,12 @@ class DirFunc extends Component {
  * @param string orderBy  排序方法
  * return array
  */
-    public static function getChildren($p_id,$showLeaf=true,$status=1,$orderBy='ord DESC,id DESC'){
+    public static function getChildren($p_id,$showLeaf=true,$status=1,$orderBy='ord DESC,id DESC',$limit=false){
         $where['p_id'] = $p_id;
         $where['status'] = $status;
         if($showLeaf==false)
             $where['is_leaf'] = 0;
-        return Dir::find()->where($where)->orderBy($orderBy)->all();
+        return Dir::find()->where($where)->orderBy($orderBy)->limit($limit)->all();
     }
 
     /*
