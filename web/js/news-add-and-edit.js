@@ -1,5 +1,6 @@
 
 var qiniuDomain = $('#qiniuDomain').val();
+var qiniuDomainBeaut = $('#qiniuDomainBeaut').val();
 var pickfileId = $('#pickfileId').val();
 var fileurlId = $('#fileurlId').val();
 var _file;
@@ -44,8 +45,8 @@ var uploader = Qiniu.uploader({
             /*alert(res.key);
              alert(info);*/
             //$('#'+fileurlId+'').val(res.key);
-            $('#newsform-img_url').val(qiniuDomain+res.key);
-            $('#img-upload').attr('src','').attr('src',qiniuDomain+res.key);
+            $('#newsform-img_url').val(res.key);
+            $('#img-upload').attr('src','').attr('src',qiniuDomainBeaut+res.key);
             $('#'+fileurlId+'_upload_txt').html('<span style="color:green;">上传成功</span>');
         },
         'Error': function(up, err, errTip) {

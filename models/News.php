@@ -27,6 +27,8 @@ class News extends \yii\db\ActiveRecord
 
         ];
     }
+
+
 /*CREATE TABLE `news` (
  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
  `title` varchar(255) NOT NULL COMMENT '标题',

@@ -14,7 +14,7 @@
     <div class="bd">
         <ul>
             <?php foreach($news_list as $l):?>
-            <li><a href="/" target="_blank"><img src="<?=$l->img_url?>" /></a></li>
+            <li><a href="/" target="_blank"><img src="<?=\app\components\CommonFunc::imgUrl($l->img_url)?>" /></a></li>
             <?php endforeach;?>
         </ul>
     </div>

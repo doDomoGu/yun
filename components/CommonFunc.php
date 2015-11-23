@@ -2,6 +2,7 @@
 namespace app\components;
 
 use yii\base\Component;
+use yii;
 
 class CommonFunc extends Component {
     public static function getGender($type){
@@ -45,5 +46,11 @@ class CommonFunc extends Component {
         }
         $m < 0 && $y -= 1;
         return array($y, $m, $d);
+    }
+
+    public static function imgUrl($img_url){
+        if($img_url!='' && strpos($img_url,'http')===false)
+            $img_url = yii::$app->params['qiniu-domain-beaut'].$img_url;
+        return $img_url;
     }
 }

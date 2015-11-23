@@ -22,7 +22,8 @@ use yii\bootstrap\BaseHtml;
                 <tr>
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->title?></td>
-                    <td><?=\yii\bootstrap\Html::img($l->img_url,['width'=>200,'title'=>$l->img_url,'alt'=>$l->img_url,'style'=>'border:1px solid #333;'])?></td>
+                    <?php $img_url = \app\components\CommonFunc::imgUrl($l->img_url);?>
+                    <td><?=\yii\bootstrap\Html::img($img_url,['width'=>200,'title'=>$img_url,'alt'=>$img_url,'style'=>'border:1px solid #333;'])?></td>
                     <td><?=$l->status==1?'启用':'禁用'?></td>
                     <td><?=$l->ord?></td>
                     <!--<td><?/*=$l->add_time*/?></td>

@@ -7,6 +7,7 @@
     app\assets\AppAsset::addJsFile($this,'js/news-add-and-edit.js');
 ?>
 <input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
+<input type="hidden" id="qiniuDomainBeaut" value="<?=yii::$app->params['qiniu-domain-beaut']?>" />
 <input type="hidden" id="pickfileId" value="pickfile" />
 <input type="hidden" id="fileurlId" value="fileurl" />
         <h2>
@@ -27,7 +28,7 @@
 
         <?= $form->field($model, 'img_url',['template'=>"{label}\n<div class=\"col-lg-3\">
     <div>
-    <img id=\"img-upload\" src=\"".$model->img_url."\" style=\"border:1px solid #333;\" />
+    <img id=\"img-upload\" src=\"".\app\components\CommonFunc::imgUrl($model->img_url)."\" style=\"border:1px solid #333;\" />
     </div>
     <div id=\"pickfile_container\">
     <p>
