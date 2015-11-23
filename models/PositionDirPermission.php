@@ -16,7 +16,7 @@ class PositionDirPermission extends \yii\db\ActiveRecord
  `position_id` int(11) unsigned NOT NULL,
  `dir_id` int(11) unsigned NOT NULL,
  `type` tinyint(1) unsigned NOT NULL,
- PRIMARY KEY (`role_id`,`dir_id`,`type`)
+ PRIMARY KEY (`position_id`,`dir_id`,`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8*/
 
 }

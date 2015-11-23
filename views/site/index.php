@@ -1,13 +1,12 @@
 <?php
     app\assets\AppAsset::addCssFile($this,'css/site-index.css');
 ?>
-<div class="row">
-    <div class="col-lg-2" id="news_list">
-        <?=$this->render('/site/_left',['news_list'=>$news_list])?>
+    <div id="news_list">
+        <?=$this->render('/site/_news',['news_list'=>$news_list])?>
     </div>
-    <div class="col-lg-8">
-        <div class="row" id="site-index">
-            <div class="col-lg-3">
+    <div >
+        <div id="site-index">
+            <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
@@ -26,7 +25,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
@@ -45,7 +44,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
@@ -64,7 +63,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
@@ -83,7 +82,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">
@@ -104,7 +103,6 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2" id="recruitment_list">
+    <div id="recruitment_list">
         <?=$this->render('/site/_right',['recruitment_list'=>$recruitment_list])?>
     </div>
-</div>
