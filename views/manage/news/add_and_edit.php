@@ -28,14 +28,14 @@
 
         <?= $form->field($model, 'img_url',['template'=>"{label}\n<div class=\"col-lg-3\">
     <div>
-    <img id=\"img-upload\" src=\"".\app\components\CommonFunc::imgUrl($model->img_url)."\" style=\"border:1px solid #333;\" />
+    <img id=\"img-upload\" src=\"".app\components\CommonFunc::imgUrl($model->img_url)."\" style=\"border:1px solid #333;\" />
     </div>
     <div id=\"pickfile_container\">
     <p>
         <input type=\"file\" id=\"pickfile\">
     </p>
     <p>
-    <input type=\"hidden\" value=\"\" name=\"NewsForm[img_url]\" class=\"form-control\" id=\"newsform-img_url\">
+    <input type=\"hidden\" name=\"NewsForm[img_url]\" class=\"form-control\" value=\"".$model->img_url."\" id=\"newsform-img_url\">
 
     </p>
     <div class=\"clearfix\" id=\"fileurl_upload_txt\"></div>
