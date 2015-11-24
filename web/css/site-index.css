@@ -10,13 +10,21 @@
     font-size:20px;
 }
 
-#site-index .item-one {
+#site-index .item-one,#site-index .item-two {
     width:220px;
-    margin:0 10px 10px 0;
+    margin:0 10px 0 0;
     display: block;
     float:left;
     height:auto;
     overflow: hidden;
+}
+
+#site-index .item-one.item-last,#site-index .item-two.item-last{
+    margin-right:0;
+}
+
+#site-index .item-one a{
+    text-decoration: none;
 }
 
 #site-index .item-one .panel-heading:hover {
@@ -36,15 +44,11 @@
 
 
 #site-index .item-one table tr a {
-    text-decoration: none;
     color:#eee;
     font-size:18px;
 }
 
 
-#site-index .item-one.item-last{
-    margin-right:0;
-}
 
 #site-index .item-one tr.item-count-1 {
     height:240px;
@@ -64,6 +68,20 @@
 #site-index .item-one tr td {
     vertical-align: middle;
 }
+
+#site-index .item-two img {
+    width: 100%;
+}
+
+#site-index #email-login {
+    height:223px;
+}
+
+#site-index .item-two .wx {
+    padding:5px 0;
+    border: 1px solid #333;
+}
+
 
 .wrap > .container {
     padding: 50px 15px 20px;
