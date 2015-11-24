@@ -38,9 +38,56 @@ class DirFrontFunc extends Component {
         return $arr;
     }
 
+    public static function createTreeJson($arr,$dir_id,$p_ids){
+        $data = null;
+        $i=1;
+        if(!empty($arr)){
+            $data .= '[';
+            foreach($arr as $l){
+                $data.='{';
+                $data.="name:'".$l->name."',url:'/dir?dir_id=".$l->id."',target:'_self'";
+                if($l->id == $dir_id){
+                    $data.=",font:{'background-color':'black', 'color':'white'}";
+                }else if(in_array($l->id,$p_ids)){
+                    $data.=',open:true';
+                }
+                if(!empty($l->childrenList)){
+                    $data.=',children: '.self::createTreeJson($l->childrenList,$dir_id,$p_ids);
+                }
+
+
+                $data.='}';
+                if($i<count($arr)){
+                    $data.=',';
+                }
+                $i++;
+            }
+            $data .= ']';
+        }
+        return $data;
+    }
+
     public static function getTreeData($dir_id){
-        $data = '[{ name:"父节点1 - 展开", open:true,isParent:true}]';
-        $data2 = '[
+        $data = null;
+        $parents = DirFunc::getParents($dir_id);
+        if(isset($parents[1])){
+            $p_ids = [];
+            foreach($parents as $p){
+                $p_ids[] = $p->id;
+            }
+
+
+            //$dir_id_one = $parents[1];
+            $arr = DirFunc::getChildrenArr($parents[1]->id,true,false,false);
+
+            $data .=self::createTreeJson($arr,$dir_id,$p_ids);
+
+
+            //$data = '[{ name:"父节点1 - 展开", open:true,isParent:true}]';
+        }
+        return $data;
+
+       /* $data2 = '[
 			{ name:"父节点1 - 展开", open:true,
                 children: [
                 { name:"父节点11 - 折叠",url:"manage",target:"_self",
@@ -71,7 +118,7 @@ class DirFrontFunc extends Component {
 					{ name:"父节点22 - 折叠",
                         children: [
                         { name:"叶子节点221"},
-							{ name:"叶子节点222"},
+	/*						{ name:"叶子节点222"},
 							{ name:"叶子节点223"},
 							{ name:"叶子节点224"}
 ]},
@@ -86,6 +133,6 @@ class DirFrontFunc extends Component {
 			{ name:"父节点3 - 没有子节点", isParent:true}
 
 ]';
-        return $data;
+        return $data;*/
     }
 }

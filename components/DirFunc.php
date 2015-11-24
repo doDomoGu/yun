@@ -195,6 +195,75 @@ class DirFunc extends Component {
         return $arr;
     }
 
+
+
+    /*
+     * 函数getDropDownArr ,实现根据is_leaf(Dir表 is_leaf字段) 底层
+     *
+     * @param integer p_id 父id (默认 0 )
+     * @param boolean showLeaf 是否显示叶子层级的标志位 (默认true)
+     * @param boolean includeSelf 是否包含自己本身的标志位 (默认false)
+     * @param integer level  显示层级数限制 (默认false,不限制)
+     * return array  递归
+     */
+
+    public static function getChildrenArr($p_id=0,$showLeaf=true,$showTree=false,$includeSelf=false,$level=false){
+        $arr = [];
+        $dir = NULL;
+        if($p_id>0){
+            //根据p_id(父id)查找对应父对象
+            $dir = Dir::find()->where(['id'=>$p_id])->one();
+            if($dir==NULL || $dir->status==0){ //不存在或者状态禁用则返回空数组
+                return [];
+            }else if($includeSelf===true){ //将自己本身添加至数组
+                $arr[$dir->id]= $dir;
+            }
+        }
+
+        $level = $level===false?false:intval($level);
+        if($level>0 || $level===false){  //level正整数 或者 false不限制
+            $list = self::getChildren($p_id,$showLeaf);
+
+            if(!empty($list)){
+                $nlevel = $level===false?false: intval($level - 1);
+                foreach($list as $l){
+                    $arr[$l->id] = $l;
+                    if($showTree){
+                        $prefix = '';
+                        if($l->level>1){
+                            for($i=1;$i<$l->level;$i++){
+                                $prefix.='&emsp;';
+                            }
+                            if($l->is_last>0){
+                                $prefix.='└─ ';
+                            } else{
+                                $prefix.='├─ ';
+                            }
+                        }
+                        $arr[$l->id]->name = $prefix.$l->name;
+                    }
+
+                    if($nlevel === false || $nlevel > 0){
+                        $children = self::getChildrenArr($l->id,$showLeaf,$showTree,false,$nlevel);
+                        $childrenIds = [];
+                        $childrenList = [];
+                        if(!empty($children)){
+                            foreach($children as $child){
+                                //$arr[$child->id] = $child;
+                                $childrenIds[]=$child->id;
+                                $childrenList[]=$child;
+                            }
+                        }
+                        $arr[$l->id]->childrenIds = $childrenIds;
+                        $arr[$l->id]->childrenList = $childrenList;
+                    }
+
+                }
+            }
+        }
+        return $arr;
+    }
+
     /*
  * 函数getChildren ,实现根据 p_id 获取子层级 （单层）
  *

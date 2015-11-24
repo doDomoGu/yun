@@ -6,6 +6,7 @@ use yii;
 class Dir extends \yii\db\ActiveRecord
 {
     public $childrenIds;
+    public $childrenList;
 
     public function rules()
     {

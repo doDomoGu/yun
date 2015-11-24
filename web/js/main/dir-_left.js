@@ -5,7 +5,21 @@ $('.dd').nestable({ */
 
 
 
-var setting = {	};
+var setting = {
+    view: {
+        fontCss: getFont,
+        nameIsHTML: true
+    },
+    data: {
+        simpleData: {
+            enable: true
+        }
+    }
+};
+function getFont(treeId, node) {
+    return node.font ? node.font : {};
+}
+
 var zNodes2 = eval($('#treeData').html());
 /*alert(zNodes2);
     zNodes2 = zNodes2.toString();
