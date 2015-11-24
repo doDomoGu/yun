@@ -1,6 +1,6 @@
-<div class="panel panel-danger">
+<div id="recruitment_list" class="panel panel-danger">
     <div class="panel-heading">
-        <h3 class="panel-title">招聘信息</h3>
+        <h3 class="panel-title">招聘信息 <button id="testBtn">test</button></h3>
     </div>
     <table class="table table-bordered table-hover">
         <?php foreach($recruitment_list as $l):?>

@@ -6,4 +6,7 @@ $(function(){
         location.href = $(this).find('a').attr('href');
     });
 
+    if($(window).width()<1775){
+        $('#recruitment_list').hide();
+    }
 });
