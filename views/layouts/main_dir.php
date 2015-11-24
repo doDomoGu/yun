@@ -18,7 +18,7 @@ AppAsset::register($this);  /* 注册appAsset */
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
-                <?=$this->render('/dir/_left')?>
+                <?=$this->render('/dir/_left',['dir_id'=>$this->params['dir_id']])?>
             </div>
             <div class="col-lg-10">
                 <?= Breadcrumbs::widget([

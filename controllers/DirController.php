@@ -54,16 +54,17 @@ class DirController extends BaseController
 
                 //$list = DirFunc::getChildren($dir_id);
                 $list = FileFrontFunc::getFilesByDirId($dir_id);
-                $params['list'] = $list;
-                $params['dir_id'] = $dir_id;
                 $p_id = 0;
-                $params['p_id'] = $p_id;
-                return $this->render('list',$params);
+                $viewName = 'list';
             }else{
                 $list = DirFunc::getChildren($dir_id);
-                $params['list'] = $list;
-                return $this->render('index',$params);
+                $viewName = 'index';
             }
+            $params['list'] = $list;
+            $params['dir_id'] = $dir_id;
+            $params['p_id'] = $p_id;
+            $this->view->params['dir_id'] = $dir_id;
+            return $this->render($viewName,$params);
         }else{
 
             $this->layout = 'main';

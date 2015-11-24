@@ -1,5 +1,18 @@
-<?php \app\assets\AppAsset::addCssFile($this,'css/dir-left.css');?>
-<div style="border:1px solid #aaa;border-radius:10px;height:300px;padding:10px;">
-    <h3>板块目录</h3>
-    <h4>侧边栏</h4>
+<?php
+    use app\components\DirFrontFunc;
+    app\assets\AppAsset::addCssFile($this,'css/dir-left.css');
+    app\assets\AppAsset::addJsFile($this,'js/main/dir-_left.js');
+
+    /*app\assets\AppAsset::addCssFile($this,'css/nestable.css');
+    app\assets\AppAsset::addJsFile($this,'js/jquery.nestable.js');*/
+
+    app\assets\AppAsset::addCssFile($this,'css/zTreeStyle/zTreeStyle.css');
+    app\assets\AppAsset::addJsFile($this,'js/jquery.ztree.core-3.5.min.js');
+
+    $treeData = DirFrontFunc::getTreeData($dir_id);
+?>
+<span id="treeData" class="hidden"><?=$treeData?></span>
+<div id="tree-div">
+    <h3>快速访问</h3>
+    <ul id="treeDemo" class="ztree"></ul>
 </div>
