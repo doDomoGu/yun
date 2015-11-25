@@ -2,6 +2,8 @@
     use yii\bootstrap\Modal;
     use yii\bootstrap\Html;
     use app\components\FileFrontFunc;
+    use app\components\PermissionFunc;
+
     app\assets\AppAsset::addCssFile($this,'css/dir-index.css');
     app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
     app\assets\AppAsset::addJsFile($this,'js/qiniu/qiniu.js');
@@ -13,7 +15,7 @@
 <input type="hidden" id="fileurlId" value="fileurl" />
 
 <p>
-    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadModal"])?>
+    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadCommon($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadModal"])?>
 
     <button class="btn btn-primary disabled">
         <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>
@@ -21,7 +23,7 @@
     </button>
 </p>
 <p>
-
+    <?=PermissionFunc::testShow($this->context->user->position_id,$dir_id)?>
 </p>
 <hr/>
 <?php if(!empty($list)):?>

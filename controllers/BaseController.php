@@ -53,25 +53,5 @@ class BaseController extends Controller
         }
     }
 
-    //检测职位对目录的操作权限  *permission_type 操作类 比如 下载 = 1 要判断 文件是否个人的 下载(公共) 下载(个人)
-    public function checkPositionDirPermission($position_id,$dir_ir,$permission_type){
-        if(in_array($permission_type,[PermissionFunc::DOWNLOAD,PermissionFunc::UPLOAD,PermissionFunc::EDIT,PermissionFunc::DELETE])){
-            $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_ir])->all();
-            if(!empty($pm)){
-                //获取拥有的权限数组
-                $typeArr = [];
-                foreach($pm as $p){
-                    $typeArr[] = $p->type;
-                }
-                //判断下载权限
-                if($permission_type==PermissionFunc::DOWNLOAD){
 
-                    if($pm)
-                        return true;
-                }
-            }
-        }
-
-        return false;
-    }
 }

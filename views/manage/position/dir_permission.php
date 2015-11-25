@@ -24,18 +24,18 @@
         <th>类型</th>
         <th width="80" class="text-center">全选</th>
 
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('upload_common')?></th>
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('download_common')?></th>
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('upload_common')?></th>
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('download_common')?></th>
         <!--<th>修改</th>-->
         <!--<th width="80" class="text-center"><?/*=PermissionFunc::getPermissionTypeNameCn('delete')*/?></th>-->
 
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('upload_person')?></th>
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('download_person')?></th>
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('upload_person')?></th>
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('download_person')?></th>
         <!--<th>修改(个人)</th>-->
 
 
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('upload_all')?></th>
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn('download_all')?></th>
+        <!--<th width="80" class="text-center"><?/*=PermissionFunc::getPermissionTypeNameCn('upload_all')*/?></th>-->
+        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('download_all')?></th>
 
 
     </tr>
@@ -49,12 +49,12 @@
                 <td><?=DirFunc::getIsLeaf($l->is_leaf)?></td>
                 <?php if($l->is_leaf):?>
                     <input type="hidden" name="pm[<?=$l->id?>][edit]" />
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][all]',isset($pmCheck[$l->id]) && count($pmCheck[$l->id])==6?true:false)?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][all]',isset($pmCheck[$l->id]) && count($pmCheck[$l->id])==5?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][11]',isset($pmCheck[$l->id][11])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][12]',isset($pmCheck[$l->id][12])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][21]',isset($pmCheck[$l->id][21])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][22]',isset($pmCheck[$l->id][22])?true:false)?></td>
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][31]',isset($pmCheck[$l->id][31])?true:false)?></td>
+                    <!--<td class="text-center"><?/*=BaseHtml::checkbox('pm['.$l->id.'][31]',isset($pmCheck[$l->id][31])?true:false)*/?></td>-->
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][32]',isset($pmCheck[$l->id][32])?true:false)?></td>
                 <?php else:?>
                     <td class="text-center"> -- </td>
@@ -62,7 +62,7 @@
                     <td class="text-center"> -- </td>
                     <td class="text-center"> -- </td>
                     <td class="text-center"> -- </td>
-                    <td class="text-center"> -- </td>
+                    <!--<td class="text-center"> -- </td>-->
                     <td class="text-center"> -- </td>
                 <?php endif;?>
             </tr>
