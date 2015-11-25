@@ -1,0 +1,10 @@
+#dir-sidebar {
+    width:200px;
+    float:left;
+}
+
+#dir-main {
+    width:920px;
+    padding-left:20px;
+    float:left;
+}

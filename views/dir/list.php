@@ -20,9 +20,12 @@
         新建文件夹(暂不可用)
     </button>
 </p>
+<p>
+
+</p>
 <hr/>
 <?php if(!empty($list)):?>
-<div class="row">
+<div>
 <?php foreach($list as $l):?>
     <div class="col-md-3 dir-item text-center" data-id="<?=$l->id?>">
         <div class="icon">

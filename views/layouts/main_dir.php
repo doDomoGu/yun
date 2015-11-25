@@ -4,6 +4,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);  /* 注册appAsset */
+
+app\assets\AppAsset::addCssFile($this,'css/layout/dir.css');
 ?>
 <?php $this->beginPage(); /* 页面开始标志位 */ ?>
 <!DOCTYPE html>
@@ -16,18 +18,17 @@ AppAsset::register($this);  /* 注册appAsset */
 <div class="wrap">
     <?php echo $this->render('navbar'); /* 引入导航栏 */?>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-2">
-                <?=$this->render('/dir/_left',['dir_id'=>$this->params['dir_id']])?>
-            </div>
-            <div class="col-lg-10">
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
-                <?= $content ?>
-            </div>
+        <div id="dir-sidebar">
+            <?=$this->render('/dir/_left',['dir_id'=>$this->params['dir_id']])?>
+        </div>
+        <div id="dir-main">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= $content ?>
         </div>
     </div>
+    <div class="clearfix"></div>
 </div>
 <?=$this->render('footer')?>
 <?php $this->endBody(); /* body结束标志位 */ ?>

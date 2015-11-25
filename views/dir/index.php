@@ -1,5 +1,5 @@
 <?php \app\assets\AppAsset::addCssFile($this,'css/dir-index.css');?>
-<div class="row">
+<div>
 <?php foreach($list as $l):?>
     <div class="col-md-3 dir-item text-center">
         <div class="icon">
