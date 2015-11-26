@@ -13,7 +13,8 @@
 <input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
 <input type="hidden" id="pickfileId" value="pickfile" />
 <input type="hidden" id="fileurlId" value="fileurl" />
-
+<input type="hidden" id="pickfileId2" value="pickfile2" />
+<input type="hidden" id="fileurlId2" value="fileurl2" />
 <p>
     <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadCommon($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
 
@@ -44,6 +45,9 @@
         </div>
         <div class="name">
                 <?=$l->filename?>
+            <br/>时间：<?=$l->add_time?>
+            <br/>上传用户：<?=$l->uid==yii::$app->user->id?'自己':$l->uid?>
+            <br/>上传类型：<?=$l->flag==1?'公共':'个人'?>
         </div>
     </div>
 <?php endforeach;?>
@@ -58,6 +62,7 @@
 
 <?=$this->render('modal/upload_common')?>
 <?=$this->render('modal/upload_person')?>
+
 <input type="hidden" id="dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="p_id" value="<?=$p_id?>">
 <?/*=Html::a('提交',['/dir/save'],['id'=>'save-submit','data-method'=>'post'])*/?>

@@ -47,7 +47,7 @@ class FileFrontFunc extends Component {
     }
 
     public static function getFilesByDirId($dir_id){
-        return File::find()->where(['dir_id'=>$dir_id,'status'=>1,'flag'=>1])->orderBy('add_time desc')->all();
+        return File::find()->where(['dir_id'=>$dir_id,'status'=>1])->orderBy('add_time desc')->all();
     }
 
 }

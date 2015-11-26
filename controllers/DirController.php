@@ -91,7 +91,7 @@ class DirController extends BaseController
         $insert['clicks'] = 0;
         $insert['ord'] = 1;
         $insert['status'] = 1;
-        $insert['flag'] = 1;
+        $insert['flag'] = $post['flag'];  //flag ：1 公共  flag :2 个人\私人
 
         //$file->insert(true,$insert);
         $file->setAttributes($insert);
@@ -116,7 +116,7 @@ class DirController extends BaseController
 
     public function actionDownload(){
         $id = yii::$app->request->get('id');
-        $file = File::find()->where(['id'=>$id,'status'=>1,'flag'=>1])->one();
+        $file = File::find()->where(['id'=>$id,'status'=>1])->one();
 
         if($file){
             if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,PermissionFunc::DOWNLOAD)){

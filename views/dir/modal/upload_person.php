@@ -9,15 +9,15 @@ Modal::begin([
     'options'=>['style'=>'margin-top:120px;']
 ]);
 ?>
-    <div id="uploadModalContent">
-        <div id="pickfile_container">
+    <div id="uploadModalContent2">
+        <div id="pickfile2_container">
             <p>
-                <input type="file" id="pickfile">
+                <input type="file" id="pickfile2">
             </p>
             <p>
-                <input type="hidden" id="fileurl" name="fileurl" value="" class="col-lg-6" />
+                <input type="hidden" id="fileurl2" name="fileurl" value="" class="col-lg-6" />
             </p>
-            <div class="clearfix" id="fileurl_upload_txt"></div>
+            <div class="clearfix" id="fileurl2_upload_txt"></div>
         </div>
     </div>
 <?php
