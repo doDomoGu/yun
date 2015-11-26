@@ -46,7 +46,8 @@
 <?php if(!empty($list)):?>
 <div>
 <?php foreach($list as $l):?>
-    <div class="col-md-3 dir-item text-center" data-id="<?=$l->id?>">
+    <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
+    <div class="col-md-3 dir-item text-center" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="icon">
                 <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>

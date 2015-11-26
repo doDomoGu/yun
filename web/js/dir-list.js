@@ -5,7 +5,10 @@ $('.dir-item').mouseenter(function(){
 });
 
 $('.dir-item').click(function(){
-    location.href='/dir/download?id='+$(this).attr('data-id');
+    if($(this).attr('download-check')=='enable')
+        location.href='/dir/download?id='+$(this).attr('data-id');
+    else
+        alert('没有下载权限');
 });
 
 
