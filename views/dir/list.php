@@ -1,5 +1,5 @@
 <?php
-    use yii\bootstrap\Modal;
+
     use yii\bootstrap\Html;
     use app\components\FileFrontFunc;
     use app\components\PermissionFunc;
@@ -15,12 +15,20 @@
 <input type="hidden" id="fileurlId" value="fileurl" />
 
 <p>
-    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadCommon($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadModal"])?>
+    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadCommon($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
 
     <button class="btn btn-primary disabled">
         <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>
         新建文件夹(暂不可用)
     </button>
+</p>
+<p>
+    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传(个人)',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadPerson($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])?>
+
+    <!--<button class="btn btn-primary disabled">
+        <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>
+        新建文件夹(暂不可用)
+    </button>-->
 </p>
 <p>
     <?=PermissionFunc::testShow($this->context->user->position_id,$dir_id)?>
@@ -48,27 +56,8 @@
 <?php endif;?>
 
 
-<?php
-    Modal::begin([
-        'header' => '上传文件',
-        'id'=>'uploadModal',
-        'size'=>'modal-lg',
-    ]);
-?>
-    <div id="uploadModalContent">
-        <div id="pickfile_container">
-            <p>
-                <input type="file" id="pickfile">
-            </p>
-            <p>
-                <input type="hidden" id="fileurl" name="fileurl" value="" class="col-lg-6" />
-            </p>
-            <div class="clearfix" id="fileurl_upload_txt"></div>
-        </div>
-    </div>
-<?php
-    Modal::end();
-?>
+<?=$this->render('modal/upload_common')?>
+<?=$this->render('modal/upload_person')?>
 <input type="hidden" id="dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="p_id" value="<?=$p_id?>">
 <?/*=Html::a('提交',['/dir/save'],['id'=>'save-submit','data-method'=>'post'])*/?>

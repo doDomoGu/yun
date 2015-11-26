@@ -177,6 +177,12 @@ class PermissionFunc extends Component {
         return self::checkDirPermission($position_id,$dir_id,$permission_type);
     }
 
+    public static function isAllowUploadPerson($dir_id){
+        $position_id = yii::$app->controller->user->position_id;
+        $permission_type = self::UPLOAD_PERSON;
+        return self::checkDirPermission($position_id,$dir_id,$permission_type);
+    }
+
     public static function checkDirUploadPermission($position_id,$dir_id,$upload_type){
         $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
         if(!empty($pm)){
@@ -193,14 +199,27 @@ class PermissionFunc extends Component {
         return false;
     }
 
+
+
     public static function testShow($position_id,$dir_id){
         $string = null;
         $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+        $pArr = [];
         if(!empty($pm)){
             foreach($pm as $p){
-
-                $string .= $p->type.':'.self::getPermissionTypeNameCnByTypeId($p->type).'<br/>  ';
+                $pArr[] = $p->type;
             }
+        }
+        $arr = [11,12,21,22,32];
+        foreach($arr as $a){
+            $str = $a.':'.self::getPermissionTypeNameCnByTypeId($a);
+            if(in_array($a,$pArr)){
+                $string .= '<span style="color:green;">'.$str.'</span>';
+            }else{
+                $string .= '<span style="color:red;">'.$str.'</span>';
+            }
+            $string .= '<br/>  ';
+
         }
         return $string;
     }
