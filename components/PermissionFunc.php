@@ -183,7 +183,7 @@ class PermissionFunc extends Component {
         return self::checkDirPermission($position_id,$dir_id,$permission_type);
     }
 
-    public static function checkDirUploadPermission($position_id,$dir_id,$upload_type){
+    /*public static function checkDirUploadPermission($position_id,$dir_id,$upload_type){
         $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
         if(!empty($pm)){
             //获取拥有的权限数组
@@ -197,8 +197,47 @@ class PermissionFunc extends Component {
             }
         }
         return false;
+    }*/
+
+    public static function checkFileDownloadPermission($position_id,$file){
+        $dir_id = $file->dir_id;
+        $flag = $file->flag;
+        $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+        if(!empty($pm)){
+            //获取拥有的权限数组
+            $typeArr = [];
+            foreach($pm as $p){
+                $typeArr[] = $p->type;
+            }
+            if($flag==1){
+                if(in_array(self::DOWNLOAD_COMMON,$typeArr))
+                    return true;
+            }elseif($flag==2){
+                if($file->uid == yii::$app->user->id || in_array(self::DOWNLOAD_ALL,$typeArr))
+                    return true;
+            }
+        }
+        return false;
     }
 
+    public static function checkFileUploadPermission($position_id,$dir_id,$flag){
+        $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+        if(!empty($pm)){
+            //获取拥有的权限数组
+            $typeArr = [];
+            foreach($pm as $p){
+                $typeArr[] = $p->type;
+            }
+            if($flag==1){
+                if(in_array(self::UPLOAD_COMMON,$typeArr))
+                    return true;
+            }elseif($flag==2){
+                if(in_array(self::UPLOAD_PERSON,$typeArr))
+                    return true;
+            }
+        }
+        return false;
+    }
 
 
     public static function testShow($position_id,$dir_id){
@@ -210,7 +249,7 @@ class PermissionFunc extends Component {
                 $pArr[] = $p->type;
             }
         }
-        $arr = [11,12,21,22,32];
+        $arr = [11,12,21,32];
         foreach($arr as $a){
             $str = $a.':'.self::getPermissionTypeNameCnByTypeId($a);
             if(in_array($a,$pArr)){

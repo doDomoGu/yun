@@ -30,7 +30,7 @@
         <!--<th width="80" class="text-center"><?/*=PermissionFunc::getPermissionTypeNameCn('delete')*/?></th>-->
 
         <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('upload_person')?></th>
-        <th width="80" class="text-center"><?=PermissionFunc::getPermissionTypeNameCn2('download_person')?></th>
+        <!--<th width="80" class="text-center"><?/*=PermissionFunc::getPermissionTypeNameCn2('download_person')*/?></th>-->
         <!--<th>修改(个人)</th>-->
 
 
@@ -53,7 +53,7 @@
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][11]',isset($pmCheck[$l->id][11])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][12]',isset($pmCheck[$l->id][12])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][21]',isset($pmCheck[$l->id][21])?true:false)?></td>
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][22]',isset($pmCheck[$l->id][22])?true:false)?></td>
+                    <!--<td class="text-center"><?/*=BaseHtml::checkbox('pm['.$l->id.'][22]',isset($pmCheck[$l->id][22])?true:false)*/?></td>-->
                     <!--<td class="text-center"><?/*=BaseHtml::checkbox('pm['.$l->id.'][31]',isset($pmCheck[$l->id][31])?true:false)*/?></td>-->
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][32]',isset($pmCheck[$l->id][32])?true:false)?></td>
                 <?php else:?>
@@ -61,7 +61,7 @@
                     <td class="text-center"> -- </td>
                     <td class="text-center"> -- </td>
                     <td class="text-center"> -- </td>
-                    <td class="text-center"> -- </td>
+                    <!--<td class="text-center"> -- </td>-->
                     <!--<td class="text-center"> -- </td>-->
                     <td class="text-center"> -- </td>
                 <?php endif;?>

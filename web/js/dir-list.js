@@ -91,6 +91,8 @@ var uploader = Qiniu.uploader({
                         if(_p_id>0){
                             location.href='/dir?p_id='+_p_id;
                         }
+                    }else{
+                        $('#'+fileurlId+'_upload_txt').html('<span style="color:red;">没有上传权限</span>');
                     }
                 }
             });
@@ -199,6 +201,8 @@ var uploader2 = Qiniu.uploader({
                         if(_p_id>0){
                             location.href='/dir?p_id='+_p_id;
                         }
+                    }else{
+                        $('#'+fileurlId2+'_upload_txt').html('<span style="color:red;">没有上传权限</span>');
                     }
                 }
             });

@@ -16,7 +16,11 @@
 <input type="hidden" id="pickfileId2" value="pickfile2" />
 <input type="hidden" id="fileurlId2" value="fileurl2" />
 <p>
-    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadCommon($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
+    <?php if(PermissionFunc::isAllowUploadCommon($dir_id)):?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
+    <?php else:?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
+    <?php endif;?>
 
     <button class="btn btn-primary disabled">
         <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>
@@ -24,7 +28,11 @@
     </button>
 </p>
 <p>
-    <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传(个人)',['value'=>'','class'=> 'btn btn-success'.(PermissionFunc::isAllowUploadPerson($dir_id)?'':' disabled'),'id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])?>
+    <?php if(PermissionFunc::isAllowUploadPerson($dir_id)):?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传(个人)',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton2','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])?>
+    <?php else:?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传(个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
+    <?php endif;?>
 
     <!--<button class="btn btn-primary disabled">
         <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>

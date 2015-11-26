@@ -80,37 +80,50 @@ class DirController extends BaseController
     public function actionSave(){
         $post = yii::$app->request->post();
 
-        $file = new File();
-        $insert['filename'] = $post['filename'];
-        $insert['filesize'] = $post['filesize'];
-        $insert['filetype'] = FileFrontFunc::getFileType($post['filename']);;
-        $insert['dir_id'] = $post['dir_id'];
-        $insert['p_id'] = $post['p_id'];
-        $insert['filename_real'] = $post['filename_real'];
-        $insert['uid'] = yii::$app->user->id;
-        $insert['clicks'] = 0;
-        $insert['ord'] = 1;
-        $insert['status'] = 1;
-        $insert['flag'] = $post['flag'];  //flag ：1 公共  flag :2 个人\私人
+        $dir_id = isset($post['dir_id'])?$post['dir_id']:'';
+        $p_id = isset($post['p_id'])?$post['p_id']:'';
+        $uid = $this->user->id;
+        $flag = isset($post['flag'])?$post['flag']:'';
+        if(PermissionFunc::checkFileUploadPermission($this->user->position_id,$dir_id,$flag)){
+            $file = new File();
+            $insert['filename'] = isset($post['filename'])?$post['filename']:'';
+            $insert['filesize'] = isset($post['filesize'])?$post['filesize']:'';
+            $insert['filetype'] = FileFrontFunc::getFileType($insert['filename']);;
+            $insert['dir_id'] = $dir_id;
+            $insert['p_id'] = $p_id;
+            $insert['filename_real'] = isset($post['filename_real'])?$post['filename_real']:'';
+            $insert['uid'] = $uid;
+            $insert['clicks'] = 0;
+            $insert['ord'] = 1;
+            $insert['status'] = 1;
+            $insert['flag'] = $flag;  //flag ：1 公共  flag :2 个人\私人
 
-        //$file->insert(true,$insert);
-        $file->setAttributes($insert);
 
-        /*$file->filename = $post['filename'];
-        $file->filesize = $post['filesize'];
-        $file->filetype = FileFrontFunc::getFileType($post['filename']);
-        $file->dir_id = $post['dir_id'];
-        $file->p_id = $post['p_id'];
-        $file->filename_real = $post['filename_real'];
-        $file->uid = yii::$app->user->id;
-        $file->clicks = 0;
-        $file->ord = 1;
-        $file->status = 1;
-        $file->flag = 1;*/
 
-        $file->save();
-        //yii::$app->response->redirect(['/dir','dir_id'=>$post['dir_id']])->send();
-        echo json_encode(['result'=>true]);exit;
+            //$file->insert(true,$insert);
+            $file->setAttributes($insert);
+
+            /*$file->filename = $post['filename'];
+            $file->filesize = $post['filesize'];
+            $file->filetype = FileFrontFunc::getFileType($post['filename']);
+            $file->dir_id = $post['dir_id'];
+            $file->p_id = $post['p_id'];
+            $file->filename_real = $post['filename_real'];
+            $file->uid = yii::$app->user->id;
+            $file->clicks = 0;
+            $file->ord = 1;
+            $file->status = 1;
+            $file->flag = 1;*/
+
+            $file->save();
+            //yii::$app->response->redirect(['/dir','dir_id'=>$post['dir_id']])->send();
+            echo json_encode(['result'=>true]);
+        }else{
+            echo json_encode(['result'=>false]);
+        }
+
+
+        yii::$app->end();
 
     }
 
@@ -119,7 +132,7 @@ class DirController extends BaseController
         $file = File::find()->where(['id'=>$id,'status'=>1])->one();
 
         if($file){
-            if($this->checkPositionDirPermission($this->user->position_id,$file->dir_id,PermissionFunc::DOWNLOAD)){
+            if(PermissionFunc::checkFileDownloadPermission($this->user->position_id,$file)){
 
                 $file_path = FileFrontFunc::getFilePath($file->filename_real);
 
