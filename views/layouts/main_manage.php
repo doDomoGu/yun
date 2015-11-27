@@ -14,7 +14,7 @@ AppAsset::register($this);  /* 注册appAsset */
 
 
 <div class="wrap">
-    <?php echo $this->render('navbar'); /* 引入导航栏 */?>
+    <?php echo $this->render($this->context->navbarView); /* 引入导航栏 */?>
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

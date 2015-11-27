@@ -1,0 +1,36 @@
+.navbar-background {
+    background: #393939;
+    padding-top:40px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1030;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar-background > .navbar > .container {
+    position:relative;
+}
+
+#container {
+    padding-top:90px;
+
+}
+
+
+.navbar-header {
+    position:absolute;
+    top:-36px;
+    left:100px;
+}
+
+.navbar-brand img{
+    width:110px;
+}
+
+body {
+    background: #362b39;
+}

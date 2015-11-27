@@ -5,7 +5,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);  /* 注册appAsset */
 
-app\assets\AppAsset::addCssFile($this,'css/layout/dir.css');
+app\assets\AppAsset::addCssFile($this,'css/layouts/dir.css');
 ?>
 <?php $this->beginPage(); /* 页面开始标志位 */ ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ app\assets\AppAsset::addCssFile($this,'css/layout/dir.css');
 
 
 <div class="wrap">
-    <?php echo $this->render('navbar'); /* 引入导航栏 */?>
+    <?php echo $this->render($this->context->navbarView); /* 引入导航栏 */?>
     <div class="container">
         <div id="dir-sidebar">
             <?=$this->render('/dir/_left',['dir_id'=>$this->params['dir_id']])?>

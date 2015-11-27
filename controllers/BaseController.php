@@ -11,6 +11,8 @@ class BaseController extends Controller
 {
     public $titleSuffix;
     public $user;
+    public $navbarView = 'navbar';
+
     //public $layout = 'main';
     public function beforeAction($action){
         if (!parent::beforeAction($action)) {
