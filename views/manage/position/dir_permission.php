@@ -49,7 +49,7 @@
                 <td><?=DirFunc::getIsLeaf($l->is_leaf)?></td>
                 <?php if($l->is_leaf):?>
                     <input type="hidden" name="pm[<?=$l->id?>][edit]" />
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][all]',isset($pmCheck[$l->id]) && count($pmCheck[$l->id])==5?true:false)?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][all]',isset($pmCheck[$l->id]) && count($pmCheck[$l->id])==4?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][11]',isset($pmCheck[$l->id][11])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][12]',isset($pmCheck[$l->id][12])?true:false)?></td>
                     <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][21]',isset($pmCheck[$l->id][21])?true:false)?></td>
