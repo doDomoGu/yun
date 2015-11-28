@@ -29,12 +29,12 @@ class SiteController extends BaseController
                     ],
                 ],
             ],*/
-            'verbs' => [
+           /* 'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
-            ],
+            ],*/
         ];
     }
 
