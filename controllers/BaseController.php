@@ -11,7 +11,7 @@ class BaseController extends Controller
 {
     public $titleSuffix;
     public $user;
-    public $navbarView = 'navbar';
+    public $navbarView = 'navbar2';
 
     //public $layout = 'main';
     public function beforeAction($action){

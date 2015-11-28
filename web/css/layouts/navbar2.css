@@ -10,6 +10,11 @@
 .navbar {
     margin-bottom: 0;
 }
+.navbar a {
+
+    /*font-size:16px;*/
+    /*font-weight: bold;*/
+}
 
 .navbar-background > .navbar > .container {
     position:relative;
@@ -23,12 +28,34 @@
 
 .navbar-header {
     position:absolute;
-    top:-36px;
+    top:-43px;
     left:100px;
 }
 
 .navbar-brand img{
-    width:110px;
+    width:120px;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: transparent;
+}
+
+
+/*.navbar li > a:hover .active-red {*/
+.navbar li > a:focus > span.active-red ,
+.navbar li > a:hover > span.active-red ,
+.navbar li.active > a > span.active-red {
+    display: block;
+    position:absolute;
+    background: #ee1b24;
+    width:80%;
+    height:6px;
+    top:-7px;
+    left:10%;
+
 }
 
 body {

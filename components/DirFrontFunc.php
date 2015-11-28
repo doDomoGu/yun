@@ -27,9 +27,10 @@ class DirFrontFunc extends Component {
                 $active = $dirLvl_1!=null && $dirLvl_1->id==$dir->id?true:false;
 
                 $arr[] = [
-                    'label'=>$dir->name,
+                    'label'=>$dir->name.'<span class="active-red"></span>',
                     'url'=>['/dir','dir_id'=>$dir->id],
                     'active' => $active,
+                    'encode'=>false
                 ];
             }
         }

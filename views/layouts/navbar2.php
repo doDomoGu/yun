@@ -10,8 +10,9 @@ app\assets\AppAsset::addCssFile($this,'css/layouts/navbar2.css');
 <?php
     //导航栏菜单项
     $navbarItems = [[
-        'label' => '首页',
-        'url' => ['site/index']
+        'label' => '首页<span class="active-red"></span>',
+        'url' => ['site/index'],
+        'encode' => false
     ]];
 
     $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
@@ -25,6 +26,7 @@ NavBar::begin([
     'options' => [
         'class' => 'navbar-default',
     ],
+
 ]);
 
 echo Nav::widget([
