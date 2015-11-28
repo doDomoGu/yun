@@ -91,7 +91,9 @@ class SiteController extends BaseController
 
     public function actionLogin()
     {
-        $this->layout = false;
+        //$this->layout = false;
+
+        $this->view->title = '职工登录 - '. yii::$app->id;
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

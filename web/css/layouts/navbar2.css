@@ -20,9 +20,8 @@
     position:relative;
 }
 
-#container {
-    padding-top:90px;
-
+.wrap > .container {
+    padding-top:92px;
 }
 
 
