@@ -20,9 +20,13 @@
             ],
         ]); ?>
 
+        <?= $form->field($model, 'send_type',[
+            'template'=>"{label}\n<div class=\"col-lg-5\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>"
+        ])->dropDownList([2=>'2 - 对单一职员发送',3=>'3 - 对部门下职员发送',4=>'4 - 对全体员工发送'],['prompt'=>'== 请选择 =='])  ?>
+
         <?= $form->field($model, 'subject') ?>
 
-        <?= $form->field($model, 'content') ?>
+        <?= $form->field($model, 'content')->textarea() ?>
 
 
 <!--        <?/*= $form->field($model, 'ord',[
