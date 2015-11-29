@@ -1,6 +1,7 @@
 <?php
 namespace app\components;
 
+use yii\helpers\Json;
 use yii\base\Component;
 use yii;
 use app\models\Message;
@@ -23,5 +24,22 @@ class MessageFunc extends Component {
                 $name = null;
         }
         return $name;
+    }
+
+    public static function getObjectInfo($send_type,$send_param){
+        $info = 'N/A';
+        if($send_type==self::SEND_TYPE_ONE){
+            if($send_param!=''){
+
+            }
+            $object = Json::decode($send_param);
+            $user_id = $object['user_id'];
+            $info = $user_id;
+        }elseif($send_type==self::SEND_TYPE_POSITION){
+            $object = Json::decode($send_param);
+            $position_id = $object['position_id'];
+            $info = $position_id;
+        }
+        return $info;
     }
 }

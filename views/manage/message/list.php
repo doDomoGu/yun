@@ -36,7 +36,7 @@
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->subject?></td>
                     <td><?=MessageFunc::getTypeNameById($l->send_type)?></td>
-                    <td>--</td>
+                    <td><?=MessageFunc::getObjectInfo($l->send_type,$l->send_param)?></td>
                     <td>--</td>
                     <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>
