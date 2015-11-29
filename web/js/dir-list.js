@@ -1,13 +1,15 @@
 $('.dir-item').mouseenter(function(){
-    $(this).find('.name').addClass('hover');
+    $(this).find('.info').addClass('hover');
 }).mouseleave(function(){
-    $(this).find('.name').removeClass('hover');
+    $(this).find('.info').removeClass('hover');
 });
 
 $('.dir-item').click(function(){
-    if($(this).attr('download-check')=='enable')
+    if($(this).attr('download-check')=='enable'){
+        _download_times = parseInt($(this).find('.download_times span').html())+1;
+        $(this).find('.download_times span').html(_download_times);
         location.href='/dir/download?id='+$(this).attr('data-id');
-    else
+    }else
         alert('没有下载权限');
 });
 

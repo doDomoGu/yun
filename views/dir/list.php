@@ -52,11 +52,12 @@
                 <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
         </div>
-        <div class="name">
-                <?=$l->filename?>
-            <br/>时间：<?=$l->add_time?>
-            <br/>上传用户：<?=$l->uid==yii::$app->user->id?'自己':$l->uid?>
-            <br/>上传类型：<?=$l->flag==1?'公共':'个人'?>
+        <div class="info">
+            <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
+            <div class="upload_time">时间：<?=$l->add_time?></div>
+            <div class="upload_uid">上传用户：<?=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid?></div>
+            <div class="upload_type">上传类型：<?=$l->flag==1?'公共':'个人'?></div>
+            <div class="download_times">下载次数：<span><?=$l->clicks?></span></div>
         </div>
     </div>
 <?php endforeach;?>

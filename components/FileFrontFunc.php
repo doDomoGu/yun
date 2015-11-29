@@ -51,11 +51,14 @@ class FileFrontFunc extends Component {
         return File::find()->where(['dir_id'=>$dir_id,'status'=>1])->orderBy('add_time desc')->all();
     }
 
-    public static function insertDownloadRecord($file_id,$uid){
+    public static function insertDownloadRecord($file,$uid){
         $downloadRecord = new DownloadRecord();
-        $downloadRecord->file_id = $file_id;
+        $downloadRecord->file_id = $file->id;
         $downloadRecord->uid = $uid;
         $downloadRecord->save();
+
+        $file->clicks+=1;
+        $file->save();
     }
 
 }
