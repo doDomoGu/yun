@@ -16,6 +16,22 @@ app\assets\AppAsset::addCssFile($this,'css/layouts/navbar2.css');
     ]];
 
     $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
+if(!yii::$app->user->isGuest)
+    $navbarItems = ArrayHelper::merge($navbarItems,
+        [
+        [
+            'label' => '<span class="glyphicon glyphicon-user" aria-hidden="true"></span>',
+            'items' => [
+                ['label' => '资料', 'url' => '/user'],
+                '<li class="divider"></li>',
+                ['label' => '退出', 'url' => '/site/logout'],
+                /*'<li class="dropdown-header">Dropdown Header</li>',
+                ['label' => 'Level 1 - Dropdown B', 'url' => '#'],*/
+            ],
+            'linkOptions'=>['style'=>'margin-left:40px;'],
+            'encode'=>false
+        ]]
+    );
 ?>
 
 
@@ -33,6 +49,7 @@ echo Nav::widget([
     'options' => ['class' => 'navbar-nav pull-right'],
     'items' => $navbarItems
 ]);
+
 
 NavBar::end();
 ?>
