@@ -62,6 +62,12 @@ class ManageController extends BaseController
             'recruitment-add-and-edit' => [
                 'class' => 'app\controllers\manage\recruitment\RecruitmentAddAndEditAction',
             ],
+            'message' => [
+                'class' => 'app\controllers\manage\message\MessageAction',
+            ],
+            /*'message-add-and-edit' => [
+                'class' => 'app\controllers\manage\news\NewsAddAndEditAction',
+            ],*/
             'user' => [
                 'class' => 'app\controllers\manage\user\UserAction',
             ],

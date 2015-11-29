@@ -22,8 +22,8 @@
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/admin')===0?'active':''?>" href="/manage/admin">
             管理员设置
         </a>
-        <button class="list-group-item disabled <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
+        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
             消息通知
-        </button>
+        </a>
     </div>
 </div>
