@@ -9,15 +9,14 @@ use app\models\Message;
 class MessageAddAction extends Action{
     public function run(){
         $model = new MessageForm();
-        $message = null;
 
         $this->controller->view->title = '消息添加 - 管理';
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if($message == null){
-                $message = new Message();
-            }
+            $message = new Message();
 
             $message->setAttributes($model->attributes);
+            $message->uid = yii::$app->user->id;
+            $message->send_param = 'test';
             if($message->save()){
                 Yii::$app->response->redirect('message')->send();
             }

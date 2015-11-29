@@ -1,5 +1,6 @@
 <?php
-use yii\bootstrap\BaseHtml;
+    use yii\bootstrap\BaseHtml;
+    use app\components\MessageFunc;
 ?>
         <?=BaseHtml::a('发送消息',['message-add'],['class'=>'btn btn-primary'])?>
         <p></p>
@@ -19,9 +20,8 @@ use yii\bootstrap\BaseHtml;
             <?php foreach($list as $l):?>
                 <tr>
                     <th scope="row"><?=$l->id?></th>
-                    <td><?=$l->title?></td>
-                    <td><?=$l->send_type?></td>
-                    <td>--</td>
+                    <td><?=$l->subject?></td>
+                    <td><?=MessageFunc::getTypeNameById($l->send_type)?></td>
                     <td>--</td>
                     <td>--</td>
                     <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>

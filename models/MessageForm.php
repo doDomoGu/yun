@@ -24,10 +24,8 @@ class MessageForm extends Model
     public function rules()
     {
         return [
-            [['subject', 'content', 'uid', 'send_type'], 'required'],
-            [['id', 'uid', 'send_type'], 'integer'],
-            [['send_param'],'safe'],
-            [['send_time'],'default','value'=>date('Y-m-d H:i:s')],
+            [['subject', 'content', 'send_type'], 'required'],
+            [['id', 'send_type'], 'integer'],
         ];
     }
 

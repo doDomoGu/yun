@@ -2,12 +2,9 @@
     use yii\helpers\Html;
     use yii\bootstrap\ActiveForm;
 
-    app\assets\AppAsset::addJsFile($this,'js/news-add-and-edit.js');
+    use app\components\MessageFunc;
 ?>
-<input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
-<input type="hidden" id="qiniuDomainBeaut" value="<?=yii::$app->params['qiniu-domain-beaut']?>" />
-<input type="hidden" id="pickfileId" value="pickfile" />
-<input type="hidden" id="fileurlId" value="fileurl" />
+
         <h2>
             <?=$this->title?>
         </h2>
@@ -22,7 +19,11 @@
 
         <?= $form->field($model, 'send_type',[
             'template'=>"{label}\n<div class=\"col-lg-5\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>"
-        ])->dropDownList([2=>'2 - 对单一职员发送',3=>'3 - 对部门下职员发送',4=>'4 - 对全体员工发送'],['prompt'=>'== 请选择 =='])  ?>
+        ])->dropDownList([
+                MessageFunc::SEND_TYPE_ONE=>'对单一职员发送',
+                MessageFunc::SEND_TYPE_POSITION=>'对部门下职员发送',
+                MessageFunc::SEND_TYPE_ALL=>'对全体员工发送'
+            ],['prompt'=>'== 请选择 =='])  ?>
 
         <?= $form->field($model, 'subject') ?>
 
