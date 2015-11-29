@@ -4,7 +4,14 @@
     use app\components\FileFrontFunc;
     use app\components\PermissionFunc;
 
+
     app\assets\AppAsset::addCssFile($this,'css/dir-index.css');
+
+    if($route=='list'){
+        app\assets\AppAsset::addCssFile($this,'css/dir-list.css');
+    }
+
+
     app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
     app\assets\AppAsset::addJsFile($this,'js/qiniu/qiniu.js');
     app\assets\AppAsset::addJsFile($this,'js/dir-list.js');
@@ -47,7 +54,7 @@
 <div>
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
-    <div class="col-md-3 dir-item text-center" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+    <div class="col-md-3 dir-item <?=$route=='list'?'file-item':''?> text-center" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="icon">
                 <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>

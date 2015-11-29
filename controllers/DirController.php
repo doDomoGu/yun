@@ -64,6 +64,7 @@ class DirController extends BaseController
             $params['dir_id'] = $dir_id;
             $params['p_id'] = $p_id;
             $this->view->params['dir_id'] = $dir_id;
+            $params['route'] = $viewName;
             return $this->render($viewName,$params);
         }else{
 
