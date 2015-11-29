@@ -11,6 +11,7 @@ class MessageForm extends Model
     public $subject;
     public $content;
     public $send_type;
+    public $send_param;
 
 
     public function attributeLabels(){
@@ -26,6 +27,7 @@ class MessageForm extends Model
         return [
             [['subject', 'content', 'send_type'], 'required'],
             [['id', 'send_type'], 'integer'],
+            [['send_param'], 'safe'],
         ];
     }
 

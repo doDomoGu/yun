@@ -1,10 +1,12 @@
 <?php
 namespace app\controllers\manage\message;
 
+use app\components\MessageFunc;
 use Yii;
 use yii\base\Action;
 use app\models\MessageForm;
 use app\models\Message;
+use yii\helpers\Json;
 
 class MessageAddAction extends Action{
     public function run(){
@@ -18,7 +20,12 @@ class MessageAddAction extends Action{
 
                 $message->setAttributes($model->attributes);
                 $message->uid = yii::$app->user->id;
-                $message->send_param = 'test';
+
+                if($message->send_type==MessageFunc::SEND_TYPE_ONE){
+                    $message->send_param = Json::encode(['user_id'=>$message->send_param]);
+                }elseif($message->send_type==MessageFunc::SEND_TYPE_POSITION){
+                    $message->send_param = Json::encode(['position_id'=>$message->send_param]);
+                }
                 if($message->save()){
                     Yii::$app->response->redirect('message')->send();
                 }

@@ -53,4 +53,5 @@ class CommonFunc extends Component {
             $img_url = yii::$app->params['qiniu-domain-beaut'].$img_url;
         return $img_url;
     }
+
 }

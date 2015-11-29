@@ -18,8 +18,23 @@
         ]); ?>
 
 <?= $form->field($model, 'send_type',[
-    'template'=>"{label}\n<div class=\"col-lg-5\">".MessageFunc::getTypeNameById($model->send_type)."</div>"
+    'template'=>"{label}\n<div class=\"col-lg-5\" style=\"padding-top:7px;\">".MessageFunc::getTypeNameById($model->send_type)."</div>"
 ])  ?>
+
+<?php if($model->send_type==MessageFunc::SEND_TYPE_ONE):?>
+    <div class="form-group field-messageform-subject required">
+        <label for="messageform-subject" class="col-lg-2 control-label">职员ID</label>
+        <div class="col-lg-3"><input type="text" name="MessageForm[send_param]" class="form-control" id="messageform-send_param"></div>
+    </div>
+<?php elseif($model->send_type==MessageFunc::SEND_TYPE_POSITION):?>
+    <div class="form-group field-messageform-subject required">
+        <label for="messageform-subject" class="col-lg-2 control-label">部门ID</label>
+        <div class="col-lg-3"><input type="text" name="MessageForm[send_param]" class="form-control" id="messageform-send_param"></div>
+    </div>
+<?php endif;?>
+
+
+
 
         <?= $form->field($model, 'subject') ?>
 
