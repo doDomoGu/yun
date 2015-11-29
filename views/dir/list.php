@@ -54,6 +54,7 @@
         </div>
         <div class="info">
             <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
+            <div class="filesize">文件大小：<?=FileFrontFunc::sizeFormat($l->filesize)?></div>
             <div class="upload_time">时间：<?=$l->add_time?></div>
             <div class="upload_uid">上传用户：<?=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid?></div>
             <div class="upload_type">上传类型：<?=$l->flag==1?'公共':'个人'?></div>

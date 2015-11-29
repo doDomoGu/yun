@@ -61,4 +61,26 @@ class FileFrontFunc extends Component {
         $file->save();
     }
 
+    public static function sizeFormat($size)
+    {
+        if($size<1024)
+        {
+            return $size." B";
+        }
+        else if($size<(1024*1024))
+        {
+            $size=round($size/1024,1);
+            return $size." KB";
+        }
+        else if($size<(1024*1024*1024))
+        {
+            $size=round($size/(1024*1024),1);
+            return $size." MB";
+        }
+        else
+        {
+            $size=round($size/(1024*1024*1024),1);
+            return $size." GB";
+        }
+    }
 }
