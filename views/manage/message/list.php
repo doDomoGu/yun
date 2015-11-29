@@ -1,7 +1,7 @@
 <?php
 use yii\bootstrap\BaseHtml;
 ?>
-        <?=BaseHtml::a('发送消息',['news-add-and-edit'],['class'=>'btn btn-primary'])?>
+        <?=BaseHtml::a('发送消息',['message-add'],['class'=>'btn btn-primary'])?>
         <p></p>
         <table class="table table-bordered">
             <thead>

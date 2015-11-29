@@ -65,9 +65,9 @@ class ManageController extends BaseController
             'message' => [
                 'class' => 'app\controllers\manage\message\MessageAction',
             ],
-            /*'message-add-and-edit' => [
-                'class' => 'app\controllers\manage\news\NewsAddAndEditAction',
-            ],*/
+            'message-add' => [
+                'class' => 'app\controllers\manage\message\MessageAddAction',
+            ],
             'user' => [
                 'class' => 'app\controllers\manage\user\UserAction',
             ],
