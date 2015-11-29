@@ -14,11 +14,11 @@ class MessageFunc extends Component {
     public static function getTypeNameById($send_type){
         switch($send_type){
             case self::SEND_TYPE_ONE:
-                $name = '发送单一职员';break;
+                $name = '对单一职员发送';break;
             case self::SEND_TYPE_POSITION:
-                $name = '发送整个部门';break;
+                $name = '对整个部门发送';break;
             case self::SEND_TYPE_ALL:
-                $name = '发送全体职员';break;
+                $name = '对全体职员发送';break;
             default:
                 $name = null;
         }

@@ -2,7 +2,21 @@
     use yii\bootstrap\BaseHtml;
     use app\components\MessageFunc;
 ?>
-        <?=BaseHtml::a('发送消息',['message-add'],['class'=>'btn btn-primary'])?>
+        <?=BaseHtml::a(
+            '发送消息:'.MessageFunc::getTypeNameById(MessageFunc::SEND_TYPE_ONE),
+            ['message-add','send_type'=>MessageFunc::SEND_TYPE_ONE],
+            ['class'=>'btn btn-primary']
+        )?>
+        <?=BaseHtml::a(
+            '发送消息:'.MessageFunc::getTypeNameById(MessageFunc::SEND_TYPE_POSITION),
+            ['message-add','send_type'=>MessageFunc::SEND_TYPE_POSITION],
+            ['class'=>'btn btn-primary']
+        )?>
+        <?=BaseHtml::a(
+            '发送消息:'.MessageFunc::getTypeNameById(MessageFunc::SEND_TYPE_ALL),
+            ['message-add','send_type'=>MessageFunc::SEND_TYPE_ALL],
+            ['class'=>'btn btn-primary']
+        )?>
         <p></p>
         <table class="table table-bordered">
             <thead>

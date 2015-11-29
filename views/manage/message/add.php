@@ -17,13 +17,9 @@
             ],
         ]); ?>
 
-        <?= $form->field($model, 'send_type',[
-            'template'=>"{label}\n<div class=\"col-lg-5\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>"
-        ])->dropDownList([
-                MessageFunc::SEND_TYPE_ONE=>'对单一职员发送',
-                MessageFunc::SEND_TYPE_POSITION=>'对部门下职员发送',
-                MessageFunc::SEND_TYPE_ALL=>'对全体员工发送'
-            ],['prompt'=>'== 请选择 =='])  ?>
+<?= $form->field($model, 'send_type',[
+    'template'=>"{label}\n<div class=\"col-lg-5\">".MessageFunc::getTypeNameById($model->send_type)."</div>"
+])  ?>
 
         <?= $form->field($model, 'subject') ?>
 
