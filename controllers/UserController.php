@@ -11,6 +11,8 @@ class UserController extends BaseController
 {
     public function actionIndex()
     {
+        $this->view->title = '职员资料'.$this->titleSuffix;
+
         $user = User::find()->where(['id'=>Yii::$app->user->id])->one();
 
 
