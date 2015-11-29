@@ -1,6 +1,7 @@
 <?php
 namespace app\components;
 
+use app\models\DownloadRecord;
 use app\models\File;
 use yii\base\Component;
 use yii\helpers\BaseArrayHelper;
@@ -39,7 +40,7 @@ class FileFrontFunc extends Component {
         }
     }
 
-    public static function getFilePath($path,$beaut=true){
+    public static function getFilePath($path,$beaut=false){
         if($beaut)
             return yii::$app->params['qiniu-domain-beaut'].$path;
         else
@@ -48,6 +49,13 @@ class FileFrontFunc extends Component {
 
     public static function getFilesByDirId($dir_id){
         return File::find()->where(['dir_id'=>$dir_id,'status'=>1])->orderBy('add_time desc')->all();
+    }
+
+    public static function insertDownloadRecord($file_id,$uid){
+        $downloadRecord = new DownloadRecord();
+        $downloadRecord->file_id = $file_id;
+        $downloadRecord->uid = $uid;
+        $downloadRecord->save();
     }
 
 }

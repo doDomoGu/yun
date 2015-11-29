@@ -133,8 +133,9 @@ class DirController extends BaseController
 
         if($file){
             if(PermissionFunc::checkFileDownloadPermission($this->user->position_id,$file)){
+                $file_path = FileFrontFunc::getFilePath($file->filename_real,true);
 
-                $file_path = FileFrontFunc::getFilePath($file->filename_real);
+                FileFrontFunc::insertDownloadRecord($file->id,yii::$app->user->id);
 
                 //Header("HTTP/1.1 303 See Other");
                 /*Header("Location: $file_path");
