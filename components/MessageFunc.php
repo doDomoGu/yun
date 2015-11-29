@@ -1,6 +1,8 @@
 <?php
 namespace app\components;
 
+use app\models\Position;
+use app\models\User;
 use yii\helpers\Json;
 use yii\base\Component;
 use yii;
@@ -17,7 +19,7 @@ class MessageFunc extends Component {
             case self::SEND_TYPE_ONE:
                 $name = '对单一职员发送';break;
             case self::SEND_TYPE_POSITION:
-                $name = '对整个部门发送';break;
+                $name = '对整个部门/职位发送';break;
             case self::SEND_TYPE_ALL:
                 $name = '对全体职员发送';break;
             default:
@@ -29,16 +31,22 @@ class MessageFunc extends Component {
     public static function getObjectInfo($send_type,$send_param){
         $info = 'N/A';
         if($send_type==self::SEND_TYPE_ONE){
-            if($send_param!=''){
-
-            }
             $object = Json::decode($send_param);
             $user_id = $object['user_id'];
-            $info = $user_id;
+            $user = User::find()->where(['id'=>$user_id])->one();
+            if($user)
+                $info = $user_id.' '.$user->name;
+            else
+                $info = $user_id.' N/A';
         }elseif($send_type==self::SEND_TYPE_POSITION){
             $object = Json::decode($send_param);
             $position_id = $object['position_id'];
-            $info = $position_id;
+
+            $position = Position::find()->where(['id'=>$position_id])->one();
+            if($position)
+                $info = $position_id.' '.PositionFunc::getFullRoute($position_id);
+            else
+                $info = $position_id.' N/A';
         }
         return $info;
     }
