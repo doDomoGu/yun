@@ -3,6 +3,7 @@ namespace app\controllers\manage\message;
 
 use app\components\MessageFunc;
 use app\models\MessageUser;
+use app\models\User;
 use Yii;
 use yii\base\Action;
 use app\models\MessageForm;
@@ -47,9 +48,35 @@ class MessageAddAction extends Action{
                         $messageUser->read_status = 0;
                         $messageUser->save();
                     }elseif($message->send_type==MessageFunc::SEND_TYPE_POSITION){
-
+                        $users = User::find()->where(['position_id'=>$send_param['position_id']])->all();
+                        if(!empty($users)){
+                            foreach($users as $u){
+                                $messageUser = new MessageUser();
+                                $messageUser->msg_id = $message->id;
+                                $messageUser->send_from_id = 0;
+                                $messageUser->send_to_id = $u->id;
+                                $messageUser->reply_msg_id = 0;
+                                $messageUser->send_status = 0;
+                                $messageUser->recieve_status = 0;
+                                $messageUser->read_status = 0;
+                                $messageUser->save();
+                            }
+                        }
                     }elseif($message->send_type==MessageFunc::SEND_TYPE_ALL){
-
+                        $users = User::find()->all();
+                        if(!empty($users)){
+                            foreach($users as $u){
+                                $messageUser = new MessageUser();
+                                $messageUser->msg_id = $message->id;
+                                $messageUser->send_from_id = 0;
+                                $messageUser->send_to_id = $u->id;
+                                $messageUser->reply_msg_id = 0;
+                                $messageUser->send_status = 0;
+                                $messageUser->recieve_status = 0;
+                                $messageUser->read_status = 0;
+                                $messageUser->save();
+                            }
+                        }
                     }
 
 
