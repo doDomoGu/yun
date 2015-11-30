@@ -12,6 +12,10 @@ class MessageUser extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getMessage(){
+        return $this->hasOne('app\models\Message', ['id' => 'msg_id']);
+    }
+
 
 /*CREATE TABLE `message_user` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
