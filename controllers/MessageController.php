@@ -23,7 +23,7 @@ class MessageController extends BaseController
     }
 
     public function actionSystem(){
-        $this->view->title = '消息通知'.$this->titleSuffix;
+        $this->view->title = '系统消息'.$this->titleSuffix;
 
         $list = MessageUser::find()->with('message')->where(['send_from_id'=>0,'send_to_id'=>yii::$app->user->id])->all();
 
@@ -32,4 +32,25 @@ class MessageController extends BaseController
         return $this->render('system',$params);
     }
 
+    public function actionDetail(){
+        $this->view->title = '消息通知'.$this->titleSuffix;
+        $message = null;
+        $id = yii::$app->request->get('id',false);
+        $messageUser = MessageUser::find()->where(['id'=>$id,'send_to_id'=>$this->user->id])->one();
+        if($messageUser){
+            $message = Message::find()->where(['id'=>$messageUser->msg_id])->one();
+            if($message){
+                if($messageUser->read_status==0){
+                    $messageUser->read_status=1;
+                    $messageUser->save();
+                }
+                $params['message'] = $message;
+
+                return $this->render('detail',$params);
+            }
+        }
+        Yii::$app->response->redirect('/message/system')->send();
+
+
+    }
 }
