@@ -17,9 +17,10 @@ app\assets\AppAsset::addCssFile($this,'css/layouts/navbar2.css');
 
     $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
 if(!yii::$app->user->isGuest){
-    $item2 = [['label' => '资料', 'url' => '/user']];
+    $item2 = [['label' => '职员资料', 'url' => '/user']];
+    $item2 =  ArrayHelper::merge($item2,[['label' => '消息通知', 'url' => '/message']]);
     if($this->context->checkIsAdmin())
-        $item2 = ArrayHelper::merge($item2,[['label' => '管理*', 'url' => '/manage']]);
+        $item2 = ArrayHelper::merge($item2,[['label' => '管理中心*', 'url' => '/manage']]);
     $item2 = ArrayHelper::merge($item2,['<li class="divider"></li>']);
     $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout']]);
         /*'<li class="dropdown-header">Dropdown Header</li>',
