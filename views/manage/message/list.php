@@ -25,8 +25,8 @@
                     <th>标题</th>
                     <th>类型</th>
                     <th>发送对象</th>
-                    <th>发送人数</th>
-                    <th>操作</th>
+                    <th>发送人数<br/>(已读/总数)</th>
+                    <!--<th>操作</th>-->
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +37,8 @@
                     <td><?=$l->subject?></td>
                     <td><?=MessageFunc::getTypeNameById($l->send_type)?></td>
                     <td><?=MessageFunc::getObjectInfo($l->send_type,$l->send_param)?></td>
-                    <td>--</td>
-                    <td><?=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
+                    <td><?=MessageFunc::getSendUserNum($l->id,1)?> / <?=MessageFunc::getSendUserNum($l->id)?></td>
+                    <!--<td><?/*=BaseHtml::a('编辑',['news-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])*/?></td>-->
                 </tr>
             <?php endforeach;?>
             <?php endif;?>

@@ -1,6 +1,7 @@
 <?php
 namespace app\components;
 
+use app\models\MessageUser;
 use app\models\Position;
 use app\models\User;
 use yii\helpers\Json;
@@ -34,20 +35,34 @@ class MessageFunc extends Component {
             $object = Json::decode($send_param);
             $user_id = $object['user_id'];
             $user = User::find()->where(['id'=>$user_id])->one();
+            $info = '('.$user_id.') ';
             if($user)
-                $info = $user_id.' '.$user->name;
+                $info .= $user->name;
             else
-                $info = $user_id.' N/A';
+                $info .= 'N/A';
         }elseif($send_type==self::SEND_TYPE_POSITION){
             $object = Json::decode($send_param);
             $position_id = $object['position_id'];
-
             $position = Position::find()->where(['id'=>$position_id])->one();
+            $info = '('.$position_id.') ';
             if($position)
-                $info = $position_id.' '.PositionFunc::getFullRoute($position_id);
+                $info .= PositionFunc::getFullRoute($position_id);
             else
-                $info = $position_id.' N/A';
+                $info .= 'N/A';
+        }elseif($send_type==self::SEND_TYPE_ALL){
+            $info = '--';
         }
         return $info;
+    }
+
+    public static function getSendUserNum($msg_id,$read_status=false){
+        $where = ['msg_id'=>$msg_id];
+        if($read_status===1){
+            $where['read_status'] = 1;
+        }elseif($read_status===0){
+            $where['read_status'] = 0;
+        }
+        $count = MessageUser::find()->where($where)->count();
+        return $count;
     }
 }
