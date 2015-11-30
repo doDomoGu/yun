@@ -2,6 +2,7 @@
 namespace app\controllers\manage\message;
 
 use app\components\MessageFunc;
+use app\models\MessageUser;
 use Yii;
 use yii\base\Action;
 use app\models\MessageForm;
@@ -21,12 +22,37 @@ class MessageAddAction extends Action{
                 $message->setAttributes($model->attributes);
                 $message->uid = yii::$app->user->id;
 
+                $send_param = ['user_id'=>false,'position_id'=>false,'all'=>false];
+
                 if($message->send_type==MessageFunc::SEND_TYPE_ONE){
+                    $send_param['user_id'] = $message->send_param;
                     $message->send_param = Json::encode(['user_id'=>$message->send_param]);
                 }elseif($message->send_type==MessageFunc::SEND_TYPE_POSITION){
+                    $send_param['position_id'] = $message->send_param;
                     $message->send_param = Json::encode(['position_id'=>$message->send_param]);
+                }elseif($message->send_type==MessageFunc::SEND_TYPE_ALL){
+                    $send_param['all'] = true;
+                    $message->send_param = Json::encode([]);
                 }
+
                 if($message->save()){
+                    if($message->send_type==MessageFunc::SEND_TYPE_ONE){
+                        $messageUser = new MessageUser();
+                        $messageUser->msg_id = $message->id;
+                        $messageUser->send_from_id = 0;
+                        $messageUser->send_to_id = $send_param['user_id'];
+                        $messageUser->reply_msg_id = 0;
+                        $messageUser->send_status = 0;
+                        $messageUser->recieve_status = 0;
+                        $messageUser->read_status = 0;
+                        $messageUser->save();
+                    }elseif($message->send_type==MessageFunc::SEND_TYPE_POSITION){
+
+                    }elseif($message->send_type==MessageFunc::SEND_TYPE_ALL){
+
+                    }
+
+
                     Yii::$app->response->redirect('message')->send();
                 }
             }
