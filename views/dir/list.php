@@ -69,6 +69,9 @@
         </div>
     </div>
 <?php endforeach;?>
+    <div class="clearfix col-md-12 text-center">
+        <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
+    </div>
 </div>
 <?php else:?>
     <div class="alert alert-danger" role="alert">

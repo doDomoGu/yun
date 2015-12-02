@@ -8,6 +8,7 @@ use app\components\FileFrontFunc;
 use app\components\PermissionFunc;
 use app\models\Dir;
 use app\models\File;
+use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use Yii;
 use app\components\QiniuUpload;
@@ -38,6 +39,8 @@ class DirController extends BaseController
 
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
 
+        $count = 0;
+
         if($curDir){
             $this->view->title = $curDir->name.$this->titleSuffix;
             //面包屑
@@ -53,9 +56,22 @@ class DirController extends BaseController
 
 
                 //$list = DirFunc::getChildren($dir_id);
-                $list = FileFrontFunc::getFilesByDirId($dir_id);
+
+
+                //$pageNum = yii::$app->request->get('page',1);
+                $pageSize = 8;
+                $order = 'add_time desc';
+                $search = yii::$app->request->get('search',false);
+
+                $count = FileFrontFunc::getFilesNumByDirId($dir_id,$search);
+
+                $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+
+                $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
                 $p_id = 0;
                 $viewName = 'list';
+                $params['pages'] = $pages;
+
             }else{
                 $list = DirFunc::getChildren($dir_id);
                 $viewName = 'index';
@@ -65,6 +81,7 @@ class DirController extends BaseController
             $params['p_id'] = $p_id;
             $this->view->params['dir_id'] = $dir_id;
             $params['route'] = $viewName;
+            $params['count'] = $count;
             return $this->render($viewName,$params);
         }else{
 

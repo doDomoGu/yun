@@ -8,6 +8,7 @@ use yii\helpers\BaseArrayHelper;
 use Yii;
 
 class FileFrontFunc extends Component {
+
     public static function file_type($reverse=false){
         $arr = array(
             'dir','txt','jpg','jpeg','png','gif','bmp','tif','tiff',
@@ -47,9 +48,27 @@ class FileFrontFunc extends Component {
             return yii::$app->params['qiniu-domain'].$path;
     }
 
-    public static function getFilesByDirId($dir_id){
-        return File::find()->where(['dir_id'=>$dir_id,'status'=>1])->orderBy('add_time desc')->all();
+    public static function getFilesByDirId($dir_id,$pages,$order='add_time desc',$search=''){
+        $files = File::find()
+            ->where(['dir_id'=>$dir_id,'status'=>1]);
+            if($search!==false)
+                $files = $files->andWhere(['like','filename',$search]);
+        $files = $files->orderBy($order)
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $files;
     }
+
+    public static function getFilesNumByDirId($dir_id,$search=false){
+        $count = File::find()
+            ->where(['dir_id'=>$dir_id,'status'=>1]);
+        if($search!==false)
+            $count = $count->andWhere(['like','filename',$search]);
+        return $count->count();
+    }
+
 
     public static function insertDownloadRecord($file,$uid){
         $downloadRecord = new DownloadRecord();
