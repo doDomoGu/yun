@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
                 <?= Html::submitButton('提交', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?=$model->getScenario()=='update'?'<br/>*编辑职员时，如无需更改密码，密码字段留空':''?>
             </div>
         </div>
 

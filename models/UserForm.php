@@ -67,10 +67,56 @@ UNIQUE KEY `username_UNIQUE` (`username`)
         ];
     }
 
+    public function scenarios(){
+        return [
+            'create'=>[
+                'username',
+                'password',
+                'password2',
+                'reg_code',
+                'forgetpw_code',
+                'name',
+                'position_id',
+                'gender',
+                'birthday',
+                'ord',
+                'status',
+                'join_date',
+                'mobile',
+                'phone',
+                'describe',
+                'ord',
+                'status',
+            ],
+            'update'=>[
+                'id',
+                'username',
+                'password',
+                'password2',
+                'reg_code',
+                'forgetpw_code',
+                'name',
+                'position_id',
+                'gender',
+                'birthday',
+                'ord',
+                'status',
+                'join_date',
+                'mobile',
+                'phone',
+                'describe',
+                'ord',
+                'status',
+            ]
+        ];
+    }
+
+
     public function rules()
     {
         return [
-            [['username', 'password', 'password2', 'name', 'ord', 'status'], 'required'],
+            [['password','password2'],'required','on'=>'create'],
+            [['username', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
             ['password2', 'compare','compareAttribute'=>'password'],
