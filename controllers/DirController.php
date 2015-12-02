@@ -17,6 +17,8 @@ class DirController extends BaseController
 {
     public $layout = 'main_dir';
 
+    public $orderArr = ['add_time.desc','add_time.asc','filesize.desc','filesize.asc','clicks.desc','clicks.asc'];
+
     public function behaviors()
     {
         return [
@@ -58,10 +60,16 @@ class DirController extends BaseController
                 //$list = DirFunc::getChildren($dir_id);
 
 
-                //$pageNum = yii::$app->request->get('page',1);
                 $pageSize = 8;
-                $order = 'add_time desc';
+
+                $page = yii::$app->request->get('page',1);
+
                 $search = yii::$app->request->get('search',false);
+
+                $order = yii::$app->request->get('order',false);
+                if(!in_array($order,$this->orderArr))
+                    $order = 'add_time.desc';
+                $order = str_replace('.',' ',$order);
 
                 $count = FileFrontFunc::getFilesNumByDirId($dir_id,$search);
 
@@ -70,7 +78,18 @@ class DirController extends BaseController
                 $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
                 $p_id = 0;
                 $viewName = 'list';
+                $links = [];
+
+                foreach($this->orderArr as $orderOne){
+                    $linkTmp = '/dir?dir_id='.$dir_id;
+                    $linkTmp .= $page>1?'&page='.$page:'';
+                    $linkTmp .= '&order='.$orderOne;
+                    $links[$orderOne] = $linkTmp;
+                }
+
                 $params['pages'] = $pages;
+                $params['order'] = $order;
+                $params['links'] = $links;
 
             }else{
                 $list = DirFunc::getChildren($dir_id);

@@ -28,7 +28,6 @@
     <?php else:?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
     <?php endif;?>
-
     <button class="btn btn-primary disabled">
         <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>
         新建文件夹(暂不可用)
@@ -49,9 +48,18 @@
 <p>
     <?=PermissionFunc::testShow($this->context->user->position_id,$dir_id)?>
 </p>
-<hr/>
+<ul class="nav nav-tabs">
+    <li role="presentation" class="<?=$order=='add_time desc'?'active':''?>"><?=Html::a('按时间从新到旧',$links['add_time.desc'])?></li>
+    <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('按时间从新到旧',$links['add_time.asc'])?></li>
+    <li role="presentation" class="<?=$order=='filesize desc'?'active':''?>"><?=Html::a('按文件大小从大到小',$links['filesize.desc'])?></li>
+    <li role="presentation" class="<?=$order=='filesize asc'?'active':''?>"><?=Html::a('按文件大小从小到大',$links['filesize.asc'])?></li>
+    <li role="presentation" class="<?=$order=='clicks desc'?'active':''?>"><?=Html::a('按下载量从大到小',$links['clicks.desc'])?></li>
+    <li role="presentation" class="<?=$order=='clicks asc'?'active':''?>"><?=Html::a('按下载量从小到大',$links['clicks.asc'])?></li>
+</ul>
 <?php if(!empty($list)):?>
 <div>
+
+
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <div class="col-md-3 dir-item <?=$route=='list'?'file-item':''?> text-center" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
