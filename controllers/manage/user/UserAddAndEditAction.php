@@ -30,6 +30,7 @@ class UserAddAndEditAction extends Action{
             }
 
             $user->setAttributes($model->attributes);
+            $user->password = md5($user->password);
             if($user->save()){
                 Yii::$app->response->redirect('user')->send();
             }

@@ -10,6 +10,7 @@ class UserForm extends Model
     public $id;
     public $username;
     public $password;
+    public $password2;
     public $reg_code;
     public $forgetpw_code;
     public $name;
@@ -49,6 +50,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
         return [
             'username' => '用户名(邮箱)',
             'password' => '密码',
+            'password2' => '密码(再输入一次)',
             'reg_code' => '注册码',
             'forgetpw_code' => '忘记密码验证码',
             'name' => '姓名',
@@ -68,9 +70,10 @@ UNIQUE KEY `username_UNIQUE` (`username`)
     public function rules()
     {
         return [
-            [['username', 'password', 'name', 'ord', 'status'], 'required'],
+            [['username', 'password', 'password2', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
+            ['password2', 'compare','compareAttribute'=>'password'],
             [['reg_code', 'forgetpw_code', 'join_date', 'mobile', 'phone', 'describe'], 'safe']
         ];
     }
