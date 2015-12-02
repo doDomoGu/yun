@@ -1,9 +1,7 @@
 <?php
     use yii\helpers\Html;
     use yii\bootstrap\ActiveForm;
-/*
-$this->params['breadcrumbs'][] = ['label'=>'个人中心','url'=>'/user'];
-$this->params['breadcrumbs'][] = $this->title;*/
+    app\assets\AppAsset::addJsFile($this,'js/main/manage-user-add-and-edit.js');
 ?>
 
         <h2>
@@ -24,7 +22,18 @@ $this->params['breadcrumbs'][] = $this->title;*/
         <?= $form->field($model, 'password2')->passwordInput() ?>
 
         <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'position_id') ?>
+
+        <?/*= $form->field($model, 'position_id') */?>
+<div class="form-group field-userform-position_id">
+    <label for="userform-position_id" class="col-lg-2 control-label">职位</label>
+    <div class="col-lg-3">
+        <input type="hidden" name="UserForm[position_id]" class="form-control" id="userform-position_id" value="<?=$model->position_id?>">
+        <input type="hidden" id="s_position_id" value="<?=$model->position_id?>" />
+            <?=$this->render('/manage/_position')?>
+    </div>
+    <div class="col-lg-5"><p class="help-block help-block-error"></p></div>
+</div>
+
         <?= $form->field($model, 'gender')->dropDownList([0=>'N/A',1=>'男',2=>'女']) ?>
         <?= $form->field($model, 'mobile') ?>
         <?= $form->field($model, 'phone') ?>

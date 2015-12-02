@@ -116,7 +116,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
     {
         return [
             [['password','password2'],'required','on'=>'create'],
-            [['username', 'name', 'ord', 'status'], 'required'],
+            [['username', 'name', 'ord', 'status','position_id'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
             ['password2', 'compare','compareAttribute'=>'password'],

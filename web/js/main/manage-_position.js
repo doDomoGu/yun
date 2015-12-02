@@ -41,6 +41,8 @@ $(function(){
             $(this).nextAll().remove();
         }
         $('#pos_id_div').html(p_id2);
+        $('#pos_id_input').val(p_id2);
+        $('#pos_id_input').change();
     });
 });
 

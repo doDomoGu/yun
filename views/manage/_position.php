@@ -17,3 +17,4 @@
     ['encode'=>false,'id'=>'pos-select','prompt'=>'===请选择===','class'=>'pos-select-group']
 )*/?>
 <div id="pos_id_div" class="hidden"></div>
+<input id="pos_id_input" type="hidden">
