@@ -48,11 +48,14 @@ class FileFrontFunc extends Component {
             return yii::$app->params['qiniu-domain'].$path;
     }
 
-    public static function getFilesByDirId($dir_id,$pages,$order='add_time desc',$search=''){
-        $files = File::find()
-            ->where(['dir_id'=>$dir_id,'status'=>1]);
-            if($search!==false)
-                $files = $files->andWhere(['like','filename',$search]);
+    public static function getFiles($dir_id,$p_id,$pages,$order='add_time desc',$search=''){
+        $files = File::find();
+        if($p_id>0)
+            $files = $files->where(['p_id'=>$p_id,'status'=>1]);
+        else
+            $files = $files->where(['dir_id'=>$dir_id,'status'=>1]);
+        if($search!==false)
+            $files = $files->andWhere(['like','filename',$search]);
         $files = $files->orderBy($order)
             ->offset($pages->offset)
             ->limit($pages->limit)
@@ -61,9 +64,12 @@ class FileFrontFunc extends Component {
         return $files;
     }
 
-    public static function getFilesNumByDirId($dir_id,$search=false){
-        $count = File::find()
-            ->where(['dir_id'=>$dir_id,'status'=>1]);
+    public static function getFilesNum($dir_id,$p_id,$search=false){
+        $count = File::find();
+        if($p_id>0)
+            $count = $count->where(['p_id'=>$p_id,'status'=>1]);
+        else
+            $count = $count->where(['dir_id'=>$dir_id,'status'=>1]);
         if($search!==false)
             $count = $count->andWhere(['like','filename',$search]);
         return $count->count();
@@ -101,5 +107,25 @@ class FileFrontFunc extends Component {
             $size=round($size/(1024*1024*1024),1);
             return $size." GB";
         }
+    }
+
+
+    /*
+     * 函数getParents ,实现根据 当前p_id 递归获取全部父层级 id
+     *
+     * @param integer p_id
+     * return array
+     */
+    public static function getParents($p_id){
+        $arr = [];
+        $curDir = File::find()->where(['id'=>$p_id,'status'=>1])->one();
+        if($curDir){
+            $arr[] = $curDir;
+            $arr2 = self::getParents($curDir->p_id);
+            $arr = BaseArrayHelper::merge($arr2,$arr);
+        }
+
+        ksort($arr);
+        return $arr;
     }
 }

@@ -19,6 +19,7 @@ class DirController extends BaseController
 
     public $orderArr = ['add_time.desc','add_time.asc','filesize.desc','filesize.asc','clicks.desc','clicks.asc'];
 
+    public $dir_id;
     public function behaviors()
     {
         return [
@@ -45,6 +46,7 @@ class DirController extends BaseController
             $dir_id = $parDir->dir_id;
         }else{
             $dir_id = Yii::$app->request->get('dir_id',false);
+            $p_id = 0;
         }
 
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
@@ -52,21 +54,26 @@ class DirController extends BaseController
         $count = 0;
 
         if($curDir){
-            $this->view->title = $curDir->name.$this->titleSuffix;
+            $this->dir_id = $dir_id;
             //面包屑
             $parents = DirFunc::getParents($dir_id);
             foreach($parents as $parent){
                 $this->view->params['breadcrumbs'][] = ['label'=>$parent->name,'url'=>['/dir','dir_id'=>$parent->id]];
             }
-
+            $parents2 = FileFrontFunc::getParents($p_id);
+            foreach($parents2 as $parent){
+                $this->view->params['breadcrumbs'][] = ['label'=>$parent->filename,'url'=>['/dir','p_id'=>$parent->id]];
+            }
+            if($parDir)
+                $this->view->title = $parDir->filename.$this->titleSuffix;
+            else
+                $this->view->title = $curDir->name.$this->titleSuffix;
 
             if($curDir->is_leaf){
                 //是底层目录 可以进行上传/新建文件夹等操作
                 //var_dump(FileFrontFunc::getFileType('sss.png'));exit;
 
-
                 //$list = DirFunc::getChildren($dir_id);
-
 
                 $pageSize = 8;
 
@@ -79,12 +86,23 @@ class DirController extends BaseController
                     $order = 'add_time.desc';
                 $order = str_replace('.',' ',$order);
 
-                $count = FileFrontFunc::getFilesNumByDirId($dir_id,$search);
+                /*if($parDir){
+
+                }else{
+                    $count = FileFrontFunc::getFilesNumByDirId($dir_id,$search);
+
+                    $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+
+                    $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
+                }*/
+
+
+                $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
 
                 $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
-                $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
-                $p_id = 0;
+                $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$order,$search);
+
                 $viewName = 'list';
                 $links = [];
 

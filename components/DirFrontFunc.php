@@ -13,7 +13,7 @@ class DirFrontFunc extends Component {
         $isDirCtl = strpos(Yii::$app->controller->route,'dir')===0?true:false;
         $dirLvl_1 = null;
         if($isDirCtl){
-            $dir_id = Yii::$app->request->get('dir_id',false);
+            $dir_id = yii::$app->controller->dir_id;
 
             if($dir_id){
                 $parents = DirFunc::getParents($dir_id);
