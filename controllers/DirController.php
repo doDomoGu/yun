@@ -95,7 +95,10 @@ class DirController extends BaseController
 
                     $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
                 }*/
-
+                if($parDir){
+                    if(!PermissionFunc::checkFileDownloadPermission($this->user->position_id,$parDir))
+                        yii::$app->response->redirect('/')->send();
+                }
 
                 $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
 
