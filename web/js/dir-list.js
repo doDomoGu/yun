@@ -6,11 +6,20 @@ $('.dir-item').mouseenter(function(){
 
 $('.dir-item').click(function(){
     if($(this).attr('download-check')=='enable'){
-        _download_times = parseInt($(this).find('.download_times span').html())+1;
-        $(this).find('.download_times span').html(_download_times);
-        location.href='/dir/download?id='+$(this).attr('data-id');
-    }else
-        alert('没有下载权限');
+        if($(this).attr('data-is-dir')=='1'){
+            location.href='/dir?p_id='+$(this).attr('data-id');
+        }else{
+            _download_times = parseInt($(this).find('.download_times span').html())+1;
+            $(this).find('.download_times span').html(_download_times);
+            location.href='/dir/download?id='+$(this).attr('data-id');
+        }
+    }else{
+        if($(this).attr('data-is-dir')=='1'){
+            alert('没有权限打开');
+        }else{
+            alert('没有下载权限');
+        }
+    }
 });
 
 

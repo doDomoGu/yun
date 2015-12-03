@@ -62,7 +62,7 @@
 
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
-    <div class="col-md-3 dir-item <?=$route=='list'?'file-item':''?> text-center" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+    <div class="col-md-3 dir-item <?=$route=='list'?'file-item':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="icon">
                 <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>

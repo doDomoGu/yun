@@ -35,9 +35,17 @@ class DirController extends BaseController
 
     public function actionIndex()
     {
-        $dir_id = Yii::$app->request->get('dir_id',false);
-
+        //url参数 p_id & dir_id 两者只存在一个 先取p_id
         $p_id = Yii::$app->request->get('p_id',false);
+
+        $parDir = File::find()->where(['id'=>$p_id,'status'=>1])->one();
+
+        //如果parDir存在 , 给dir_id赋值
+        if($p_id!==false && $parDir && $parDir->dir_id>0){
+            $dir_id = $parDir->dir_id;
+        }else{
+            $dir_id = Yii::$app->request->get('dir_id',false);
+        }
 
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
 
