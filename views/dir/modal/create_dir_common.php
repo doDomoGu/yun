@@ -12,7 +12,7 @@ Modal::begin([
     <div id="createDirModalContent">
         <p>
             <label>文件夹名：</label>
-            <input name="dirname">
+            <input name="dirname" class="dirname">
             <span class="create-dir-error"></span>
         </p>
         <p>

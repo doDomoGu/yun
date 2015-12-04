@@ -154,7 +154,7 @@ class DirController extends BaseController
             $file = new File();
             $insert['filename'] = isset($post['filename'])?$post['filename']:'';
             $insert['filesize'] = isset($post['filesize'])?$post['filesize']:'';
-            $insert['filetype'] = FileFrontFunc::getFileType($insert['filename']);;
+            $insert['filetype'] = isset($post['filetype'])?$post['filetype']:FileFrontFunc::getFileType($insert['filename']);
             $insert['dir_id'] = $dir_id;
             $insert['p_id'] = $p_id;
             $insert['filename_real'] = isset($post['filename_real'])?$post['filename_real']:'';
