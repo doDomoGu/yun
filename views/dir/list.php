@@ -1,16 +1,13 @@
 <?php
-
     use yii\bootstrap\Html;
     use app\components\FileFrontFunc;
     use app\components\PermissionFunc;
-
 
     app\assets\AppAsset::addCssFile($this,'css/dir-index.css');
 
     if($route=='list'){
         app\assets\AppAsset::addCssFile($this,'css/dir-list.css');
     }
-
 
     app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
     app\assets\AppAsset::addJsFile($this,'js/qiniu/qiniu.js');
@@ -24,16 +21,18 @@
 <input type="hidden" id="fileurlId2" value="fileurl2" />
 <p>
     <?php if(PermissionFunc::isAllowUploadCommon($dir_id)):?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>新建文件夹',['value'=>'','class'=> 'btn btn-pir','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirCommonModal"])?>
     <?php else:?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>新建文件夹',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirCommonModal"])?>
     <?php endif;?>
     <?php if(PermissionFunc::isAllowUploadPerson($dir_id)):?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传 (个人)',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton2','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton2','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirPersonModal"])?>
     <?php else:?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span>上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
+        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirPersonModal"])?>
     <?php endif;?>
 </p>
     <!--<button class="btn btn-primary disabled">
@@ -87,6 +86,8 @@
 
 <?=$this->render('modal/upload_common')?>
 <?=$this->render('modal/upload_person')?>
+<?=$this->render('modal/create_dir_common')?>
+<?=$this->render('modal/create_dir_person')?>
 
 <input type="hidden" id="dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="p_id" value="<?=$p_id?>">

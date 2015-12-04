@@ -22,6 +22,12 @@ $('.dir-item').click(function(){
     }
 });
 
+$('#createDirModalContent button.btn').click(function(){
+   alert('sss');
+});
+$('#createDirModalContent2 button.btn').click(function(){
+    alert('sss222');
+});
 
 
 var qiniuDomain = $('#qiniuDomain').val();
