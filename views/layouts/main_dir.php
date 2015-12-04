@@ -1,11 +1,14 @@
 <?php
 
-use yii\widgets\Breadcrumbs;
+    use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-AppAsset::register($this);  /* 注册appAsset */
+    AppAsset::register($this);  /* 注册appAsset */
 
-app\assets\AppAsset::addCssFile($this,'css/layouts/dir.css');
+    app\assets\AppAsset::addCssFile($this,'css/layouts/dir.css');
+    if($this->params['dir_id']==5){
+        app\assets\AppAsset::addCssFile($this,'css/dir-study.css');
+    }
 ?>
 <?php $this->beginPage(); /* 页面开始标志位 */ ?>
 <!DOCTYPE html>
@@ -21,12 +24,15 @@ app\assets\AppAsset::addCssFile($this,'css/layouts/dir.css');
         <div id="dir-sidebar">
             <?=$this->render('/dir/_left',['dir_id'=>$this->params['dir_id']])?>
         </div>
-        <div id="dir-main">
+        <div id="dir-main" class="<?=$this->params['dir_id']==5?'dir-study':''?>">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= $content ?>
         </div>
+        <?php if($this->params['dir_id']==5):?>
+        <?=$this->render('/dir/_rank_download')?>
+        <?php endif;?>
     </div>
     <div class="clearfix"></div>
 </div>

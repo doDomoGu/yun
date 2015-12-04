@@ -128,4 +128,15 @@ class FileFrontFunc extends Component {
         ksort($arr);
         return $arr;
     }
+
+
+    public static function getDownloadList($dir_ids){
+        $files = File::find()
+            ->where(['in','dir_id',$dir_ids])
+            ->andWhere(['>','filetype',0])
+            ->andWhere(['status'=>1])
+            ->orderBy('clicks desc')
+            ->all();
+        return $files;
+    }
 }
