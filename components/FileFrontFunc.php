@@ -139,4 +139,14 @@ class FileFrontFunc extends Component {
             ->all();
         return $files;
     }
+
+    public static function getRecentList($dir_ids){
+        $files = File::find()
+            ->where(['in','dir_id',$dir_ids])
+            ->andWhere(['>','filetype',0])
+            ->andWhere(['status'=>1])
+            ->orderBy('add_time desc')
+            ->all();
+        return $files;
+    }
 }
