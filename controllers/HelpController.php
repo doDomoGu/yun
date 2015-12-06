@@ -25,4 +25,8 @@ class HelpController extends BaseController
     public function actionIndex2(){
         return $this->render('index2');
     }
+
+    public function actionIndex3(){
+        return $this->render('index3');
+    }
 }

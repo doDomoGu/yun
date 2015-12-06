@@ -19,7 +19,8 @@ AppAsset::register($this);  /* 注册appAsset */
     <div class="container">
         <ul class="nav nav-tabs">
             <li role="presentation" class="<?=yii::$app->controller->action->id=='index'?'active':''?>"><?=Html::a('登录',['/help'])?></li>
-            <li role="presentation" class="<?=yii::$app->controller->action->id=='index2'?'active':''?>"><?=Html::a('首页结构',['/help/index2'])?></li>
+            <li role="presentation" class="<?=yii::$app->controller->action->id=='index2'?'active':''?>"><?=Html::a('头部导航',['/help/index2'])?></li>
+            <li role="presentation" class="<?=yii::$app->controller->action->id=='index3'?'active':''?>"><?=Html::a('首页',['/help/index3'])?></li>
         </ul>
         <?= $content ?>
     </div>
