@@ -1,10 +1,13 @@
 <?php
 
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\bootstrap\Html;
 
 AppAsset::register($this);  /* 注册appAsset */
+
+
+app\assets\AppAsset::addCssFile($this,'css/help-index.css');
+
 ?>
 <?php $this->beginPage(); /* 页面开始标志位 */ ?>
 <!DOCTYPE html>
@@ -18,9 +21,10 @@ AppAsset::register($this);  /* 注册appAsset */
     <?php echo $this->render($this->context->navbarView); /* 引入导航栏 */?>
     <div class="container">
         <ul class="nav nav-tabs">
-            <li role="presentation" class="<?=yii::$app->controller->action->id=='index'?'active':''?>"><?=Html::a('登录',['/help'])?></li>
-            <li role="presentation" class="<?=yii::$app->controller->action->id=='index2'?'active':''?>"><?=Html::a('头部导航',['/help/index2'])?></li>
-            <li role="presentation" class="<?=yii::$app->controller->action->id=='index3'?'active':''?>"><?=Html::a('首页',['/help/index3'])?></li>
+            <li role="presentation" class="<?=yii::$app->request->get('index',1)==1?'active':''?>"><?=Html::a('登录',['/help'])?></li>
+            <li role="presentation" class="<?=yii::$app->request->get('index',1)==2?'active':''?>"><?=Html::a('头部导航',['/help?index=2'])?></li>
+            <li role="presentation" class="<?=yii::$app->request->get('index',1)==3?'active':''?>"><?=Html::a('首页',['/help?index=3'])?></li>
+            <li role="presentation" class="<?=yii::$app->request->get('index',1)==4?'active':''?>"><?=Html::a('板块目录',['/help?index=4'])?></li>
         </ul>
         <?= $content ?>
     </div>

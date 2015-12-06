@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use yii;
 
 class HelpController extends BaseController
 {
@@ -14,19 +15,18 @@ class HelpController extends BaseController
             return false;
     }
     public function actionIndex(){
+        $index = yii::$app->request->get('index',1);
+        if(in_array($index,[1,2,3,4,5,6,7])){
+            $viewName = 'index';
+            if($index>1){
+                $viewName .= '_'.$index;
+            }
+            return $this->render($viewName);
+        }else{
+            $this->redirect('/');
+            return false;
+        }
 
-        return $this->render('index');
     }
 
-    /*public function actionIndex1(){
-        return $this->render('index');
-    }*/
-
-    public function actionIndex2(){
-        return $this->render('index2');
-    }
-
-    public function actionIndex3(){
-        return $this->render('index3');
-    }
 }
