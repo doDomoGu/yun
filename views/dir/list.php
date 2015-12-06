@@ -40,9 +40,9 @@
         新建文件夹(暂不可用)
     </button>-->
 </p>
-<p>
-    <?=PermissionFunc::testShow($this->context->user->position_id,$dir_id)?>
-</p>
+<!--<p>
+    <?/*=PermissionFunc::testShow($this->context->user->position_id,$dir_id)*/?>
+</p>-->
 <ul class="nav nav-tabs">
     <li role="presentation" class="<?=$order=='add_time desc'?'active':''?>"><?=Html::a('按时间从新到旧',$links['add_time.desc'])?></li>
     <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('按时间从新到旧',$links['add_time.asc'])?></li>

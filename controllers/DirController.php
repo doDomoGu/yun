@@ -75,7 +75,7 @@ class DirController extends BaseController
 
                 //$list = DirFunc::getChildren($dir_id);
 
-                $pageSize = 8;
+                $pageSize = 12;
 
                 $page = yii::$app->request->get('page',1);
 
