@@ -22,6 +22,7 @@ if(!yii::$app->user->isGuest){
     if($this->context->checkIsAdmin())
         $item2 = ArrayHelper::merge($item2,[['label' => '管理中心*', 'url' => '/manage']]);
     $item2 = ArrayHelper::merge($item2,['<li class="divider"></li>']);
+    $item2 = ArrayHelper::merge($item2,[['label' => '帮助', 'url' => '/help']]);
     $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout']]);
         /*'<li class="dropdown-header">Dropdown Header</li>',
         ['label' => 'Level 1 - Dropdown B', 'url' => '#'],*/
