@@ -7,12 +7,11 @@
 <div style="padding:10px;">
     <div class="bg-primary" style="padding:10px 0;">
         <ul >
-            <li>4 板块目录文件夹</li>
-            <li>4.1 点击文件夹可进入</li>
+            <li>5 上传文件</li>
         </ul>
     </div>
     <p>
-        <img src="/images/help/4.jpg" class="img-thumbnail">
+        <img src="/images/help/5.jpg" class="img-thumbnail">
         <br/>
             <br/>
         <img src="/images/help/4-2.jpg" class="img-thumbnail">
