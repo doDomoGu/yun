@@ -7,8 +7,8 @@
 <div style="padding:10px;">
     <div class="bg-primary" style="padding:10px 0;">
         <ul >
-            <li>6 职员中心</li>
-            <li>6.1 职员资料
+            <li>6 职员资料</li>
+            <li>6.1 信息
                 <ul>
                     <li>姓名</li>
                     <li>邮箱（用户名）</li>
