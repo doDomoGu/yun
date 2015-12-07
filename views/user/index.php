@@ -12,7 +12,7 @@
     <div class="col-md-9">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">个人信息</h3>
+                <h3 class="panel-title">职员资料</h3>
             </div>
             <table class="table table-bordered table-hover">
                 <tr>
