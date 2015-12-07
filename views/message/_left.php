@@ -4,7 +4,7 @@
         消息通知
     </a>
     <div class="submenu">
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'message/system')===0?'active':''?>" href="/message/system">
+        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'message/system')===0 || $this->params['messageType']=='system'?'active':''?>" href="/message/system">
             系统通知
         </a>
         <button class="disabled list-group-item <?=strpos(Yii::$app->controller->route,'manage/recruitment')===0?'active':''?>" href="/manage/recruitment">

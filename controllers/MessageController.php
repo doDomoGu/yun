@@ -45,7 +45,7 @@ class MessageController extends BaseController
                     $messageUser->save();
                 }
                 $params['message'] = $message;
-
+                $this->view->params['messageType'] = 'system';
                 return $this->render('detail',$params);
             }
         }
