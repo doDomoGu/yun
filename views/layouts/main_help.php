@@ -25,7 +25,7 @@ app\assets\AppAsset::addCssFile($this,'css/help-index.css');
             <li role="presentation" class="<?=yii::$app->request->get('index',1)==2?'active':''?>"><?=Html::a('头部导航',['/help?index=2'])?></li>
             <li role="presentation" class="<?=yii::$app->request->get('index',1)==3?'active':''?>"><?=Html::a('首页结构',['/help?index=3'])?></li>
             <li role="presentation" class="<?=yii::$app->request->get('index',1)==4?'active':''?>"><?=Html::a('板块目录',['/help?index=4'])?></li>
-            <li role="presentation" class="<?=yii::$app->request->get('index',1)==5?'active':''?>"><?=Html::a('上传文件',['/help?index=5'])?></li>
+            <li role="presentation" class="<?=yii::$app->request->get('index',1)==5?'active':''?>"><?=Html::a('上传下载',['/help?index=5'])?></li>
         </ul>
         <?= $content ?>
     </div>
