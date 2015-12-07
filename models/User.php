@@ -61,4 +61,9 @@ class User extends \yii\db\ActiveRecord
 PRIMARY KEY (`id`),
 UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8*/
+
+
+    /*ALTER TABLE `user`
+     ADD `contract_date` DATETIME NOT NULL AFTER `join_date`,
+     ADD `head_img` VARCHAR(255) NOT NULL AFTER `contract_date`;*/
 }

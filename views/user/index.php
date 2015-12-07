@@ -3,8 +3,11 @@
     use app\components\PositionFunc;
 ?>
 <div class="row">
-    <div class="col-md-3">
-        <img src="/images/default-user.png" alt="默认头像" class="img-thumbnail">
+    <div class="col-md-3 text-center">
+        <img src="<?=$user->head_img!=''?CommonFunc::imgUrl($user->head_img):'/images/default-user.png'?>"
+             alt="职员头像" class="img-thumbnail" style="width:250px;height:250px;">
+        <br/>
+        <?=\yii\bootstrap\Html::a('修改头像','/user/change-head-img',['class'=>'btn btn-primary btn-xs'])?>
     </div>
     <div class="col-md-9">
         <div class="panel panel-default">
