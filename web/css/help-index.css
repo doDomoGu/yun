@@ -5,3 +5,7 @@ p {
 ul {
     margin-bottom: 0;
 }
+
+.img-thumbnail {
+    width:80%;
+}

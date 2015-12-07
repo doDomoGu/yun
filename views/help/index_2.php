@@ -21,7 +21,7 @@
 
         </ul>
     </div>
-    <p>
+    <p class="text-center">
         <img src="/images/help/2.jpg" class="img-thumbnail">
     </p>
 

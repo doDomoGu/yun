@@ -12,7 +12,7 @@
             <li>3.2 第二行区域是目录链接</li>
         </ul>
     </div>
-    <p>
+    <p class="text-center">
         <img src="/images/help/3.jpg" class="img-thumbnail">
     </p>
 </div>

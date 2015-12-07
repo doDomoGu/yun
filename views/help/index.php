@@ -13,7 +13,7 @@
             <li>1.3 勾选"记住我"可以保持登录30天</li>
         </ul>
     </div>
-    <p>
+    <p class="text-center">
         <img src="/images/help/1.jpg" class="img-thumbnail">
     </p>
 </div>

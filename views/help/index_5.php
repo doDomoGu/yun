@@ -19,7 +19,7 @@
 
         </ul>
     </div>
-    <p>
+    <p class="text-center">
         <img src="/images/help/5.jpg" class="img-thumbnail">
     </p>
     <div  class="bg-primary" style="padding:10px 0;">
@@ -32,7 +32,7 @@
             </li>
         </ul>
     </div>
-    <p>
+    <p class="text-center">
         <img src="/images/help/5-2.jpg" class="img-thumbnail">
     </p>
 </div>
