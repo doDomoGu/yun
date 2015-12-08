@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;*/
 
         <?= $form->field($model, 'content') ?>
 
-        <?= $form->field($model, 'img_url') ?>
+        <?/*= $form->field($model, 'img_url') */?>
         <?= $form->field($model, 'link_url') ?>
         <?= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
