@@ -2,22 +2,31 @@
 <div style="padding:10px;">
     <div  class="bg-primary" style="padding:10px 0;">
         <ul >
-            <li>2 头部导航</li>
-            <li>2.1 板块链接导航 :目录文件夹的列表页面</li>
+            <li>2 招聘</li>
+            <li>2.1 列表</li>
+        </ul>
+    </div>
+    <p class="text-center">
+        <img src="/images/manage-help/2.jpg" class="img-thumbnail">
+    </p>
+
+    <div  class="bg-primary" style="padding:10px 0;">
+        <ul >
             <li>
-                2.2 职员中心（下拉菜单)
+                2.2 编辑或添加：主要为5个字段
                 <ul>
-                    <li>1) 职员资料：显示职员信息和修改密码等</li>
-                    <li>2）消息通知：接收查看管理员发送的消息通知</li>
-                    <li>3) 管理中心* (需要管理员权限) </li>
+                    <li>标题：招聘标题</li>
+                    <li>内容：详细内容</li>
+                    <li>链接：需要点击跳转到的网址url，没有则不跳转</li>
+                    <li>排序：显示顺序，从大到小</li>
+                    <li>状态：启用和禁用</li>
                 </ul>
             </li>
-
 
         </ul>
     </div>
     <p class="text-center">
-        <img src="/images/help/2.jpg" class="img-thumbnail">
+        <img src="/images/manage-help/2-2.jpg" class="img-thumbnail">
     </p>
 
 </div>
