@@ -27,3 +27,7 @@
         </a>
     </div>
 </div>
+
+<div class="text-center">
+    <a href="/manage/help" >帮助|help?</a>
+</div>

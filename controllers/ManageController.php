@@ -126,4 +126,22 @@ class ManageController extends BaseController
         $this->view->title = '管理中心';
         return $this->render('index',$params);
     }
+
+
+    public function actionHelp(){
+        //$this->layout = ''
+        $this->view->title = '管理中心 - 帮助'.$this->titleSuffix;
+        $index = yii::$app->request->get('index',1);
+        if(in_array($index,[1,2,3,4,5,6,7])){
+            $viewName = 'index';
+            if($index>1){
+                $viewName .= '_'.$index;
+            }
+            return $this->render('help/'.$viewName);
+        }else{
+            $this->redirect('/');
+            return false;
+        }
+
+    }
 }
