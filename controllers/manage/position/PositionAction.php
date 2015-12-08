@@ -14,6 +14,13 @@ class PositionAction extends Action{
             $p->install();
             exit;
         }
+
+        if(Yii::$app->request->get('install2')){
+            $p = new Position();
+            $p->install2();
+            exit;
+        }
+
         if(Yii::$app->request->get('handle')){
             PositionFunc::handleIsLastAndIsLeaf();
             exit;

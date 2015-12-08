@@ -368,6 +368,196 @@ class Position extends \yii\db\ActiveRecord
         }
     }
 
+    public function install2() {
+        try {
+            $exist = Position::find()->one();
+            if($exist){
+                throw new yii\base\Exception('Position has installed');
+            }
+
+            $zhiji1 = [
+                ['n'=>'总监','l'=>true],
+                ['n'=>'副总监','l'=>true],
+                ['n'=>'经理','l'=>true],
+                ['n'=>'主管','l'=>true],
+                ['n'=>'专员','l'=>true]
+            ];
+
+            $zhiji2 = [
+                ['n'=>'总经理','l'=>true],
+                ['n'=>'副总经理','l'=>true],
+                ['n'=>'总监','l'=>true],
+                ['n'=>'总经理助理','l'=>true]
+            ];
+
+            $zhiji3 = [
+                ['n'=>'总监','l'=>true],
+                ['n'=>'副总监','l'=>true],
+                ['n'=>'经理','l'=>true]
+            ];
+
+            $zhiji4 = [
+                ['n'=>'指导','l'=>true],
+                ['n'=>'师','l'=>true],
+                ['n'=>'专员','l'=>true],
+                ['n'=>'助理','l'=>true]
+            ];
+
+            $anchang1 = [
+                ['n'=>'项目管理','c'=>[
+                    ['n'=>'总监','l'=>true],
+                    ['n'=>'副总监','l'=>true],
+                    ['n'=>'经理','l'=>true]
+                ]],
+                ['n'=>'案场策划','c'=>[
+                    ['n'=>'副总监','l'=>true],
+                    ['n'=>'经理','l'=>true],
+                    ['n'=>'主管','l'=>true],
+                    ['n'=>'专员','l'=>true]
+                ]],
+                ['n'=>'案场销售','c'=>[
+                    ['n'=>'客户主管','l'=>true]
+                ]],
+                ['n'=>'案场客服','c'=>[
+                    ['n'=>'客户代表','l'=>true]
+                ]],
+                ['n'=>'案场行政','c'=>[
+                    ['n'=>'主管','l'=>true],
+                    ['n'=>'专员','l'=>true]
+                ]]
+            ];
+
+            $guanggao = [
+                ['n'=>'部门管理','c'=>$zhiji3],
+                ['n'=>'设计','c'=>$zhiji4],
+                ['n'=>'文案','c'=>$zhiji4],
+            ];
+            $bumen1 = [
+                ['n'=>'总经办','c'=>$zhiji2],
+                ['n'=>'财务部','c'=>$zhiji1],
+                ['n'=>'综合管理部','c'=>$zhiji1],
+                ['n'=>'开发拓展部','c'=>$zhiji1],
+                ['n'=>'市场策划部','c'=>$zhiji1],
+                ['n'=>'销售业务部','c'=>[
+                    ['n'=>'项目案场[A]','c'=>$anchang1],
+                    ['n'=>'项目案场[B]','c'=>$anchang1],
+                    ['n'=>'项目案场[C]','c'=>$anchang1]
+                ]]
+            ];
+            $bumen2 = [
+                ['n'=>'销售业务部','c'=>[
+                    ['n'=>'项目案场[A]','c'=>$zhiji1],
+                    ['n'=>'项目案场[B]','c'=>$zhiji1]
+                ]]
+            ];
+
+            $bumen3 = [
+                ['n'=>'总经办','c'=>[
+                   ['n'=>'总经理','l'=>true],
+                   ['n'=>'副总经理','l'=>true],
+                   ['n'=>'总经理助理','l'=>true]
+                ]],
+                ['n'=>'财务部','c'=>$zhiji1],
+                ['n'=>'综合管理部','c'=>$zhiji1],
+                ['n'=>'开发拓展部','c'=>$zhiji1],
+                ['n'=>'AE策划部','c'=>$zhiji1],
+                ['n'=>'创意部','c'=>$guanggao],
+                ['n'=>'创作部','c'=>[
+                    ['n'=>'创作1部','c'=>$guanggao],
+                    ['n'=>'创作2部','c'=>$guanggao],
+                    ['n'=>'创作3部','c'=>$guanggao]
+                ]],
+
+
+            ];
+
+
+
+
+            $arr = [
+                ['n'=>'管理员','l'=>true],
+                ['n'=>'颂唐机构','c'=>[
+                    ['n'=>'上海总部平台','c'=>[
+                        ['n'=>'企宣管控中心','c'=>$zhiji1],
+                        ['n'=>'发展管控中心','c'=>$zhiji1],
+                        ['n'=>'行政管控中心','c'=>$zhiji1],
+                        ['n'=>'财务管控中心','c'=>$zhiji1]
+                    ]]
+                ]],
+                ['n'=>'市场策略中心','c'=>[
+                    ['n'=>'上海总部平台','c'=>$zhiji1]
+                ]],
+                ['n'=>'华麦建筑','c'=>[
+                    ['n'=>'上海华麦建筑']
+                ]],
+                ['n'=>'颂唐地产','c'=>[
+                    ['n'=>'上海颂唐地产','c'=>$bumen1],
+                    ['n'=>'苏州颂唐地产','c'=>$bumen1],
+                    ['n'=>'无锡颂唐地产','c'=>$bumen1],
+                    ['n'=>'南京颂唐地产','c'=>$bumen1],
+                    ['n'=>'安徽颂唐地产','c'=>$bumen1],
+                    ['n'=>'苏北颂唐地产','c'=>$bumen1],
+                ]],
+                ['n'=>'汉佑房屋','c'=>[
+                    ['n'=>'苏州汉佑房屋','c'=>[
+                        ['n'=>'新湖明珠店','c'=>$zhiji1],
+                        ['n'=>'石湖店','c'=>$zhiji1]
+                    ]],
+                    ['n'=>'无锡汉佑房屋']
+                ]],
+                ['n'=>'致秦经纪','c'=>[
+                   ['n'=>'上海致秦经纪','c'=>$bumen2],
+                   ['n'=>'苏州致秦经纪','c'=>$bumen2],
+                   ['n'=>'无锡致秦经纪','c'=>$bumen2],
+                   ['n'=>'南京致秦经纪','c'=>$bumen2],
+                   ['n'=>'合肥致秦经纪','c'=>$bumen2],
+                ]],
+                ['n'=>'明致置业','c'=>[
+                   ['n'=>'上海明致置业'],
+                   ['n'=>'南京明致置业']
+                ]],
+                ['n'=>'日鑫商业','c'=>[
+                    ['n'=>'上海日鑫商业','c'=>$bumen1],
+                    ['n'=>'苏州日鑫商业','c'=>$bumen1],
+                    ['n'=>'无锡日鑫商业','c'=>$bumen1],
+                    ['n'=>'南京日鑫商业','c'=>$bumen1],
+                    ['n'=>'安徽日鑫商业','c'=>$bumen1],
+                    ['n'=>'苏北日鑫商业','c'=>$bumen1],
+                ]],
+                ['n'=>'颂唐广告','c'=>[
+                    ['n'=>'上海颂唐广告','c'=>$bumen3],
+                    ['n'=>'苏州颂唐广告','c'=>$bumen3],
+                    ['n'=>'南京颂唐广告','c'=>$bumen3],
+                    ['n'=>'安徽颂唐广告','c'=>$bumen3]
+                ]],
+                ['n'=>'尚晋公关','c'=>[
+                    ['n'=>'苏州尚晋公关','c'=>$zhiji1],
+                ]],
+                ['n'=>'元素互动','c'=>[
+                    ['n'=>'上海元素互动','c'=>$zhiji1],
+                ]],
+                ['n'=>'周道物业','c'=>[
+                    ['n'=>'苏州周道物业','c'=>$zhiji1],
+                ]]
+            ];
+
+
+            $this->array2value($arr,0,1);
+            return true;
+        }catch (\Exception $e)
+        {
+            echo  'Position 2222 install failed<br />';
+            $message = $e->getMessage() . "\n";
+            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+            echo $message;
+            /*echo '<br/><br/>';
+            var_dump($errorInfo);*/
+
+            //throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+            return false;
+        }
+    }
+
     public function array2value($arr,$pid,$level){
 
         $sqlbase = "INSERT IGNORE INTO `position`(`name`,`p_id`,`is_leaf`,`is_class`,`level`,`ord`,`status`)
@@ -382,7 +572,7 @@ class Position extends \yii\db\ActiveRecord
             $cmd->execute();
 
             //$lastId = Yii::app()->db->lastInsertID;
-            if(isset($a['c'])){
+            if(isset($a['c']) && !empty($a['c'])){
                 $this->array2value($a['c'],Yii::$app->db->lastInsertID,$level+1);
             }
             $ord--;
