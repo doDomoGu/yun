@@ -18,9 +18,9 @@
 
         <?= $form->field($model, 'describe')->textarea() ?>
 
-        <?= $form->field($model, 'type',[
+        <?/*= $form->field($model, 'type',[
             'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
-        ])->dropDownList([1=>'企业运营中心',2=>'发展资源中心',3=>'工具应用中心',4=>'项目资源中心',5=>'学习共享中心']) ?>
+        ])->dropDownList([1=>'企业运营中心',2=>'发展资源中心',3=>'工具应用中心',4=>'项目资源中心',5=>'学习共享中心']) */?>
 
         <?= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
