@@ -1,18 +1,35 @@
 .dir-item {
-    cursor: pointer;
+    width:225px;
+    float:left;
+    /*cursor: pointer;*/
     display: block;
     overflow: hidden;
     padding-bottom:20px;
 }
 
 .dir-item:hover{
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
 }
 
-.dir-item .info.hover {
+/*.dir-item .info.hover {
     color:#337ab7;
-}
+}*/
 
 .dir-item .icon img{
-    width:50%;
+    width:100%;
+}
+
+.dir-item a {
+    display: block;
+    width:128px;
+    margin-left:49px;
+    overflow: hidden;
+}
+
+.dir-item a:hover img {
+    background: #414141;
+}
+.dir-item a:hover {
+    text-decoration: none;
+    color:#333;
 }

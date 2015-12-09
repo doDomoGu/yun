@@ -1,18 +1,15 @@
 <?php \app\assets\AppAsset::addCssFile($this,'css/dir-index.css');?>
-<div>
+<div class="clearfix"></div>
 <?php foreach($list as $l):?>
-    <div class="col-md-3 dir-item text-center">
+<div class="dir-item text-center">
+    <a class="alink" href="/dir?dir_id=<?=$l->id?>">
         <div class="icon">
-            <a href="/dir?dir_id=<?=$l->id?>">
-                <!--<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>-->
-                <img src="/images/fileicon/dir.png">
-            </a>
+            <img src="/images/fileicon/documents.png">
         </div>
         <div class="name">
-            <a href="/dir?dir_id=<?=$l->id?>">
-                <?=$l->name?>
-            </a>
+            <?=$l->name?>
         </div>
-    </div>
-<?php endforeach;?>
+    </a>
 </div>
+<?php endforeach;?>
+<div class="clearfix"></div>
