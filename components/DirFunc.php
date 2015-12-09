@@ -321,7 +321,7 @@ class DirFunc extends Component {
                 }
             }
         }else{
-            Dir::updateAll(['is_leaf'=>1],['id'=>$p_id]);
+            //Dir::updateAll(['is_leaf'=>1],['id'=>$p_id]);
         }
     }
 }
