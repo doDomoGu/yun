@@ -1,18 +1,44 @@
 .file-item {
-    cursor: pointer;
+    height:280px;
+}
+
+
+/*.file-item:hover{
+    background: #f5f5f5;
+}*/
+
+/*.file-item .info.hover {
+    color:#337ab7;
+}*/
+
+.file-item .icon {
     display: block;
-    height:260px;
+    width:128px;
+    margin-left:49px;
     overflow: hidden;
 }
 
-.file-item:hover{
-    background: #f5f5f5;
-}
-
-.file-item .info.hover {
-    color:#337ab7;
-}
-
 .file-item .icon img{
-    width:50%;
+    width:100%;
+    border-radius: 4px;
+}
+
+.file-item .info {
+    margin-top:2px;
+    display: inline-block;
+    padding:2px 4px;
+}
+
+.file-item.hover{
+    cursor: pointer;
+}
+
+.file-item.hover img {
+    background: #e2e2e2;
+}
+
+.file-item.hover .info{
+    color:#FFF;
+    background: #116cd6;
+    border-radius: 2px;
 }

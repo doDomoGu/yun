@@ -11,7 +11,7 @@ class FileFrontFunc extends Component {
 
     public static function file_type($reverse=false){
         $arr = array(
-            'dir','txt','jpg','jpeg','png','gif','bmp','tif','tiff',
+            'documents','txt','jpg','jpeg','png','gif','bmp','tif','tiff',
             'doc','ppt','xls','docx','pptx','xlsx','psd','ai','html','htm',
             'mp3','avi','mp4','rmvb','wma','pdf',
         );

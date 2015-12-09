@@ -1,7 +1,19 @@
-$('.dir-item').mouseenter(function(){
+/*$('.dir-item').mouseenter(function(){
     $(this).find('.info').addClass('hover');
 }).mouseleave(function(){
     $(this).find('.info').removeClass('hover');
+});*/
+
+$('.dir-item .icon').mouseenter(function(){
+    $(this).parent('.dir-item').addClass('hover');
+}).mouseleave(function(){
+    $(this).parent('.dir-item').removeClass('hover');
+});
+
+$('.dir-item .info').mouseenter(function(){
+    $(this).parent('.dir-item').addClass('hover');
+}).mouseleave(function(){
+    $(this).parent('.dir-item').removeClass('hover');
 });
 
 $('.dir-item').click(function(){
