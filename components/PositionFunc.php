@@ -3,6 +3,7 @@ namespace app\components;
 
 use app\models\Position;
 use yii\base\Component;
+use yii\helpers\ArrayHelper;
 use yii\helpers\BaseArrayHelper;
 
 class PositionFunc extends Component {
@@ -152,7 +153,7 @@ class PositionFunc extends Component {
      * @param string orderBy  排序方法
      * return array
      */
-    public static function getChildren($p_id,$showLeaf,$status=1,$orderBy='ord DESC,id DESC'){
+    public static function getChildren($p_id,$showLeaf=true,$status=1,$orderBy='ord DESC,id DESC'){
         $where['p_id'] = $p_id;
         $where['status'] = $status;
         if($showLeaf==false)
@@ -160,6 +161,18 @@ class PositionFunc extends Component {
         return Position::find()->where($where)->orderBy($orderBy)->all();
     }
 
+    public static function getAllChildrenIds($p_id){
+        $arr = [];
+        $children = self::getChildren($p_id);
+        if($children && !empty($children)){
+            foreach($children as $c){
+                $arr[] = $c->id;
+                $children2 = self::getAllChildrenIds($c->id);
+                $arr = ArrayHelper::merge($arr,$children2);
+            }
+        }
+        return $arr;
+    }
 
     /*
      * 函数getParents ,实现根据 当前position_id 递归获取全部父层级 id

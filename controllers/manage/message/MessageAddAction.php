@@ -2,12 +2,14 @@
 namespace app\controllers\manage\message;
 
 use app\components\MessageFunc;
+use app\components\PositionFunc;
 use app\models\MessageUser;
 use app\models\User;
 use Yii;
 use yii\base\Action;
 use app\models\MessageForm;
 use app\models\Message;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 class MessageAddAction extends Action{
@@ -48,7 +50,10 @@ class MessageAddAction extends Action{
                         $messageUser->read_status = 0;
                         $messageUser->save();
                     }elseif($message->send_type==MessageFunc::SEND_TYPE_POSITION){
-                        $users = User::find()->where(['position_id'=>$send_param['position_id']])->all();
+                        $pids = ArrayHelper::merge([$send_param['position_id']],PositionFunc::getAllChildrenIds($send_param['position_id']));
+
+                        $users = User::find()->where(['in','position_id',$pids])->all();
+
                         if(!empty($users)){
                             foreach($users as $u){
                                 $messageUser = new MessageUser();

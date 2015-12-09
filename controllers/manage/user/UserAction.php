@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\manage\user;
 
+use app\components\PositionFunc;
 use yii\base\Action;
 use app\models\User;
 use yii\helpers\ArrayHelper;
@@ -28,9 +29,15 @@ class UserAction extends Action{
                 if(in_array($k,['username','name','phone','mobile'])){
                     if($s!='')
                         $list->andWhere(['like',$k,$s]);
-                }else if(in_array($k,['status','gender','position_id'])){
+                }else if(in_array($k,['status','gender'])){
                     if($s!=='')
                         $list->andWhere([$k=>$s]);
+                }else if(in_array($k,['position_id'])){
+                    if($s!==''){
+                        $arr = ArrayHelper::merge([$s],PositionFunc::getAllChildrenIds($s));
+                        $list->andWhere(['in',$k,$arr]);
+                    }
+
                 }
             }
         }
