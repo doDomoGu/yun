@@ -17,13 +17,13 @@ app\assets\AppAsset::addCssFile($this,'css/layouts/navbar2.css');
 
     $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
 if(!yii::$app->user->isGuest){
-    $item2 = [['label' => '职员资料', 'url' => '/user']];
-    $item2 =  ArrayHelper::merge($item2,[['label' => '消息通知', 'url' => '/message/system']]);
+    $item2 = [['label' => '职员资料', 'url' => '/user','options'=>['class'=>'user-item']]];
+    $item2 =  ArrayHelper::merge($item2,[['label' => '消息通知', 'url' => '/message/system','options'=>['class'=>'user-item']]]);
     if($this->context->checkIsAdmin())
-        $item2 = ArrayHelper::merge($item2,[['label' => '管理中心*', 'url' => '/manage']]);
+        $item2 = ArrayHelper::merge($item2,[['label' => '管理中心*', 'url' => '/manage','options'=>['class'=>'user-item']]]);
     $item2 = ArrayHelper::merge($item2,['<li class="divider"></li>']);
-    $item2 = ArrayHelper::merge($item2,[['label' => '帮助', 'url' => '/help']]);
-    $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout']]);
+    $item2 = ArrayHelper::merge($item2,[['label' => '帮助', 'url' => '/help','options'=>['class'=>'user-item']]]);
+    $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout','options'=>['class'=>'user-item']]]);
         /*'<li class="dropdown-header">Dropdown Header</li>',
         ['label' => 'Level 1 - Dropdown B', 'url' => '#'],*/
 
@@ -43,7 +43,7 @@ if(!yii::$app->user->isGuest){
 
 <?php
 NavBar::begin([
-    'brandLabel' => BaseHtml::img('/images/songtang-united-logo.jpg'),
+    'brandLabel' => BaseHtml::img('/images/songtang-united-logo.png'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-default',
