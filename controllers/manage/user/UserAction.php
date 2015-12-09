@@ -4,6 +4,7 @@ namespace app\controllers\manage\user;
 use app\components\PositionFunc;
 use yii\base\Action;
 use app\models\User;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use Yii;
 
@@ -41,10 +42,19 @@ class UserAction extends Action{
                 }
             }
         }
+        $count = $list->count();
+        $pageSize = 4;
+        $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
-        $list = $list->orderBy('')->all();
+
+        $list = $list
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            //->orderBy('')
+            ->all();
         $params['list'] = $list;
         $params['search'] = $search;
+        $params['pages'] = $pages;
         return $this->controller->render('user/list',$params);
     }
 }

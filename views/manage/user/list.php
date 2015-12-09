@@ -76,3 +76,7 @@
             <?php endif;?>
             </tbody>
         </table>
+
+<div class="clearfix col-md-12 text-center">
+    <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
+</div>
