@@ -1,11 +1,13 @@
 <?=$this->render('_nav')?>
+
 <div style="padding:10px;">
     <div class="bg-primary" style="padding:10px 0;">
         <ul >
-            <li>
-                7 消息通知
+            <li>7 管理员授权
                 <ul>
-                    <li>分为“对单一职员”、“对整个部门/职位”、“对全体职员”，3种发送方式</li>
+                    <li>可对一个普通职员*进行管理员权限的授权和取消授权</li>
+                    <li>*普通职员 是指一个非“管理员”职位的职员，管理员职位ID为1</li>
+                    <li>也不能对自己进行操作</li>
                 </ul>
             </li>
 
@@ -14,39 +16,5 @@
     <p class="text-center">
         <img src="/images/manage-help/7.jpg" class="img-thumbnail">
     </p>
-    <div class="bg-primary" style="padding:10px 0;">
-        <ul >
-            <li>
-                7.1 对单一职员发送：需要选择职员ID
-            </li>
 
-        </ul>
-    </div>
-    <p class="text-center">
-        <img src="/images/manage-help/7-2.jpg" class="img-thumbnail">
-    </p>
-
-    <div class="bg-primary" style="padding:10px 0;">
-        <ul >
-            <li>
-                7.2 对整个部门/职位下归属的职员发送：需要选择部门/职位ID
-            </li>
-
-        </ul>
-    </div>
-    <p class="text-center">
-        <img src="/images/manage-help/7-3.jpg" class="img-thumbnail">
-    </p>
-
-    <div class="bg-primary" style="padding:10px 0;">
-        <ul >
-            <li>
-                7.3 对全体职员发送：无任何选项，对所有职员发送
-            </li>
-
-        </ul>
-    </div>
-    <p class="text-center">
-        <img src="/images/manage-help/7-4.jpg" class="img-thumbnail">
-    </p>
 </div>

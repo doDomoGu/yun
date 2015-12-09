@@ -132,7 +132,7 @@ class ManageController extends BaseController
         //$this->layout = ''
         $this->view->title = '管理中心 - 帮助'.$this->titleSuffix;
         $index = yii::$app->request->get('index',1);
-        if(in_array($index,[1,2,3,4,5,6,7])){
+        if(in_array($index,[1,2,3,4,5,6,7,8])){
             $viewName = 'index';
             if($index>1){
                 $viewName .= '_'.$index;
