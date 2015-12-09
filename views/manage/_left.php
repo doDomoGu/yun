@@ -20,7 +20,7 @@
             公司职员
         </a>
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/admin')===0?'active':''?>" href="/manage/admin">
-            管理员设置
+            管理员授权
         </a>
         <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
             消息通知
