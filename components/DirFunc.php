@@ -3,6 +3,7 @@ namespace app\components;
 
 use app\models\Dir;
 use yii\base\Component;
+use yii\helpers\ArrayHelper;
 use yii\helpers\BaseArrayHelper;
 
 class DirFunc extends Component {
@@ -144,6 +145,7 @@ class DirFunc extends Component {
     public static function getListArr($p_id=0,$showLeaf=true,$showTree=false,$includeSelf=false,$level=false){
         $arr = [];
         $dir = NULL;
+        $selfChildrenIds = [];
         if($p_id>0){
             //根据p_id(父id)查找对应父对象
             $dir = Dir::find()->where(['id'=>$p_id])->one();
@@ -187,10 +189,19 @@ class DirFunc extends Component {
                             }
                         }
                         $arr[$l->id]->childrenIds = $childrenIds;
+                        if($includeSelf===true){
+                            $selfChildrenIds = ArrayHelper::merge($selfChildrenIds,$childrenIds);
+                        }
                     }
-
+                    if($includeSelf===true){
+                        $selfChildrenIds = ArrayHelper::merge($selfChildrenIds,[$l->id]);
+                    }
                 }
             }
+        }
+
+        if($includeSelf===true){
+            $arr[$dir->id]->childrenIds = $selfChildrenIds;
         }
         return $arr;
     }

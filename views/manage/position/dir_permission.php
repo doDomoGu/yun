@@ -1,5 +1,6 @@
 <?php
     use yii\bootstrap\BaseHtml;
+    use app\components\CommonFunc;
     use app\components\PositionFunc;
     use app\components\DirFunc;
     use app\components\PermissionFunc;
@@ -49,21 +50,22 @@
                 <td><?=DirFunc::getIsLeaf($l->is_leaf)?></td>
                 <?php if($l->is_leaf):?>
                     <input type="hidden" name="pm[<?=$l->id?>][edit]" />
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][all]',isset($pmCheck[$l->id]) && count($pmCheck[$l->id])==4?true:false)?></td>
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][11]',isset($pmCheck[$l->id][11])?true:false)?></td>
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][12]',isset($pmCheck[$l->id][12])?true:false)?></td>
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][21]',isset($pmCheck[$l->id][21])?true:false)?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][all]',isset($pmCheck[$l->id]) && count($pmCheck[$l->id])==4?true:false,['data-pid'=>$l->id,'class'=>'row-check'])?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][11]',isset($pmCheck[$l->id][11])?true:false,['class'=>'pm-'.$l->id,'id'=>'pm-'.$l->id.'-11'])?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][12]',isset($pmCheck[$l->id][12])?true:false,['class'=>'pm-'.$l->id,'id'=>'pm-'.$l->id.'-12'])?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][21]',isset($pmCheck[$l->id][21])?true:false,['class'=>'pm-'.$l->id,'id'=>'pm-'.$l->id.'-21'])?></td>
                     <!--<td class="text-center"><?/*=BaseHtml::checkbox('pm['.$l->id.'][22]',isset($pmCheck[$l->id][22])?true:false)*/?></td>-->
                     <!--<td class="text-center"><?/*=BaseHtml::checkbox('pm['.$l->id.'][31]',isset($pmCheck[$l->id][31])?true:false)*/?></td>-->
-                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][32]',isset($pmCheck[$l->id][32])?true:false)?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.'][32]',isset($pmCheck[$l->id][32])?true:false,['class'=>'pm-'.$l->id,'id'=>'pm-'.$l->id.'-32'])?></td>
                 <?php else:?>
+                    <input type="hidden" id="p-<?=$l->id?>-childs"  value="<?=CommonFunc::array2string($l->childrenIds)?>" />
                     <td class="text-center"> -- </td>
-                    <td class="text-center"> -- </td>
-                    <td class="text-center"> -- </td>
-                    <td class="text-center"> -- </td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.']','',['class'=>'column-check','id'=>'pm-'.$l->id.'-11','data-permission'=>11,'data-pid'=>$l->id])?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.']','',['class'=>'column-check','id'=>'pm-'.$l->id.'-12','data-permission'=>12,'data-pid'=>$l->id])?></td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.']','',['class'=>'column-check','id'=>'pm-'.$l->id.'-21','data-permission'=>21,'data-pid'=>$l->id])?></td>
                     <!--<td class="text-center"> -- </td>-->
                     <!--<td class="text-center"> -- </td>-->
-                    <td class="text-center"> -- </td>
+                    <td class="text-center"><?=BaseHtml::checkbox('pm['.$l->id.']','',['class'=>'column-check','id'=>'pm-'.$l->id.'-32','data-permission'=>32,'data-pid'=>$l->id])?></td>
                 <?php endif;?>
             </tr>
         <?php endforeach;?>

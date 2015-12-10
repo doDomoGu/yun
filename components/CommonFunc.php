@@ -54,4 +54,11 @@ class CommonFunc extends Component {
         return $img_url;
     }
 
+    public static function array2string($arr){
+        $str = null;
+        if(is_array($arr) && !empty($arr)){
+            $str = implode(',',$arr);
+        }
+        return $str;
+    }
 }

@@ -26,3 +26,28 @@ $('#dir-select-2').change(function(){
     location.href = _url;
 
 });
+
+$('.row-check').click(function(){
+    pid = $(this).attr('data-pid');
+    if($(this).prop('checked')){
+        $('.pm-'+pid).prop('checked',true);
+    }else{
+        $('.pm-'+pid).prop('checked',false);
+    }
+});
+
+$('.column-check').click(function(){
+    pid = $(this).attr('data-pid');
+    permission = $(this).attr('data-permission');
+    childids = $('#p-'+pid+'-childs').val().split(',');
+    for(i in childids){
+        $('#pm-'+childids[i]+'-'+permission).prop('checked',$(this).prop('checked'));
+    }
+
+    /*if($(this).prop('checked')){
+        for(i in childids)
+        $('.pm-'+pid).prop('checked',true);
+    }else{
+        $('.pm-'+pid).prop('checked',false);
+    }*/
+});
