@@ -69,6 +69,6 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<div id="recruitment_list">
-    <?=$this->render('/site/_recruitment',['recruitment_list'=>$recruitment_list])?>
-</div>
+<!--<div id="recruitment_list">
+    <?/*=$this->render('/site/_recruitment',['recruitment_list'=>$recruitment_list])*/?>
+</div>-->

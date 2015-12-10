@@ -7,7 +7,7 @@
 }
 
 #site-index h3.panel-title a {
-    font-size:20px;
+    font-size:18px;
 }
 
 #site-index .item-one,#site-index .item-two {
@@ -27,25 +27,25 @@
     text-decoration: none;
 }
 
-#site-index .item-one .panel-heading:hover {
-    background: #011957;
+#site-index .item-one .panel-heading {
+    background: #362b39;
     cursor: pointer;
     color:#eee;
 }
 
 #site-index .item-one table tr {
-    background: #e00024;
+    /*background: #e00024;*/
 }
 
 #site-index .item-one table tr:hover {
-    background: #011957;
+    /*background: #011957;*/
     cursor: pointer;
 }
 
 
 #site-index .item-one table tr a {
-    color:#eee;
-    font-size:18px;
+    color:#333;
+    font-size:16px;
 }
 
 

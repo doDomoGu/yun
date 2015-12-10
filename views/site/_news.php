@@ -4,13 +4,13 @@
 ?>
 <?php if(!empty($news_list)):?>
 <div id="slideBox-news" class="slideBox">
-    <div class="hd">
+    <!--<div class="hd">
         <ul>
-            <?php for($i=1;$i<=count($news_list);$i++):?>
-            <li><?=$i?></li>
-            <?php endfor;?>
+            <?php /*for($i=1;$i<=count($news_list);$i++):*/?>
+            <li><?/*=$i*/?></li>
+            <?php /*endfor;*/?>
         </ul>
-    </div>
+    </div>-->
     <div class="bd">
         <ul>
             <?php foreach($news_list as $l):?>
