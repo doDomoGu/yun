@@ -1,8 +1,9 @@
 #tree-div {
-    background: #f5f5f5;
+    /*background: #f5f5f5;*/
     overflow: hidden;
     overflow-x: scroll;
     min-height: 400px;
+    
 }
 #tree-div h3 {
     padding:10px 0 0 20px;
