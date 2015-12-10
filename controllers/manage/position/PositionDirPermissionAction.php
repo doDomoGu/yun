@@ -82,24 +82,30 @@ class PositionDirPermissionAction extends Action{
 
     public function updatePermission($position_id,$pm){
         foreach($pm as $k=>$p){
+
             $typeAll = [11,12,21,/*22,*//*31,*/32];
             PositionDirPermission::deleteAll(['position_id'=>$position_id,'dir_id'=>$k]);
             $typeArr = [];
             /*if(isset($p['all'])){
                 $typeArr = $typeAll;
             }else{*/
+            if(!empty($p)){
                 foreach($p as $k2=>$a){
                     if(in_array($k2,$typeAll)){
                         $typeArr[] = $k2;
                     }
                 }
+            }
+
             /*}*/
-            foreach($typeArr as $t){
-                $row = new PositionDirPermission();
-                $row->position_id = $position_id;
-                $row->dir_id = $k;
-                $row->type = $t;
-                $row->save();
+            if(!empty($typeArr)){
+                foreach($typeArr as $t){
+                    $row = new PositionDirPermission();
+                    $row->position_id = $position_id;
+                    $row->dir_id = $k;
+                    $row->type = $t;
+                    $row->save();
+                }
             }
         }
     }
