@@ -62,7 +62,6 @@ class SiteController extends BaseController
         var_dump($user->getId());exit;*/
 
         $params['recruitment_list'] = Recruitment::find()->where(['status'=>1])->orderBy('ord desc')->all();
-        $params['news_list'] = News::find()->where(['status'=>1])->orderBy('ord desc')->all();
 
 
         $dir_1 = Dir::find()->where(['id'=>1])->one();

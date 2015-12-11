@@ -3,7 +3,7 @@
     display: block;
 }*/
 #news_list/*, #site-index*/ {
-    margin-bottom: 10px;
+    padding-top:86px;
 }
 
 #site-index h3.panel-title a {

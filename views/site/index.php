@@ -2,9 +2,7 @@
     app\assets\AppAsset::addCssFile($this,'css/site-index.css');
     app\assets\AppAsset::addJsFile($this,'js/main/site-index.js');
 ?>
-<div id="news_list">
-    <?=$this->render('/site/_news',['news_list'=>$news_list])?>
-</div>
+
 <div class="clearfix"></div>
 <div id="site-index">
     <?php for($i=1;$i<=count($list_dirOne);$i++):?>
