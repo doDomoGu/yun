@@ -1,0 +1,44 @@
+#news_list/*, #site-index*/ {
+    padding-top:82px;
+    position:absolute;
+    width:100%;
+    text-align: center;
+}
+
+
+.slideBox{ width:100%; height:302px; overflow:hidden; position:relative; border:1px solid #ddd;  }
+.slideBox .hd{ height:15px; overflow:hidden; position:absolute; right:5px; bottom:5px; z-index:1; }
+.slideBox .hd ul{padding-left: 0; overflow:hidden; zoom:1; float:left;  }
+.slideBox .hd ul li{ list-style:none;float:left; margin-right:2px;  width:15px; height:15px; line-height:14px; text-align:center; background:#fff; cursor:pointer; }
+.slideBox .hd ul li.on{ background:#f00; color:#fff; }
+.slideBox .bd{ padding-left:0;position:relative; height:100%; z-index:0;   }
+.slideBox .bd ul {padding-left: 0;}
+.slideBox .bd li{ list-style:none;zoom:1; vertical-align:middle; }
+.slideBox .bd img{ width:100%; height:300px; display:block;  }
+
+/* 下面是前/后按钮代码，如果不需要删除即可 */
+.slideBox .prev,
+.slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(../images/common/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+.slideBox .next{ left:auto; right:3%; background-position:8px 5px; }
+.slideBox .prev:hover,
+.slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+.slideBox .prevStop{ display:none;  }
+.slideBox .nextStop{ display:none;  }
+
+
+.fullSlide{ min-width:1000px; border-top:4px solid #3D9EE9;  position:relative;  height:299px; overflow:hidden;   }
+.fullSlide .bd{ position:relative; z-index:0;  }
+.fullSlide .bd ul{ width:100% !important; }
+.fullSlide .bd li{ width:100% !important;  height:299px; }
+.fullSlide .bd li .siteWidth{ width:1000px; position:relative;  margin:0 auto;  height:299px;  }
+.fullSlide .bd li a{ position:absolute; width:100%; height:299px; display:block; z-index:1;;   }
+.fullSlide .bd .txt{ position:absolute; width:415px; top:100px; left:22px;   font:normal 18px/30px "Microsoft YaHei";    }
+.fullSlide .bd .btn{ display:block; zoom:1; margin-top:8px;  width:72px; padding-right:10px;  height:31px; line-height:31px; text-align:center; color:#fff; font-size:12px; background:url(../images/common/banner-btn.png) 0 0 no-repeat;
+    _background:url(../images/common/banner-btn-ie6.png) 0 0 no-repeat;
+}
+
+.fullSlide .hd{ width:100%;  position:absolute; z-index:1; bottom:0; left:0; height:30px; line-height:30px; text-align:center; }
+.fullSlide .hd ul li{ cursor:pointer; display:inline-block; *display:inline; zoom:1; width:11px; height:11px; margin:4px; background:url(../images/common/dot-black.png) 0 0; overflow:hidden;
+    line-height:9999px; filter:alpha(opacity=40);opacity:0.4;
+}
+.fullSlide .hd ul .on{ filter:alpha(opacity=100);opacity:1;  }

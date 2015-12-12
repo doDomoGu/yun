@@ -20,7 +20,7 @@ AppAsset::register($this);  /* 注册appAsset */
     </div>
     <?php endif;?>
     <?php if(yii::$app->controller->route == 'site/index'):?>
-    <div class="container" style="padding-top:10px;">
+    <div class="container" style="padding-top:390px;">
     <?php else:?>
     <div class="container">
     <?php endif;?>

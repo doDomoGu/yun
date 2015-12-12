@@ -2,11 +2,11 @@
     app\assets\AppAsset::addJsFile($this,'js/jquery.SuperSlide.2.1.1.js');
     app\assets\AppAsset::addJsFile($this,'js/main/site-_news.js');
     app\assets\AppAsset::addCssFile($this,'css/site-_news.css');
-    $news_list = app\models\News::find()->where(['status'=>1])->orderBy('ord desc')->all();
+    $news_list = app\models\News::find()->where(['status'=>1])->orderBy('ord desc, edit_time desc')->all();
 ?>
 
 <?php if(!empty($news_list)):?>
-<div id="slideBox-news" class="slideBox">
+<div id="slideBox-news" class="fullSlide">
     <!--<div class="hd">
         <ul>
             <?php /*for($i=1;$i<=count($news_list);$i++):*/?>
@@ -17,7 +17,8 @@
     <div class="bd">
         <ul>
             <?php foreach($news_list as $l):?>
-            <li><a href="/" target="_blank"><img src="<?=\app\components\CommonFunc::imgUrl($l->img_url)?>" /></a></li>
+            <li style="background:url('<?=\app\components\CommonFunc::imgUrl($l->img_url)?>') #CCE1F3 center 0 no-repeat;">
+                <div class="siteWidth"><a href="/" target="_blank"></a></div></li>
             <?php endforeach;?>
         </ul>
     </div>
