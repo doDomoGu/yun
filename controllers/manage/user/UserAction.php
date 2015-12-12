@@ -43,7 +43,7 @@ class UserAction extends Action{
             }
         }
         $count = $list->count();
-        $pageSize = 4;
+        $pageSize = 20;
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
 
