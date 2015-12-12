@@ -21,6 +21,7 @@ class User extends \yii\db\ActiveRecord
             'gender' => '性别',
             'birthday' => '生日',
             'join_date' => '入职日期',
+            'contract_date' => '合同到期日期',
             'mobile' => '联系手机',
             'phone' => '联系电话',
             'describe' => '其他备注',
@@ -36,7 +37,7 @@ class User extends \yii\db\ActiveRecord
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
             [['reg_code', 'forgetpw_code'],'default','value'=>''],
-            [['reg_code', 'forgetpw_code', 'join_date', 'mobile', 'phone', 'describe'], 'safe']
+            [['reg_code', 'forgetpw_code', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
 
         ];
     }
@@ -64,6 +65,6 @@ UNIQUE KEY `username_UNIQUE` (`username`)
 
 
     /*ALTER TABLE `user`
-     ADD `contract_date` DATETIME NOT NULL AFTER `join_date`,
-     ADD `head_img` VARCHAR(255) NOT NULL AFTER `contract_date`;*/
+     ADD `contract_date` DATETIME DEFAULT NULL AFTER `join_date`,
+     ADD `head_img` VARCHAR(255) DEFAULT NULL AFTER `contract_date`;*/
 }

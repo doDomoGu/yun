@@ -19,6 +19,7 @@ class UserForm extends Model
     public $gender;
     public $birthday;
     public $join_date;
+    public $contract_date;
     public $mobile;
     public $phone;
     public $describe;
@@ -59,6 +60,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
             'gender' => '性别',
             'birthday' => '生日',
             'join_date' => '入职日期',
+            'contract_date' => '合同到期日期',
             'mobile' => '联系电话(手机)',
             'phone' => '联系电话(座机)',
             'describe' => '其他备注',
@@ -82,6 +84,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
                 'ord',
                 'status',
                 'join_date',
+                'contract_date',
                 'mobile',
                 'phone',
                 'describe',
@@ -102,6 +105,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
                 'ord',
                 'status',
                 'join_date',
+                'contract_date',
                 'mobile',
                 'phone',
                 'describe',
@@ -116,11 +120,11 @@ UNIQUE KEY `username_UNIQUE` (`username`)
     {
         return [
             [['password','password2'],'required','on'=>'create'],
-            [['username', 'name', 'ord', 'status','position_id'], 'required'],
+            [['username', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
             ['password2', 'compare','compareAttribute'=>'password'],
-            [['reg_code', 'forgetpw_code', 'join_date', 'mobile', 'phone', 'describe'], 'safe']
+            [['reg_code', 'forgetpw_code', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
         ];
     }
 

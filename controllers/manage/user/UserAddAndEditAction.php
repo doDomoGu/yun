@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\manage\user;
 
+use app\components\MyMail;
 use Yii;
 use yii\base\Action;
 use app\models\UserForm;
@@ -10,7 +11,8 @@ class UserAddAndEditAction extends Action{
     public function run(){
         $model = new UserForm();
         $user = null;
-        $notChangePw = false;
+        $updatePassword = true;
+        $passwordTmp = null;
         $id = Yii::$app->request->get('id');
         if($id!=''){
             $user = User::find()->where(['id'=>$id])->one();
@@ -35,15 +37,39 @@ class UserAddAndEditAction extends Action{
             }
             if($model->getScenario()=='update' && ($model->password=='' || $model->password2=='')){
                 $model->password = $user->password;
-                $notChangePw = true;
+                $updatePassword = false;
             }
 
             $user->setAttributes($model->attributes);
 
-            if($notChangePw==false){
+            if($updatePassword===true){
+                $passwordTmp = $user->password;
                 $user->password = md5($user->password);
             }
+
             if($user->save()){
+                //发送邮件
+                if($model->getScenario()=='create'){
+                    $mail = new MyMail();
+                    $mail->to = $user->username;
+                    $mail->subject = '【颂唐云】新职员注册成功';
+                    $mail->htmlBody = '职员['.$user->name.'],您好：<br/>颂唐云网址为：http://yun.songtang.net 您的登录用户名为 '.$user->username.' 密码为 '.$passwordTmp;
+                    $mail->send();
+                }elseif($model->getScenario()=='update'){
+                    $mail = new MyMail();
+                    $mail->to = $user->username;
+                    if($updatePassword==true){
+                        $mail->subject = '【颂唐云】职员信息变更(包括密码)';
+                    }else{
+                        $mail->subject = '【颂唐云】职员信息变更';
+                    }
+                    $mail->htmlBody = '职员['.$user->name.'],您好：<br/> 您的职员信息发生了更改。';
+                    if($updatePassword==true){
+                        $mail->htmlBody.=' <br/>您的登录密码变为 '.$passwordTmp;
+                    }
+                    $mail->send();
+                }
+
                 Yii::$app->response->redirect('user')->send();
             }
         }

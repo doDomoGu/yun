@@ -11,7 +11,7 @@
             'id' => 'user-form',
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-lg-5\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>",
+                'template' => "{label}\n<div class=\"col-lg-5\">{input}{hint}</div>\n<div class=\"col-lg-5\">{error}</div>",
                 'labelOptions' => ['class' => 'col-lg-2 control-label'],
             ],
         ]); ?>
@@ -37,6 +37,8 @@
         <?= $form->field($model, 'gender')->dropDownList([0=>'N/A',1=>'男',2=>'女']) ?>
         <?= $form->field($model, 'mobile') ?>
         <?= $form->field($model, 'phone') ?>
+        <?= $form->field($model, 'join_date')->hint('格式:2010-10-10') ?>
+        <?= $form->field($model, 'contract_date')->hint('格式:2010-10-10') ?>
         <?= $form->field($model, 'describe')->textarea() ?>
         <?= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"

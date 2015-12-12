@@ -4,6 +4,8 @@
 }*/
 #news_list/*, #site-index*/ {
     padding-top:86px;
+    width:1920px;
+    text-align: center;
 }
 
 #site-index h3.panel-title a {
