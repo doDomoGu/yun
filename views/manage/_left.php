@@ -4,27 +4,41 @@
         管理中心
     </a>
     <div class="submenu">
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/news')===0?'active':''?>" href="/manage/news">
-            首页新闻
-        </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/recruitment')===0?'active':''?>" href="/manage/recruitment">
-            招聘信息
-        </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/position')===0?'active':''?>" href="/manage/position">
-            部门/职位
-        </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/dir')===0?'active':''?>" href="/manage/dir">
-            板块目录
-        </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/user')===0?'active':''?>" href="/manage/user">
-            公司职员
-        </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/admin')===0?'active':''?>" href="/manage/admin">
-            管理员授权
-        </a>
-        <a class="list-group-item <?=strpos(Yii::$app->controller->route,'manage/message')===0?'active':''?>" href="/manage/message">
-            消息通知
-        </a>
+        <?php $route = Yii::$app->controller->route;?>
+        <?php if($this->context->checkIsSuperAdmin()):?>
+            <a class="list-group-item <?=strpos($route,'manage/news')===0?'active':''?>" href="/manage/news">
+                首页新闻
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/recruitment')===0?'active':''?>" href="/manage/recruitment">
+                招聘信息
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/position')===0?'active':''?>" href="/manage/position">
+                部门/职位
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/dir')===0?'active':''?>" href="/manage/dir">
+                板块目录
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/user')===0?'active':''?>" href="/manage/user">
+                公司职员
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/admin')===0?'active':''?>" href="/manage/admin">
+                管理员授权
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/message')===0?'active':''?>" href="/manage/message">
+                消息通知
+            </a>
+        <?php elseif($this->context->checkIsUserAdmin()):?>
+            <button class="list-group-item disabled">首页新闻</button>
+            <button class="list-group-item disabled">招聘信息</button>
+            <button class="list-group-item disabled">部门/职位</button>
+            <button class="list-group-item disabled">板块目录</button>
+            <a class="list-group-item <?=strpos($route,'manage/user')===0?'active':''?>" href="/manage/user">
+                公司职员
+            </a>
+            <button class="list-group-item disabled">管理员授权</button>
+            <button class="list-group-item disabled">消息通知</button>
+        <?php endif;?>
+
     </div>
 </div>
 

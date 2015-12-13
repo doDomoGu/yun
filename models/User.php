@@ -65,6 +65,6 @@ UNIQUE KEY `username_UNIQUE` (`username`)
 
 
     /*ALTER TABLE `user`
-     ADD `contract_date` DATETIME DEFAULT NULL AFTER `join_date`,
+     ADD `contract_date` DATE DEFAULT NULL AFTER `join_date`,
      ADD `head_img` VARCHAR(255) DEFAULT NULL AFTER `contract_date`;*/
 }

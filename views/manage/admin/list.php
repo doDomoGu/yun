@@ -34,7 +34,8 @@
                         <select id="s_is_admin" name="search[is_admin]" >
                             <option value="">----</option>
                             <option value="0" <?=$search['is_admin']!=='' && $search['is_admin']==0?'selected="selected"':''?>>否</option>
-                            <option value="1" <?=$search['is_admin']!=='' && $search['is_admin']==1?'selected="selected"':''?>>是</option>
+                            <option value="1" <?=$search['is_admin']!=='' && $search['is_admin']==1?'selected="selected"':''?>>超级管理员</option>
+                            <option value="2" <?=$search['is_admin']!=='' && $search['is_admin']==2?'selected="selected"':''?>>普通管理员</option>
                         </select>
                     </th>
                     <th><button id="searchBtn">检索</button></th>
@@ -62,15 +63,19 @@
                     <td><?=$l->name?> </td>
                     <td><?=PositionFunc::getFullRoute($l->position_id)?></td>
                     <td><?=$l->status?'正常':'禁用'?></td>
-                    <td><?=$l->is_admin?'是':'否'?></td>
+                    <td><?=PositionFunc::getAdminName($l->is_admin)?></td>
                     <td>
                         <?php if($l->position_id==1||$l->id==yii::$app->user->id):?>
                             管理员职位 或者 自己 不可更改
                         <?php else:?>
-                            <?php if($l->is_admin==1):?>
-                                <?=BaseHtml::a('取消授权',['admin-set','id'=>$l->id,'is_admin'=>0],['class'=>'btn btn-danger btn-xs','data-method'=>'post'])?>
-                            <?php else:?>
-                                <?=BaseHtml::a('授权为管理员',['admin-set','id'=>$l->id,'is_admin'=>1],['class'=>'btn btn-success btn-xs','data-method'=>'post'])?>
+                            <?php if($l->is_admin!=0):?>
+                                <div><?=BaseHtml::a('取消授权',['admin-set','id'=>$l->id,'is_admin'=>0],['class'=>'btn btn-danger btn-xs','data-method'=>'post'])?></div>
+                            <?php endif;?>
+                            <?php if($l->is_admin!=1):?>
+                                <div><?=BaseHtml::a('授权为"超级管理员"',['admin-set','id'=>$l->id,'is_admin'=>1],['class'=>'btn btn-success btn-xs','data-method'=>'post'])?></div>
+                            <?php endif;?>
+                            <?php if($l->is_admin!=2):?>
+                                <div><?=BaseHtml::a('授权为"普通管理员"',['admin-set','id'=>$l->id,'is_admin'=>2],['class'=>'btn btn-success btn-xs','data-method'=>'post'])?></div>
                             <?php endif;?>
                         <?php endif;?>
                     </td>
@@ -79,3 +84,6 @@
             <?php endif;?>
             </tbody>
         </table>
+<div class="clearfix col-md-12 text-center">
+    <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
+</div>

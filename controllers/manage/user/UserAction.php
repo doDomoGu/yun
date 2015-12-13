@@ -50,7 +50,7 @@ class UserAction extends Action{
         $list = $list
             ->offset($pages->offset)
             ->limit($pages->limit)
-            //->orderBy('order desc,id desc')
+            ->orderBy('id asc')
             ->all();
         $params['list'] = $list;
         $params['search'] = $search;

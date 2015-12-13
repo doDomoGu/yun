@@ -217,4 +217,19 @@ class PositionFunc extends Component {
             Position::updateAll(['is_leaf'=>1],['id'=>$p_id]);
         }
     }
+
+    public static function getAdminName($adminId){
+        $adminId = intval($adminId);
+        switch ($adminId){
+            case 0:
+                $name ='否';break;
+            case 1:
+                $name ='超级管理员';break;
+            case 2:
+                $name ='普通管理员';break;
+            default:
+                $name = 'N/A';
+        }
+        return $name;
+    }
 }

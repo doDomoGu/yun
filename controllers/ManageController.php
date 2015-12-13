@@ -12,16 +12,51 @@ use Yii;
 
 class ManageController extends BaseController
 {
+    const SUPER_ADMIN = 1;
+    const USER_ADMIN = 2;
     public $layout = 'main_manage';
+    public $adminId;
+
     public function beforeAction($action){
         if (!parent::beforeAction($action)) {
             return false;
         }
         if($this->checkIsAdmin()){
-            return true;
+            $this->adminId = $this->user->is_admin;
+            if($this->adminId == self::SUPER_ADMIN){
+                return true;
+            }elseif($this->adminId == self::USER_ADMIN){
+                if(in_array($this->route,[
+                    'manage/index',
+                    'manage/user',
+                    'manage/user-add-and-edit',
+                    'manage/position-select-ajax',
+                    'manage/help'
+                ])){
+                    return true;
+                }else{
+                    return $this->redirect(Yii::$app->urlManager->createUrl('/manage'));
+                }
+            }else{
+                $this->redirect(Yii::$app->urlManager->createUrl('/'));
+            }
         }else{
             $this->redirect(Yii::$app->urlManager->createUrl('/'));
         }
+    }
+
+    public function checkIsSuperAdmin(){
+        if($this->adminId == self::SUPER_ADMIN)
+            return true;
+        else
+            return false;
+    }
+
+    public function checkIsUserAdmin(){
+        if($this->adminId == self::USER_ADMIN)
+            return true;
+        else
+            return false;
     }
 
     public function behaviors()

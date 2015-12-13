@@ -46,7 +46,7 @@
                         <?php if($user->join_date>0):?>
                             <?=date('Y-m-d',strtotime($user->join_date))?>
                             <?php $joinDay = CommonFunc::getJoinDay($user->join_date);?>
-                            <br/>距今已经有<?=$joinDay['day']?>天 / <?=$joinDay['yearMonth']?>
+                            <br/>距今已经有 <?=$joinDay['day']?>天 / <?=$joinDay['yearMonth']?>
                         <?php else:?>
                             --
                         <?php endif;?>
@@ -58,7 +58,12 @@
                         <?php if($user->join_date>0):?>
                             <?=date('Y-m-d',strtotime($user->contract_date))?>
                             <?php $contractDay = CommonFunc::getContractDay($user->contract_date);?>
-                            距今还有<?=$contractDay['day']?>天/<?=$contractDay['yearMonth']?>
+                            <br/>
+                            <?php if($contractDay['day']!=''):?>
+                            距今还有 <?=$contractDay['day']?>天 / <?=$contractDay['yearMonth']?>
+                            <?php else:?>
+                            已到期
+                            <?php endif;?>
                         <?php else:?>
                             --
                         <?php endif;?>

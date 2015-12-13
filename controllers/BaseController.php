@@ -47,13 +47,13 @@ class BaseController extends Controller
     //检测是否管理员 User的is_admin字段
     public function checkIsAdmin(){
         //进入"管理中心"(manage)需要进行判断
-        if($this->user && $this->user->is_admin){
+        if($this->user && $this->user->is_admin > 0){
             return true;
         }else{
-
             return false;
         }
     }
+
 
 
 }
