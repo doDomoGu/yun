@@ -16,14 +16,36 @@ class CommonFunc extends Component {
     }
 
     public static function getJoinDay($join_date){
-        $arr = array();
+        $arr = ['day'=>null,'yearMonth'=>null];
         $joinTimestamp = strtotime($join_date);
-        $now = time();
-        $arr['day'] = intval(abs($now-$joinTimestamp)/86400);
-        $join_date = date('y-m-d',$joinTimestamp);
-        $today = date('y-m-d');
-        $ymdArr =self::diffDate($join_date,$today);
-        $arr['yearMonth'] = $ymdArr[0].'年'.$ymdArr[1].'个月'.$ymdArr[2].'天';
+        if($joinTimestamp > 0){
+            $now = strtotime(date('y-m-d'));
+            if($now-$joinTimestamp > -1){
+                $day = intval(abs($now-$joinTimestamp)/86400);
+                $arr['day'] = $day;
+                $joinday = date('y-m-d',$joinTimestamp);
+                $today = date('y-m-d');
+                $ymdArr =self::diffDate($joinday,$today);
+                $arr['yearMonth'] = $ymdArr[0].'年'.$ymdArr[1].'个月'.$ymdArr[2].'天';
+            }
+        }
+        return $arr;
+    }
+
+    public static function getContractDay($contract_date){
+        $arr = ['day'=>null,'yearMonth'=>null];
+        $contractTimestamp = strtotime($contract_date);
+        if($contractTimestamp > 0){
+            $now = strtotime(date('y-m-d'));
+            if($contractTimestamp - $now > -1){
+                $day = intval(abs($contractTimestamp - $now)/86400);
+                $arr['day'] = $day;
+                $contractday = date('y-m-d',$contractTimestamp);
+                $today = date('y-m-d');
+                $ymdArr =self::diffDate($today,$contractday);
+                $arr['yearMonth'] = $ymdArr[0].'年'.$ymdArr[1].'个月'.$ymdArr[2].'天';
+            }
+        }
         return $arr;
     }
 
