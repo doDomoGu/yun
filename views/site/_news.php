@@ -17,7 +17,7 @@
     <div class="bd">
         <ul>
             <?php foreach($news_list as $l):?>
-            <li style="background:url('<?=\app\components\CommonFunc::imgUrl($l->img_url)?>') #CCE1F3 center 0 no-repeat;">
+            <li style="background:url('<?=\app\components\CommonFunc::imgUrl($l->img_url)?>') #fff center 0 no-repeat;">
                 <div class="siteWidth"><a href="/" target="_blank"></a></div></li>
             <?php endforeach;?>
         </ul>

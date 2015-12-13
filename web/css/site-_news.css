@@ -1,5 +1,5 @@
 #news_list/*, #site-index*/ {
-    padding-top:82px;
+    padding-top:84px;
     position:absolute;
     width:100%;
     text-align: center;
@@ -26,7 +26,7 @@
 .slideBox .nextStop{ display:none;  }
 
 
-.fullSlide{ min-width:1000px; border-top:4px solid #3D9EE9;  position:relative;  height:299px; overflow:hidden;   }
+.fullSlide{ min-width:1000px; /*border-top:4px solid #3D9EE9; */ position:relative;  height:299px; overflow:hidden;   }
 .fullSlide .bd{ position:relative; z-index:0;  }
 .fullSlide .bd ul{ width:100% !important; }
 .fullSlide .bd li{ width:100% !important;  height:299px; }

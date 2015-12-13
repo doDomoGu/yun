@@ -84,29 +84,7 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
-.navbar{
-    height:74px;
-    border-radius: 0;
-}
 
-
-.navbar-brand {
-    padding:44px 15px 0;
-    width:159px;
-}
-
-.navbar-red {
-    background: #e00024;
-}
-
-.navbar-red .navbar-nav > li > a {
-    color: #d3d3d3;
-}
-
-.navbar-red .navbar-nav > li > a:hover, .navbar-red .navbar-nav > li > a:focus {
-    background-color: transparent;
-    color: #fff;
-}
 
 .footer {
     height: 153px;
