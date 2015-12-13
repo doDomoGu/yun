@@ -96,7 +96,7 @@
     float:left;
 }
 
-#email-login article span {
+#email-login article span a {
     background: #ED1B23;
     display: block;
     width: 220px;
@@ -104,10 +104,6 @@
     text-align: center;
     cursor: pointer;
     padding: 37px 40px;
-
-}
-
-#email-login article span a{
     color:#fff;
     text-decoration: none;
 }
@@ -132,7 +128,7 @@
     margin-right:0;
 }
 
-#article-link > article > span {
+#article-link > article > span > a {
     height:200px;
     width:378px;
     padding:87px 168px;
@@ -140,23 +136,18 @@
     display: block;
     cursor: pointer;
     background: #31b0d5;
-}
-
-#article-link > article > span > a {
     color:#fff;
     text-decoration: none;
-    width:42px;
-    display: block;
 }
 
-#article-link > #article-link-1 > span {
+#article-link > #article-link-1 > span > a {
     background: url('../images/site-index/1.jpg');
 }
 
-#article-link > #article-link-2 > span {
+#article-link > #article-link-2 > span > a {
     background: url('../images/site-index/2.jpg');
 }
 
-#article-link > #article-link-3 > span {
+#article-link > #article-link-3 > span > a {
     background: url('../images/site-index/3.jpg');
 }
