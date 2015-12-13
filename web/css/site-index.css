@@ -71,10 +71,6 @@
     width: 100%;
 }
 
-#site-index #email-login {
-    height:223px;
-}
-
 #site-index .item-two .wx {
     padding:5px 0;
     border: 1px solid #333;
@@ -92,4 +88,75 @@
     width:300px;
 }
 
+/*#email-login {
+    height:80px;
+}*/
 
+#email-login article,#email-login aside {
+    float:left;
+}
+
+#email-login article span {
+    background: #ED1B23;
+    display: block;
+    width: 220px;
+    font-size:18px;
+    text-align: center;
+    cursor: pointer;
+    padding: 37px 40px;
+
+}
+
+#email-login article span a{
+    color:#fff;
+    text-decoration: none;
+}
+
+#email-login aside {
+    background: #362b39;
+    width:917px;
+    height:100px;
+    margin-left:3px;
+}
+
+#article-link {
+    margin-top:3px;
+}
+
+#article-link article {
+    margin-right:3px;
+    float:left;
+}
+
+#article-link #article-link-3 {
+    margin-right:0;
+}
+
+#article-link > article > span {
+    height:200px;
+    width:378px;
+    padding:87px 168px;
+    font-size:18px;
+    display: block;
+    cursor: pointer;
+    background: #31b0d5;
+}
+
+#article-link > article > span > a {
+    color:#fff;
+    text-decoration: none;
+    width:42px;
+    display: block;
+}
+
+#article-link > #article-link-1 > span {
+    background: url('../images/site-index/1.jpg');
+}
+
+#article-link > #article-link-2 > span {
+    background: url('../images/site-index/2.jpg');
+}
+
+#article-link > #article-link-3 > span {
+    background: url('../images/site-index/3.jpg');
+}
