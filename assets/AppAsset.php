@@ -8,6 +8,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/main.css',
+        'css/layouts/navbar2.css'
     ];
     public $js = [
     ];

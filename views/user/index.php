@@ -1,6 +1,7 @@
 <?php
     use app\components\CommonFunc;
     use app\components\PositionFunc;
+    app\assets\AppAsset::addCssFile($this,'css/user-index.css');
 ?>
 <div class="row">
     <div class="col-md-3 text-center">
