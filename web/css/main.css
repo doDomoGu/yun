@@ -11,7 +11,8 @@ html,body {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+        padding: 70px 15px 20px;
+    width:1170px;
 }
 
 
