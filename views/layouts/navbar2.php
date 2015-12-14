@@ -26,15 +26,31 @@ if(!yii::$app->user->isGuest){
     $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout','options'=>['class'=>'user-item']]]);
         /*'<li class="dropdown-header">Dropdown Header</li>',
         ['label' => 'Level 1 - Dropdown B', 'url' => '#'],*/
-
+    $route = Yii::$app->controller->route;
+    $routeArr = explode('/',$route);
+    $route1 = isset($routeArr[0]) && $routeArr[0] !=''?$routeArr[0]:'';
+    $userActive = $route1 !='' && in_array($route1,['user','manage','message','help'])?true:false;
     $navbarItems = ArrayHelper::merge($navbarItems,
         [
             [
-                'label' => '<span class="glyphicon glyphicon-user" aria-hidden="true"></span>',
+                'label' => '<span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="active-red"></span>',
                 'items' => $item2,
+                'active' => $userActive,
                 'linkOptions'=>['style'=>'margin-left:40px;'],
                 'encode'=>false
-            ]]
+            ]
+        ]
+    );
+}else{
+    $navbarItems = ArrayHelper::merge(
+        $navbarItems,
+        [
+            [
+                'label'=>'<span style="border:1px solid #ccc;padding:4px 10px;">登录</span><span class="active-red"></span>',
+                'url'=>['/site/login'],
+                'encode'=>false
+            ]
+        ]
     );
 }
 
