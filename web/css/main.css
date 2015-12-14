@@ -6,8 +6,8 @@ html,body {
 .wrap {
     min-height: 100%;
     height: auto;
-    margin: 0 auto -169px;
-    padding: 0 0 169px;
+    margin: 0 auto -140px;
+    padding: 0 0 140px;
 }
 
 .wrap > .container {
@@ -88,23 +88,20 @@ a.desc:after {
 
 
 .footer {
-    height: 153px;
+    height: 140px;
     /*background-color: #f5f5f5;*/
     background: #fff;
-    border-top: 1px solid #999;
+    border-top: 1px solid #ccc;
     color:#666;
-padding-top:16px;
+    padding-top:8px;
+    /*position: fixed;
+    width:100%;*/
+}
+.footer .logo-line {
+
 }
 
-/*
-.footer ul li {
-    height:120px;
-    overflow: hidden;
-    float:left;
-    padding:10px 14px;
+.footer .txt-line {
+    height:24px;
+    line-height: 24px;
 }
-
-.footer ul li img {
-    width:100%;
-    height:100px;
-}*/

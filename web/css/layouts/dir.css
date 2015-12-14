@@ -2,11 +2,15 @@
     width:200px;
     border-left:1px solid #ccc;
     border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    /*position: fixed;*/
     float:left;
 }
 
 #dir-main {
+    /*margin-left:200px;*/
     width:920px;
     /*padding-left:20px;*/
     float:left;
+
 }
