@@ -1,5 +1,5 @@
 #dir-sidebar {
-    width:200px;
+    width:160px;
     border-left:1px solid #ccc;
     border-right:1px solid #ccc;
     border-bottom:1px solid #ccc;
@@ -9,8 +9,16 @@
 
 #dir-main {
     /*margin-left:200px;*/
-    width:920px;
+    width:800px;
     /*padding-left:20px;*/
     float:left;
 
+}
+
+#dir-sidebar-right {
+    width:160px;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    float:left;
 }

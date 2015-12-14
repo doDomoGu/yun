@@ -32,6 +32,10 @@ use app\assets\AppAsset;
         </div>
         <?php if($this->params['dir_id']==5):?>
         <?=$this->render('/dir/_rank_download')?>
+        <?php else:?>
+        <div id="dir-sidebar-right">
+        <?=$this->render('/dir/_sidebar_right')?>
+        </div>
         <?php endif;?>
     </div>
     <div class="clearfix"></div>
