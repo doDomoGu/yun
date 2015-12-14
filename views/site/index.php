@@ -54,7 +54,7 @@
     <div class="clearfix"></div>
     <section id="email-login">
         <article>
-            <span><a href="/" target="_blank">颂唐邮箱登录</a></span>
+            <span><a href="http://exmail.qq.com/login" target="_blank">颂唐邮箱登录</a></span>
         </article>
         <aside>
             <span></span>
