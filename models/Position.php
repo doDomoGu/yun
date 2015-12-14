@@ -13,22 +13,48 @@ class Position extends \yii\db\ActiveRecord
             ['name', 'required'],
             [['id', 'status', 'p_id', 'ord', 'is_leaf', 'is_last', 'level', 'is_class'], 'integer'],
             ['name', 'string', 'max'=>100],
-            [['describe'],'safe']
+            [['describe','shuoming','zhiquan','zhize','zhibiao'],'safe']
         ];
     }
-/*CREATE TABLE `position` (
- `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
- `name` varchar(100) NOT NULL COMMENT '部门/职位名称',
- `describe` text NOT NULL,
- `p_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父位置id,一级位置为0',
- `level` int(4) unsigned DEFAULT '0' COMMENT '层级',
- `is_leaf` tinyint(1) unsigned DEFAULT '0' COMMENT '0:部门;1:职位;',
- `is_class` tinyint(1) unsigned DEFAULT '0' COMMENT '0:不在,1:在中心的组织架构中出现;',
- `is_last` tinyint(1) unsigned DEFAULT '0' COMMENT '实际排序当前同级下最后一个',
- `ord` int(4) unsigned DEFAULT '0' COMMENT '排序,倒序从大到小',
- `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0:删除;1:正常',
- PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8*/
+
+    public function attributeLabels(){
+        return [
+            'name' => '名称',
+            'describe' => '描述',
+            'p_id' => '父级',
+            'level' => '层级',
+            'is_leaf' => '是否叶级',
+            //'is_class' => '是否类',
+            //'is_last' => '最后一个',
+            'ord' => '排序',
+            'status' => '状态',
+            'shuoming' => '个人岗位说明',
+            'zhiquan' => '个人岗位职权',
+            'zhize' => '个人岗位职责',
+            'zhibiao' => '个人绩效指标',
+        ];
+    }
+
+    /*CREATE TABLE `position` (
+     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+     `name` varchar(100) NOT NULL COMMENT '部门/职位名称',
+     `describe` text NOT NULL,
+     `p_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父位置id,一级位置为0',
+     `level` int(4) unsigned DEFAULT '0' COMMENT '层级',
+     `is_leaf` tinyint(1) unsigned DEFAULT '0' COMMENT '0:部门;1:职位;',
+     `is_class` tinyint(1) unsigned DEFAULT '0' COMMENT '0:不在,1:在中心的组织架构中出现;',
+     `is_last` tinyint(1) unsigned DEFAULT '0' COMMENT '实际排序当前同级下最后一个',
+     `ord` int(4) unsigned DEFAULT '0' COMMENT '排序,倒序从大到小',
+     `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0:删除;1:正常',
+     PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8*/
+
+
+
+/*ALTER TABLE `position` ADD `shuoming` VARCHAR(255) DEFAULT NULL ,
+ADD `zhiquan` VARCHAR(255) DEFAULT NULL ,
+ADD `zhize` VARCHAR(255) DEFAULT NULL ,
+ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
     public function install() {
         try {
             $exist = Position::find()->one();

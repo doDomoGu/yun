@@ -39,7 +39,7 @@
         <?= $form->field($model, 'phone') ?>
         <?= $form->field($model, 'join_date')->hint('格式:2010-10-10') ?>
         <?= $form->field($model, 'contract_date')->hint('格式:2010-10-10') ?>
-        <?= $form->field($model, 'describe')->textarea() ?>
+
         <?= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
         ])->dropDownList([5=>5,4=>4,3=>3,2=>2,1=>1])  ?>
