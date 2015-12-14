@@ -22,7 +22,7 @@ class ManageController extends BaseController
             return false;
         }
         if($this->checkIsAdmin()){
-            $this->adminId = $this->user->is_admin;
+            $this->adminId = $this->user->position_id==1?self::SUPER_ADMIN:$this->user->is_admin;
             if($this->adminId == self::SUPER_ADMIN){
                 return true;
             }elseif($this->adminId == self::USER_ADMIN){

@@ -4,7 +4,7 @@
 }*/
 
 
-#site-index h3.panel-title a {
+/*#site-index h3.panel-title a {
     font-size:18px;
 }
 
@@ -32,11 +32,9 @@
 }
 
 #site-index .item-one table tr {
-    /*background: #e00024;*/
 }
 
 #site-index .item-one table tr:hover {
-    /*background: #011957;*/
     cursor: pointer;
 }
 
@@ -74,11 +72,54 @@
 #site-index .item-two .wx {
     padding:5px 0;
     border: 1px solid #333;
-}
-
+}*/
 
 .wrap > .container {
     padding: 50px 15px 20px;
+}
+
+#dir-list article {
+    width:224px;
+    /*height:400px;*/
+    margin-right:5px;
+    float:left;
+}
+
+#dir-list article.last {
+    margin-right: 0;
+}
+
+#dir-list article .item-heading a {
+    font-size:18px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color:#fff;
+    background: #362b39;
+    padding:20px;
+}
+
+#dir-list article .item-heading a:hover{
+    opacity: 0.8;
+}
+
+#dir-list article .item-list li{
+    margin:0 20px;
+    border-bottom: 1px dashed #333;
+    height:50px
+}
+#dir-list article .item-list li a {
+    font-size:14px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color:#333;
+
+    padding:20px 0 10px;
+}
+
+#dir-list article .item-list li a:hover{
+    opacity: 0.8;
 }
 
 #recruitment_list {

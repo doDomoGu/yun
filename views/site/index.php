@@ -5,28 +5,51 @@
 
 <div class="clearfix"></div>
 <div id="site-index">
-    <section>
-    <?php for($i=1;$i<=count($list_dirOne);$i++):?>
-    <div class="item-one <?=$i==count($list_dirOne)?'item-last':''?>">
+    <!--<section>
+    <?php /*for($i=1;$i<=count($list_dirOne);$i++):*/?>
+    <div class="item-one <?/*=$i==count($list_dirOne)?'item-last':''*/?>">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">
-                    <?=yii\bootstrap\Html::a($list_dirOne[$i]->name,['/dir','dir_id'=>$list_dirOne[$i]->id])?>
+                    <?/*=yii\bootstrap\Html::a($list_dirOne[$i]->name,['/dir','dir_id'=>$list_dirOne[$i]->id])*/?>
                 </h3>
             </div>
             <table class="table table-hover">
-                <?php foreach(${'list_'.$i} as $l):?>
-                    <tr class="item-count-<?=count(${'list_'.$i})?>">
+                <?php /*foreach(${'list_'.$i} as $l):*/?>
+                    <tr class="item-count-<?/*=count(${'list_'.$i})*/?>">
                         <td class="text-center">
-                            <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
+                            <?/*=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])*/?>
                         </td>
                     </tr>
-                <?php endforeach;?>
+                <?php /*endforeach;*/?>
 
             </table>
         </div>
     </div>
-    <?php endfor;?>
+    <?php /*endfor;*/?>
+    </section>-->
+    <section id="dir-list">
+        <?php for($i=1;$i<=count($list_dirOne);$i++):?>
+            <article class="<?=$i==count($list_dirOne)?'last':''?>">
+                <div class="item-heading">
+                    <?=yii\bootstrap\Html::a($list_dirOne[$i]->name,['/dir','dir_id'=>$list_dirOne[$i]->id])?>
+                </div>
+                <div class="item-list">
+                    <ul class="list-unstyled">
+                    <?php $j=0;foreach(${'list_'.$i} as $l):?>
+                        <li>
+                            <?=yii\bootstrap\Html::a($l->name,['/dir','dir_id'=>$l->id])?>
+                        </li>
+                    <?php $j++;endforeach;?>
+                    <?php for($k=$j;$k<5;$k++):?>
+                        <li>
+
+                        </li>
+                    <?php endfor;?>
+                    </ul>
+                </div>
+            </article>
+        <?php endfor;?>
     </section>
     <div class="clearfix"></div>
     <section id="email-login">
