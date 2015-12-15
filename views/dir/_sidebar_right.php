@@ -2,6 +2,7 @@
     use app\components\PositionFunc;
     app\assets\AppAsset::addCssFile($this,'css/dir-right.css');
     $user = $this->context->user;
+    $position = $this->context->position;
     $routeArr = PositionFunc::getRouteArr($user->position_id);
 ?>
 
@@ -35,4 +36,16 @@
 <div class="info-list">
     <span class="info-list-label">个人职位</span>
     <span class="info-list-txt"><?=$routeArr[4]?></span>
+</div>
+<div class="info-list">
+    <span class="info-list-label">个人岗位说明</span>
+    <span class="info-list-txt"><?=$position->shuoming?></span>
+</div>
+<div class="info-list">
+    <span class="info-list-label">个人岗位职权</span>
+    <span class="info-list-txt"><?=$position->zhiquan?></span>
+</div>
+<div class="info-list">
+    <span class="info-list-label">个人岗位职责</span>
+    <span class="info-list-txt"><?=$position->zhize?></span>
 </div>

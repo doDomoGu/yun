@@ -16,8 +16,6 @@
     text-align: right;
     border-right:1px solid #ccc;
     padding:4px;
-    height:auto;
-    overflow: hidden;
 }
 
 #dir-sidebar-right .info-list .info-list-txt{

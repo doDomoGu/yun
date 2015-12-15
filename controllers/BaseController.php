@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\components\PermissionFunc;
+use app\models\Position;
 use app\models\PositionDirPermission;
 use app\models\User;
 use Yii;
@@ -12,7 +13,7 @@ class BaseController extends Controller
     public $titleSuffix;
     public $user;
     public $navbarView = 'navbar2';
-
+    public $position;
     //public $layout = 'main';
     public function beforeAction($action){
         if (!parent::beforeAction($action)) {
@@ -20,8 +21,11 @@ class BaseController extends Controller
         }
 
         $this->titleSuffix = '_'.yii::$app->id;
-        if(!Yii::$app->user->isGuest)
+        if(!Yii::$app->user->isGuest){
             $this->user = User::find()->where(['id'=>yii::$app->user->id])->one();
+            $this->position = Position::find()->where(['id'=>$this->user->position_id])->one();
+        }
+
 
         if(!$this->checkLogin()){
             return false;
