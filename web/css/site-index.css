@@ -77,18 +77,54 @@
 .wrap > .container {
     padding: 50px 15px 20px;
 }
+
+/* aside */
 #site-index aside {
-    width:200px;
+    width:210px;
+    float:left;
+
+    margin-right:10px;
+}
+/* main */
+#site-index main {
+    width:920px;
     float:left;
 }
 
-#site-index main {
-    width:900px;
-    float:left;
+/* aside slogan */
+#slogan {
+    width:100%;
+    height:325px;
+    background: #eee;
+}
+
+
+/* aside email-login */
+#email-login {
+    width:100%;
+    height:200px;
+    margin-top:3px;
+    background: #eee;
+    padding:20px;
+}
+
+#email-login input.text {
+    width:70px;
+    margin-right:4px;
+}
+
+#email-login span.email-suffix {
+    font-size:12px;
+}
+
+
+/* main dir-list */
+#dir-list {
+    overflow: hidden;
 }
 
 #dir-list article {
-    width:174px;
+    width:180px;
     /*height:400px;*/
     margin-right:5px;
     float:left;
@@ -113,9 +149,10 @@
 }
 
 #dir-list article .item-list li{
-    margin:0 20px;
+    margin:0 16px;
     border-bottom: 1px dashed #333;
-    height:50px
+    height:50px;
+    overflow: hidden;
 }
 #dir-list article .item-list li a {
     font-size:14px;
@@ -123,49 +160,23 @@
     text-align: center;
     text-decoration: none;
     color:#333;
-
-    padding:20px 0 10px;
+    height:20px;
+    line-height: 30px;
+    padding:10px 0 10px;
 }
 
 #dir-list article .item-list li a:hover{
     opacity: 0.8;
 }
 
-
-
-/*#email-login {
-    height:80px;
-}*/
-
-#email-login article,#email-login aside {
-    float:left;
-}
-
-#email-login article span a {
-    background: #ED1B23;
-    display: block;
-    width: 220px;
-    font-size:18px;
-    text-align: center;
-    cursor: pointer;
-    padding: 37px 40px;
-    color:#fff;
-    text-decoration: none;
-}
-
-#email-login aside {
-    background: #362b39;
-    width:917px;
-    height:100px;
-    margin-left:3px;
-}
-
+/* main article */
 #article-link {
     margin-top:3px;
+    overflow: hidden;
 }
 
 #article-link article {
-    margin-right:3px;
+    margin-right:4px;
     float:left;
 }
 
@@ -175,8 +186,8 @@
 
 #article-link > article > span > a {
     height:200px;
-    width:378px;
-    padding:87px 168px;
+    width:304px;
+    padding:87px 131px;
     font-size:18px;
     display: block;
     cursor: pointer;
