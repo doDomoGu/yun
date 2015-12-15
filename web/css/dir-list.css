@@ -1,3 +1,16 @@
+.breadcrumb {
+    border-radius: 0;
+    margin-bottom: 10px;
+}
+
+#buttons {
+    padding: 0 4px;
+}
+
+#file-nav {
+    padding: 0 4px;
+}
+
 .file-item {
     height:280px;
 }

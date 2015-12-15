@@ -19,7 +19,7 @@
 <input type="hidden" id="fileurlId" value="fileurl" />
 <input type="hidden" id="pickfileId2" value="pickfile2" />
 <input type="hidden" id="fileurlId2" value="fileurl2" />
-<p>
+<p id='buttons'>
     <?php if(PermissionFunc::isAllowUploadCommon($dir_id)):?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirCommonModal"])?>
@@ -34,27 +34,20 @@
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])?>
     <?php endif;?>
-</p>
-    <!--<button class="btn btn-primary disabled">
-        <span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span>
-        新建文件夹(暂不可用)
-    </button>-->
-</p>
+
 <!--<p>
     <?/*=PermissionFunc::testShow($this->context->user->position_id,$dir_id)*/?>
 </p>-->
-<ul class="nav nav-tabs">
-    <li role="presentation" class="<?=$order=='add_time desc'?'active':''?>"><?=Html::a('按时间从新到旧',$links['add_time.desc'])?></li>
-    <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('按时间从新到旧',$links['add_time.asc'])?></li>
-    <li role="presentation" class="<?=$order=='filesize desc'?'active':''?>"><?=Html::a('按文件大小从大到小',$links['filesize.desc'])?></li>
-    <li role="presentation" class="<?=$order=='filesize asc'?'active':''?>"><?=Html::a('按文件大小从小到大',$links['filesize.asc'])?></li>
-    <li role="presentation" class="<?=$order=='clicks desc'?'active':''?>"><?=Html::a('按下载量从大到小',$links['clicks.desc'])?></li>
-    <li role="presentation" class="<?=$order=='clicks asc'?'active':''?>"><?=Html::a('按下载量从小到大',$links['clicks.asc'])?></li>
+<ul id="file-nav" class="nav nav-tabs">
+    <li role="presentation" class="<?=$order=='add_time desc'?'active':''?>"><?=Html::a('时间从新到旧',$links['add_time.desc'])?></li>
+    <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('时间从新到旧',$links['add_time.asc'])?></li>
+    <li role="presentation" class="<?=$order=='filesize desc'?'active':''?>"><?=Html::a('文件大小从大到小',$links['filesize.desc'])?></li>
+    <li role="presentation" class="<?=$order=='filesize asc'?'active':''?>"><?=Html::a('文件大小从小到大',$links['filesize.asc'])?></li>
+    <li role="presentation" class="<?=$order=='clicks desc'?'active':''?>"><?=Html::a('下载量从大到小',$links['clicks.desc'])?></li>
+    <li role="presentation" class="<?=$order=='clicks asc'?'active':''?>"><?=Html::a('下载量从小到大',$links['clicks.asc'])?></li>
 </ul>
 <?php if(!empty($list)):?>
 <div>
-<p></p>
-
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <div class="dir-item <?=$route=='list'?'file-item':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
@@ -76,10 +69,12 @@
     </div>
 </div>
 <?php else:?>
+<div style="padding:4px;">
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         还没有任何文件！
     </div>
+</div>
 <?php endif;?>
 
 
