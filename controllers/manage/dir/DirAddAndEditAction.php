@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\manage\dir;
 
+use app\components\DirFrontFunc;
 use app\components\DirFunc;
 use Yii;
 use yii\base\Action;
@@ -37,11 +38,22 @@ class DirAddAndEditAction extends Action{
                 }elseif(isset($parents[1])){
                     $redirect['dir_id'] = $parents[1]->id;
                 }
+                $cache = Yii::$app->getCache();
+                unset($cache['treeDataId']);
+                //$this->clearTreeDataCache();
+
                 Yii::$app->response->redirect($redirect)->send();
             }
         }
 
         $params['model'] = $model;
         return $this->controller->render('dir/add_and_edit',$params);
+    }
+
+    public function clearTreeDataCache(){
+        $dirList = Dir::find()->all();
+        foreach($dirList as $d){
+            DirFrontFunc::getTreeData($d->id);
+        }
     }
 }

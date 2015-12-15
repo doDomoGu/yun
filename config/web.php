@@ -39,6 +39,18 @@ $config = [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                /*[
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'categories' => ['application'],
+                    'logFile' => '@app/runtime/logs/appinfo.log'
+                ],*/
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'categories' => ['youhua'],
+                    'logFile' => '@app/runtime/logs/youhua.log'
+                ]
             ],
         ],
         'db' => $db,
