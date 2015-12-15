@@ -5,6 +5,25 @@
 }
 
 #dir-sidebar-right .info-list {
-    padding:4px;
     border-bottom: 1px solid #ccc;
+    overflow: hidden;
+}
+
+#dir-sidebar-right .info-list .info-list-label{
+    width:59px;
+    display: block;
+    float:left;
+    text-align: right;
+    border-right:1px solid #ccc;
+    padding:4px;
+    height:auto;
+    overflow: hidden;
+}
+
+#dir-sidebar-right .info-list .info-list-txt{
+    width:99px;
+    display: block;
+    float:left;
+    text-align: center;
+    padding:4px;
 }

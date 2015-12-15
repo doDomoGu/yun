@@ -29,6 +29,51 @@ class PositionFunc extends Component {
         }
     }
 
+    public static function getRouteArr($position_id,$separator=' > '){
+        $arr = [
+            1 => '--',
+            2 => '--',
+            3 => '--',
+            4 => '--'
+        ];
+        $position = Position::find()->where(['id'=>$position_id,'is_leaf'=>1])->one();
+        if($position){
+            $temp = [];
+            $parents = self::getParents($position_id);
+            for($i=1;$i<=count($parents);$i++){
+                if(isset($parents[$i])){
+                    $temp[$i] = $parents[$i]->name;
+                }
+            }
+
+            $count = count($temp);
+
+            if($count==1){
+                $arr[4] = $temp[1];
+            }elseif($count==2){
+                $arr[3] = $temp[1];
+                $arr[4] = $temp[2];
+            }elseif($count==3){
+                $arr[2] = $temp[1];
+                $arr[3] = $temp[2];
+                $arr[4] = $temp[3];
+            }elseif($count==4){
+                $arr[1] = $temp[1];
+                $arr[2] = $temp[2];
+                $arr[3] = $temp[3];
+                $arr[4] = $temp[4];
+            }elseif($count>4){
+                $arr[1] = $temp[1];
+                $arr[2] = $temp[2];
+                $arr[3] = $temp[3];
+                for($j=4;$j<$count;$j++)
+                    $arr[3] .= $separator . $temp[$j];
+                $arr[4] = $temp[$count];
+            }
+        }
+        return $arr;
+    }
+
     /*
      * 函数getIsLeaf ,实现根据is_leaf(Position表 is_leaf字段) 判断是部门还是职位
      *
