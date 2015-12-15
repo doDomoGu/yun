@@ -65,8 +65,8 @@
                     <td><?=$l->status?'正常':'禁用'?></td>
                     <td><?=PositionFunc::getAdminName($l->is_admin)?></td>
                     <td>
-                        <?php if($l->position_id==1||$l->id==yii::$app->user->id):?>
-                            管理员职位 或者 自己 不可更改
+                        <?php if($l->id==yii::$app->user->id):?>
+                            自己 不可更改
                         <?php else:?>
                             <?php if($l->is_admin!=0):?>
                                 <div><?=BaseHtml::a('取消授权',['admin-set','id'=>$l->id,'is_admin'=>0],['class'=>'btn btn-danger btn-xs','data-method'=>'post'])?></div>
