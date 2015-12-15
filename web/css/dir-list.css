@@ -26,13 +26,12 @@
 
 .file-item .icon {
     display: block;
-    width:128px;
+    width:100px;
     margin-left:49px;
     overflow: hidden;
 }
 
 .file-item .icon img{
-    width:100%;
     border-radius: 4px;
 }
 
