@@ -12,10 +12,7 @@
             Tel: 021-50103599  Fax: 021-50103598  Email: songtang@126.com
         </div>
         <div class="txt-line">
-            地址：上海市-闵行区-中春路9988号
-        </div>
-        <div class="txt-line">
-            Add: No. 9988, Zhongchun Road, Minhang District, Shanghai
+            地址：上海市-闵行区-中春路9988号 Add: No. 9988, Zhongchun Road, Minhang District, Shanghai
         </div>
     </div>
 </footer>
