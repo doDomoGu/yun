@@ -77,9 +77,18 @@
 .wrap > .container {
     padding: 50px 15px 20px;
 }
+#site-index aside {
+    width:200px;
+    float:left;
+}
+
+#site-index main {
+    width:900px;
+    float:left;
+}
 
 #dir-list article {
-    width:224px;
+    width:174px;
     /*height:400px;*/
     margin-right:5px;
     float:left;
