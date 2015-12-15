@@ -25,6 +25,9 @@
 }
 
 body {
-    background: #ED1B23;
+    background: #9b1316;
 }
 
+.has-error .help-block {
+    color:#fff;
+}
