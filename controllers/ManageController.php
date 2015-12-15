@@ -12,8 +12,7 @@ use Yii;
 
 class ManageController extends BaseController
 {
-    const SUPER_ADMIN = 1;
-    const USER_ADMIN = 2;
+
     public $layout = 'main_manage';
     public $adminId;
 
@@ -22,10 +21,10 @@ class ManageController extends BaseController
             return false;
         }
         if($this->checkIsAdmin()){
-            $this->adminId = $this->user->position_id==1?self::SUPER_ADMIN:$this->user->is_admin;
-            if($this->adminId == self::SUPER_ADMIN){
+            $this->adminId = $this->user->position_id==1?User::SUPER_ADMIN:$this->user->is_admin;
+            if($this->adminId == User::SUPER_ADMIN){
                 return true;
-            }elseif($this->adminId == self::USER_ADMIN){
+            }elseif($this->adminId == User::USER_ADMIN){
                 if(in_array($this->route,[
                     'manage/index',
                     'manage/user',
@@ -46,14 +45,14 @@ class ManageController extends BaseController
     }
 
     public function checkIsSuperAdmin(){
-        if($this->adminId == self::SUPER_ADMIN)
+        if($this->adminId = User::SUPER_ADMIN)
             return true;
         else
             return false;
     }
 
     public function checkIsUserAdmin(){
-        if($this->adminId == self::USER_ADMIN)
+        if($this->adminId == User::USER_ADMIN)
             return true;
         else
             return false;

@@ -4,6 +4,9 @@ namespace app\models;
 
 class User extends \yii\db\ActiveRecord
 {
+    const SUPER_ADMIN = 1;
+    const USER_ADMIN = 2;
+
     public function validatePassword($password)
     {
         return $this->password === md5($password);

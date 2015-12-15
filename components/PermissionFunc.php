@@ -27,7 +27,7 @@ class PermissionFunc extends Component {
     const EDIT_ALL          = 33;
     const DELETE_ALL        = 34;
 
-
+    public $type_all = [11,12,21,32];
     /*
      * 权限类型
      * param reverse  键值交换,默认false为 数字对应名称
@@ -121,53 +121,26 @@ class PermissionFunc extends Component {
             return false;
     }
 
-
-
-    //检测职位对目录的操作权限  *permission_type 操作类 比如 下载 = 1 要判断 文件是否个人的 下载(公共) 下载(个人)
-    /*
-    * 函数checkPositionDirPermission ,实现根据is_leaf(Dir表 is_leaf字段) 底层
-    *
-    * @param integer position_id 职位id
-    * @param integer file_id 文件id   通过file_id可以知道对应的dir_id和file_permission_type
-    * @param integer permission_type 权限类型 [PermissionFunc::DOWNLOAD,PermissionFunc::UPLOAD,PermissionFunc::EDIT,PermissionFunc::DELETE]
-    * return array
-    */
-
-    public function checkFilePermission($position_id,$file_id,$permission_type){
-        if(in_array($permission_type,[PermissionFunc::DOWNLOAD,PermissionFunc::UPLOAD,PermissionFunc::EDIT,PermissionFunc::DELETE])){
-            $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_ir])->all();
-            if(!empty($pm)){
-                //获取拥有的权限数组
-                $typeArr = [];
-                foreach($pm as $p){
-                    $typeArr[] = $p->type;
-                }
-                //判断下载权限
-                if($permission_type==PermissionFunc::DOWNLOAD){
-
-                    if($pm)
-                        return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-
     public static function checkDirPermission($position_id,$dir_id,$permission_type){
-        $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
-        if(!empty($pm)){
-            //获取拥有的权限数组
-            $typeArr = [];
-            foreach($pm as $p){
-                $typeArr[] = $p->type;
-            }
+        //获取拥有的权限数组
+        $typeArr = [];
 
-            if(in_array($permission_type,$typeArr)){
-                return true;
+        $adminId = yii::$app->controller->user->is_admin;
+        if($adminId==User::SUPER_ADMIN){
+            return true;
+        }else{
+            $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+
+            if(!empty($pm)){
+                foreach($pm as $p)
+                    $typeArr[] = $p->type;
             }
         }
+
+        if(in_array($permission_type,$typeArr)){
+            return true;
+        }
+
         return false;
     }
 
@@ -200,40 +173,50 @@ class PermissionFunc extends Component {
     }*/
 
     public static function checkFileDownloadPermission($position_id,$file){
-        $dir_id = $file->dir_id;
-        $flag = $file->flag;
-        $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
-        if(!empty($pm)){
-            //获取拥有的权限数组
-            $typeArr = [];
-            foreach($pm as $p){
-                $typeArr[] = $p->type;
-            }
-            if($flag==1){
-                if(in_array(self::DOWNLOAD_COMMON,$typeArr))
-                    return true;
-            }elseif($flag==2){
-                if($file->uid == yii::$app->user->id || in_array(self::DOWNLOAD_ALL,$typeArr))
-                    return true;
+        $adminId = yii::$app->controller->user->is_admin;
+        if($adminId==User::SUPER_ADMIN){
+            return true;
+        }else{
+            $dir_id = $file->dir_id;
+            $flag = $file->flag;
+            $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+            if(!empty($pm)){
+                //获取拥有的权限数组
+                $typeArr = [];
+                foreach($pm as $p){
+                    $typeArr[] = $p->type;
+                }
+                if($flag==1){
+                    if(in_array(self::DOWNLOAD_COMMON,$typeArr))
+                        return true;
+                }elseif($flag==2){
+                    if($file->uid == yii::$app->user->id || in_array(self::DOWNLOAD_ALL,$typeArr))
+                        return true;
+                }
             }
         }
         return false;
     }
 
     public static function checkFileUploadPermission($position_id,$dir_id,$flag){
-        $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
-        if(!empty($pm)){
-            //获取拥有的权限数组
-            $typeArr = [];
-            foreach($pm as $p){
-                $typeArr[] = $p->type;
-            }
-            if($flag==1){
-                if(in_array(self::UPLOAD_COMMON,$typeArr))
-                    return true;
-            }elseif($flag==2){
-                if(in_array(self::UPLOAD_PERSON,$typeArr))
-                    return true;
+        $adminId = yii::$app->controller->user->is_admin;
+        if($adminId==User::SUPER_ADMIN){
+            return true;
+        }else{
+            $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+            if(!empty($pm)){
+                //获取拥有的权限数组
+                $typeArr = [];
+                foreach($pm as $p){
+                    $typeArr[] = $p->type;
+                }
+                if($flag==1){
+                    if(in_array(self::UPLOAD_COMMON,$typeArr))
+                        return true;
+                }elseif($flag==2){
+                    if(in_array(self::UPLOAD_PERSON,$typeArr))
+                        return true;
+                }
             }
         }
         return false;
@@ -242,6 +225,8 @@ class PermissionFunc extends Component {
 
     public static function testShow($position_id,$dir_id){
         $string = null;
+        /*$user
+        if(Yii::$app->controller->user)*/
         $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
         $pArr = [];
         if(!empty($pm)){
