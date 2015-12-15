@@ -8,6 +8,10 @@
     color:#000;
 }
 
+.breadcrumb {
+    border-radius: 0;
+}
+
 .dir-item:hover{
     /*background: #f5f5f5;*/
 }
