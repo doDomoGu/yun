@@ -12,10 +12,12 @@ class DirAction extends Action{
         if(Yii::$app->request->get('install')){
             $p = new Dir();
             $p->install();
+            Yii::$app->response->redirect('dir')->send();
             exit;
         }
         if(Yii::$app->request->get('handle')){
             DirFunc::handleIsLastAndIsLeaf();
+            Yii::$app->response->redirect('dir')->send();
             exit;
         }
 
