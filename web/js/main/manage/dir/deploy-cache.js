@@ -12,7 +12,7 @@ $(function(){
             dataType: "json",
             success: function(response) {
                 if(response.result){
-                    str += '生成缓存成功';
+                    str += '生成缓存成功 '+response.time;
                 }else{
                     str += '生成缓存失败';
                 }

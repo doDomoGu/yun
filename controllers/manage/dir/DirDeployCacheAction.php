@@ -14,13 +14,17 @@ class DirDeployCacheAction extends Action{
         if(Yii::$app->request->isAjax){
             $dir_id = Yii::$app->request->get('dir_id',false);
             $dir = Dir::find()->where(['id'=>$dir_id])->one();
+            $time = 0;
             if($dir){
+                $start = microtime(true);
                 DirFrontFunc::getTreeData($dir->id);
+                $end = microtime(true);
+                $time = number_format($end - $start,3);
                 $result = true;
             }else{
                 $result = false;
             }
-            return Json::encode(['result'=>$result]);
+            return Json::encode(['result'=>$result,'time'=>$time]);
         }else{
             $this->controller->view->title = '重新生成“文件目录结构”缓存';
             $cache = Yii::$app->getCache();
