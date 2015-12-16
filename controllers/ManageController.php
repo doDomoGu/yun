@@ -129,6 +129,9 @@ class ManageController extends BaseController
             'dir-add-and-edit' => [
                 'class' => 'app\controllers\manage\dir\DirAddAndEditAction',
             ],
+            'dir-deploy-cache' => [
+                'class' => 'app\controllers\manage\dir\DirDeployCacheAction',
+            ],
             'admin' => [
                 'class' => 'app\controllers\manage\admin\AdminAction',
             ],
