@@ -20,6 +20,6 @@ $(function(){
             }
         });
         str += ' ('+(parseInt(i)+1)+'/'+dir_ids_count +')<Br/>';
-        $('#deploy-show').append(str);
+        $('#deploy-show').prepend(str);
     }
 })
