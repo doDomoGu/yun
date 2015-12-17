@@ -259,7 +259,7 @@ class PositionFunc extends Component {
                 }
             }
         }else{
-            Position::updateAll(['is_leaf'=>1],['id'=>$p_id]);
+            //Position::updateAll(['is_leaf'=>1],['id'=>$p_id]);
         }
     }
 

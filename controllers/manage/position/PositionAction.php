@@ -9,20 +9,22 @@ use Yii;
 
 class PositionAction extends Action{
     public function run(){
-        if(Yii::$app->request->get('install')){
+       /* if(Yii::$app->request->get('install')){
             $p = new Position();
             $p->install();
             exit;
-        }
+        }*/
 
         if(Yii::$app->request->get('install2')){
             $p = new Position();
             $p->install2();
+            Yii::$app->response->redirect('position')->send();
             exit;
         }
 
         if(Yii::$app->request->get('handle')){
             PositionFunc::handleIsLastAndIsLeaf();
+            Yii::$app->response->redirect('position')->send();
             exit;
         }
 
