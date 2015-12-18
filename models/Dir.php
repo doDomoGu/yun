@@ -1,7 +1,9 @@
 <?php
 
 namespace app\models;
+use app\components\PositionFunc;
 use yii;
+use yii\helpers\ArrayHelper;
 
 class Dir extends \yii\db\ActiveRecord
 {
@@ -47,7 +49,12 @@ PRIMARY KEY (`id`)
 
     public $arr1;
 
+    public $localArr;
+
+    public $ytArr;
+
     public function __construct(){
+
         $this->arr0 = [
             ['n'=>'企业运营中心','a'=>'zyfzzx','c'=>[]],
             ['n'=>'发展资源中心','a'=>'fzzyzx','c'=>[]],
@@ -62,21 +69,21 @@ PRIMARY KEY (`id`)
             ['n'=>'华麦建筑','a'=>'hmjz','l'=>true],
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
-            /*['n'=>'致秦经纪','l'=>true],
-            ['n'=>'明致置业','l'=>true],
-            ['n'=>'日鑫商业','l'=>true],
-            ['n'=>'颂唐广告','l'=>true],
-            ['n'=>'尚晋公关','l'=>true],
-            ['n'=>'元素互动','l'=>true],
-            ['n'=>'周道物业','l'=>true]*/
+            /*['n'=>'致秦经纪','a'=>'zqjj','l'=>true],
+            ['n'=>'明致置业','a'=>'mzzy','l'=>true],
+            ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
+            ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ['n'=>'尚晋公关','a'=>'sjgg','l'=>true],
+            ['n'=>'元素互动','a'=>'yshd','l'=>true],
+            ['n'=>'周道物业','a'=>'zdwy','l'=>true]*/
         ];
 
         $this->arr_yt2 = [
             ['n'=>'颂唐机构','a'=>'stjg','c'=>[
-                ['n'=>'上海总部平台','a'=>'sh','l'=>true]
+                ['n'=>'上海总部平台','a'=>'shzbpt','l'=>true]
             ]],
             ['n'=>'市场策略中心','a'=>'scclzx','c'=>[
-                ['n'=>'上海总部平台','a'=>'sh','l'=>true]
+                ['n'=>'上海总部平台','a'=>'shzbpt','l'=>true]
             ]],
             ['n'=>'华麦建筑','a'=>'hmjz','c'=>[
                 ['n'=>'上海华麦建筑','a'=>'sh','l'=>true]
@@ -89,44 +96,44 @@ PRIMARY KEY (`id`)
                 ['n'=>'安徽颂唐地产','a'=>'ah','l'=>true],
                 ['n'=>'苏北颂唐地产','a'=>'sb','l'=>true]
             ]],
-            /*['n'=>'汉佑房屋','c'=>[
-                ['n'=>'苏州汉佑房屋','l'=>true],
-                ['n'=>'无锡汉佑房屋','l'=>true]
+            ['n'=>'汉佑房屋','a'=>'hyfw','c'=>[
+                ['n'=>'苏州汉佑房屋','a'=>'sz','l'=>true],
+                ['n'=>'无锡汉佑房屋','a'=>'wx','l'=>true]
             ]],
-            ['n'=>'致秦经纪','c'=>[
-                ['n'=>'上海致秦经纪','l'=>true],
-                ['n'=>'苏州致秦经纪','l'=>true],
-                ['n'=>'无锡致秦经纪','l'=>true],
-                ['n'=>'南京致秦经纪','l'=>true],
-                ['n'=>'合肥致秦经纪','l'=>true]
+            ['n'=>'致秦经纪','a'=>'zqjj','c'=>[
+                ['n'=>'上海致秦经纪','a'=>'sh','l'=>true],
+                ['n'=>'苏州致秦经纪','a'=>'sz','l'=>true],
+                ['n'=>'无锡致秦经纪','a'=>'wx','l'=>true],
+                ['n'=>'南京致秦经纪','a'=>'nj','l'=>true],
+                ['n'=>'合肥致秦经纪','a'=>'hf','l'=>true]
             ]],
-            ['n'=>'明致置业','c'=>[
-                ['n'=>'上海明致置业','l'=>true],
-                ['n'=>'南京明致置业','l'=>true]
+            ['n'=>'明致置业','a'=>'mzzy','c'=>[
+                ['n'=>'上海明致置业','a'=>'sh','l'=>true],
+                ['n'=>'南京明致置业','a'=>'nj','l'=>true]
             ]],
-            ['n'=>'日鑫商业','c'=>[
-                ['n'=>'上海日鑫商业','l'=>true],
-                ['n'=>'苏州日鑫商业','l'=>true],
-                ['n'=>'无锡日鑫商业','l'=>true],
-                ['n'=>'南京日鑫商业','l'=>true],
-                ['n'=>'安徽日鑫商业','l'=>true],
-                ['n'=>'苏北日鑫商业','l'=>true]
+            ['n'=>'日鑫商业','a'=>'rxsy','c'=>[
+                ['n'=>'上海日鑫商业','a'=>'sh','l'=>true],
+                ['n'=>'苏州日鑫商业','a'=>'sz','l'=>true],
+                ['n'=>'无锡日鑫商业','a'=>'wx','l'=>true],
+                ['n'=>'南京日鑫商业','a'=>'nj','l'=>true],
+                ['n'=>'安徽日鑫商业','a'=>'ah','l'=>true],
+                ['n'=>'苏北日鑫商业','a'=>'sb','l'=>true]
             ]],
-            ['n'=>'颂唐广告','c'=>[
-                ['n'=>'上海颂唐广告','l'=>true],
-                ['n'=>'苏州颂唐广告','l'=>true],
-                ['n'=>'南京颂唐广告','l'=>true],
-                ['n'=>'安徽颂唐广告','l'=>true]
+            ['n'=>'颂唐广告','a'=>'stgg','c'=>[
+                ['n'=>'上海颂唐广告','a'=>'sh','l'=>true],
+                ['n'=>'苏州颂唐广告','a'=>'sz','l'=>true],
+                ['n'=>'南京颂唐广告','a'=>'nj','l'=>true],
+                ['n'=>'安徽颂唐广告','a'=>'ah','l'=>true]
             ]],
-            ['n'=>'尚晋公关','c'=>[
-                ['n'=>'苏州尚晋公关','l'=>true]
+            ['n'=>'尚晋公关','a'=>'sjgg','c'=>[
+                ['n'=>'苏州尚晋公关','a'=>'sz','l'=>true]
             ]],
-            ['n'=>'元素互动','c'=>[
-                ['n'=>'上海元素互动','l'=>true]
+            ['n'=>'元素互动','a'=>'yshd','c'=>[
+                ['n'=>'上海元素互动','a'=>'sh','l'=>true]
             ]],
-            ['n'=>'周道物业','c'=>[
-                ['n'=>'苏州周道物业','l'=>true]
-            ]]*/
+            ['n'=>'周道物业','a'=>'zdwy','c'=>[
+                ['n'=>'苏州周道物业','a'=>'sz','l'=>true]
+            ]]
         ];
 
         $this->arr_company = [
@@ -157,16 +164,16 @@ PRIMARY KEY (`id`)
         ];
 
         $this->arr1 = [
-            ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
-                ['n'=>'公司简介','a'=>'gsjj','c'=>$this->arr_yt1],
-                ['n'=>'VI应用标准模板','a'=>'vi','c'=>$this->arr_yt2]
-            ]],
+            /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
+                ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$this->arr_yt1],
+                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['admin'],12=>'all'],'c'=>$this->arr_yt2]
+            ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','c'=>$this->arr_yt2],
-                ['n'=>'行政管理制度','a'=>'xzglzd','c'=>$this->arr_yt2],
-                ['n'=>'人事管理制度','a'=>'rsglzd','c'=>$this->arr_yt2],
-                ['n'=>'管理表单范本','a'=>'glbdfb','c'=>$this->arr_yt1],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','c'=>$this->arr_yt2],
+                //['n'=>'公告通知','a'=>'ggtz','pm'=>[12=>'local'],'c'=>$this->arr_yt2],
+                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
+                //['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[12=>'local'],'c'=>$this->arr_yt2],
+                //['n'=>'管理表单范本','a'=>'glbdfb','c'=>$this->arr_yt1],
+                //['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[12=>'local'],'c'=>$this->arr_yt2],
             ]],
             /*['n'=>'财务管控中心','c'=>[
                 ['n'=>'财务管理制度','c'=>$arr_yt1],
@@ -176,6 +183,14 @@ PRIMARY KEY (`id`)
                 ['n'=>'合同范本','c'=>$arr_yt1],
                 ['n'=>'信函范本','c'=>$arr_yt1]
             ]]*/
+        ];
+
+        $this->localArr = [
+            'shzbpt','sh','sz','wx','hf','sb','ah','nj'
+        ];
+
+        $this->ytArr = [
+            'stjg','scclzx','hmjz','stdc','hyfw','zqjj','mzzy','rxsy','stgg','sjgg','yshd','zdwy'
         ];
     }
     public function install() {
@@ -191,9 +206,9 @@ PRIMARY KEY (`id`)
 
 
 
-            self::initDir($this->arr1,1,2,1);
+            $this->initDir($this->arr1,1,2,1);
 
-            $arr2 = [
+            /*$arr2 = [
                 ['n'=>'颂唐-人才资源中心','c'=>[
                     ['n'=>'在职员工档案','c'=>$this->arr_yt2],
                     ['n'=>'离职员工档案','c'=>$this->arr_yt2],
@@ -214,7 +229,7 @@ PRIMARY KEY (`id`)
                 ]]
             ];
 
-            self::initDir($arr2,2,2,2);
+            self::initDir($arr2,2,2,2);*/
 
             /*$arr3 = [
                 ['n'=>'颂唐地产','c'=>[
@@ -306,7 +321,7 @@ PRIMARY KEY (`id`)
         }
     }
 
-    public static function initDir($arr,$pid,$level,$type){
+    public function initDir($arr,$pid,$level,$type,$pm=[],$yt='',$local=''){
         $sqlbase = "INSERT IGNORE INTO `dir`(`name`,`alias`,`p_id`,`type`,`is_leaf`,`level`,`is_last`,`ord`,`status`)
                 VALUES";
         $ord = 99;
@@ -316,17 +331,99 @@ PRIMARY KEY (`id`)
             $leaf = isset($a['l']) && $a['l']==1?1:0;
             $name = isset($a['n']) && $a['n']!=''?$a['n']:'默认名称';
             $alias = isset($a['a']) && $a['a']!=''?$a['a']:'默认别名';
+            if(empty($pm) && isset($a['pm']))
+                $pm = $a['pm'];
+
+            if(in_array($alias,$this->ytArr))
+                $yt = $alias;
+
+            if(in_array($alias,$this->localArr))
+                $local = $alias;
+
+
             $sql = $sqlbase."('".$name."','".$alias."',$pid,$type,$leaf,$level,$isLast,$ord,1)";
             $cmd = Yii::$app->db->createCommand($sql);
             $cmd->execute();
-            //$lastId = Yii::app()->db->lastInsertID;
-            if(isset($a['c']) && !empty($a['c'])){
-                self::initDir($a['c'],Yii::$app->db->lastInsertID,$level+1,$type);
+            $lastId = Yii::$app->db->lastInsertID;
+            if($leaf==0){
+                if(isset($a['c']) && !empty($a['c'])){
+                    $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local);
+                }
+            }else{
+                $this->initPm($lastId,$pm,$yt,$local);
             }
+
+
             $ord--;
             $i++;
         }
     }
+
+    public function initPm($dir_id,$pmArr,$yt,$local){
+        if(!empty($pmArr)){
+            $pAll = [];
+            $positionAll = Position::find()->where(['is_leaf'=>1])->all();
+            foreach($positionAll as $pOne){
+                $pAll[] = $pOne->id;
+            }
+            $sqlBase = "INSERT IGNORE INTO `position_dir_permission`(`position_id`,`dir_id`,`type`) VALUES";
+            foreach($pmArr as $k=>$pArr){
+                if($pArr=='all'){
+                    $sql = $sqlBase;
+                    $sqlValueArr = [];
+                    foreach($pAll as $p){
+                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                    }
+                    $sql .= implode(',',$sqlValueArr);
+                    $cmd = Yii::$app->db->createCommand($sql);
+                    $cmd->execute();
+                }elseif($pArr=='ytlocal'){
+                    //业态是唯一的 业态下的地方公司也是唯一的
+                    if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
+                        //$pLocalArr = [];
+                        $sql = $sqlBase;
+                        //根据业态获取position
+                        $pos1 = Position::find()->where(['alias'=>$yt])->one();
+                        if($pos1){
+                            //业态的下面一层就是地方公司
+                            $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+                            if($pos2){
+                                //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
+                                /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
+                                $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                            }
+                        }
+                        if(!empty($pYtLocalArr)){
+                            $sqlValueArr = [];
+                            foreach($pYtLocalArr as $p){
+                                $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                            }
+                            $sql .= implode(',',$sqlValueArr);
+                            $cmd = Yii::$app->db->createCommand($sql);
+                            $cmd->execute();
+                        }
+
+                    }
+                }elseif(is_array($pArr) && !empty($pArr)){
+                    $sql = $sqlBase;
+                    $sqlValueArr = [];
+                    $pids = [];
+                    foreach($pArr as $p){
+                        $p_id = PositionFunc::getIdByAlias($p);
+                        $pids[] = $p_id;
+                    }
+                    foreach($pids as $p){
+                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                    }
+                    $sql .= implode(',',$sqlValueArr);
+                    $cmd = Yii::$app->db->createCommand($sql);
+                    $cmd->execute();
+                }
+            }
+        }
+    }
+
 
     public static function initDirTop($arr){
         $sqlbase = "INSERT IGNORE INTO `dir`(`name`,`alias`,`p_id`,`type`,`is_leaf`,`level`,`is_last`,`ord`,`status`)

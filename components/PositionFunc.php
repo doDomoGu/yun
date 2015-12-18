@@ -219,6 +219,20 @@ class PositionFunc extends Component {
         return $arr;
     }
 
+    public static function getAllLeafChildrenIds($p_id){
+        $arr = [];
+        $children = self::getChildren($p_id);
+        if($children && !empty($children)){
+            foreach($children as $c){
+                if($c->is_leaf==1)
+                    $arr[] = $c->id;
+                $children2 = self::getAllLeafChildrenIds($c->id);
+                $arr = ArrayHelper::merge($arr,$children2);
+            }
+        }
+        return $arr;
+    }
+
     /*
      * 函数getParents ,实现根据 当前position_id 递归获取全部父层级 id
      *
@@ -276,5 +290,26 @@ class PositionFunc extends Component {
                 $name = 'N/A';
         }
         return $name;
+    }
+
+    public static function getIdByAlias($alias,$p_id=false){
+        $returnId = false;
+        $aliasArr = explode('/',$alias);
+        //if(count($aliasArr)>1){
+        if($p_id===false){
+            $p_id = 0;
+            foreach($aliasArr as $a){
+                $p_id = self::getIdByAlias($a,$p_id);
+                if($p_id===false)
+                    break;
+            }
+            $returnId = $p_id;
+        }else{
+            $pos = Position::find()->where(['alias'=>$alias,'p_id'=>$p_id])->one();
+            if($pos){
+                $returnId = $pos->id;
+            }
+        }
+        return $returnId;
     }
 }

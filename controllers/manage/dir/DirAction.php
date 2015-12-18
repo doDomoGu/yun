@@ -2,9 +2,11 @@
 namespace app\controllers\manage\dir;
 
 use app\components\DirFunc;
+use app\components\PositionFunc;
+use app\models\Position;
 use yii\base\Action;
 use app\models\Dir;
-
+use yii\helpers\ArrayHelper;
 use Yii;
 
 class DirAction extends Action{
@@ -12,7 +14,7 @@ class DirAction extends Action{
         if(Yii::$app->request->get('install')){
             $p = new Dir();
             $p->install();
-            Yii::$app->response->redirect('dir')->send();
+            //Yii::$app->response->redirect('dir')->send();
             exit;
         }
         if(Yii::$app->request->get('handle')){
@@ -63,6 +65,8 @@ class DirAction extends Action{
 
         return $this->controller->render('dir/list',$params);
     }
+
+
 
 
 

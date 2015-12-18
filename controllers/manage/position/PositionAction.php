@@ -4,6 +4,7 @@ namespace app\controllers\manage\position;
 use app\components\PositionFunc;
 use yii\base\Action;
 use app\models\Position;
+use app\models\Dir;
 
 use Yii;
 
@@ -14,6 +15,19 @@ class PositionAction extends Action{
             $p->install();
             exit;
         }*/
+//var_dump(PositionFunc::getIdByAlias('stjg'));exit;
+
+        if(Yii::$app->request->get('get-num')){
+            $dir = new Dir();
+            foreach($dir->ytArr as $y){
+                foreach($dir->localArr as $l){
+                    $this->getNum($y,$l);
+                }
+            }
+            exit;
+        }
+
+
 
         if(Yii::$app->request->get('install2')){
             $p = new Position();
@@ -72,5 +86,22 @@ class PositionAction extends Action{
 
 
         return $this->controller->render('position/list',$params);
+    }
+
+    public function getNum($yt,$local){
+        $pos1 = Position::find()->where(['alias'=>$yt])->one();
+        echo $yt;
+        if($pos1){
+            echo '('.$pos1->name.')';
+            //业态的下面一层就是地方公司
+            echo ' - '.$local;
+            $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+            if($pos2){
+                echo '('.$pos2->name.')';
+                $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                echo ' : '.count($pYtLocalArr);
+            }
+        }
+        echo '<br/>';
     }
 }
