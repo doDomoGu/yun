@@ -386,6 +386,7 @@ PRIMARY KEY (`id`)
                     $cmd = Yii::$app->db->createCommand($sql);
                     $cmd->execute();
                 }elseif(is_array($pmItem) && !empty($pmItem)){
+
                     foreach($pmItem as $type => $pmItem2){
                         if($type == 'ytlocal'){
                             if($pmItem2=='all'){
@@ -416,9 +417,11 @@ PRIMARY KEY (`id`)
                                     }
                                 }
                             }elseif(is_array($pmItem2) && !empty($pmItem2)){
+
+
                                 //业态是唯一的 业态下的地方公司也是唯一的
-                                if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
-                                    //$pLocalArr = [];
+                                if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr) ){
+                                    $pArr = [];
                                     $sql = $sqlBase;
                                     //根据业态获取position
                                     $pos1 = Position::find()->where(['alias'=>$yt])->one();
@@ -426,16 +429,20 @@ PRIMARY KEY (`id`)
                                         //业态的下面一层就是地方公司
                                         $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
                                         if($pos2){
-
-                                            $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
-                                            if($pos3){
-                                                $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
+                                            //地方公司下面是部门
+                                            foreach($pmItem2 as $posAlias){
+                                                if(in_array($posAlias,$this->positionArr)){
+                                                    $pos3 = Position::find()->where(['alias'=>$posAlias,'p_id'=>$pos2->id])->one();
+                                                    if($pos3){
+                                                        $pArr = ArrayHelper::merge($pArr,PositionFunc::getAllLeafChildrenIds($pos3->id));
+                                                    }
+                                                }
                                             }
                                         }
                                     }
-                                    if(!empty($pYtLocalArr)){
+                                    if(!empty($pArr)){
                                         $sqlValueArr = [];
-                                        foreach($pYtLocalArr as $p){
+                                        foreach($pArr as $p){
                                             $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
                                         }
                                         $sql .= implode(',',$sqlValueArr);
