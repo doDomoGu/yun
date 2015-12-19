@@ -165,15 +165,15 @@ PRIMARY KEY (`id`)
 
         $this->arr1 = [
             /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
-                ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$this->arr_yt1],
-                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['admin'],12=>'all'],'c'=>$this->arr_yt2]
+                ['n'=>'公司简介','a'=>'gsjj','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt1],
+                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt2]
             ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                //['n'=>'公告通知','a'=>'ggtz','pm'=>[12=>'local'],'c'=>$this->arr_yt2],
-                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
-                //['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[12=>'local'],'c'=>$this->arr_yt2],
-                //['n'=>'管理表单范本','a'=>'glbdfb','c'=>$this->arr_yt1],
-                //['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[12=>'local'],'c'=>$this->arr_yt2],
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[/*11=>['zhglb'=>'ytlocal'],*/12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
+                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
+                ['n'=>'管理表单范本','a'=>'glbdfb','c'=>$this->arr_yt1],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],*/
             ]],
             /*['n'=>'财务管控中心','c'=>[
                 ['n'=>'财务管理制度','c'=>$arr_yt1],
@@ -367,8 +367,8 @@ PRIMARY KEY (`id`)
                 $pAll[] = $pOne->id;
             }
             $sqlBase = "INSERT IGNORE INTO `position_dir_permission`(`position_id`,`dir_id`,`type`) VALUES";
-            foreach($pmArr as $k=>$pArr){
-                if($pArr=='all'){
+            foreach($pmArr as $k=>$pmItem){
+                if($pmItem=='all'){
                     $sql = $sqlBase;
                     $sqlValueArr = [];
                     foreach($pAll as $p){
@@ -377,48 +377,52 @@ PRIMARY KEY (`id`)
                     $sql .= implode(',',$sqlValueArr);
                     $cmd = Yii::$app->db->createCommand($sql);
                     $cmd->execute();
-                }elseif($pArr=='ytlocal'){
-                    //业态是唯一的 业态下的地方公司也是唯一的
-                    if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
-                        //$pLocalArr = [];
-                        $sql = $sqlBase;
-                        //根据业态获取position
-                        $pos1 = Position::find()->where(['alias'=>$yt])->one();
-                        if($pos1){
-                            //业态的下面一层就是地方公司
-                            $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
-                            if($pos2){
-                                //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
-                                /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
-                                $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
-                                $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                }elseif(is_array($pmItem) && !empty($pmItem)){
+                    foreach($pmItem as $type => $pmItem2){
+                        if($type == 'ytlocal'){
+
+                            //业态是唯一的 业态下的地方公司也是唯一的
+                            if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
+                                //$pLocalArr = [];
+                                $sql = $sqlBase;
+                                //根据业态获取position
+                                $pos1 = Position::find()->where(['alias'=>$yt])->one();
+                                if($pos1){
+                                    //业态的下面一层就是地方公司
+                                    $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+                                    if($pos2){
+                                        //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
+                                        /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                        $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
+                                        $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                    }
+                                }
+                                if(!empty($pYtLocalArr)){
+                                    $sqlValueArr = [];
+                                    foreach($pYtLocalArr as $p){
+                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                    }
+                                    $sql .= implode(',',$sqlValueArr);
+                                    $cmd = Yii::$app->db->createCommand($sql);
+                                    $cmd->execute();
+                                }
                             }
-                        }
-                        if(!empty($pYtLocalArr)){
+                        }elseif($type == 'single'){
+                            $sql = $sqlBase;
                             $sqlValueArr = [];
-                            foreach($pYtLocalArr as $p){
+                            $pids = [];
+                            foreach($pmItem2 as $p){
+                                $p_id = PositionFunc::getIdByAlias($p);
+                                $pids[] = $p_id;
+                            }
+                            foreach($pids as $p){
                                 $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
                             }
                             $sql .= implode(',',$sqlValueArr);
                             $cmd = Yii::$app->db->createCommand($sql);
                             $cmd->execute();
                         }
-
                     }
-                }elseif(is_array($pArr) && !empty($pArr)){
-                    $sql = $sqlBase;
-                    $sqlValueArr = [];
-                    $pids = [];
-                    foreach($pArr as $p){
-                        $p_id = PositionFunc::getIdByAlias($p);
-                        $pids[] = $p_id;
-                    }
-                    foreach($pids as $p){
-                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
-                    }
-                    $sql .= implode(',',$sqlValueArr);
-                    $cmd = Yii::$app->db->createCommand($sql);
-                    $cmd->execute();
                 }
             }
         }
