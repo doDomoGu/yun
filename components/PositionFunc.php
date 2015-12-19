@@ -199,11 +199,16 @@ class PositionFunc extends Component {
      * return array
      */
     public static function getChildren($p_id,$showLeaf=true,$status=1,$orderBy='ord DESC,id DESC'){
-        $where['p_id'] = $p_id;
-        $where['status'] = $status;
-        if($showLeaf==false)
-            $where['is_leaf'] = 0;
-        return Position::find()->where($where)->orderBy($orderBy)->all();
+        if($p_id === false){
+            return [];
+        }else{
+            $where['p_id'] = $p_id;
+            $where['status'] = $status;
+            if($showLeaf==false)
+                $where['is_leaf'] = 0;
+            return Position::find()->where($where)->orderBy($orderBy)->all();
+        }
+
     }
 
     public static function getAllChildrenIds($p_id){
