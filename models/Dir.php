@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use app\components\CommonFunc;
 use app\components\PositionFunc;
 use yii;
 use yii\helpers\ArrayHelper;
@@ -171,11 +172,11 @@ PRIMARY KEY (`id`)
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt2]
             ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal'=>['zhglb']]/*,12=>['ytlocal'=>'all']*/],'c'=>$this->arr_yt2],
-                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
-                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
-                ['n'=>'管理表单范本','a'=>'glbdfb','c'=>$this->arr_yt1],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],*/
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']]/*,12=>['ytlocal'=>'all']*/],'c'=>$this->arr_yt2],
+                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal'=>['zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal'=>['zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt1],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal'=>['zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],*/
             ]],
             /*['n'=>'财务管控中心','c'=>[
                 ['n'=>'财务管理制度','c'=>$arr_yt1],
@@ -449,6 +450,41 @@ PRIMARY KEY (`id`)
                                         $cmd = Yii::$app->db->createCommand($sql);
                                         $cmd->execute();
                                     }
+                                }
+                            }
+                        }elseif($type == 'ytlocal2'){
+                            //业态是唯一的 业态下的地方公司也是唯一的
+                            if(in_array($yt,$this->ytArr)){
+                                $pArr = [];
+
+                                //根据业态获取position
+                                $pos1 = Position::find()->where(['alias'=>$yt])->one();
+                                if($pos1){
+                                    foreach($pmItem2 as $posAlias){
+                                        $posAliasTmp = $yt.'/'.$posAlias;
+                                        $posId = PositionFunc::getIdByAlias($posAliasTmp);
+                                        /*var_dump($posId);var_dump($posAliasTmp);
+                                        echo "<br/><br/>";*/
+                                        //PositionFunc::getAllLeafChildrenIds($posId);
+                                        $pArr = ArrayHelper::merge($pArr,PositionFunc::getAllLeafChildrenIds($posId));
+                                    }
+                                }
+                                if(!empty($pArr)){
+
+                                    $pArr = CommonFunc::arrayDivide($pArr);
+                                    foreach($pArr as $pArrOne){
+                                        /*var_dump(count($pArrOne));
+                                        echo "<br/><br/>";*/
+                                        $sql = $sqlBase;
+                                        $sqlValueArr = [];
+                                        foreach($pArrOne as $p){
+                                            $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                        }
+                                        $sql .= implode(',',$sqlValueArr);
+                                        $cmd = Yii::$app->db->createCommand($sql);
+                                        $cmd->execute();
+                                    }
+                                    /*echo "<br/><br/>";*/
                                 }
                             }
                         }elseif($type == 'single'){

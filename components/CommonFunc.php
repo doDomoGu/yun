@@ -83,4 +83,18 @@ class CommonFunc extends Component {
         }
         return $str;
     }
+
+    public static function arrayDivide($arr,$num=200){
+        $arr_obj = [];
+        $count = count($arr);
+        $i=1;
+        $times = ceil($count/$num);
+        while($i<=$times){
+            $start = ($i-1)*$num;
+            $arrTmp = array_slice($arr,$start,$num);
+            $arr_obj[] = $arrTmp;
+            $i++;
+        }
+        return $arr_obj;
+    }
 }

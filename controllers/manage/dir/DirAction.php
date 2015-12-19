@@ -12,6 +12,7 @@ use Yii;
 class DirAction extends Action{
     public function run(){
         if(Yii::$app->request->get('install')){
+            set_time_limit(0);
             $p = new Dir();
             $p->install();
             //Yii::$app->response->redirect('dir')->send();

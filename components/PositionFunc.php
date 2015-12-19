@@ -221,15 +221,21 @@ class PositionFunc extends Component {
 
     public static function getAllLeafChildrenIds($p_id){
         $arr = [];
-        $children = self::getChildren($p_id);
-        if($children && !empty($children)){
-            foreach($children as $c){
-                if($c->is_leaf==1)
-                    $arr[] = $c->id;
-                $children2 = self::getAllLeafChildrenIds($c->id);
-                $arr = ArrayHelper::merge($arr,$children2);
+        $curPos = Position::find()->where(['id'=>$p_id])->one();
+        if($curPos && $curPos->is_leaf){
+            $arr[] = $curPos->id;
+        }else{
+            $children = self::getChildren($p_id);
+            if($children && !empty($children)){
+                foreach($children as $c){
+                    if($c->is_leaf==1)
+                        $arr[] = $c->id;
+                    $children2 = self::getAllLeafChildrenIds($c->id);
+                    $arr = ArrayHelper::merge($arr,$children2);
+                }
             }
         }
+
         return $arr;
     }
 
