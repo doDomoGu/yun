@@ -53,6 +53,8 @@ PRIMARY KEY (`id`)
 
     public $ytArr;
 
+    public $positionArr;
+
     public function __construct(){
 
         $this->arr0 = [
@@ -169,7 +171,7 @@ PRIMARY KEY (`id`)
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt2]
             ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[/*11=>['zhglb'=>'ytlocal'],*/12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal'=>['zhglb']]/*,12=>['ytlocal'=>'all']*/],'c'=>$this->arr_yt2],
                 /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
                 ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[12=>'ytlocal'],'c'=>$this->arr_yt2],
                 ['n'=>'管理表单范本','a'=>'glbdfb','c'=>$this->arr_yt1],
@@ -191,6 +193,10 @@ PRIMARY KEY (`id`)
 
         $this->ytArr = [
             'stjg','scclzx','hmjz','stdc','hyfw','zqjj','mzzy','rxsy','stgg','sjgg','yshd','zdwy'
+        ];
+
+        $this->positionArr = [
+            'zhglb'
         ];
     }
     public function install() {
@@ -321,7 +327,7 @@ PRIMARY KEY (`id`)
         }
     }
 
-    public function initDir($arr,$pid,$level,$type,$pm=[],$yt='',$local=''){
+    public function initDir($arr,$pid,$level,$type,$pm=[],$yt='',$local='',$position=''){
         $sqlbase = "INSERT IGNORE INTO `dir`(`name`,`alias`,`p_id`,`type`,`is_leaf`,`level`,`is_last`,`ord`,`status`)
                 VALUES";
         $ord = 99;
@@ -340,6 +346,8 @@ PRIMARY KEY (`id`)
             if(in_array($alias,$this->localArr))
                 $local = $alias;
 
+            if(in_array($alias,$this->positionArr))
+                $position = $alias;
 
             $sql = $sqlbase."('".$name."','".$alias."',$pid,$type,$leaf,$level,$isLast,$ord,1)";
             $cmd = Yii::$app->db->createCommand($sql);
@@ -347,10 +355,10 @@ PRIMARY KEY (`id`)
             $lastId = Yii::$app->db->lastInsertID;
             if($leaf==0){
                 if(isset($a['c']) && !empty($a['c'])){
-                    $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local);
+                    $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
                 }
             }else{
-                $this->initPm($lastId,$pm,$yt,$local);
+                $this->initPm($lastId,$pm,$yt,$local,$position);
             }
 
 
@@ -359,7 +367,7 @@ PRIMARY KEY (`id`)
         }
     }
 
-    public function initPm($dir_id,$pmArr,$yt,$local){
+    public function initPm($dir_id,$pmArr,$yt,$local,$position){
         if(!empty($pmArr)){
             $pAll = [];
             $positionAll = Position::find()->where(['is_leaf'=>1])->all();
@@ -380,31 +388,60 @@ PRIMARY KEY (`id`)
                 }elseif(is_array($pmItem) && !empty($pmItem)){
                     foreach($pmItem as $type => $pmItem2){
                         if($type == 'ytlocal'){
-
-                            //业态是唯一的 业态下的地方公司也是唯一的
-                            if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
-                                //$pLocalArr = [];
-                                $sql = $sqlBase;
-                                //根据业态获取position
-                                $pos1 = Position::find()->where(['alias'=>$yt])->one();
-                                if($pos1){
-                                    //业态的下面一层就是地方公司
-                                    $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
-                                    if($pos2){
-                                        //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
-                                        /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
-                                        $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
-                                        $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                            if($pmItem2=='all'){
+                                //业态是唯一的 业态下的地方公司也是唯一的
+                                if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
+                                    //$pLocalArr = [];
+                                    $sql = $sqlBase;
+                                    //根据业态获取position
+                                    $pos1 = Position::find()->where(['alias'=>$yt])->one();
+                                    if($pos1){
+                                        //业态的下面一层就是地方公司
+                                        $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+                                        if($pos2){
+                                            //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
+                                            /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                            $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
+                                            $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                        }
+                                    }
+                                    if(!empty($pYtLocalArr)){
+                                        $sqlValueArr = [];
+                                        foreach($pYtLocalArr as $p){
+                                            $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                        }
+                                        $sql .= implode(',',$sqlValueArr);
+                                        $cmd = Yii::$app->db->createCommand($sql);
+                                        $cmd->execute();
                                     }
                                 }
-                                if(!empty($pYtLocalArr)){
-                                    $sqlValueArr = [];
-                                    foreach($pYtLocalArr as $p){
-                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                            }elseif(is_array($pmItem2) && !empty($pmItem2)){
+                                //业态是唯一的 业态下的地方公司也是唯一的
+                                if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
+                                    //$pLocalArr = [];
+                                    $sql = $sqlBase;
+                                    //根据业态获取position
+                                    $pos1 = Position::find()->where(['alias'=>$yt])->one();
+                                    if($pos1){
+                                        //业态的下面一层就是地方公司
+                                        $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+                                        if($pos2){
+
+                                            $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
+                                            if($pos3){
+                                                $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
+                                            }
+                                        }
                                     }
-                                    $sql .= implode(',',$sqlValueArr);
-                                    $cmd = Yii::$app->db->createCommand($sql);
-                                    $cmd->execute();
+                                    if(!empty($pYtLocalArr)){
+                                        $sqlValueArr = [];
+                                        foreach($pYtLocalArr as $p){
+                                            $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                        }
+                                        $sql .= implode(',',$sqlValueArr);
+                                        $cmd = Yii::$app->db->createCommand($sql);
+                                        $cmd->execute();
+                                    }
                                 }
                             }
                         }elseif($type == 'single'){

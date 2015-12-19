@@ -19,9 +19,14 @@ class PositionAction extends Action{
 
         if(Yii::$app->request->get('get-num')){
             $dir = new Dir();
+            $this->getNum();
             foreach($dir->ytArr as $y){
+                $this->getNum($y);
                 foreach($dir->localArr as $l){
                     $this->getNum($y,$l);
+                    foreach($dir->positionArr as $p){
+                        $this->getNum($y,$l,$p);
+                    }
                 }
             }
             exit;
@@ -88,11 +93,59 @@ class PositionAction extends Action{
         return $this->controller->render('position/list',$params);
     }
 
-    public function getNum($yt,$local){
-        $pos1 = Position::find()->where(['alias'=>$yt])->one();
+    public function getNum($yt='',$local='',$position=''){
+        if($yt!=''){
+            $pos1 = Position::find()->where(['alias'=>$yt])->one();
+            echo $yt;
+            if($pos1){
+                if($local!=''){
+                    $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+                    echo  ' - '.$local;
+                    if($pos2){
+                        if($position!=''){
+                            $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
+                            echo ' - '.$position;
+                            if($pos3){
+                                echo '('.$pos3->name.')';
+                                $pArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
+                                echo ' : '.count($pArr).'<br/>';
+
+                            }else{
+                                echo ' : null<br/>';
+                            }
+                        }else{
+                            echo '('.$pos2->name.')';
+                            $pArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                            echo ' : '.count($pArr).'<br/>';
+                        }
+
+
+                    }else{
+                        echo ' : null<br/>';
+                    }
+                }else{
+                    echo '('.$pos1->name.')';
+                    $pArr = PositionFunc::getAllLeafChildrenIds($pos1->id);
+                    echo ' : '.count($pArr).'<br/>';
+                }
+
+            }else{
+                echo ' : null<br/>';
+            }
+        }else{
+            $pArr = PositionFunc::getAllLeafChildrenIds(0);
+            echo 'All : '.count($pArr).'<br/>';
+        }
+
+
+
+
+        /*$pos1 = Position::find()->where(['alias'=>$yt])->one();
         echo $yt;
         if($pos1){
-            echo '('.$pos1->name.')';
+            echo '('.$pos1->name.')<br/>';
+            $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos1->id);
+            echo ' : '.count($pYtLocalArr);
             //业态的下面一层就是地方公司
             echo ' - '.$local;
             $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
@@ -100,8 +153,17 @@ class PositionAction extends Action{
                 echo '('.$pos2->name.')';
                 $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
                 echo ' : '.count($pYtLocalArr);
+                $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
+                if($pos3){
+                    echo '('.$pos2->name.')';
+                    $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                    echo ' : '.count($pYtLocalArr);
+                }
             }
+        }else{
+            echo ' : null';
         }
-        echo '<br/>';
+        echo '<br/>';*/
+
     }
 }
