@@ -167,10 +167,10 @@ PRIMARY KEY (`id`)
         ];
 
         $this->arr1 = [
-            /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
+            ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
                 ['n'=>'公司简介','a'=>'gsjj','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt1],
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt2]
-            ]],*/
+            ]],
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
                 ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
                 ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
@@ -178,14 +178,14 @@ PRIMARY KEY (`id`)
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[11=>['single'=>['admin']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt1],
                 ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
             ]],
-            /*['n'=>'财务管控中心','c'=>[
-                ['n'=>'财务管理制度','c'=>$arr_yt1],
-                ['n'=>'财务表单范本','c'=>$arr_yt1]
+            ['n'=>'财务管控中心','c'=>[
+                ['n'=>'财务管理制度','a'=>'cwglzd','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb','sh/cwb']]],'c'=>$this->arr_yt1],
+                ['n'=>'财务表单范本','a'=>'cwbdfb','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb','sh/cwb']]],'c'=>$this->arr_yt1]
             ]],
-            ['n'=>'法务管控中心','c'=>[
-                ['n'=>'合同范本','c'=>$arr_yt1],
-                ['n'=>'信函范本','c'=>$arr_yt1]
-            ]]*/
+            ['n'=>'法务管控中心','a'=>'fwgkzx','c'=>[
+                ['n'=>'合同范本','a'=>'htfb','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']]],'c'=>$this->arr_yt1],
+                ['n'=>'信函范本','a'=>'xhfb','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']]],'c'=>$this->arr_yt1]
+            ]]
         ];
 
         $this->localArr = [
@@ -197,7 +197,7 @@ PRIMARY KEY (`id`)
         ];
 
         $this->positionArr = [
-            'zhglb'
+            'zhglb','zjb','cwb'
         ];
     }
     public function install() {
@@ -471,7 +471,8 @@ PRIMARY KEY (`id`)
                                         /*var_dump($posId);var_dump($posAliasTmp);
                                         echo "<br/><br/>";*/
                                         //PositionFunc::getAllLeafChildrenIds($posId);
-                                        $pArr = ArrayHelper::merge($pArr,PositionFunc::getAllLeafChildrenIds($posId));
+                                        if($posId!==false)
+                                            $pArr = ArrayHelper::merge($pArr,PositionFunc::getAllLeafChildrenIds($posId));
                                     }
                                 }
                                 if(!empty($pArr)){

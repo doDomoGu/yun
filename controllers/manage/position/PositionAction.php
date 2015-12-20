@@ -21,10 +21,13 @@ class PositionAction extends Action{
             $dir = new Dir();
             $this->getNum();
             foreach($dir->ytArr as $y){
+                echo $y;
                 $this->getNum($y);
                 foreach($dir->localArr as $l){
+                    echo ' - '.$l;
                     $this->getNum($y,$l);
                     foreach($dir->positionArr as $p){
+                        echo ' - '.$p;
                         $this->getNum($y,$l,$p);
                     }
                 }
