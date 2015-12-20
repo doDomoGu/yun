@@ -109,7 +109,6 @@ class PositionAction extends Action{
                                 echo '('.$pos3->name.')';
                                 $pArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
                                 echo ' : '.count($pArr).'<br/>';
-
                             }else{
                                 echo ' : null<br/>';
                             }

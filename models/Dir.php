@@ -72,13 +72,13 @@ PRIMARY KEY (`id`)
             ['n'=>'华麦建筑','a'=>'hmjz','l'=>true],
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
-            /*['n'=>'致秦经纪','a'=>'zqjj','l'=>true],
+            ['n'=>'致秦经纪','a'=>'zqjj','l'=>true],
             ['n'=>'明致置业','a'=>'mzzy','l'=>true],
             ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
             ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
             ['n'=>'尚晋公关','a'=>'sjgg','l'=>true],
             ['n'=>'元素互动','a'=>'yshd','l'=>true],
-            ['n'=>'周道物业','a'=>'zdwy','l'=>true]*/
+            ['n'=>'周道物业','a'=>'zdwy','l'=>true]
         ];
 
         $this->arr_yt2 = [
@@ -172,11 +172,11 @@ PRIMARY KEY (`id`)
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt2]
             ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']]/*,12=>['ytlocal'=>'all']*/],'c'=>$this->arr_yt2],
-                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal'=>['zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
-                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal'=>['zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
-                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt1],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal'=>['zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],*/
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[11=>['single'=>['admin']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt1],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
             ]],
             /*['n'=>'财务管控中心','c'=>[
                 ['n'=>'财务管理制度','c'=>$arr_yt1],
@@ -338,7 +338,7 @@ PRIMARY KEY (`id`)
             $leaf = isset($a['l']) && $a['l']==1?1:0;
             $name = isset($a['n']) && $a['n']!=''?$a['n']:'默认名称';
             $alias = isset($a['a']) && $a['a']!=''?$a['a']:'默认别名';
-            if(empty($pm) && isset($a['pm']))
+            if(isset($a['pm']))
                 $pm = $a['pm'];
 
             if(in_array($alias,$this->ytArr))
@@ -387,29 +387,34 @@ PRIMARY KEY (`id`)
                     $cmd = Yii::$app->db->createCommand($sql);
                     $cmd->execute();
                 }elseif(is_array($pmItem) && !empty($pmItem)){
-
                     foreach($pmItem as $type => $pmItem2){
                         if($type == 'ytlocal'){
                             if($pmItem2=='all'){
                                 //业态是唯一的 业态下的地方公司也是唯一的
-                                if(in_array($local,$this->localArr) && in_array($yt,$this->ytArr)){
-                                    //$pLocalArr = [];
+                                if(in_array($yt,$this->ytArr)){
+                                    $pArr = [];
                                     $sql = $sqlBase;
                                     //根据业态获取position
                                     $pos1 = Position::find()->where(['alias'=>$yt])->one();
                                     if($pos1){
-                                        //业态的下面一层就是地方公司
-                                        $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
-                                        if($pos2){
-                                            //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
-                                            /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
-                                            $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
-                                            $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                        if($local!=''){
+                                            if(in_array($local,$this->localArr)){
+                                                //业态的下面一层就是地方公司
+                                                $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
+                                                if($pos2){
+                                                    //现在的yt-local = $pos1->alias.'-'.$pos2->alias  例如: stgg-sh stdc-sh
+                                                    /*$arrTmp = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                                    $pYtLocalArr = ArrayHelper::merge($pLocalArr,$arrTmp);*/
+                                                    $pArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                                                }
+                                            }
+                                        }else{
+                                            $pArr = PositionFunc::getAllLeafChildrenIds($pos1->id);
                                         }
                                     }
-                                    if(!empty($pYtLocalArr)){
+                                    if(!empty($pArr)){
                                         $sqlValueArr = [];
-                                        foreach($pYtLocalArr as $p){
+                                        foreach($pArr as $p){
                                             $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
                                         }
                                         $sql .= implode(',',$sqlValueArr);

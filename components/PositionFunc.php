@@ -233,10 +233,12 @@ class PositionFunc extends Component {
             $children = self::getChildren($p_id);
             if($children && !empty($children)){
                 foreach($children as $c){
-                    if($c->is_leaf==1)
+                    if($c->is_leaf==1){
                         $arr[] = $c->id;
-                    $children2 = self::getAllLeafChildrenIds($c->id);
-                    $arr = ArrayHelper::merge($arr,$children2);
+                    }else{
+                        $children2 = self::getAllLeafChildrenIds($c->id);
+                        $arr = ArrayHelper::merge($arr,$children2);
+                    }
                 }
             }
         }

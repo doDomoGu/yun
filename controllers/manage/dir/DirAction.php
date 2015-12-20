@@ -12,6 +12,13 @@ use Yii;
 class DirAction extends Action{
     public function run(){
         if(Yii::$app->request->get('install')){
+            /*$positionAll = Position::find()->where(['is_leaf'=>1])->all();
+            var_dump(count($positionAll));
+
+            var_dump(count(PositionFunc::getAllLeafChildrenIds(0)));exit;*/
+
+            /*var_dump(PositionFunc::getIdByAlias('admin'));
+            exit;*/
             set_time_limit(0);
             $p = new Dir();
             $p->install();
