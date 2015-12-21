@@ -1,5 +1,6 @@
 <?php
     use yii\bootstrap\Modal;
+use yii\bootstrap\Progress;
 ?>
 <?php
 Modal::begin([
@@ -18,6 +19,13 @@ Modal::begin([
                 <input type="hidden" id="fileurl2" name="fileurl" value="" class="col-lg-6" />
             </p>
             <div class="clearfix" id="fileurl2_upload_txt"></div>
+            <?php            echo Progress::widget([
+                'percent' => 0,
+                'label' => '上传中',
+                'id'=>'upload-progress-2',
+                'options'=>['class' => 'progress-striped active','style'=>'display:none;']
+            ]);
+            ?>
         </div>
     </div>
 <?php

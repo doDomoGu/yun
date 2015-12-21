@@ -261,6 +261,7 @@ var uploader2 = Qiniu.uploader({
                 // 文件添加进队列后,处理相关的事情
                 _file = file;
             });
+            $('#upload-progress-2').show();
             $('#'+fileurlId2+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');
 
         },
@@ -269,6 +270,9 @@ var uploader2 = Qiniu.uploader({
         },
         'UploadProgress': function(up, file) {
             // 每个文件上传时,处理相关的事情
+            $('#upload-progress-2 .progress-bar').css('width',file.percent+'%');
+            $('#upload-progress-2 .progress-bar').html(file.percent+'% <span class="sr-only"></span>');
+            $('#'+fileurlId2+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...&nbsp;&nbsp;'+file.loaded+'/'+file.size+'</span>');
         },
         'FileUploaded': function(up, file, info) {
             var res = $.parseJSON(info);
