@@ -134,18 +134,31 @@ var uploader = Qiniu.uploader({
     auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
     init: {
         'FilesAdded': function(up, files) {
+
             plupload.each(files, function(file) {
                 // 文件添加进队列后,处理相关的事情
                 _file = file;
+                /*console.log('11111');
+                console.log(up);
+                console.log(file);*/
             });
+            $('#upload-progress-1').show();
             $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');
 
         },
         'BeforeUpload': function(up, file) {
             // 每个文件上传前,处理相关的事情
+
         },
         'UploadProgress': function(up, file) {
             // 每个文件上传时,处理相关的事情
+            //console.log('22222');
+            //console.log(up);
+            //console.log(file);
+            $('#upload-progress-1 .progress-bar').css('width',file.percent+'%');
+            $('#upload-progress-1 .progress-bar').html(file.percent+'% <span class="sr-only"></span>');
+            //$('#upload-progress-1 .progress-bar .sr-only').html(file.percent+'%');
+            $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...&nbsp;&nbsp;'+file.loaded+'/'+file.size+'</span>');
         },
         'FileUploaded': function(up, file, info) {
             var res = $.parseJSON(info);
