@@ -69,6 +69,18 @@
                         <?php endif;?>
                     </td>
                 </tr>
+                <tr>
+                    <td class="text-right">个人岗位说明</td>
+                    <td><?=$user->position->shuoming?></td>
+                </tr>
+                <tr>
+                    <td class="text-right">个人岗位职权</td>
+                    <td><?=$user->position->zhiquan?></td>
+                </tr>
+                <tr>
+                    <td class="text-right">个人岗位职责</td>
+                    <td><?=$user->position->zhize?></td>
+                </tr>
             </table>
         </div>
     </div>
