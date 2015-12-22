@@ -50,10 +50,10 @@ class FileFrontFunc extends Component {
 
     public static function getFiles($dir_id,$p_id,$pages,$order='add_time desc',$search=''){
         $files = File::find();
-        if($p_id>0)
-            $files = $files->where(['p_id'=>$p_id,'status'=>1]);
-        else
-            $files = $files->where(['dir_id'=>$dir_id,'status'=>1]);
+        $dir_id = intval($dir_id);
+        $p_id = intval($p_id);
+        $files = $files->where(['dir_id'=>$dir_id,'status'=>1]);
+        $files = $files->andWhere(['p_id'=>$p_id,'status'=>1]);
         if($search!==false)
             $files = $files->andWhere(['like','filename',$search]);
         $files = $files->orderBy($order)
@@ -130,22 +130,24 @@ class FileFrontFunc extends Component {
     }
 
 
-    public static function getDownloadList($dir_ids){
+    public static function getDownloadList($dir_ids,$limit=10){
         $files = File::find()
             ->where(['in','dir_id',$dir_ids])
             ->andWhere(['>','filetype',0])
             ->andWhere(['status'=>1])
             ->orderBy('clicks desc')
+            ->limit($limit)
             ->all();
         return $files;
     }
 
-    public static function getRecentList($dir_ids){
+    public static function getRecentList($dir_ids,$limit=10){
         $files = File::find()
             ->where(['in','dir_id',$dir_ids])
             ->andWhere(['>','filetype',0])
             ->andWhere(['status'=>1])
             ->orderBy('add_time desc')
+            ->limit($limit)
             ->all();
         return $files;
     }
