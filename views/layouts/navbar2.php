@@ -59,7 +59,7 @@ if(!yii::$app->user->isGuest){
 
 <?php
 NavBar::begin([
-    'brandLabel' => BaseHtml::img('/images/songtang-united-logo.png'),
+    'brandLabel' => BaseHtml::img('/images/logo.png'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-default',
