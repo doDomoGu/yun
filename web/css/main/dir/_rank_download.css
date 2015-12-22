@@ -1,0 +1,25 @@
+#dir-sidebar-study-download {
+    width:160px;
+    /*margin-left:20px;*/
+    float:left;
+    background: #f9f9f9;
+    padding:10px;
+    border:1px solid #ccc;
+    border-top:none;
+}
+
+#dir-sidebar-study-download h3 {
+    margin: 0;
+    padding: 0;
+}
+
+#dir-sidebar-study-download ul {
+    margin-top:20px;
+}
+
+#dir-sidebar-study-download ul li {
+    height:42px;
+    overflow: hidden;
+    word-break: break-all;
+    margin-bottom: 8px;
+}

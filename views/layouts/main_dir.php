@@ -6,9 +6,9 @@ use app\assets\AppAsset;
     AppAsset::register($this);  /* 注册appAsset */
 
     app\assets\AppAsset::addCssFile($this,'css/layouts/dir.css');
-    if($this->params['dir_id']==5){
+    /*if($this->params['dir_id']==5){
         app\assets\AppAsset::addCssFile($this,'css/dir-study.css');
-    }
+    }*/
 ?>
 <?php $this->beginPage(); /* 页面开始标志位 */ ?>
 <!DOCTYPE html>
