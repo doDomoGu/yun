@@ -3,7 +3,7 @@
     use app\components\DirFunc;
     \app\assets\AppAsset::addJsFile($this,'js/manage-dir.js');
 ?>
-        <?=BaseHtml::a('添加目录（暂时不可用）',['dir-add-and-edit'],['class'=>'btn btn-primary disabled'])?>
+        <?/*=BaseHtml::a('添加目录（暂时不可用）',['dir-add-and-edit'],['class'=>'btn btn-primary disabled'])*/?>
         <?=BaseHtml::a('重新生成目录缓存*',['dir-deploy-cache'],['class'=>'btn btn-warning'])?> *在修改或添加过目录项后可点击，运行时间较长非必要无需重新生成
         <p></p>
 
@@ -31,7 +31,12 @@
                     <!--<td><?/*=$l->ord*/?></td>-->
                     <td><?=$l->name?> <span class="badge" title="<?=DirFunc::getFullRoute($l->id)?>">i</span></td>
                     <td><?=DirFunc::getIsLeaf($l->is_leaf)?></td>
-                    <td><?=BaseHtml::a('编辑',['dir-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
+                    <td>
+                        <?=BaseHtml::a('编辑',['dir-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
+                        <?php if($l->is_leaf==0):?>
+                        <?=BaseHtml::a('添加子目录',['dir-add-and-edit','p_id'=>$l->id],['class'=>'btn btn-warning btn-xs'])?>
+                        <?php endif;?>
+                    </td>
                 </tr>
             <?php endforeach;?>
             <?php endif;?>

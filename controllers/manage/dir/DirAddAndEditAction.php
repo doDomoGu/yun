@@ -12,8 +12,9 @@ class DirAddAndEditAction extends Action{
     public function run(){
         $model = new DirForm();
         $dir = null;
-        $id = Yii::$app->request->get('id');
-        if($id!=''){
+        $id = Yii::$app->request->get('id',false);
+        $p_id = Yii::$app->request->get('p_id',false);
+        if($id!=false){
             $dir = Dir::find()->where(['id'=>$id])->one();
             if($dir){
                 $this->controller->view->title = '板块目录 - 编辑';
@@ -21,8 +22,13 @@ class DirAddAndEditAction extends Action{
             }else{
                 Yii::$app->response->redirect('dir')->send();
             }
-        }else{
-            $this->controller->view->title = '板块目录 - 添加';
+        }elseif($p_id!=false){
+            $parDir = Dir::find()->where(['id'=>$p_id,'is_leaf'=>0])->one();
+            if($parDir){
+                $this->controller->view->title = '板块目录 - 添加';
+            }else{
+                Yii::$app->response->redirect('dir')->send();
+            }
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if($dir == null){
