@@ -1,4 +1,4 @@
-<?php \app\assets\AppAsset::addCssFile($this,'css/dir-index.css');?>
+<?php \app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');?>
 <div class="clearfix"></div>
 <?php foreach($list as $l):?>
 <div class="dir-item text-center">

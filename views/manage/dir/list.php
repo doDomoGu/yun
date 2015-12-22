@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>排序</th>
+                    <!--<th>排序</th>-->
                     <th>目录</th>
                     <th>类型</th>
                     <th>操作</th>
@@ -28,8 +28,8 @@
             <?php foreach($list as $l):?>
                 <tr>
                     <th scope="row"><?=$l->id?></th>
-                    <td><?=$l->ord?></td>
-                    <td><?=$l->name?> <span class="badge" title="<?=DirFunc::getFullRoute($l->id)?>">i</span><?=$l->alias?></td>
+                    <!--<td><?/*=$l->ord*/?></td>-->
+                    <td><?=$l->name?> <span class="badge" title="<?=DirFunc::getFullRoute($l->id)?>">i</span></td>
                     <td><?=DirFunc::getIsLeaf($l->is_leaf)?></td>
                     <td><?=BaseHtml::a('编辑',['dir-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>

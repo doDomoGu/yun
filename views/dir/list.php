@@ -3,7 +3,7 @@
     use app\components\FileFrontFunc;
     use app\components\PermissionFunc;
 
-    app\assets\AppAsset::addCssFile($this,'css/dir-index.css');
+    app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
 
     if($route=='list'){
         app\assets\AppAsset::addCssFile($this,'css/dir-list.css');
