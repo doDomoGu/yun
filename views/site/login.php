@@ -4,9 +4,9 @@ use yii\bootstrap\Html;
         app\assets\AppAsset::addCssFile($this,'css/site-login.css');
 ?>
         <div class="site-login">
-
-            <p class="line-1 text-center">一站式地产综合服务商 http://www.songtang.net</p>
-            <p class="line-2 text-center">China's Glory United</p>
+<div class="text-center"><img src="/images/login.png" style="width:500px;"/></div>
+            <!--<p class="line-1 text-center">一站式地产综合服务商 http://www.songtang.net</p>
+            <p class="line-2 text-center">China's Glory United</p>-->
 
             <?php $form = ActiveForm::begin([
                 'id' => 'login-form',

@@ -25,7 +25,8 @@
 }
 
 body {
-    background: #9b1316;
+    /*background: #9b1316;*/
+    background: #ED1B23;
 }
 
 .has-error .help-block {
