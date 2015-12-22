@@ -7,7 +7,7 @@
 <div id="site-index">
     <aside>
         <section id="slogan">
-            客户满意度
+            <img src="/images/manyi.png" style="width:210px;padding:20px 10px;"/>
         </section>
         <section id="email-login">
             <article>

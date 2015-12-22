@@ -6,7 +6,7 @@
     </div>-->
     <div class=" text-center">
         <div class="logo-line">
-            <img src="/images/footer.jpg" />
+            <img src="/images/footer.png"  style="width:1140px;"/>
         </div>
         <div class="txt-line">
             Tel: 021-50103599  Fax: 021-50103598  Email: songtang@126.com
