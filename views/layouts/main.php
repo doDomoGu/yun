@@ -13,15 +13,13 @@ AppAsset::register($this);  /* 注册appAsset */
 <?php $this->beginBody(); /* body开始标志位 */ ?>
 
 <div class="wrap">
-    <?php if(yii::$app->controller->route != 'site/login'):?>
     <?=$this->render($this->context->navbarView)/* 引入导航栏 */?>
-    <?php endif;?>
     <?php if(yii::$app->controller->route == 'site/index'):?>
         <?=$this->render('/site/_news')?>
         <?=$this->render('/site/_recruitment')?>
     <?php endif;?>
     <?php if(yii::$app->controller->route == 'site/index'):?>
-    <div class="container" style="padding-top:636px;">
+    <div class="container" style="padding-top:640px;">
     <?php else:?>
     <div class="container">
     <?php endif;?>
@@ -31,9 +29,7 @@ AppAsset::register($this);  /* 注册appAsset */
         <?= $content ?>
     </div>
 </div>
-<?php if(yii::$app->controller->route != 'site/login'):?>
 <?=$this->render('footer')?>
-<?php endif;?>
 <?php $this->endBody(); /* body结束标志位 */ ?>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    app\assets\AppAsset::addCssFile($this,'css/site-_recruitment.css');
+    app\assets\AppAsset::addCssFile($this,'css/main/site/_recruitment.css');
     $list = app\models\Recruitment::find()->where(['status'=>1])->orderBy('ord desc,edit_time desc')->limit(10)->all();
 ?>
 <section id="recruitment-section" >

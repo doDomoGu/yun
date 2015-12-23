@@ -1,89 +1,12 @@
-/*#site-index .panel {
-    height:240px;
-    display: block;
-}*/
-
-
-/*#site-index h3.panel-title a {
-    font-size:18px;
-}
-
-#site-index .item-one,#site-index .item-two {
-    width:220px;
-    margin:0 10px 0 0;
-    display: block;
-    float:left;
-    height:auto;
-    overflow: hidden;
-}
-
-#site-index .item-one.item-last,#site-index .item-two.item-last{
-    margin-right:0;
-}
-
-#site-index .item-one a{
-    text-decoration: none;
-}
-
-#site-index .item-one .panel-heading {
-    background: #362b39;
-    cursor: pointer;
-    color:#eee;
-}
-
-#site-index .item-one table tr {
-}
-
-#site-index .item-one table tr:hover {
-    cursor: pointer;
-}
-
-
-#site-index .item-one table tr a {
-    color:#333;
-    font-size:16px;
-}
-
-
-
-#site-index .item-one tr.item-count-1 {
-    height:240px;
-}
-#site-index .item-one tr.item-count-2 {
-    height:120px;
-}
-#site-index .item-one tr.item-count-3 {
-    height:80px;
-}
-#site-index .item-one tr.item-count-4 {
-    height:60px;
-}
-#site-index .item-one tr.item-count-5 {
-    height:48px;
-}
-#site-index .item-one tr td {
-    vertical-align: middle;
-}
-
-#site-index .item-two img {
-    width: 100%;
-}
-
-#site-index .item-two .wx {
-    padding:5px 0;
-    border: 1px solid #333;
-}*/
-
 .wrap > .container {
-    padding: 50px 15px 20px;
+    padding: 50px 15px 10px;
 }
 
 /* aside */
 #site-index aside {
-    width:210px;
+    width:214px;
     float:left;
-
-    margin-right:10px;
+    margin-right:6px;
 }
 /* main */
 #site-index main {
@@ -103,7 +26,7 @@
 #email-login {
     width:100%;
     height:200px;
-    margin-top:10px;
+    margin-top:6px;
     background: #eee;
     padding:20px;
 }
@@ -121,7 +44,7 @@
 /* main dir-list */
 #dir-list {
     overflow: hidden;
-    margin-bottom:8px;
+    margin-bottom:6px;
 }
 
 #dir-list article {
@@ -179,7 +102,7 @@
 
 /* main article */
 #article-link {
-    margin-top:3px;
+    /*margin-top:3px;*/
     overflow: hidden;
 }
 
@@ -205,14 +128,18 @@
     opacity: 0.9;
 }
 
+#article-link > article > span > a:hover {
+    opacity: 0.8;
+}
+
 #article-link > #article-link-1 > span > a {
-    background: url('../images/site-index/1.jpg');
+    background: url('../../../images/site-index/1.jpg');
 }
 
 #article-link > #article-link-2 > span > a {
-    background: url('../images/site-index/2.jpg');
+    background: url('../../../images/site-index/2.jpg');
 }
 
 #article-link > #article-link-3 > span > a {
-    background: url('../images/site-index/3.jpg');
+    background: url('../../../images/site-index/3.jpg');
 }

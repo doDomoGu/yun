@@ -1,6 +1,6 @@
 <?php
-    app\assets\AppAsset::addCssFile($this,'css/site-index.css');
-    app\assets\AppAsset::addJsFile($this,'js/main/site-index.js');
+    app\assets\AppAsset::addCssFile($this,'css/main/site/index.css');
+    app\assets\AppAsset::addJsFile($this,'js/main/site/index.js');
 ?>
 
 <div class="clearfix"></div>
