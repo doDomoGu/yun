@@ -17,7 +17,7 @@
                     <input type="hidden" value="other" name="aliastype">
                     <input type="hidden" value="bizmail" name="dmtype">
                     <input type="hidden" value="" name="p">
-                    <div>
+                    <div class="email-login-header">
                         企业邮箱登录
                     </div>
                     <br/>

@@ -28,7 +28,13 @@
     height:200px;
     margin-top:6px;
     background: #eee;
-    padding:20px;
+    padding:10px 10px;
+}
+
+#email-login .email-login-header {
+    background: #B8B8B8;
+    text-align: center;
+    padding:10px;
 }
 
 #email-login input.text {
