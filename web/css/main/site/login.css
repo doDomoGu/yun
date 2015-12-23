@@ -1,16 +1,27 @@
-.site-login {
+/*.site-login {
     padding: 60px 0 120px;
+}*/
+
+#site-login header {
+    background: #fff;
+    border-top:40px solid #3A3A3C;
+    padding:14px 0;
 }
 
-.line-1 {
-    color:#fff;
+#site-login header .logo {
+    width:240px;
 
 }
 
-.line-2 {
+#site-login footer {
+    background: #3A3A3C;
     color:#fff;
-    font-size:60px;
-    margin-bottom: 50px;
+    font-size:24px;
+    padding:40px 0;
+}
+
+#login-form {
+    margin-top:30px;
 }
 
 .form-horizontal .control-label {
