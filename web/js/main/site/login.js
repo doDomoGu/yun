@@ -1,10 +1,12 @@
 $(function(){
 
+    $('#loginform-username').focus();
+
     var _height = $(window).outerHeight() - $('#site-login header').outerHeight() - $('#site-login footer').outerHeight();
 
     $('#site-login #login-form-section').height(_height);
 
-    var _height2 = $('#login-form-section article').height()+$('#login-form').height();
+    var _height2 = $('#login-form-section article').height();
 
     var _height3 = parseInt(parseInt(_height-_height2) / 2);
 

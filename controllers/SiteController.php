@@ -98,6 +98,7 @@ class SiteController extends BaseController
         }
 
         $model = new LoginForm();
+        //$model->rememberMe = true;
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
