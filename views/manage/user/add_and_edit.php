@@ -1,7 +1,7 @@
 <?php
     use yii\helpers\Html;
     use yii\bootstrap\ActiveForm;
-    app\assets\AppAsset::addJsFile($this,'js/main/manage-user-add-and-edit.js');
+    app\assets\AppAsset::addJsFile($this,'js/main/manage/user/add_and_edit.js');
 ?>
 
         <h2>
@@ -9,17 +9,21 @@
         </h2>
         <?php $form = ActiveForm::begin([
             'id' => 'user-form',
-            'options' => ['class' => 'form-horizontal'],
+            'options' => ['class' => 'form-horizontal','autocomplete'=>'off'],
             'fieldConfig' => [
                 'template' => "{label}\n<div class=\"col-lg-5\">{input}{hint}</div>\n<div class=\"col-lg-5\">{error}</div>",
                 'labelOptions' => ['class' => 'col-lg-2 control-label'],
             ],
         ]); ?>
-
-        <?= $form->field($model, 'username') ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-        <?= $form->field($model, 'password2')->passwordInput() ?>
+<input style="display:none">
+        <?/*= $form->field($model, 'username') */?>
+        <?= $form->field($model, 'username',['inputOptions'=>['autocomplete'=>'off']]) ?>
+<input style="display:none">
+        <?/*= $form->field($model, 'password')->passwordInput() */?>
+        <?= $form->field($model, 'password',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>
+<input style="display:none">
+        <?/*= $form->field($model, 'password2')->passwordInput() */?>
+        <?= $form->field($model, 'password2',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>
 
         <?= $form->field($model, 'name') ?>
 

@@ -28,14 +28,18 @@
             ],
         ]); ?>
 <section id="form-input-group">
+    <input style="display:none" />
         <?= $form->field($model, 'username',[
             'inputTemplate' => '{input}',
-            'inputOptions'=>['placeholder' => 'Username | 用户名']
+            'inputOptions'=>['placeholder' => 'Username | 用户名','autocomplete'=>'off']
         ])->textInput() ?>
-
+    <input style="display:none">
+    <input style="display:none">
+    <input style="display:none">
+    <input style="display:none">
         <?= $form->field($model, 'password',[
             'inputTemplate' => '{input}',
-            'inputOptions'=>['placeholder' => 'Password | 密码']
+            'inputOptions'=>['placeholder' => 'Password | 密码','autocomplete'=>'off']
         ])->passwordInput() ?>
 
         <?=$form->errorSummary($model)?>
