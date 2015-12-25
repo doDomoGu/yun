@@ -14,21 +14,38 @@
             ],
         ]); ?>
 
+        <div class="form-group">
+            <label class="col-lg-2 control-label" >父级目录</label>
+            <div class="col-lg-6" style="padding:7px 15px; font-weight: bold;color:#ED1B23;">
+                <?=\app\components\DirFunc::getFullRoute($model->p_id)?>
+            </div>
+        </div>
+
         <?= $form->field($model, 'name') ?>
 
-        <?= $form->field($model, 'describe')->textarea() ?>
+        <?= $form->field($model, 'alias') ?>
+
+        <?/*= $form->field($model, 'describe')->textarea() */?>
 
         <?/*= $form->field($model, 'type',[
             'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
         ])->dropDownList([1=>'企业运营中心',2=>'发展资源中心',3=>'工具应用中心',4=>'项目资源中心',5=>'学习共享中心']) */?>
 
+
+
         <?/*= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
         ]) */?>
 
-        <?= $form->field($model, 'status',[
-            'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
-        ])->dropDownList([0=>'禁用',1=>'启用']) ?>
+        <?php if($action=='add'):?>
+            <?= $form->field($model, 'is_leaf')->dropDownList([0=>'否',1=>'是']) ?>
+        <?php else:?>
+
+        <?php endif;?>
+<?/*= $form->field($model, 'status',[
+    'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
+])->dropDownList([0=>'禁用',1=>'启用']) */?>
+
 
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">

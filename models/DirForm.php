@@ -9,6 +9,7 @@ class DirForm extends Model
 {
     public $id;
     public $name;
+    public $alias;
     public $describe;
     public $type;
     //public $more_cate;
@@ -22,11 +23,12 @@ class DirForm extends Model
     public function attributeLabels(){
         return [
             'name' => '名称',
+            'alias' => '别名',
             'describe' => '描述',
             'type' => '类型',
             'p_id' => '父级',
             'level' => '层级',
-            'is_leaf' => '是否叶级',
+            'is_leaf' => '是否底层目录',
             //'is_last' => '最后一个',
             'ord' => '排序',
             'status' => '状态',
@@ -36,7 +38,7 @@ class DirForm extends Model
     public function rules()
     {
         return [
-            [['name', 'p_id'], 'required'],
+            [['name', 'alias', 'p_id'], 'required'],
             [['id', 'type', 'ord', 'level', 'is_leaf', 'is_last', 'p_id', 'status'], 'integer'],
             [['describe'], 'safe']
 

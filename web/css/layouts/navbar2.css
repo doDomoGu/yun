@@ -87,7 +87,7 @@
 .navbar li.active > a > span.active-red {
     display: block;
     position:absolute;
-    background: #ee1b24;
+    background: #ED1B23;
     width:80%;
     height:6px;
     top:-6px;

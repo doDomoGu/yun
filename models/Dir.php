@@ -14,7 +14,7 @@ class Dir extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'p_id'], 'required'],
+            [['name', 'alias', 'p_id'], 'required'],
             [['id', 'type', 'ord', 'level', 'is_leaf', 'is_last', 'p_id', 'status'], 'integer'],
             [['describe'], 'safe']
         ];
