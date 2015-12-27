@@ -5,8 +5,11 @@ use app\models\Dir;
 use yii\base\Component;
 use yii\helpers\ArrayHelper;
 use yii\helpers\BaseArrayHelper;
+use yii;
 
 class DirFunc extends Component {
+    Const ORDER_TYPE_1 = 'ord Desc,id Desc';
+
     /*
      * 函数getFullRoute ,实现根据dir_id(Dir表 id字段)获取完整的板块目录路径
      *
@@ -148,7 +151,7 @@ class DirFunc extends Component {
         $selfChildrenIds = [];
         if($p_id>0){
             //根据p_id(父id)查找对应父对象
-            $dir = Dir::find()->where(['id'=>$p_id])->one();
+            $dir = self::getOneByCache($p_id);
             if($dir==NULL || $dir->status==0){ //不存在或者状态禁用则返回空数组
                 return [];
             }else if($includeSelf===true){ //将自己本身添加至数组
@@ -158,7 +161,7 @@ class DirFunc extends Component {
 
         $level = $level===false?false:intval($level);
         if($level>0 || $level===false){  //level正整数 或者 false不限制
-            $list = self::getChildren($p_id,$showLeaf);
+            $list = self::getChildrenByCache($p_id,$showLeaf);
 
             if(!empty($list)){
                 $nlevel = $level===false?false: intval($level - 1);
@@ -223,7 +226,7 @@ class DirFunc extends Component {
         $dir = NULL;
         if($p_id>0){
             //根据p_id(父id)查找对应父对象
-            $dir = Dir::find()->where(['id'=>$p_id])->one();
+            $dir = self::getOneByCache($p_id);
             if($dir==NULL || $dir->status==0){ //不存在或者状态禁用则返回空数组
                 return [];
             }else if($includeSelf===true){ //将自己本身添加至数组
@@ -276,20 +279,95 @@ class DirFunc extends Component {
     }
 
     /*
- * 函数getChildren ,实现根据 p_id 获取子层级 （单层）
- *
- * @param integer p_id 父id (默认 0 )
- * @param boolean showLeaf 是否显示叶子层级的标志位 (默认true)
- * @param boolean status 状态 (默认1)
- * @param string orderBy  排序方法
- * return array
- */
-    public static function getChildren($p_id,$showLeaf=true,$status=1,$orderBy='ord DESC,id DESC',$limit=false){
+     * 函数getChildren ,实现根据 p_id 获取子层级 （单层）
+     *
+     * @param integer p_id 父id (默认 0 )
+     * @param boolean showLeaf 是否显示叶子层级的标志位 (默认true)
+     * @param boolean status 状态 (默认1)
+     * @param string orderBy  排序方法
+     * return array
+     */
+    public static function getChildren($p_id,$showLeaf=true,$status=1,$orderBy=1,$limit=false){
         $where['p_id'] = $p_id;
         $where['status'] = $status;
         if($showLeaf==false)
             $where['is_leaf'] = 0;
-        return Dir::find()->where($where)->orderBy($orderBy)->limit($limit)->all();
+
+        $orderByStr = self::ORDER_TYPE_1;
+        //其他排序类型赋值；
+        /*if($orderBy==1){
+            $orderByStr = self::ORDER_TYPE_1;
+        }*/
+        return Dir::find()->where($where)->orderBy($orderByStr)->limit($limit)->all();
+    }
+
+
+    /*
+     * 函数getChildrenByCache ,实现根据 p_id 获取子层级 （单层）
+     *                       读取数据缓存，有则直接返回缓存内容，没有则获取模型数据，并添加至缓存
+     * @param integer p_id 父id (默认 0 )
+     * @param boolean showLeaf 是否显示叶子层级的标志位 (默认true)
+     * @param boolean status 状态 (默认1)
+     * @param string orderBy  排序方法
+     * return array
+     */
+    public static function getChildrenByCache($p_id,$showLeaf=true,$status=1,$orderBy=1,$limit=false){
+        $cache = yii::$app->cache;
+        $cacheExist = true;
+        $dirChildrenDataId = [];
+        $dirChildrenData = NULL;
+        $key = $p_id.'_'.($showLeaf==true?'1':'0').'_'.($status==1?'1':'0').'_'.$orderBy.'_'.($limit==false?'f':$limit);
+//var_dump($key);exit;
+        if(isset($cache['dirChildrenDataId'])){
+            $dirChildrenDataId = $cache['dirChildrenDataId'];
+            if(isset($dirChildrenDataId[$key])){
+                $dirChildrenData = $cache['dirChildrenData_'.$key];
+            }else{
+                $cacheExist = false;
+            }
+        }else{
+            $cacheExist = false;
+        }
+        if($cacheExist == false){
+            $dirChildrenData = self::getChildren($p_id,$showLeaf,$status,$orderBy,$limit);
+
+            $cache['dirChildrenDataId'] = \yii\helpers\ArrayHelper::merge($dirChildrenDataId,[$key=>1]);
+
+            $cache['dirChildrenData_'.$key]=$dirChildrenData;
+        }
+        return $dirChildrenData;
+    }
+
+
+    /*
+     * 函数getOneByCache ,实现根据 id 读取数据缓存，有则直接返回缓存内容，没有则获取模型数据，并添加至缓存
+     *
+     * @param integer id  dir:id
+     * return DirModel
+     */
+    public static function getOneByCache($id){
+        $cache = yii::$app->cache;
+        $cacheExist = true;
+        $dirDataId = [];
+        $dirData = NULL;
+        if(isset($cache['dirDataId'])){
+            $dirDataId = $cache['dirDataId'];
+            if(isset($dirDataId[$id])){
+                $dirData = $cache['dirData_'.$id];
+            }else{
+                $cacheExist = false;
+            }
+        }else{
+            $cacheExist = false;
+        }
+        if($cacheExist == false){
+            $dirData = Dir::find()->where(['id'=>$id])->one();
+
+            $cache['dirDataId'] = \yii\helpers\ArrayHelper::merge($dirDataId,[$id=>1]);
+
+            $cache['dirData_'.$id]=$dirData;
+        }
+        return $dirData;
     }
 
     /*

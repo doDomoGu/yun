@@ -138,6 +138,12 @@ class ManageController extends BaseController
             'admin-set' => [
                 'class' => 'app\controllers\manage\admin\AdminSetAction',
             ],
+            'cache' => [
+                'class' => 'app\controllers\manage\cache\CacheAction',
+            ],
+            'cache-dir-clear' => [
+                'class' => 'app\controllers\manage\cache\CacheDirClearAction',
+            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
