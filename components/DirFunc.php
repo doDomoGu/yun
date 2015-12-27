@@ -200,7 +200,7 @@ class DirFunc extends Component {
             }
         }
 
-        if($includeSelf===true){
+        if($dir && $includeSelf===true){
             $arr[$dir->id]->childrenIds = $selfChildrenIds;
         }
         return $arr;

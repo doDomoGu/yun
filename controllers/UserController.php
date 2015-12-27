@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\components\DirFunc;
+use app\models\Dir;
+use app\models\PositionDirPermission;
 use Yii;
 use app\models\User;
 use app\models\UserChangePwdForm;
@@ -53,5 +56,29 @@ class UserController extends BaseController
 
         $params['model'] = $model;
         return $this->render('change_head_img',$params);
+    }
+
+    public function actionPermissionList(){
+        $this->view->title = '职员权限列表';
+
+        $list =  DirFunc::getListArr(0,true,true,true,false);
+
+        $pmCheck = [];
+        $pmDirIds = [];
+        foreach($list as $l){
+            if($l->is_leaf ==1){
+                $pmDirIds[] = $l->id;
+            }
+        }
+        $pmList = PositionDirPermission::find()->where(['position_id'=>$this->user->position_id])->andWhere(['in','dir_id',$pmDirIds])->all();
+
+        foreach($pmList as $pmOne){
+            $pmCheck[$pmOne->dir_id][$pmOne->type] = 1;
+        }
+
+        $params['list'] = $list;
+        $params['pmCheck'] = $pmCheck;
+
+        return $this->render('permission_list',$params);
     }
 }
