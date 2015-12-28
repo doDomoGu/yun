@@ -60,9 +60,8 @@ class UserController extends BaseController
 
     public function actionPermissionList(){
         $this->view->title = '职员权限列表';
-
+        //$list = [];
         $list =  DirFunc::getListArr(0,true,true,true,false);
-
         $pmCheck = [];
         $pmDirIds = [];
         foreach($list as $l){
@@ -70,7 +69,9 @@ class UserController extends BaseController
                 $pmDirIds[] = $l->id;
             }
         }
-        $pmList = PositionDirPermission::find()->where(['position_id'=>$this->user->position_id])->andWhere(['in','dir_id',$pmDirIds])->all();
+        $pmList = PositionDirPermission::find()->where(['position_id'=>$this->user->position_id]);
+        //$pmList = $pmList->andWhere(['in','dir_id',$pmDirIds]);
+        $pmList = $pmList->all();
 
         foreach($pmList as $pmOne){
             $pmCheck[$pmOne->dir_id][$pmOne->type] = 1;
