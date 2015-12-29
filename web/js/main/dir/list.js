@@ -126,7 +126,7 @@ var uploader = Qiniu.uploader({
     //bucket 域名，下载资源时用到，**必需**
     container: pickfileId+'_container',           //上传区域DOM ID，默认是browser_button的父元素，
     max_file_size: '2000mb',           //最大文件体积限制
-    flash_swf_url: 'Moxie.swf',  //引入flash,相对路径
+    flash_swf_url: '/js/qiniu/Moxie.swf',  //引入flash,相对路径
     max_retries: 0,                   //上传失败最大重试次数
     dragdrop: true,                   //开启可拖曳上传
     drop_element: pickfileId+'_container',       //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
@@ -249,7 +249,7 @@ var uploader2 = Qiniu.uploader({
     //bucket 域名，下载资源时用到，**必需**
     container: pickfileId2+'_container',           //上传区域DOM ID，默认是browser_button的父元素，
     max_file_size: '2000mb',           //最大文件体积限制
-    flash_swf_url: 'Moxie.swf',  //引入flash,相对路径
+    flash_swf_url: '/js/qiniu/Moxie.swf',  //引入flash,相对路径
     max_retries: 0,                   //上传失败最大重试次数
     dragdrop: true,                   //开启可拖曳上传
     drop_element: pickfileId2+'_container',       //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
