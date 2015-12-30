@@ -20,10 +20,11 @@
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
             'options' => [/*'class' => 'form-horizontal',*/'autocomplete'=>'off'],
-
+            //'enableAjaxValidation'=>false,
+            //'enableClientValidation'=>false,
             'fieldConfig' => [
                 //'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-4\">{error}</div>",
-                'template' => "{input}",
+                'template' => "{input}{error}",
                 'labelOptions' => ['class' => 'col-lg-2 col-lg-offset-3 control-label'],
             ],
         ]); ?>
@@ -42,7 +43,7 @@
             'inputOptions'=>['placeholder' => 'Password | 密码','autocomplete'=>'off']
         ])->passwordInput() ?>
 
-        <?=$form->errorSummary($model)?>
+        <?/*=$model->getFirstError('username')*/?>
 </section>
         <?/*= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"col-lg-offset-5 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",

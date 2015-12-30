@@ -35,6 +35,10 @@ input,button,select,textarea{outline:none}
 input:focus{outline:none;border: 0;box-shadow: none;}
 
 .form-control:focus {outline:none;border: 0;box-shadow: none;}
+.has-error .form-control#loginform-username,
+.has-success .form-control#loginform-username,
+.has-error .form-control#loginform-password,
+.has-success .form-control#loginform-password {outline:none;border: 0;box-shadow: none;}
 
 .form-group {
     width:200px;
