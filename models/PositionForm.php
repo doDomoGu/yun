@@ -9,6 +9,7 @@ class PositionForm extends Model
 {
     public $id;
     public $name;
+    public $alias;
     public $describe;
     public $p_id;
     public $level;
@@ -25,6 +26,7 @@ class PositionForm extends Model
     public function attributeLabels(){
         return [
             'name' => '名称',
+            'alias' => '别名',
             'describe' => '描述',
             'p_id' => '父级',
             'level' => '层级',
@@ -43,7 +45,7 @@ class PositionForm extends Model
     public function rules()
     {
         return [
-            [['name', 'p_id'], 'required'],
+            [['name', 'alias', 'p_id'], 'required'],
             [['id', 'ord', 'level', 'is_leaf', 'is_last', 'is_class', 'p_id', 'status'], 'integer'],
             [['describe','shuoming','zhiquan','zhize','zhibiao'], 'safe']
 

@@ -23,6 +23,8 @@
 
         <?= $form->field($model, 'name') ?>
 
+        <?= $form->field($model, 'alias') ?>
+
         <?= $form->field($model, 'shuoming')->textarea() ?>
 
         <?= $form->field($model, 'zhiquan')->textarea() ?>
