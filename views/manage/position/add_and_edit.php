@@ -14,6 +14,13 @@
             ],
         ]); ?>
 
+        <div class="form-group">
+            <label class="col-lg-2 control-label" >父级部门</label>
+            <div class="col-lg-6" style="padding:7px 15px; font-weight: bold;color:#ED1B23;">
+                <?=\app\components\PositionFunc::getFullRoute($model->p_id)?>
+            </div>
+        </div>
+
         <?= $form->field($model, 'name') ?>
 
         <?= $form->field($model, 'shuoming')->textarea() ?>

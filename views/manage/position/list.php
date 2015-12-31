@@ -33,9 +33,11 @@
                     <td>
                         <?=BaseHtml::a('编辑',['position-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                         <?=BaseHtml::button('查看职员',['class'=>'btn btn-success btn-xs viewUserBtn','p_id'=>$l->id])?>
-                        <?php if($l->is_leaf)
-                            echo BaseHtml::a('目录权限',['position-dir-permission','position_id'=>$l->id],['class'=>'btn btn-warning btn-xs']);
-                        ?>
+                        <?php if($l->is_leaf):?>
+                            <?=BaseHtml::a('目录权限',['position-dir-permission','position_id'=>$l->id],['class'=>'btn btn-warning btn-xs'])?>
+                        <?php else:?>
+                            <?=BaseHtml::a('添加子部门/职位',['position-add-and-edit','p_id'=>$l->id],['class'=>'btn btn-danger btn-xs'])?>
+                        <?php endif;?>
                     </td>
                 </tr>
             <?php endforeach;?>

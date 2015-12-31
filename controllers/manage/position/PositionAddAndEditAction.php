@@ -11,18 +11,32 @@ class PositionAddAndEditAction extends Action{
     public function run(){
         $model = new PositionForm();
         $position = null;
-        $id = Yii::$app->request->get('id');
-        if($id!=''){
+        $id = Yii::$app->request->get('id',false);
+        $p_id = Yii::$app->request->get('p_id',false);
+        $action = null ;
+        if($id!=false){
             $position = Position::find()->where(['id'=>$id])->one();
             if($position){
                 $this->controller->view->title = '职位/部门 - 编辑';
                 $model->setAttributes($position->attributes);
+                $action = 'edit';
             }else{
                 Yii::$app->response->redirect('position')->send();
             }
-        }else{
-            $this->controller->view->title = '职位/部门 - 添加';
+        }elseif($p_id!=false){
+            $parPos = Position::find()->where(['id'=>$p_id,'is_leaf'=>0])->one();
+            if($parPos){
+                $model->p_id = $p_id;
+                //$model->type = $parPos->type;
+                $model->level = $parPos->level + 1;
+                $model->status = 1;
+                $this->controller->view->title = '职位/部门 - 添加';
+                $action = 'add';
+            }else{
+                Yii::$app->response->redirect('position')->send();
+            }
         }
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if($position == null){
                 $position = new Position();
@@ -42,6 +56,7 @@ class PositionAddAndEditAction extends Action{
         }
 
         $params['model'] = $model;
+        $params['action'] = $action;
         return $this->controller->render('position/add_and_edit',$params);
     }
 }
