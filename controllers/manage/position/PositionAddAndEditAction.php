@@ -40,10 +40,30 @@ class PositionAddAndEditAction extends Action{
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if($position == null){
                 $position = new Position();
+                $position->setAttributes($model->attributes);
+                //查找出当前父部门下的其他子目录 ord 最小的
+                $lastPos = Position::find()->where(['p_id'=>$p_id])->orderBy('ord asc')->one();
+                if($lastPos){
+                    //将原本is_last子部门职位改为0
+                    $lastPos->is_last = 0;
+                    $lastPos->save();
+                    //赋予新建的部门职位 ord = lastPos->ord - 1  is_last = 1
+                    $position->ord = $lastPos->ord - 1;
+                }else{
+                    $position->ord = 99;
+                }
+                $position->is_last = 1;
+                $position->is_class = 0;
+            }else{
+                $position->setAttributes($model->attributes);
             }
 
-            $position->setAttributes($model->attributes);
             if($position->save()){
+                //清除缓存
+                $cache = Yii::$app->getCache();
+                unset($cache['treeDataId']);
+
+                //重定向
                 $parents = PositionFunc::getParents($position->id);
                 $redirect = ['manage/position'];
                 if(isset($parents[2])){

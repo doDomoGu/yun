@@ -30,7 +30,7 @@ class PositionForm extends Model
             'describe' => '描述',
             'p_id' => '父级',
             'level' => '层级',
-            'is_leaf' => '是否叶级',
+            'is_leaf' => '是否职位',
             //'is_class' => '是否类',
             //'is_last' => '最后一个',
             'ord' => '排序',

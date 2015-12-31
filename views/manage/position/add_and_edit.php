@@ -25,15 +25,20 @@
 
         <?= $form->field($model, 'alias') ?>
 
+        <?php if($action=='add'):?>
+            <?= $form->field($model, 'is_leaf',['template'=>"{label}\n<div class=\"col-lg-4\">{input}{hint}</div>\n<div class=\"col-lg-5\">{error}</div>"])->dropDownList([0=>'否',1=>'是'])->hint('否：部门;     是：职位') ?>
+        <?php else:?>
+        <?php endif;?>
+
         <?= $form->field($model, 'shuoming')->textarea() ?>
 
         <?= $form->field($model, 'zhiquan')->textarea() ?>
 
         <?= $form->field($model, 'zhize')->textarea() ?>
 
-        <?= $form->field($model, 'ord',[
+        <?/*= $form->field($model, 'ord',[
             'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"
-        ]) ?>
+        ]) */?>
 
         <?= $form->field($model, 'status',[
             'template'=>"{label}\n<div class=\"col-lg-4\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>"

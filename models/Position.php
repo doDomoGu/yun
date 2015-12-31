@@ -10,7 +10,7 @@ class Position extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['name', 'required'],
+            [['name', 'alias'], 'required'],
             [['id', 'status', 'p_id', 'ord', 'is_leaf', 'is_last', 'level', 'is_class'], 'integer'],
             ['name', 'string', 'max'=>100],
             [['describe','shuoming','zhiquan','zhize','zhibiao'],'safe']
@@ -20,6 +20,7 @@ class Position extends \yii\db\ActiveRecord
     public function attributeLabels(){
         return [
             'name' => '名称',
+            'alias' => '别名',
             'describe' => '描述',
             'p_id' => '父级',
             'level' => '层级',
