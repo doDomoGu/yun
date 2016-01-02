@@ -37,6 +37,7 @@
     <?php endif;?>
     </tbody>
 </table>
-<div class="clearfix col-md-12 text-center">
+<div class="clearfix text-center">
     <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
 </div>
+<div class="clearfix text-center">共 <?=$pages->totalCount?> 个</div>

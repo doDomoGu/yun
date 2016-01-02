@@ -54,10 +54,10 @@ class DirFunc extends Component {
         if($p_id > 0){
             $pDir = File::find()->where(['id'=>$p_id])->one();
             if($pDir){
-                $route .= $separator.$pDir->filename;
                 if($pDir->p_id>0){
                     $route .= self::getFileFullRoute(0,$pDir->p_id,$separator);
                 }
+                $route .= $separator.$pDir->filename;
             }
         }
         return $route;

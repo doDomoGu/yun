@@ -87,7 +87,7 @@ class UserController extends BaseController
 
     public function actionFile(){
         $this->view->title = '我的文件';
-        $list = File::find()->where(['uid'=>$this->user->id]);
+        $list = File::find()->where(['uid'=>$this->user->id])->andWhere(['>','filetype',0]);
         $count = $list->count();
         $pageSize = 10;
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
