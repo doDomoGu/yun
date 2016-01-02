@@ -1,10 +1,11 @@
 <?php
-    use app\components\CommonFunc;
-    use app\components\PositionFunc;
     use app\components\DirFunc;
     use yii\bootstrap\BaseHtml;
     app\assets\AppAsset::addCssFile($this,'css/main/user/file.css');
 ?>
+<div>
+    <h3>我的文件</h3>
+</div>
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -36,3 +37,6 @@
     <?php endif;?>
     </tbody>
 </table>
+<div class="clearfix col-md-12 text-center">
+    <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
+</div>

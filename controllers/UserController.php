@@ -10,6 +10,7 @@ use Yii;
 use app\models\User;
 use app\models\UserChangePwdForm;
 use app\models\UserChangeHeadImgForm;
+use yii\data\Pagination;
 
 
 class UserController extends BaseController
@@ -86,9 +87,18 @@ class UserController extends BaseController
 
     public function actionFile(){
         $this->view->title = '我的文件';
-        $list = File::find()->where(['uid'=>$this->user->id])->all();
+        $list = File::find()->where(['uid'=>$this->user->id]);
+        $count = $list->count();
+        $pageSize = 10;
+        $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+        $list = $list
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy('id desc')
+            ->all();
 
         $params['list'] = $list;
+        $params['pages'] = $pages;
         return $this->render('file',$params);
     }
 }
