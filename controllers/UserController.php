@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\DirFunc;
 use app\models\Dir;
+use app\models\File;
 use app\models\PositionDirPermission;
 use Yii;
 use app\models\User;
@@ -81,5 +82,13 @@ class UserController extends BaseController
         $params['pmCheck'] = $pmCheck;
 
         return $this->render('permission_list',$params);
+    }
+
+    public function actionFile(){
+        $this->view->title = '我的文件';
+        $list = File::find()->where(['uid'=>$this->user->id])->all();
+
+        $params['list'] = $list;
+        return $this->render('file',$params);
     }
 }
