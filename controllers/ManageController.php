@@ -45,7 +45,7 @@ class ManageController extends BaseController
     }
 
     public function checkIsSuperAdmin(){
-        if($this->adminId = User::SUPER_ADMIN)
+        if($this->adminId == User::SUPER_ADMIN)
             return true;
         else
             return false;
