@@ -22,16 +22,20 @@
                 <th scope="row"><?=$l->id?></th>
                 <td><?=$l->filename?></td>
                 <td>
-                    <?php
-                        if($l->p_id>0){
-                            $link = ['/dir','p_id'=>$l->p_id];
-                        }else{
-                            $link = ['/dir','dir_id'=>$l->dir_id];
-                        }
-                    ?>
-                    <?=BaseHtml::a(DirFunc::getFileFullRoute($l->dir_id,$l->p_id),$link,['target'=>'_blank'])?>
+                    <?=DirFunc::getFileFullRoute($l->dir_id,$l->p_id)?>
                 </td>
-                <td></td>
+                <td>
+                    <?php
+                    if($l->p_id>0){
+                        $link = ['/dir','p_id'=>$l->p_id];
+                    }else{
+                        $link = ['/dir','dir_id'=>$l->dir_id];
+                    }
+                    ?>
+                    <?=BaseHtml::a('进入目录',$link,['target'=>'_blank','class'=>'btn btn-primary btn-xs'])?>
+
+
+                </td>
             </tr>
         <?php endforeach;?>
     <?php endif;?>
