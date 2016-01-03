@@ -18,6 +18,9 @@
             <a class="list-group-item <?=strpos($route,'manage/dir')===0?'active':''?>" href="/manage/dir">
                 板块目录
             </a>
+            <a class="list-group-item <?=strpos($route,'manage/file')===0?'active':''?>" href="/manage/file">
+                文件列表
+            </a>
             <a class="list-group-item <?=strpos($route,'manage/user')===0?'active':''?>" href="/manage/user">
                 公司职员
             </a>
@@ -32,6 +35,7 @@
             <button class="list-group-item disabled">招聘信息</button>
             <button class="list-group-item disabled">部门/职位</button>
             <button class="list-group-item disabled">板块目录</button>
+            <button class="list-group-item disabled">文件列表</button>
             <a class="list-group-item <?=strpos($route,'manage/user')===0?'active':''?>" href="/manage/user">
                 公司职员
             </a>

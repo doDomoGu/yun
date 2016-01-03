@@ -138,6 +138,9 @@ class ManageController extends BaseController
             'admin-set' => [
                 'class' => 'app\controllers\manage\admin\AdminSetAction',
             ],
+            'file' => [
+                'class' => 'app\controllers\manage\file\FileAction',
+            ],
             'cache' => [
                 'class' => 'app\controllers\manage\cache\CacheAction',
             ],
