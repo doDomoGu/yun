@@ -15,6 +15,12 @@ class File extends \yii\db\ActiveRecord
             [['describe', 'add_time', 'edit_time'],'safe']
         ];
     }
+
+
+    public function getUser()
+    {
+        return $this->hasOne('app\models\User', array('id' => 'uid'));
+    }
 /*CREATE TABLE `file` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `filename` varchar(200) NOT NULL COMMENT '文件名',

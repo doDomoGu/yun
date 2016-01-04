@@ -37,7 +37,7 @@ use app\components\DirFunc;
                 <th scope="row"><?=$l->id?></th>
                 <td><?=$l->filename?></td>
                 <td><?=$l->filetype>0?'<span class="label label-info">文件</span>':'<span class="label label-default">文件夹</span>'?></td>
-                <td><?=$l->uid?></td>
+                <td><?=$l->user->name?></td>
                 <td><?=DirFunc::getFileFullRoute($l->dir_id,$l->p_id)?></td>
                 <td>
 
