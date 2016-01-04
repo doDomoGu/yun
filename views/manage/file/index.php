@@ -39,7 +39,24 @@ use app\components\DirFunc;
                 <td><?=$l->filetype>0?'<span class="label label-info">文件</span>':'<span class="label label-default">文件夹</span>'?></td>
                 <td><?=$l->uid?></td>
                 <td><?=DirFunc::getFileFullRoute($l->dir_id,$l->p_id)?></td>
-                <td><?=BaseHtml::a('编辑',['user-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
+                <td>
+
+                    <?php
+                    if($l->p_id>0){
+                        $link = ['/dir','p_id'=>$l->p_id];
+                    }else{
+                        $link = ['/dir','dir_id'=>$l->dir_id];
+                    }
+
+
+                    ?>
+                    <p>
+                        <?=BaseHtml::a('进入目录',$link,['target'=>'_blank','class'=>'btn btn-primary btn-xs'])?>
+                    </p>
+                    <p>
+                        <?=BaseHtml::a('下载',['dir/download','id'=>$l->id],['target'=>'_blank','class'=>'btn btn-success btn-xs'])?>
+                    </p>
+                </td>
             </tr>
         <?php endforeach;?>
     <?php endif;?>
