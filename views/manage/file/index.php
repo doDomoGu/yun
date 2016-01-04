@@ -3,7 +3,7 @@ use yii\bootstrap\BaseHtml;
 //use app\components\CommonFunc;
 //use app\components\PositionFunc;
 use app\components\DirFunc;
-//app\assets\AppAsset::addJsFile($this,'js/main/manage-user.js');
+app\assets\AppAsset::addJsFile($this,'js/main/manage/file/index.js');
 ?>
 
 <table class="table table-bordered">

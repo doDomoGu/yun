@@ -5,16 +5,38 @@ use app\models\File;
 use yii\base\Action;
 use Yii;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 
 class FileAction extends Action{
     public function run(){
         $this->controller->view->title = '文件列表 - 管理中心';
         $search = [
-            'filename'=>''
+            'filename' => '',
+            'username' => '',
         ];
-
+        $searchPost = yii::$app->request->post('search',false);
 
         $list = File::find();
+        if($searchPost){
+            $search = ArrayHelper::merge($search,$searchPost);
+            foreach($search as $k=>$s){
+                if(in_array($k,['filename'])){
+                    if($s!='')
+                        $list->andWhere(['like',$k,$s]);
+                }else if(in_array($k,['status','gender'])){
+                    if($s!=='')
+                        $list->andWhere([$k=>$s]);
+                }/*else if(in_array($k,['position_id'])){
+                    if($s!==''){
+                        $arr = ArrayHelper::merge([$s],PositionFunc::getAllChildrenIds($s));
+                        $list->andWhere(['in',$k,$arr]);
+                    }
+
+                }*/
+            }
+        }
+
+
 
         $count = $list->count();
         $pageSize = 20;
