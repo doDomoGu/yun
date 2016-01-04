@@ -2,6 +2,7 @@
 namespace app\controllers\manage\file;
 
 use app\models\File;
+use app\models\User;
 use yii\base\Action;
 use Yii;
 use yii\data\Pagination;
@@ -19,14 +20,24 @@ class FileAction extends Action{
         $list = File::find();
         if($searchPost){
             $search = ArrayHelper::merge($search,$searchPost);
+            /*var_dump($search);exit;*/
             foreach($search as $k=>$s){
                 if(in_array($k,['filename'])){
                     if($s!='')
                         $list->andWhere(['like',$k,$s]);
-                }else if(in_array($k,['status','gender'])){
+                }else if($k=='username'){
+                    $users = User::find()->where(['like','name',$s])->all();
+                    $uids = [];
+                    if(!empty($users)){
+                        foreach($users as $u){
+                            $uids[] = $u->id;
+                        }
+                    }
+                    $list->andWhere(['in','uid',$uids]);
+                }/*else if(in_array($k,['status','gender'])){
                     if($s!=='')
                         $list->andWhere([$k=>$s]);
-                }/*else if(in_array($k,['position_id'])){
+                }*//*else if(in_array($k,['position_id'])){
                     if($s!==''){
                         $arr = ArrayHelper::merge([$s],PositionFunc::getAllChildrenIds($s));
                         $list->andWhere(['in',$k,$arr]);

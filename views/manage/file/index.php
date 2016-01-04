@@ -13,7 +13,7 @@ app\assets\AppAsset::addJsFile($this,'js/main/manage/file/index.js');
             <th>#</th>
             <th><input id="s_filename" name="search[filename]" value="<?=$search['filename']?>" size="14" /></th>
             <th>--</th>
-            <th>--</th>
+            <th><input id="s_filename" name="search[username]" value="<?=$search['username']?>" size="14" /></th>
             <th>--</th>
             <th><button type="button" id="searchBtn" >检索</button></th>
             <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
