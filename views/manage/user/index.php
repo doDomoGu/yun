@@ -3,7 +3,7 @@
     use app\components\CommonFunc;
     use app\components\PositionFunc;
 
-    app\assets\AppAsset::addJsFile($this,'js/main/manage-user.js');
+    app\assets\AppAsset::addJsFile($this,'js/main/manage/user/index.js');
 ?>
 
         <?=BaseHtml::a('新增职员',['user-add-and-edit'],['class'=>'btn btn-primary'])?>

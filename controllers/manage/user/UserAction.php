@@ -55,6 +55,6 @@ class UserAction extends Action{
         $params['list'] = $list;
         $params['search'] = $search;
         $params['pages'] = $pages;
-        return $this->controller->render('user/list',$params);
+        return $this->controller->render('user/index',$params);
     }
 }
