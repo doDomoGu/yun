@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\File;
 use yii\filters\VerbFilter;
 use app\models\News;
 use app\models\Position;
@@ -163,6 +164,9 @@ class ManageController extends BaseController
         $params['recruitmentCount'] = Recruitment::find()->where('status = 1')->count();
 
         $params['positionCount'] = Position::find()->where('status = 1')->count();
+
+        $params['fileCount'] = File::find()->where(['status'=>1])->andWhere(['>','filetype',0])->count();
+        $params['dirCount'] = File::find()->where(['status'=>1,'filetype'=>0])->count();
 
         $params['userCount'] = User::find()->where('status = 1')->count();
         $params['userCountAll'] = User::find()->where('')->count();

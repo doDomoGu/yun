@@ -21,6 +21,14 @@
     </tr>
     <tr>
         <td>
+            <h3>
+                文件 <?=BaseHtml::a($fileCount,['manage/file'])?> 个
+                文件夹 <?=BaseHtml::a($dirCount,['manage/file'])?> 个
+            </h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <h3>职员 <?=BaseHtml::a($userCount,['manage/user'])?> 位 ( 共 <?=$userCountAll?> 位， <?=$userCountDisable?> 位禁用 )</h3>
         </td>
     </tr>
