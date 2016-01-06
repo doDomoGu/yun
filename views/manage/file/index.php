@@ -12,7 +12,13 @@ app\assets\AppAsset::addJsFile($this,'js/main/manage/file/index.js');
         <form id="searchForm" method="post">
             <th>#</th>
             <th><input id="s_filename" name="search[filename]" value="<?=$search['filename']?>" size="14" /></th>
-            <th>--</th>
+            <th>
+                <select id="s_isfile" name="search[isfile]" >
+                    <option value="">----</option>
+                    <option value="0" <?=$search['isfile']!=='' && $search['isfile']==0?'selected="selected"':''?>>文件夹</option>
+                    <option value="1" <?=$search['isfile']!=='' && $search['isfile']==1?'selected="selected"':''?>>文件</option>
+                </select>
+            </th>
             <th><input id="s_filename" name="search[username]" value="<?=$search['username']?>" size="14" /></th>
             <th>--</th>
             <th><button type="button" id="searchBtn" >检索</button></th>
@@ -66,3 +72,4 @@ app\assets\AppAsset::addJsFile($this,'js/main/manage/file/index.js');
 <div class="clearfix col-md-12 text-center">
     <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
 </div>
+<div class="clearfix text-center">共 <?=$pages->totalCount?> 个</div>

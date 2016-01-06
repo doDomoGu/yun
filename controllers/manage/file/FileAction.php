@@ -13,7 +13,9 @@ class FileAction extends Action{
         $this->controller->view->title = '文件列表 - 管理中心';
         $search = [
             'filename' => '',
+            'isfile' => '',
             'username' => '',
+
         ];
         $searchPost = yii::$app->request->post('search',false);
 
@@ -34,6 +36,12 @@ class FileAction extends Action{
                         }
                     }
                     $list->andWhere(['in','uid',$uids]);
+                }else if($k=='isfile'){
+                    if($s==='0'){
+                        $list->andWhere(['filetype'=>0]);
+                    }elseif($s==='1'){
+                        $list->andWhere(['>','filetype',0]);
+                    }
                 }/*else if(in_array($k,['status','gender'])){
                     if($s!=='')
                         $list->andWhere([$k=>$s]);
