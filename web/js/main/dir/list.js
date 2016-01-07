@@ -16,7 +16,7 @@ $('.dir-item .info').mouseenter(function(){
     $(this).parent('.dir-item').removeClass('hover');
 });
 
-$('.dir-item').click(function(){
+/*$('.dir-item').click(function(){
     if($(this).attr('download-check')=='enable'){
         if($(this).attr('data-is-dir')=='1'){
             location.href='/dir?p_id='+$(this).attr('data-id');
@@ -32,7 +32,28 @@ $('.dir-item').click(function(){
             alert('没有下载权限');
         }
     }
+});*/
+
+$('.clickarea').click(function(){
+    _this = $(this).parent('.dir-item');
+    if(_this.attr('download-check')=='enable'){
+        if(_this.attr('data-is-dir')=='1'){
+            location.href='/dir?p_id='+_this.attr('data-id');
+        }else{
+            _download_times = parseInt(_this.find('.download_times span').html())+1;
+            _this.find('.download_times span').html(_download_times);
+            location.href='/dir/download?id='+_this.attr('data-id');
+        }
+    }else{
+        if(_this.attr('data-is-dir')=='1'){
+            alert('没有权限打开');
+        }else{
+            alert('没有下载权限');
+        }
+    }
 });
+
+
 
 $('#createDirModalContent button.btn').click(function(){
     _dirname = $('#createDirModalContent .dirname').val();

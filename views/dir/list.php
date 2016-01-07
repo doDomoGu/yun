@@ -6,7 +6,7 @@
     app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
 
     if($route=='list'){
-        app\assets\AppAsset::addCssFile($this,'css/dir-list.css');
+        app\assets\AppAsset::addCssFile($this,'css/main/dir/list.css');
     }
 
     app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
@@ -51,10 +51,10 @@
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <div class="dir-item <?=$route=='list'?'file-item':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
-        <div class="icon">
+        <div class="icon clickarea">
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
         </div>
-        <div class="info">
+        <div class="info clickarea">
             <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
             <div class="filesize">文件大小：<?=FileFrontFunc::sizeFormat($l->filesize)?></div>
             <div class="upload_time">时间：<?=$l->add_time?></div>
