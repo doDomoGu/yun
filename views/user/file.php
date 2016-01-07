@@ -11,6 +11,7 @@
             <th>#</th>
             <th>文件名</th>
             <th>所在目录</th>
+            <th>上传时间</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -22,6 +23,9 @@
                     <td><?=$l->filename?></td>
                     <td>
                         <?=DirFunc::getFileFullRoute($l->dir_id,$l->p_id)?>
+                    </td>
+                    <td>
+                        <?=$l->add_time?>
                     </td>
                     <td>
                         <?php
