@@ -3,19 +3,21 @@
 namespace app\controllers;
 use yii;
 
-class HelpController extends BaseController
+class VersionController extends BaseController
 {
-    public $layout = 'main_help';
+    public $layout = 'main';
 
     public function beforeAction($action){
         if(parent::beforeAction($action)){
-            $this->view->title = '帮助中心'.$this->titleSuffix;
+            $this->view->title = '版本功能'.$this->titleSuffix;
             return true;
         }else
             return false;
     }
     public function actionIndex(){
-        $index = yii::$app->request->get('index',1);
+        return $this->render('index');
+
+        /*$index = yii::$app->request->get('index',1);
         if(in_array($index,[1,2,3,4,5,6,7])){
             $viewName = 'index';
             if($index>1){
@@ -25,7 +27,7 @@ class HelpController extends BaseController
         }else{
             $this->redirect('/');
             return false;
-        }
+        }*/
 
     }
 
