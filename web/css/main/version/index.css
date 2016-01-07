@@ -1,0 +1,15 @@
+.version-item {
+    padding:10px;
+}
+
+.version-item article {
+    padding:10px 40px;
+}
+
+.version-item article h3 {
+    color:#d6e9c6;
+}
+
+.version-item article ul {
+    padding-left:14px;
+}
