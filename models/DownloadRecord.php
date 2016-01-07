@@ -14,6 +14,10 @@ class DownloadRecord extends \yii\db\ActiveRecord
             [['download_time'],'default','value'=>date('Y-m-d H:i:s')],
         ];
     }
+
+    public function getFile(){
+        return $this->hasOne('app\models\File', array('id' => 'file_id'));
+    }
 /*CREATE TABLE `download_record` (
 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `file_id` int(11) NOT NULL COMMENT '文件ID',

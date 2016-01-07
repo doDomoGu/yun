@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\DirFunc;
 use app\models\Dir;
+use app\models\DownloadRecord;
 use app\models\File;
 use app\models\PositionDirPermission;
 use Yii;
@@ -100,5 +101,22 @@ class UserController extends BaseController
         $params['list'] = $list;
         $params['pages'] = $pages;
         return $this->render('file',$params);
+    }
+
+    public function actionDownload(){
+        $this->view->title = '我的下载';
+        $list = DownloadRecord::find()->where(['uid'=>$this->user->id]);
+        $count = $list->count();
+        $pageSize = 10;
+        $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+        $list = $list
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy('id desc')
+            ->all();
+
+        $params['list'] = $list;
+        $params['pages'] = $pages;
+        return $this->render('download',$params);
     }
 }
