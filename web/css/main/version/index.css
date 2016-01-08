@@ -1,11 +1,11 @@
 .version-item {
-    padding:10px;
-}
-
-.version-item article {
     padding:20px 40px;
     background-color: #337ab7;
     color: #fff;
+}
+
+.version-item article {
+
 }
 
 .version-item article h3 {
@@ -19,5 +19,5 @@
 }
 
 .version-item article dl{
-    margin:0;
+    /*margin:0;*/
 }
