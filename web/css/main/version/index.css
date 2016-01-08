@@ -3,13 +3,21 @@
 }
 
 .version-item article {
-    padding:10px 40px;
+    padding:20px 40px;
+    background-color: #337ab7;
+    color: #fff;
 }
 
 .version-item article h3 {
-    color:#d6e9c6;
+    color: #e9e831;
+    margin-top: 0;
 }
 
-.version-item article ul {
-    padding-left:14px;
+.version-item article h3 span{
+    color: #eee;
+    font-size:14px;
+}
+
+.version-item article dl{
+    margin:0;
 }
