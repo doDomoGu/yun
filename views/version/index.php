@@ -3,6 +3,8 @@
 ?>
 <!-- ●▪· -->
 <section class="version-item">
+    <?=$this->render('0.8.0.php')?>
+    <?=$this->render('0.7.0.php')?>
     <?=$this->render('0.6.0.php')?>
     <?=$this->render('0.5.0.php')?>
     <?=$this->render('0.4.0.php')?>
