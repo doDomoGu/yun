@@ -1,6 +1,6 @@
 .version-item {
-    padding:20px 40px;
-    background-color: #337ab7;
+    padding:0 40px 20px;
+    background-color: #080808;
     color: #fff;
 }
 
@@ -9,15 +9,25 @@
 }
 
 .version-item article h3 {
-    color: #e9e831;
-    margin-top: 0;
+    color: #F9BE44;
+    padding-top:20px;
+    margin:0;
 }
 
-.version-item article h3 span{
-    color: #eee;
+.version-item article h3 span {
+    color: #ddd;
     font-size:14px;
 }
 
-.version-item article dl{
-    /*margin:0;*/
+.version-item article dl {
+    padding:10px 0 0;
+    margin:0;
+}
+
+.version-item article dl dt {
+    font-weight: normal;
+}
+
+.version-item article dl dd {
+    color:#ddd;
 }
