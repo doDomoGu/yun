@@ -72,7 +72,7 @@
 <div style="padding:4px;">
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        还没有任何文件！
+        没有找到任何文件！
     </div>
 </div>
 <?php endif;?>
