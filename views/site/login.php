@@ -49,11 +49,12 @@
             'template' => "<div class=\"col-lg-offset-5 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) */?>
 
-        <div class="form-group hidden">
+        <!--<div class="form-group hidden">
             <div class="col-lg-offset-5 col-lg-7">
-                <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?/*= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) */?>
             </div>
-        </div>
+        </div>-->
+        <input type="submit" style="display:block;overflow:hidden;width:0;height:0; position:absolute;padding:0;margin:0;border:0;" />
 
         <?php ActiveForm::end(); ?>
         </article>
