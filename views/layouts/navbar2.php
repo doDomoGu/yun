@@ -57,8 +57,8 @@ $item2 = [];
     }
 
 
-    $item2 = ArrayHelper::merge($item2,[['label' => '帮助中心', 'url' => '/help','options'=>['class'=>'user-item']]]);
-    $item2 = ArrayHelper::merge($item2,[['label' => '版本功能', 'url' => '/version','options'=>['class'=>'user-item']]]);
+    $item2 = ArrayHelper::merge($item2,[['label' => '帮助中心', 'url' => '/help','options'=>['class'=>'user-item'],'linkOptions'=>['target'=>'_blank']]]);
+    $item2 = ArrayHelper::merge($item2,[['label' => '版本功能', 'url' => '/version','options'=>['class'=>'user-item'],'linkOptions'=>['target'=>'_blank']]]);
 
 
     $route = Yii::$app->controller->route;
