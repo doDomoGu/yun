@@ -24,7 +24,7 @@
                     <div class="bizmail_column">
                         <!--<label>帐号:</label>-->
                         <div class="bizmail_inputArea">
-                            <input type="text" value="" class="text" name="uin"><span class="email-suffix">@songtang.net</span>
+                            <input type="text" value="" class="text" name="uin" /><span class="email-suffix">@songtang.net</span>
                             <input type="hidden" value="songtang.net" name="domain">
                         </div>
                     </div>
@@ -36,8 +36,10 @@
                         </div>
                     </div>
                     <div class="bizmail_SubmitArea">
-                        <input type="submit" value="" style="display: none;" name="" class="buttom">
+                        <!--<input type="submit" value="" style="display: none;" name="" class="buttom">-->
+                        <input type="submit" style="display:block;overflow:hidden;width:0;height:0; position:absolute;padding:0;margin:0;border:0;" />
                     </div>
+
                 </form>
             </article>
         </section>
