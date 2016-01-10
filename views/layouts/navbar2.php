@@ -8,17 +8,22 @@ use yii\helpers\ArrayHelper;
 ?>
 <div class="navbar-background">
 <?php
-    //导航栏菜单项
-    $navbarItems = [[
-        'label' => '首页<span class="active-red"></span>',
-        'url' => ['site/index'],
-        'encode' => false
-    ]];
+//导航栏菜单项
 
-    $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
+    $navbarItems = [];
 
     $iconClass = 'glyphicon glyphicon-user';
     if(!yii::$app->user->isGuest){
+        $navbarItems = [[
+            'label' => '首页<span class="active-red"></span>',
+            'url' => ['site/index'],
+            'encode' => false
+        ]];
+
+        $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
+
+
+
         $item2 = [['label' => '职员资料', 'url' => '/user','options'=>['class'=>'user-item']]];
         $item2 = ArrayHelper::merge($item2,[['label' => '我的上传', 'url' => '/user/file','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的下载', 'url' => '/user/download','options'=>['class'=>'user-item']]]);
@@ -27,10 +32,18 @@ use yii\helpers\ArrayHelper;
         if($this->context->checkIsAdmin())
             $item2 = ArrayHelper::merge($item2,[['label' => '管理中心*', 'url' => '/manage','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout','options'=>['class'=>'user-item']]]);
+        $item2 = ArrayHelper::merge($item2,['<li class="divider"></li>']);
     }else{
         $iconClass = 'glyphicon glyphicon-menu-hamburger';
-        $item2 = [['label' => '登录', 'url' => '/site/login','options'=>['class'=>'user-item']]];
 
+        $navbarItems = [[
+            'label'=>'<span style="border:1px solid #ccc;padding:4px 10px;">登录</span><span class="active-red"></span>',
+            'url'=>['/site/login'],
+            'encode'=>false
+        ]];
+
+        //$item2 = [['label' => '登录', 'url' => '/site/login','options'=>['class'=>'user-item']]];
+$item2 = [];
         /*$navbarItems = ArrayHelper::merge(
             $navbarItems,
             [
@@ -43,7 +56,7 @@ use yii\helpers\ArrayHelper;
         );*/
     }
 
-    $item2 = ArrayHelper::merge($item2,['<li class="divider"></li>']);
+
     $item2 = ArrayHelper::merge($item2,[['label' => '帮助中心', 'url' => '/help','options'=>['class'=>'user-item']]]);
     $item2 = ArrayHelper::merge($item2,[['label' => '版本功能', 'url' => '/version','options'=>['class'=>'user-item']]]);
 
@@ -51,7 +64,7 @@ use yii\helpers\ArrayHelper;
     $route = Yii::$app->controller->route;
     $routeArr = explode('/',$route);
     $route1 = isset($routeArr[0]) && $routeArr[0] !=''?$routeArr[0]:'';
-    $userActive = $route1 !='' && in_array($route1,['user','manage','message','help'])?true:false;
+    $userActive = $route1 !='' && in_array($route1,['user','manage','message','help','version'])?true:false;
     $navbarItems = ArrayHelper::merge($navbarItems,
         [
             [
