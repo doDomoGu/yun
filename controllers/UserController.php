@@ -119,4 +119,8 @@ class UserController extends BaseController
         $params['pages'] = $pages;
         return $this->render('download',$params);
     }
+
+    public function actionSign(){
+
+    }
 }

@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
 
 
         $item2 = [['label' => '职员资料', 'url' => '/user','options'=>['class'=>'user-item']]];
+        $item2 = ArrayHelper::merge($item2,[['label' => '每日签到', 'url' => '/user/sign','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的上传', 'url' => '/user/file','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的下载', 'url' => '/user/download','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的权限', 'url' => '/user/permission-list','options'=>['class'=>'user-item']]]);

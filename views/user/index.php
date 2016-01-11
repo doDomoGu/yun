@@ -3,14 +3,18 @@
     use app\components\PositionFunc;
     app\assets\AppAsset::addCssFile($this,'css/main/user/index.css');
 ?>
-<div class="row">
-    <div class="col-md-3 text-center">
-        <img src="<?=$user->head_img!=''?CommonFunc::imgUrl($user->head_img):'/images/default-user.png'?>"
+<section>
+    <article id="head-img-aside" class="text-center">
+        <div id="head-img-pic">
+            <img src="<?=$user->head_img!=''?CommonFunc::imgUrl($user->head_img):'/images/default-user.png'?>"
              alt="职员头像" class="img-thumbnail" style="width:250px;height:250px;">
-        <br/>
-        <?=\yii\bootstrap\Html::a('修改头像','/user/change-head-img',['class'=>'btn btn-primary btn-xs'])?>
-    </div>
-    <div class="col-md-9">
+        </div>
+        <div id="head-img-btn">
+            <?=\yii\bootstrap\Html::a('修改头像','/user/change-head-img',['class'=>'btn btn-primary btn-sm'])?>
+        </div>
+
+    </article>
+    <article id="user-info-aside">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">职员资料</h3>
@@ -83,5 +87,5 @@
                 </tr>
             </table>
         </div>
-    </div>
-</div>
+    </article>
+</section>
