@@ -9,6 +9,7 @@ class UserIdentity extends \yii\base\Object implements \yii\web\IdentityInterfac
     public $password;
     public $authKey;
     public $accessToken;
+    public $status;
 
     /*private static $users = [
         '100' => [
@@ -65,7 +66,8 @@ class UserIdentity extends \yii\base\Object implements \yii\web\IdentityInterfac
                 'username' => $user->username,
                 'password' => $user->password,
                 'authKey' => 'key-'.$user->id,
-                'accessToken' => 'token-'.$user->id
+                'accessToken' => 'token-'.$user->id,
+                'status' => $user->status
             ];
             return new static($userStatic);
         }

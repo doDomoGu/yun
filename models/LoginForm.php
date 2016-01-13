@@ -34,10 +34,15 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, '用户名或者密码错误');
             }
+            
+            if (!$user->status==1) {
+                $this->addError($attribute, '该用户被禁用');
+            }
+
+
         }
     }
 
@@ -61,4 +66,7 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
+
+
 }

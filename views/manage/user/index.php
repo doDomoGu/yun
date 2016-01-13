@@ -35,9 +35,9 @@
                     </th>
                     <th>
                         <select id="s_status" name="search[status]" >
-                            <option value="">----</option>
+                            <option value="">全部</option>
                             <option value="0" <?=$search['status']!=='' && $search['status']==0?'selected="selected"':''?>>禁用</option>
-                            <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>正常</option>
+                            <option value="1" <?=$search['status']!=='' && $search['status']==1?'selected="selected"':''?>>启用</option>
                         </select>
                     </th>
                     <th><button type="button" id="searchBtn" >检索</button></th>
@@ -69,7 +69,7 @@
                     <td><?=CommonFunc::getGender($l->gender)?></td>
                     <td><?=$l->mobile?></td>
                     <td><?=$l->phone?></td>
-                    <td><?=$l->status==1?'正常':'禁用'?></td>
+                    <td><?=$l->status==1?'启用':'禁用'?></td>
                     <td><?=BaseHtml::a('编辑',['user-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?></td>
                 </tr>
             <?php endforeach;?>

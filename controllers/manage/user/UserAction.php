@@ -16,7 +16,7 @@ class UserAction extends Action{
             'name' => '',
             'phone' => '',
             'mobile' => '',
-            'status' => '',
+            'status' => 1,
             'gender' => '',
             'position_id' => '',
         ];
@@ -25,21 +25,21 @@ class UserAction extends Action{
         $list = User::find();
         if($searchPost){
             $search = ArrayHelper::merge($search,$searchPost);
-            /*var_dump($search);exit;*/
-            foreach($search as $k=>$s){
-                if(in_array($k,['username','name','phone','mobile'])){
-                    if($s!='')
-                        $list->andWhere(['like',$k,$s]);
-                }else if(in_array($k,['status','gender'])){
-                    if($s!=='')
-                        $list->andWhere([$k=>$s]);
-                }else if(in_array($k,['position_id'])){
-                    if($s!==''){
-                        $arr = ArrayHelper::merge([$s],PositionFunc::getAllChildrenIds($s));
-                        $list->andWhere(['in',$k,$arr]);
-                    }
-
+        }
+        /*var_dump($search);exit;*/
+        foreach($search as $k=>$s){
+            if(in_array($k,['username','name','phone','mobile'])){
+                if($s!='')
+                    $list->andWhere(['like',$k,$s]);
+            }else if(in_array($k,['status','gender'])){
+                if($s!=='')
+                    $list->andWhere([$k=>$s]);
+            }else if(in_array($k,['position_id'])){
+                if($s!==''){
+                    $arr = ArrayHelper::merge([$s],PositionFunc::getAllChildrenIds($s));
+                    $list->andWhere(['in',$k,$arr]);
                 }
+
             }
         }
         $count = $list->count();
