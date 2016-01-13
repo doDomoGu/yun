@@ -121,6 +121,30 @@ class UserController extends BaseController
     }
 
     public function actionSign(){
+        $this->view->title = '每日签到';
+        $y = yii::$app->request->get('y',false);
+        $m = yii::$app->request->get('m',false);
+        $y = $y?$y:date('Y');
+        $m = $m?$m:date('m');
 
+        $dateFirst = $y.$m.'01'; //月份第一天
+
+        $dayNum = date('t',strtotime($dateFirst)); //月份总天数
+
+        $dateLast = $y.$m.$dayNum; //月份最后一天
+
+        $today = date('Y-m-d'); //当前日期
+
+        $params['dateFirst'] = $dateFirst;
+        $params['dateLast'] = $dateLast;
+        $params['dayNum'] = $dayNum;
+        $params['today'] = $today;
+
+
+//        var_dump($y,$m);exit;
+        //$calender =
+
+
+        return $this->render('sign',$params);
     }
 }
