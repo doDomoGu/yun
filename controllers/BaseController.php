@@ -23,6 +23,11 @@ class BaseController extends Controller
         $this->titleSuffix = '_'.yii::$app->id;
         if(!Yii::$app->user->isGuest){
             $this->user = User::find()->where(['id'=>yii::$app->user->id])->one();
+            if(!$this->user->status==1){
+                Yii::$app->user->logout();
+                return $this->goHome();
+            }
+
             $this->position = Position::find()->where(['id'=>$this->user->position_id])->one();
         }
 
