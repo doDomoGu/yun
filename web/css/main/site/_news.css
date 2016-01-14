@@ -11,7 +11,7 @@
 .fullSlide .bd{ position:relative; z-index:0;  }
 .fullSlide .bd ul{ width:100% !important; }
 .fullSlide .bd li{ width:100% !important;  height:500px; }
-.fullSlide .bd li .siteWidth{ width:1000px; position:relative; margin:0 auto;  height:500px;  }
+.fullSlide .bd li .siteWidth{ width:100%; position:relative; margin:0 auto;  height:500px;  }
 .fullSlide .bd li a{ position:absolute; width:100%; height:500px; display:block; z-index:1;;   }
 .fullSlide .bd .txt{ position:absolute; width:415px; top:100px; left:22px;   font:normal 18px/30px "Microsoft YaHei";    }
 .fullSlide .bd .btn{ display:block; zoom:1; margin-top:8px;  width:72px; padding-right:10px;  height:31px; line-height:31px; text-align:center; color:#fff; font-size:12px; background:url(../../../images/common/banner-btn.png) 0 0 no-repeat;
