@@ -7,6 +7,7 @@ use app\models\Dir;
 use app\models\DownloadRecord;
 use app\models\File;
 use app\models\PositionDirPermission;
+use app\models\UserSign;
 use Yii;
 use app\models\User;
 use app\models\UserChangePwdForm;
@@ -129,16 +130,46 @@ class UserController extends BaseController
 
         $dateFirst = $y.$m.'01'; //月份第一天
 
+        $weekdayFirst = date('w',strtotime($dateFirst));
+
         $dayNum = date('t',strtotime($dateFirst)); //月份总天数
 
         $dateLast = $y.$m.$dayNum; //月份最后一天
 
+        $weekdayLast = date('w',strtotime($dateLast));
+
         $today = date('Y-m-d'); //当前日期
 
+        $prevMonth = strtotime('-1 month',strtotime($dateFirst));
+
+        $nextMonth = strtotime('+1 month',strtotime($dateFirst));
+
+        $prevLink = ['/user/sign','y'=>date('Y',$prevMonth),'m'=>date('m',$prevMonth)];
+        $nextLink = ['/user/sign','y'=>date('Y',$nextMonth),'m'=>date('m',$nextMonth)];
+
+
+        $signs = UserSign::find()->where(['uid'=>$this->user->id,'y'=>$y,'m'=>$m])->all();
+        $signList = [];
+        foreach($signs as $s){
+            $signList[] = $s->d;
+        }
+
+        $params['y'] = $y;
+        $params['m'] = $m;
+
+        $params['prevLink'] = $prevLink;
+        $params['nextLink'] = $nextLink;
+
+
         $params['dateFirst'] = $dateFirst;
+        $params['weekdayFirst'] = $weekdayFirst;
         $params['dateLast'] = $dateLast;
+        $params['weekdayLast'] = $weekdayLast;
         $params['dayNum'] = $dayNum;
         $params['today'] = $today;
+
+
+        $params['signList'] = $signList;
 
 
 //        var_dump($y,$m);exit;

@@ -1,0 +1,55 @@
+#calendar {
+    padding:0 44px;
+    width:100%;
+}
+
+#cal-title {
+    width:800px;
+    margin: 10px 126px;
+}
+#cal-title .ym{
+    font-size:26px;
+    font-weight: bold;
+    width:600px;
+    display: block;
+    float:left;
+    text-align: center;
+}
+
+#cal-title .prev-btn,#cal-title .next-btn {
+    width:100px;
+    display: block;
+    float:left;
+    text-align: center;
+}
+
+#calendar table{
+    /*width:500px;*/
+}
+
+#calendar table th,#calendar table td{
+    text-align: center;
+    padding:20px;
+    width:150px;
+}
+
+/*#calendar table td{
+    text-align: center;
+    padding:2px;
+    width:150px;
+}*/
+
+#calendar table td.signed{
+    background: #ED1B23;
+    color:#fff;
+}
+
+#calendar table td.today{
+    background: #e38d13;
+    color:#fff;
+    cursor:pointer;
+}
+
+#calendar table td.today:hover{
+    background: #f39d23;
+}
