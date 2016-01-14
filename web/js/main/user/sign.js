@@ -1,5 +1,5 @@
 $(function(){
     $('.today').click(function(){
-        location.href = '/user';
+        location.href = '/user/sign-in';
     });
 });

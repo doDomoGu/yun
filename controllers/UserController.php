@@ -127,6 +127,10 @@ class UserController extends BaseController
         $m = yii::$app->request->get('m',false);
         $y = $y?$y:date('Y');
         $m = $m?$m:date('m');
+        if(!(in_array($y,['2015','2016','2017','2018']) && in_array($m,['01','02','03','04','05','06','07','08','09','10','11','12']))){
+            Yii::$app->response->redirect('/user/sign')->send();
+        }
+
 
         $dateFirst = $y.$m.'01'; //月份第一天
 
@@ -147,6 +151,12 @@ class UserController extends BaseController
         $prevLink = ['/user/sign','y'=>date('Y',$prevMonth),'m'=>date('m',$prevMonth)];
         $nextLink = ['/user/sign','y'=>date('Y',$nextMonth),'m'=>date('m',$nextMonth)];
 
+        $signTodayFlag = false;
+
+        $signToday = UserSign::find()->where(['uid'=>$this->user->id,'y'=>date('Y'),'m'=>date('m'),'d'=>date('d')])->one();
+        if($signToday!=NULL){
+            $signTodayFlag = true;
+        }
 
         $signs = UserSign::find()->where(['uid'=>$this->user->id,'y'=>$y,'m'=>$m])->all();
         $signList = [];
@@ -168,8 +178,9 @@ class UserController extends BaseController
         $params['dayNum'] = $dayNum;
         $params['today'] = $today;
 
-
         $params['signList'] = $signList;
+
+        $params['signTodayFlag'] = $signTodayFlag;
 
 
 //        var_dump($y,$m);exit;
@@ -177,5 +188,29 @@ class UserController extends BaseController
 
 
         return $this->render('sign',$params);
+    }
+
+    public function actionSignIn(){
+        $this->view->title = '每日签到';
+        $y = date('Y');
+        $m = date('m');
+        $d = date('d');
+        $result = false;
+        $sign = UserSign::find()->where(['uid'=>$this->user->id,'y'=>$y,'m'=>$m,'d'=>$d])->one();
+        if($sign!=NULL){
+            $result = 2;
+        }else{
+            $newSign = new UserSign();
+            $newSign->uid = $this->user->id;
+            $newSign->y = $y;
+            $newSign->m = $m;
+            $newSign->d = $d;
+            $newSign->point = 1;
+            $newSign->sign_time = date('Y-m-d H:i:s');
+            $newSign->save();
+            $result = 1;
+        }
+        $params['result'] = $result;
+        return $this->render('sign_in',$params);
     }
 }
