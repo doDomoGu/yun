@@ -37,7 +37,7 @@
                     </div>
                     <div class="bizmail_SubmitArea">
                         <!--<input type="submit" value="" style="display: none;" name="" class="buttom">-->
-                        <input type="submit" style="display:block;overflow:hidden;width:0;height:0; position:absolute;padding:0;margin:0;border:0;" />
+                        <input class="submit-btn" type="submit" value="邮箱登录"/>
                     </div>
 
                 </form>

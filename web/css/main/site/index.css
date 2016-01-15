@@ -46,6 +46,10 @@
     font-size:12px;
 }
 
+#email-login .submit-btn {
+    margin-top:16px;
+}
+
 
 /* main dir-list */
 #dir-list {

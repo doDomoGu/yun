@@ -57,6 +57,21 @@ input:focus{outline:none;border: 0;box-shadow: none;}
     margin:0 auto;
 }
 
+#form-input-group .submit-btn {
+    position: absolute;
+    margin-left:-1px;
+    /*margin-top:-2px;*/
+    height:40px;
+    border:none;
+    background: #ccc;
+    padding:4px 10px;
+    color:#000;
+}
+
+#form-input-group .submit-btn:hover {
+    background: #bbb;
+}
+
 #loginform-username {
     background: #000000;
     border:0;

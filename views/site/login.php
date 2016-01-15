@@ -42,7 +42,7 @@
             'inputTemplate' => '{input}',
             'inputOptions'=>['placeholder' => 'Password | 密码','autocomplete'=>'off']
         ])->passwordInput() ?>
-
+    <input type="submit" class="submit-btn" value="登录" />
         <?/*=$model->getFirstError('username')*/?>
 </section>
         <?/*= $form->field($model, 'rememberMe')->checkbox([
@@ -54,7 +54,7 @@
                 <?/*= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) */?>
             </div>
         </div>-->
-        <input type="submit" style="display:block;overflow:hidden;width:0;height:0; position:absolute;padding:0;margin:0;border:0;" />
+
 
         <?php ActiveForm::end(); ?>
         </article>
