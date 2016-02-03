@@ -12,4 +12,4 @@
     </a>
 </div>
 <?php endforeach;?>
-<div class="clearfix"></div>
+<div class="clearfix"></div> 
