@@ -20,6 +20,7 @@ class SearchController extends BaseController
 {
     public function actionIndex()
     {
+        $this->view->title = '文件搜索'.$this->titleSuffix;
         $searchDefault = [
             'filename' => '',
         ];
