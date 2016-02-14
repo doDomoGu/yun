@@ -39,9 +39,14 @@
                             <option value="0" <?/*=$search['status']!=='' && $search['status']==0?'selected="selected"':''*/?>>禁用</option>
                             <option value="1" <?/*=$search['status']!=='' && $search['status']==1?'selected="selected"':''*/?>>启用</option>
                         </select>
-                    </th>
-                    <th><button type="button" id="searchBtn" >检索</button></th>-->
-                    <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                    </th>-->
+                    <th>--</th>
+                    <th>--</th>
+                    <th>--</th>
+                    <th>--</th>
+                    <th>--</th>
+                    <th><button type="submit" id="searchBtn" >搜索</button></th>
+                    <!--<input name="_csrf" type="hidden" id="_csrf" value="<?/*= Yii::$app->request->csrfToken */?>">-->
                 </form>
             </tr>
             </thead>
