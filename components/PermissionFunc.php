@@ -144,6 +144,26 @@ class PermissionFunc extends Component {
         return false;
     }
 
+    public static function getDirIdsOk($position_id,$permission_types){
+        $adminId = yii::$app->controller->user->is_admin;
+        if($adminId==User::SUPER_ADMIN){
+            return 'all';
+        }else{
+            $pmList = PositionDirPermission::find()
+                ->where(['position_id'=>$position_id])
+                ->andWhere(['in','type',$permission_types])
+                ->all();
+            $dirIds=[];
+            if(!empty($pmList)){
+                foreach($pmList as $pm){
+                    $dirIds[] = $pm->dir_id;
+                }
+            }
+            return $dirIds;
+        }
+
+    }
+
     public static function isAllowUploadCommon($dir_id){
         $position_id = yii::$app->controller->user->position_id;
         $permission_type = self::UPLOAD_COMMON;

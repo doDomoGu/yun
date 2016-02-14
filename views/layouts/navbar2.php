@@ -18,11 +18,14 @@ use yii\helpers\ArrayHelper;
 
     if(!yii::$app->user->isGuest){
         $iconClass = 'glyphicon glyphicon-user';
-        $navbarItems = [[
+        $navbarItems = [
+
+            [
             'label' => '首页<span class="active-red"></span>',
             'url' => ['site/index'],
             'encode' => false
-        ]];
+            ]
+        ];
 
         $messageSpan = $this->context->messageNum>0?' <span class="label label-danger">'.$this->context->messageNum.'</span>':'';
 
@@ -94,6 +97,15 @@ $item2 = [];
         ]
 
     ]);
+
+    if(!yii::$app->user->isGuest){
+        echo '<form id="nav_search_form" class="navbar-form navbar-left" role="search" action="/search">
+        <div class="form-group">
+          <input type="text" name="filename" class="form-control" placeholder="文件名搜索">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+      </form>';
+    }
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav pull-right'],

@@ -27,7 +27,8 @@
 
 
 .navbar-brand {
-    padding:44px 15px 0;
+    /*padding:44px 15px 0;*/
+    padding:0;
     width:159px;
 }
 
@@ -57,15 +58,15 @@
 }
 
 .navbar-header {
-    position:absolute;
+    /*position:absolute;
     top:-43px;
-    left:15px;
+    left:15px;*/
 }
 .navbar ul li {
     height:72px;
 }
 .navbar ul li a {
-    padding :26px 20px;
+    padding :26px 8px;
 }
 
 .navbar-brand img{
@@ -95,9 +96,16 @@
 
 }
 
-.navbar li.user-item {
+
+.navbar ul.dropdown-menu li.user-item {
     height:auto;
 }
-.navbar li.user-item a {
+.navbar ul.dropdown-menu li.user-item a {
     padding:3px 20px;
+}
+
+#nav_search_form {
+    padding:19px 8px 19px 34px;
+    margin:0;
+    height:72px;
 }
