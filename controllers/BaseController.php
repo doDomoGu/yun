@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\components\PermissionFunc;
+use app\models\MessageUser;
 use app\models\Position;
 use app\models\PositionDirPermission;
 use app\models\User;
@@ -14,6 +15,9 @@ class BaseController extends Controller
     public $user;
     public $navbarView = 'navbar2';
     public $position;
+    public $message = [];
+    public $messageNum = 0;
+
     //public $layout = 'main';
     public function beforeAction($action){
         if (!parent::beforeAction($action)) {
@@ -36,6 +40,7 @@ class BaseController extends Controller
             return false;
         }
 
+        $this->getMessageInfo();
 
         return true;
     }
@@ -64,5 +69,13 @@ class BaseController extends Controller
     }
 
 
-
+    //获取登录用户的消息通知提醒
+    public function getMessageInfo(){
+        if(!Yii::$app->user->isGuest){
+            $this->message = MessageUser::find()->where(['send_to_id'=>yii::$app->user->id,'read_status'=>0])->all();
+            if(!empty($this->message)){
+                $this->messageNum = count($this->message);
+            }
+        }
+    }
 }

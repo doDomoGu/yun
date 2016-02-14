@@ -12,24 +12,28 @@ use yii\helpers\ArrayHelper;
 
     $navbarItems = [];
 
-    $iconClass = 'glyphicon glyphicon-user';
+    $iconClass = '';
+
+    $messageSpan = '';
+
     if(!yii::$app->user->isGuest){
+        $iconClass = 'glyphicon glyphicon-user';
         $navbarItems = [[
             'label' => '首页<span class="active-red"></span>',
             'url' => ['site/index'],
             'encode' => false
         ]];
 
+        $messageSpan = $this->context->messageNum>0?' <span class="label label-danger">'.$this->context->messageNum.'</span>':'';
+
         $navbarItems = ArrayHelper::merge($navbarItems,\app\components\DirFrontFunc::getNavbar());
-
-
 
         $item2 = [['label' => '职员资料', 'url' => '/user','options'=>['class'=>'user-item']]];
         $item2 = ArrayHelper::merge($item2,[['label' => '每日签到', 'url' => '/user/sign','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的上传', 'url' => '/user/file','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的下载', 'url' => '/user/download','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '我的权限', 'url' => '/user/permission-list','options'=>['class'=>'user-item']]]);
-        $item2 =  ArrayHelper::merge($item2,[['label' => '消息通知', 'url' => '/message/system','options'=>['class'=>'user-item']]]);
+        $item2 =  ArrayHelper::merge($item2,[['label' => '消息通知'.$messageSpan, 'url' => '/message/system','options'=>['class'=>'user-item',],'encode' => false]]);
         if($this->context->checkIsAdmin())
             $item2 = ArrayHelper::merge($item2,[['label' => '管理中心*', 'url' => '/manage','options'=>['class'=>'user-item']]]);
         $item2 = ArrayHelper::merge($item2,[['label' => '退出', 'url' => '/site/logout','options'=>['class'=>'user-item']]]);
@@ -69,7 +73,7 @@ $item2 = [];
     $navbarItems = ArrayHelper::merge($navbarItems,
         [
             [
-                'label' => '<span class="'.$iconClass.'" aria-hidden="true"></span><span class="active-red"></span>',
+                'label' => '<span class="'.$iconClass.'" aria-hidden="true"></span>'.$messageSpan.'<span class="active-red"></span>',
                 'items' => $item2,
                 'active' => $userActive,
                 'linkOptions'=>['style'=>'margin-left:40px;'],
@@ -87,7 +91,7 @@ $item2 = [];
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default',
-        ],
+        ]
 
     ]);
 

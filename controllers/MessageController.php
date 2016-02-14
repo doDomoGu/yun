@@ -43,6 +43,8 @@ class MessageController extends BaseController
                 if($messageUser->read_status==0){
                     $messageUser->read_status=1;
                     $messageUser->save();
+                    //刷新消息通知提醒
+                    $this->getMessageInfo();
                 }
                 $params['message'] = $message;
                 $this->view->params['messageType'] = $messageUser->send_from_id==0?'system':'person';
@@ -50,7 +52,5 @@ class MessageController extends BaseController
             }
         }
         Yii::$app->response->redirect('/message/system')->send();
-
-
     }
 }
