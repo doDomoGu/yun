@@ -33,36 +33,3 @@
     padding:6px 9px;
     text-align: justify;
 }
-
-/*
-#dir-sidebar-right .right-info {
-    clear:both;
-    border-left:1px solid #ccc;
-    border-right:1px solid #ccc;
-}
-
-#dir-sidebar-right .info-heading {
-    text-align: center;
-    padding:20px;
-    border-bottom: 1px solid #ccc;
-}
-
-#dir-sidebar-right .info-list {
-    border-bottom: 1px solid #ccc;
-    overflow: hidden;
-}
-
-#dir-sidebar-right .info-list .info-list-label{
-    width:59px;
-    display: inline-block;
-    text-align: right;
-    border-right:1px solid #ccc;
-}
-
-#dir-sidebar-right .info-list .info-list-txt{
-    border-left:1px solid #ccc;
-    width:94px;
-    display: inline-block;
-    text-align: center;
-    word-break: break-all;
-}*/
