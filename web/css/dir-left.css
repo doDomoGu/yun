@@ -10,6 +10,11 @@
     margin:0;
 }
 
+
+.ztree {
+    padding:5px 0;
+}
+
 .ztree li span.button.ico_docu {
     background-position: -110px 0;
 }
