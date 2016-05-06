@@ -3,6 +3,11 @@
     use yii\bootstrap\ActiveForm;
 
     use app\components\MessageFunc;
+
+app\assets\AppAsset::addJsFile($this,'js/ueditor/ueditor.config.js');
+app\assets\AppAsset::addJsFile($this,'js/ueditor/ueditor.all.js');
+app\assets\AppAsset::addJsFile($this,'js/main/manage/message/add.js');
+
 ?>
 
         <h2>
@@ -12,7 +17,7 @@
             'id' => 'login-form',
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"col-lg-5\">{input}</div>\n<div class=\"col-lg-5\">{error}</div>",
+                'template' => "{label}\n<div class=\"col-lg-6\">{input}</div>\n<div class=\"col-lg-4\">{error}</div>",
                 'labelOptions' => ['class' => 'col-lg-2 control-label'],
             ],
         ]); ?>
@@ -38,7 +43,7 @@
 
         <?= $form->field($model, 'subject') ?>
 
-        <?= $form->field($model, 'content')->textarea() ?>
+        <?= $form->field($model, 'content')->textarea(['class'=>'']) ?>
 
 
 <!--        <?/*= $form->field($model, 'ord',[
