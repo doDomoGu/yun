@@ -40,7 +40,7 @@
 </p>-->
 <ul id="file-nav" class="nav nav-tabs">
     <li role="presentation" class="<?=$order=='add_time desc'?'active':''?>"><?=Html::a('时间从新到旧',$links['add_time.desc'])?></li>
-    <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('时间从新到旧',$links['add_time.asc'])?></li>
+    <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('时间从旧到新',$links['add_time.asc'])?></li>
     <li role="presentation" class="<?=$order=='filesize desc'?'active':''?>"><?=Html::a('文件大小从大到小',$links['filesize.desc'])?></li>
     <li role="presentation" class="<?=$order=='filesize asc'?'active':''?>"><?=Html::a('文件大小从小到大',$links['filesize.asc'])?></li>
     <li role="presentation" class="<?=$order=='clicks desc'?'active':''?>"><?=Html::a('下载量从大到小',$links['clicks.desc'])?></li>
