@@ -92,19 +92,19 @@ class FileFrontFunc extends Component {
         {
             return $size." B";
         }
-        else if($size<(1024*1024))
+        else if($size<(1024*1000))
         {
-            $size=round($size/1024,1);
+            $size=round($size/1024,2);
             return $size." KB";
         }
-        else if($size<(1024*1024*1024))
+        else if($size<(1024*1024*1000))
         {
-            $size=round($size/(1024*1024),1);
+            $size=number_format($size/(1024*1024),2);
             return $size." MB";
         }
         else
         {
-            $size=round($size/(1024*1024*1024),1);
+            $size=round($size/(1024*1024*1000),2);
             return $size." GB";
         }
     }
