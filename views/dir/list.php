@@ -50,6 +50,7 @@
 <div>
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
+    <?php if($listType=='icon'):?>
     <div class="dir-item <?=$route=='list'?'file-item':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="icon clickarea">
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
@@ -63,6 +64,21 @@
             <div class="download_times">下载次数：<span><?=$l->clicks?></span></div>
         </div>
     </div>
+    <?php elseif($listType=='list'):?>
+    <div class="dir-item <?=$route=='list'?'file-item2':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+        <div class="icon clickarea">
+            <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
+        </div>
+        <div class="info clickarea">
+            <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
+            <div class="filesize"><?=FileFrontFunc::sizeFormat($l->filesize)?></div>
+            <div class="upload_time"><?=$l->add_time?></div>
+            <!--<div class="upload_uid">上传用户：<?/*=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid*/?></div>
+            <div class="upload_type">上传类型：<?/*=$l->flag==1?'公共':'个人'*/?></div>
+            <div class="download_times">下载次数：<span><?/*=$l->clicks*/?></span></div>-->
+        </div>
+    </div>
+    <?php endif;?>
 <?php endforeach;?>
     <div class="clearfix col-md-12 text-center">
         <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>

@@ -19,7 +19,10 @@ class DirController extends BaseController
 
     public $orderArr = ['add_time.desc','add_time.asc','filesize.desc','filesize.asc','clicks.desc','clicks.asc'];
 
+    public $listTypeArr = ['icon','list'];
+
     public $dir_id;
+
     public function behaviors()
     {
         return [
@@ -69,8 +72,10 @@ class DirController extends BaseController
             else
                 $this->view->title = $curDir->name.$this->titleSuffix;
 
-            if($curDir->is_leaf){
-                //是底层目录 可以进行上传/新建文件夹等操作
+            if($curDir->is_leaf){     //是底层目录 显示文件列表 可以进行上传/新建文件夹等操作
+
+
+
                 //var_dump(FileFrontFunc::getFileType('sss.png'));exit;
 
                 //$list = DirFunc::getChildren($dir_id);
@@ -83,8 +88,31 @@ class DirController extends BaseController
 
                 $order = yii::$app->request->get('order',false);
                 if(!in_array($order,$this->orderArr))
-                    $order = 'add_time.desc';
+                    $order = $this->orderArr[0];;
                 $order = str_replace('.',' ',$order);
+
+
+                $listType = yii::$app->request->get('list_type',false);
+                if(!in_array($listType,$this->listTypeArr)){
+                    $cache = Yii::$app->cache;
+                    $cacheExist = false;
+
+                    if(isset($cache['dirListType_'.$this->user->id])){
+                        if(in_array($cache['dirListType_'.$this->user->id],$this->listTypeArr)){
+                            $cacheExist = true;
+                        }
+                    }
+                    if($cacheExist){
+                        $listType = $cache['dirListType_'.$this->user->id];
+                    }else{
+                        $listType = $this->listTypeArr[0];
+                    }
+                }else{
+                    $cache = Yii::$app->cache;
+                    $cache['dirListType_'.$this->user->id] = $listType;
+                }
+
+
 
                 /*if($parDir){
 
@@ -119,7 +147,7 @@ class DirController extends BaseController
                 $params['pages'] = $pages;
                 $params['order'] = $order;
                 $params['links'] = $links;
-
+                $params['listType'] = $listType;
             }else{
                 $list = DirFunc::getChildren($dir_id);
                 $viewName = 'index';

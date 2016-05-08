@@ -54,6 +54,78 @@
     border-radius: 2px;
 }
 
+.file-item2 {
+    height:30px;
+    float:none;
+    width:auto;
+    margin-bottom: 10px;
+
+}
+
+
+/*.file-item:hover{
+    background: #f5f5f5;
+}*/
+
+/*.file-item .info.hover {
+    color:#337ab7;
+}*/
+
+.file-item2 .icon {
+    display: block;
+    width:30px;
+    margin-left:12px;
+    overflow: hidden;
+    float:left;
+}
+
+.file-item2 .icon img{
+    border-radius: 4px;
+}
+
+.file-item2 .info {
+    margin-top:2px;
+    display: block;
+    float:left;
+    padding:2px 4px;
+    width: auto;
+}
+
+.file-item2 .info .filename {
+    width:200px;
+    float:left;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.file-item2 .info .filesize {
+    width:100px;
+    float:left;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.file-item2 .info .upload_time {
+    width:140px;
+    float:left;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.file-item.hover{
+    cursor: pointer;
+}
+
+.file-item.hover img {
+    background: #e2e2e2;
+}
+
+.file-item.hover .info{
+    color:#FFF;
+    background: #116cd6;
+    border-radius: 2px;
+}
+
 
 .btn-success,
 .btn-success.disabled,
