@@ -48,6 +48,13 @@
 </ul>
 <?php if(!empty($list)):?>
 <div>
+<?php if($listType=='list'):?>
+    <div class="clearfix" style="margin-bottom: 8px;color:#888;font-size:16px;">
+        <div style="float:left;width:244px;margin-left: 12px;">文件名</div>
+        <div style="float:left;width:100px;margin-left: 10px;">大小</div>
+        <div style="float:left;width:140px;margin-left: 10px;">上传时间</div>
+    </div>
+<?php endif;?>
 <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <?php if($listType=='icon'):?>
