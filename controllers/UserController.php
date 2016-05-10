@@ -121,6 +121,39 @@ class UserController extends BaseController
         return $this->render('download',$params);
     }
 
+    public function actionRecycle(){
+        $this->view->title = '回收站';
+        //$list = File::find()->where(['uid'=>$this->user->id])->andWhere(['>','filetype',0]);
+        $list = File::find()->where(['uid'=>$this->user->id])->andWhere(['status'=>0])/*->andWhere(['>','filetype',0])*/;
+        $count = $list->count();
+        $pageSize = 10;
+        $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+        $list = $list
+            ->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy('id desc')
+            ->all();
+
+        $params['list'] = $list;
+        $params['pages'] = $pages;
+        return $this->render('recycle',$params);
+    }
+
+    public function actionDoRecycle(){
+        $file_id = yii::$app->request->get('id',false);
+        $file = File::find()->where(['uid'=>$this->user->id,'status'=>0,'id'=>$file_id])->one();
+        if($file){
+            $file->status = 1;
+            if($file->save()){
+                Yii::$app->response->redirect('/user/recycle')->send();
+            }
+        }else{
+            echo '文件不存在';
+        }
+
+    }
+
+
     public function actionSign(){
         $this->view->title = '每日签到';
         $y = yii::$app->request->get('y',false);
