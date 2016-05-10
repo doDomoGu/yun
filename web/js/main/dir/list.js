@@ -37,6 +37,8 @@ $('.dir-item .info').mouseenter(function(){
 $('.clickarea').click(function(){
     _this = $(this).parent('.dir-item');
     if(_this.attr('download-check')=='enable'){
+        /*alert('sss');
+        return false;*/
         if(_this.attr('data-is-dir')=='1'){
             location.href='/dir?p_id='+_this.attr('data-id');
         }else{
@@ -54,10 +56,17 @@ $('.clickarea').click(function(){
 });
 
 
+$('.deleteBtn').click(function(e){
+    e.preventDefault();
+    if(confirm('确认是否要删除这个文件（移入回收站）?')){
+        window.location = $(this).attr('link');
+    }
+});
+
 
 $('#createDirModalContent button.btn').click(function(){
     _dirname = $('#createDirModalContent .dirname').val();
-    console.log(_dirname);
+    /*console.log(_dirname);*/
     if(_dirname!=''){
         _dir_id = $('#dir_id').val();
         _p_id = $('#p_id').val();

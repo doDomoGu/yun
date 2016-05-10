@@ -55,7 +55,8 @@
 }
 
 .file-item2 {
-    height:30px;
+    height:25px;
+    line-height: 25px;
     float:none;
     width:auto;
     margin-bottom: 10px;
@@ -73,7 +74,7 @@
 
 .file-item2 .icon {
     display: block;
-    width:30px;
+    width:20px;
     margin-left:12px;
     overflow: hidden;
     float:left;
@@ -87,7 +88,6 @@
     margin-top:2px;
     display: block;
     float:left;
-    padding:4px 4px;
     width: auto;
     overflow: hidden;
 }
@@ -108,21 +108,28 @@
 }
 
 .file-item2 .info .upload_time {
-    width:140px;
+    width:120px;
     float:left;
-    text-align: left;
+    text-align: right;
     margin-left: 20px;
 }
 
 .file-item2 .info .upload_uid {
-    width:70px;
+    width:64px;
     float:left;
-    text-align: left;
+    text-align: right;
+    margin-left: 10px;
+}
+
+.file-item2 .info .download_times {
+    width:64px;
+    float:left;
+    text-align: right;
     margin-left: 10px;
 }
 
 .file-item2 .info .click_btns {
-    width:200px;
+    width:168px;
     float:left;
     text-align: left;
     margin-left: 10px;
@@ -177,4 +184,7 @@
 
 .click_btns .btn {
     padding:0 10px;
+    line-height: 16px;
+
+
 }

@@ -253,6 +253,19 @@ class DirController extends BaseController
         Yii::$app->end();
     }
 
+    public function actionDelete(){
+        $id = yii::$app->request->get('id');
+        $file = File::find()->where(['id'=>$id,'status'=>1,'uid'=>yii::$app->user->id])->one();
+        if($file){
+            $file->status = 0;
+            if($file->save()){
+                Yii::$app->response->redirect(Yii::$app->request->referrer)->send();
+            }
+        }else{
+            echo '文件不存在';
+        }
+    }
+
     public function actionGetUptoken(){
         $up=new QiniuUpload(yii::$app->params['qiniu-bucket']);
         $saveKey = yii::$app->request->get('saveKey','');

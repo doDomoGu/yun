@@ -50,11 +50,12 @@
 <div>
 <?php if($listType=='list'):?>
     <div class="clearfix" style="margin-bottom: 8px;color:#888;font-size:16px;">
-        <div style="float:left;width:244px;margin-left: 12px;">文件名</div>
+        <div style="float:left;width:232px;margin-left: 12px;">文件名</div>
         <div style="float:left;width:80px;margin-left: 10px;">大小</div>
-        <div style="float:left;width:140px;margin-left: 20px;">上传时间</div>
-        <div style="float:left;width:70px;margin-left: 10px;">上传职员</div>
-        <div style="float:left;width:200px;margin-left: 10px;">操作</div>
+        <div style="float:left;width:120px;margin-left: 20px;">上传时间</div>
+        <div style="float:left;width:64px;margin-left: 10px;">上传职员</div>
+        <div style="float:left;width:64px;margin-left: 10px;">下载次数</div>
+        <div style="float:left;width:168px;margin-left: 10px;">操作</div>
     </div>
     <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
@@ -63,17 +64,24 @@
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
         </div>
         <div class="info">
-            <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
-            <div class="filesize"><?=FileFrontFunc::sizeFormat($l->filesize)?></div>
-            <div class="upload_time"><?=$l->add_time?></div>
+            <div class="filename" style="overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
+            <div class="filesize"><?=$l->filetype>0?FileFrontFunc::sizeFormat($l->filesize):'--'?></div>
+            <div class="upload_time"><?=date('Y/m/d H:i',strtotime($l->add_time))?></div>
             <div class="upload_uid"><?=$l->user->name?></div>
+            <div class="download_times"><?=$l->clicks?></div>
             <div class="click_btns">
-                <?=Html::Button('下载',['value'=>'','class'=> 'btn btn-success'])?>
-
-                <?=Html::Button('预览',['value'=>'','class'=> 'btn btn-primary'])?>
-
+                <?php if($downloadCheck):?>
+                    <?=Html::Button('下载',['value'=>'','class'=> 'btn btn-success'])?>
+                <?php else:?>
+                    <?=Html::Button('下载',['value'=>'','class'=> 'btn btn-success disabled'])?>
+                <?php endif;?>
+                <?php if(in_array($l->filetype,[])):?>
+                    <?=Html::Button('预览',['value'=>'','class'=> 'btn btn-primary'])?>
+                <?php else:?>
+                    <?=Html::Button('预览',['value'=>'','class'=> 'btn btn-primary disabled'])?>
+                <?php endif;?>
                 <?php if($l->uid==yii::$app->user->id):?>
-                    <?=Html::Button('删除',['value'=>'','class'=> 'btn btn-success'])?>
+                    <?=Html::Button('删除',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn btn-success'])?>
                 <?php else:?>
                     <?=Html::Button('删除',['value'=>'','class'=> 'btn btn-success disabled'])?>
                 <?php endif;?>
