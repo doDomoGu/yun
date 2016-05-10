@@ -51,13 +51,41 @@
 <?php if($listType=='list'):?>
     <div class="clearfix" style="margin-bottom: 8px;color:#888;font-size:16px;">
         <div style="float:left;width:244px;margin-left: 12px;">文件名</div>
-        <div style="float:left;width:100px;margin-left: 10px;">大小</div>
-        <div style="float:left;width:140px;margin-left: 10px;">上传时间</div>
+        <div style="float:left;width:80px;margin-left: 10px;">大小</div>
+        <div style="float:left;width:140px;margin-left: 20px;">上传时间</div>
+        <div style="float:left;width:70px;margin-left: 10px;">上传职员</div>
+        <div style="float:left;width:200px;margin-left: 10px;">操作</div>
     </div>
-<?php endif;?>
-<?php foreach($list as $l):?>
+    <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
-    <?php if($listType=='icon'):?>
+    <div class="dir-item <?=$route=='list'?'file-item2':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+        <div class="icon">
+            <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
+        </div>
+        <div class="info">
+            <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
+            <div class="filesize"><?=FileFrontFunc::sizeFormat($l->filesize)?></div>
+            <div class="upload_time"><?=$l->add_time?></div>
+            <div class="upload_uid"><?=$l->user->name?></div>
+            <div class="click_btns">
+                <?=Html::Button('下载',['value'=>'','class'=> 'btn btn-success'])?>
+
+                <?=Html::Button('预览',['value'=>'','class'=> 'btn btn-primary'])?>
+
+                <?php if($l->uid==yii::$app->user->id):?>
+                    <?=Html::Button('删除',['value'=>'','class'=> 'btn btn-success'])?>
+                <?php else:?>
+                    <?=Html::Button('删除',['value'=>'','class'=> 'btn btn-success disabled'])?>
+                <?php endif;?>
+            </div>
+            <!--<div class="upload_type">上传类型：<?/*=$l->flag==1?'公共':'个人'*/?></div>
+            <div class="download_times">下载次数：<span><?/*=$l->clicks*/?></span></div>-->
+        </div>
+    </div>
+    <?php endforeach;?>
+<?php else:?>
+    <?php foreach($list as $l):?>
+    <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <div class="dir-item <?=$route=='list'?'file-item':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="icon clickarea">
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
@@ -71,22 +99,8 @@
             <div class="download_times">下载次数：<span><?=$l->clicks?></span></div>
         </div>
     </div>
-    <?php elseif($listType=='list'):?>
-    <div class="dir-item <?=$route=='list'?'file-item2':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
-        <div class="icon clickarea">
-            <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
-        </div>
-        <div class="info clickarea">
-            <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
-            <div class="filesize"><?=FileFrontFunc::sizeFormat($l->filesize)?></div>
-            <div class="upload_time"><?=$l->add_time?></div>
-            <!--<div class="upload_uid">上传用户：<?/*=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid*/?></div>
-            <div class="upload_type">上传类型：<?/*=$l->flag==1?'公共':'个人'*/?></div>
-            <div class="download_times">下载次数：<span><?/*=$l->clicks*/?></span></div>-->
-        </div>
-    </div>
-    <?php endif;?>
-<?php endforeach;?>
+    <?php endforeach;?>
+<?php endif;?>
     <div class="clearfix col-md-12 text-center">
         <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
     </div>

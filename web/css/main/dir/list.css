@@ -87,8 +87,9 @@
     margin-top:2px;
     display: block;
     float:left;
-    padding:2px 4px;
+    padding:4px 4px;
     width: auto;
+    overflow: hidden;
 }
 
 .file-item2 .info .filename {
@@ -96,17 +97,32 @@
     float:left;
     text-align: left;
     margin-left: 10px;
+    overflow: hidden;
 }
 
 .file-item2 .info .filesize {
-    width:100px;
+    width:80px;
+    float:left;
+    margin-left: 10px;
+    text-align: right;
+}
+
+.file-item2 .info .upload_time {
+    width:140px;
+    float:left;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.file-item2 .info .upload_uid {
+    width:70px;
     float:left;
     text-align: left;
     margin-left: 10px;
 }
 
-.file-item2 .info .upload_time {
-    width:140px;
+.file-item2 .info .click_btns {
+    width:200px;
     float:left;
     text-align: left;
     margin-left: 10px;
@@ -135,6 +151,9 @@
     border-color: #FD1123;
 }
 
+
+.btn-success:active:hover,
+.btn-success:active:focus,
 .btn-success:hover,
 .btn-success:focus {
     background-color: #D60000;
@@ -153,4 +172,9 @@
 .btn-primary:focus {
     background-color: #365a7f;
     border-color: #46828c;
+}
+
+
+.click_btns .btn {
+    padding:0 10px;
 }
