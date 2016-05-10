@@ -19,7 +19,7 @@ class DirController extends BaseController
 
     public $orderArr = ['add_time.desc','add_time.asc','filesize.desc','filesize.asc','clicks.desc','clicks.asc'];
 
-    public $listTypeArr = ['icon','list'];
+    public $listTypeArr = ['list','icon'];
 
     public $dir_id;
 

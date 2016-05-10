@@ -55,11 +55,24 @@ $('.clickarea').click(function(){
     }
 });
 
+$('.downloadBtn').click(function(){
+    if(confirm('确认是否要下载这个文件?')){
+        _this = $(this).parents('.info');
+        _download_times = parseInt(_this.find('.download_times').html())+1;
+        _this.find('.download_times').html(_download_times);
+        location.href = '/dir/download?id='+$(this).attr('data-id');
+    }
+});
+
+$('.openBtn').click(function(){
+    location.href='/dir?p_id='+$(this).attr('data-id');
+});
+
 
 $('.deleteBtn').click(function(e){
     e.preventDefault();
     if(confirm('确认是否要删除这个文件（移入回收站）?')){
-        window.location = $(this).attr('link');
+        location.href = $(this).attr('link');
     }
 });
 
