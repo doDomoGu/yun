@@ -103,7 +103,9 @@
 <?php endif;?>
     <div class="clearfix col-md-12 text-center">
         <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
+        <div><?=$pages->totalCount?></div>
     </div>
+
 </div>
 <?php else:?>
 <div style="padding:4px;">

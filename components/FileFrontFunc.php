@@ -52,8 +52,13 @@ class FileFrontFunc extends Component {
         $files = File::find();
         $dir_id = intval($dir_id);
         $p_id = intval($p_id);
-        $files = $files->where(['dir_id'=>$dir_id,'status'=>1]);
-        $files = $files->andWhere(['p_id'=>$p_id,'status'=>1]);
+        if($p_id>0)
+            $files = $files->where(['p_id'=>$p_id,'status'=>1]);
+        else
+            $files = $files->where(['dir_id'=>$dir_id,'p_id'=>0,'status'=>1]);
+
+/*        $files = $files->where(['dir_id'=>$dir_id,'status'=>1]);
+        $files = $files->andWhere(['p_id'=>$p_id,'status'=>1]);*/
         if($search!==false)
             $files = $files->andWhere(['like','filename',$search]);
         $files = $files->orderBy($order)
@@ -66,10 +71,12 @@ class FileFrontFunc extends Component {
 
     public static function getFilesNum($dir_id,$p_id,$search=false){
         $count = File::find();
+        $dir_id = intval($dir_id);
+        $p_id = intval($p_id);
         if($p_id>0)
             $count = $count->where(['p_id'=>$p_id,'status'=>1]);
         else
-            $count = $count->where(['dir_id'=>$dir_id,'status'=>1]);
+            $count = $count->where(['dir_id'=>$dir_id,'p_id'=>0,'status'=>1]);
         if($search!==false)
             $count = $count->andWhere(['like','filename',$search]);
         return $count->count();
