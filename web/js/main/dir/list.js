@@ -77,6 +77,14 @@ $('.deleteBtn').click(function(e){
 });
 
 
+$('#order_select').change(function(){
+    location.href = $('#link_'+$(this).val()).val();
+});
+
+$('#list_type_select').change(function(){
+    location.href = $('#link2_'+$(this).val()).val();
+});
+
 $('#createDirModalContent button.btn').click(function(){
     _dirname = $('#createDirModalContent .dirname').val();
     /*console.log(_dirname);*/

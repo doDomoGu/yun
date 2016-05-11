@@ -34,18 +34,26 @@
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])?>
     <?php endif;?>
-
+    排序：<?=Html::dropDownList('order_select',$orderNum,$orderDropdown,['id'=>'order_select'])?>
+    <?php foreach($links as $link_key => $li):?>
+    <input type="hidden" id="link_<?=$link_key?>" value="<?=$li?>" />
+    <?php endforeach;?>
+    显示：<?=Html::dropDownList('list_type_select',$listTypeNum,$listTypeDropdown,['id'=>'list_type_select'])?>
+    <?php foreach($links2 as $link_key => $li):?>
+        <input type="hidden" id="link2_<?=$link_key?>" value="<?=$li?>" />
+    <?php endforeach;?>
+</p>
 <!--<p>
     <?/*=PermissionFunc::testShow($this->context->user->position_id,$dir_id)*/?>
 </p>-->
-<ul id="file-nav" class="nav nav-tabs">
-    <li role="presentation" class="<?=$order=='add_time desc'?'active':''?>"><?=Html::a('时间从新到旧',$links['add_time.desc'])?></li>
-    <li role="presentation" class="<?=$order=='add_time asc'?'active':''?>"><?=Html::a('时间从旧到新',$links['add_time.asc'])?></li>
-    <li role="presentation" class="<?=$order=='filesize desc'?'active':''?>"><?=Html::a('文件大小从大到小',$links['filesize.desc'])?></li>
-    <li role="presentation" class="<?=$order=='filesize asc'?'active':''?>"><?=Html::a('文件大小从小到大',$links['filesize.asc'])?></li>
-    <li role="presentation" class="<?=$order=='clicks desc'?'active':''?>"><?=Html::a('下载量从大到小',$links['clicks.desc'])?></li>
-    <li role="presentation" class="<?=$order=='clicks asc'?'active':''?>"><?=Html::a('下载量从小到大',$links['clicks.asc'])?></li>
-</ul>
+<!--<ul id="file-nav" class="nav nav-tabs">
+    <li role="presentation" class="<?/*=$order=='add_time desc'?'active':''*/?>"><?/*=Html::a('时间从新到旧',$links['add_time.desc'])*/?></li>
+    <li role="presentation" class="<?/*=$order=='add_time asc'?'active':''*/?>"><?/*=Html::a('时间从旧到新',$links['add_time.asc'])*/?></li>
+    <li role="presentation" class="<?/*=$order=='filesize desc'?'active':''*/?>"><?/*=Html::a('文件大小从大到小',$links['filesize.desc'])*/?></li>
+    <li role="presentation" class="<?/*=$order=='filesize asc'?'active':''*/?>"><?/*=Html::a('文件大小从小到大',$links['filesize.asc'])*/?></li>
+    <li role="presentation" class="<?/*=$order=='clicks desc'?'active':''*/?>"><?/*=Html::a('下载量从大到小',$links['clicks.desc'])*/?></li>
+    <li role="presentation" class="<?/*=$order=='clicks asc'?'active':''*/?>"><?/*=Html::a('下载量从小到大',$links['clicks.asc'])*/?></li>
+</ul>-->
 <?php if(!empty($list)):?>
 <div>
 <?php if($listType=='list'):?>

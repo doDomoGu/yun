@@ -17,9 +17,27 @@ class DirController extends BaseController
 {
     public $layout = 'main_dir';
 
-    public $orderArr = ['add_time.desc','add_time.asc','filesize.desc','filesize.asc','clicks.desc','clicks.asc'];
+    public $orderArr = [
+        'add_time.desc',
+        'add_time.asc',
+        'filesize.desc',
+        'filesize.asc',
+        'clicks.desc',
+        'clicks.asc'
+    ];
+
+    public $orderNameArr = [
+        '时间从新到旧',
+        '时间从旧到新',
+        '文件从大到小',
+        '文件从小到大',
+        '下载量从大到小',
+        '下载量从小到大'
+    ];
 
     public $listTypeArr = ['list','icon'];
+
+    public $listTypeNameArr = ['列表','图标'];
 
     public $dir_id;
 
@@ -87,12 +105,42 @@ class DirController extends BaseController
                 $search = yii::$app->request->get('search',false);
 
                 $order = yii::$app->request->get('order',false);
-                if(!in_array($order,$this->orderArr))
-                    $order = $this->orderArr[0];;
-                $order = str_replace('.',' ',$order);
+                $orderNum = 0;
+                if(!in_array($order,$this->orderArr)){
+                    $cache = Yii::$app->cache;
+                    $cacheExist = false;
+                    if(isset($cache['dirOrder_'.$this->user->id])){
+                        if(in_array($cache['dirOrder_'.$this->user->id],$this->orderArr)){
+                            $cacheExist = true;
+                        }
+                    }
+                    if($cacheExist){
+                        $order = $cache['dirOrder_'.$this->user->id];
+                    }else{
+                        $order = $this->orderArr[0];;
+                    }
+                }else{
+                    $cache = Yii::$app->cache;
+                    $cache['dirOrder_'.$this->user->id] = $order;
+                }
+
+
+                $orderDropdown = [];
+                foreach($this->orderArr as $n=>$ord){
+                    if($order==$ord)
+                        $orderNum = $n;
+
+                    $orderDropdown[] = $this->orderNameArr[$n];
+                }
+
+                $orderTrue = str_replace('.',' ',$order);
+
+
+
 
 
                 $listType = yii::$app->request->get('list_type',false);
+                $listTypeNum = 0;
                 if(!in_array($listType,$this->listTypeArr)){
                     $cache = Yii::$app->cache;
                     $cacheExist = false;
@@ -113,6 +161,14 @@ class DirController extends BaseController
                 }
 
 
+                $listTypeDropdown = [];
+                foreach($this->listTypeArr as $n=>$lT){
+                    if($listType==$lT)
+                        $listTypeNum = $n;
+
+                    $listTypeDropdown[] = $this->listTypeNameArr[$n];
+                }
+
 
                 /*if($parDir){
 
@@ -132,22 +188,35 @@ class DirController extends BaseController
 
                 $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
-                $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$order,$search);
+                $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$orderTrue,$search);
 
                 $viewName = 'list';
                 $links = [];
+                $links2 = [];
 
                 foreach($this->orderArr as $orderOne){
                     $linkTmp = '/dir?dir_id='.$dir_id;
                     $linkTmp .= $page>1?'&page='.$page:'';
                     $linkTmp .= '&order='.$orderOne;
-                    $links[$orderOne] = $linkTmp;
+                    $links[] = $linkTmp;
+                }
+
+                foreach($this->listTypeArr as $ltOne){
+                    $linkTmp = '/dir?dir_id='.$dir_id;
+                    $linkTmp .= $page>1?'&page='.$page:'';
+                    $linkTmp .= '&list_type='.$ltOne;
+                    $links2[] = $linkTmp;
                 }
 
                 $params['pages'] = $pages;
                 $params['order'] = $order;
+                $params['orderNum'] = $orderNum;
+                $params['orderDropdown'] = $orderDropdown;
                 $params['links'] = $links;
+                $params['links2'] = $links2;
                 $params['listType'] = $listType;
+                $params['listTypeNum'] = $listTypeNum;
+                $params['listTypeDropdown'] = $listTypeDropdown;
             }else{
                 $list = DirFunc::getChildren($dir_id);
                 $viewName = 'index';
