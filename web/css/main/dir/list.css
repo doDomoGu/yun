@@ -10,13 +10,14 @@
 #buttons .btn {
     display: block;
     float:left;
+    margin-right:4px;
 }
 
 #right_btns {
     float:left;
     display: block;
     text-align: right;
-    width:320px;
+    width:304px;
     padding-right: 10px;
     height:35px;
     line-height:35px;
@@ -207,4 +208,8 @@
     line-height: 16px;
 
 
+}
+
+.pagination {
+    margin: 0;
 }

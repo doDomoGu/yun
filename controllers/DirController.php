@@ -169,6 +169,10 @@ class DirController extends BaseController
                     $listTypeDropdown[] = $this->listTypeNameArr[$n];
                 }
 
+                if($listType == 'list'){
+                    $pageSize = 20;
+                }
+
 
                 /*if($parDir){
 

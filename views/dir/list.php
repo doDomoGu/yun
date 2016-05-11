@@ -128,12 +128,15 @@
     </div>
     <?php endforeach;?>
 <?php endif;?>
-    <div class="clearfix col-md-12 text-center">
-        <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
-        <div><?=$pages->totalCount?></div>
-    </div>
-
 </div>
+<div class="clearfix"></div>
+<div class="clearfix text-center">
+    <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
+    <!--<div style="display: inline-block;padding:6px;"><?/*=$pages->totalCount*/?> 个</div>-->
+    <div style="background: #d7d7d7;padding:4px;"><?=$pages->totalCount?> 个</div>
+</div>
+
+
 <?php else:?>
 <div style="padding:4px;">
     <div class="alert alert-danger" role="alert">
