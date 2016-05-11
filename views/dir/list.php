@@ -19,7 +19,7 @@
 <input type="hidden" id="fileurlId" value="fileurl" />
 <input type="hidden" id="pickfileId2" value="pickfile2" />
 <input type="hidden" id="fileurlId2" value="fileurl2" />
-<p id='buttons'>
+<div id='buttons' class="clearfix">
     <?php if(PermissionFunc::isAllowUploadCommon($dir_id)):?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirCommonModal"])?>
@@ -34,15 +34,18 @@
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])?>
     <?php endif;?>
-    排序：<?=Html::dropDownList('order_select',$orderNum,$orderDropdown,['id'=>'order_select'])?>
-    <?php foreach($links as $link_key => $li):?>
-    <input type="hidden" id="link_<?=$link_key?>" value="<?=$li?>" />
-    <?php endforeach;?>
-    显示：<?=Html::dropDownList('list_type_select',$listTypeNum,$listTypeDropdown,['id'=>'list_type_select'])?>
-    <?php foreach($links2 as $link_key => $li):?>
-        <input type="hidden" id="link2_<?=$link_key?>" value="<?=$li?>" />
-    <?php endforeach;?>
-</p>
+    <div id="right_btns">排序：<?=Html::dropDownList('order_select',$orderNum,$orderDropdown,['id'=>'order_select'])?>
+        <?php foreach($links as $link_key => $li):?>
+            <input type="hidden" id="link_<?=$link_key?>" value="<?=$li?>" />
+        <?php endforeach;?>
+        显示：<?=Html::dropDownList('list_type_select',$listTypeNum,$listTypeDropdown,['id'=>'list_type_select'])?>
+        <?php foreach($links2 as $link_key => $li):?>
+            <input type="hidden" id="link2_<?=$link_key?>" value="<?=$li?>" />
+        <?php endforeach;?>
+    </div>
+</div>
+
+
 <!--<p>
     <?/*=PermissionFunc::testShow($this->context->user->position_id,$dir_id)*/?>
 </p>-->
@@ -55,7 +58,7 @@
     <li role="presentation" class="<?/*=$order=='clicks asc'?'active':''*/?>"><?/*=Html::a('下载量从小到大',$links['clicks.asc'])*/?></li>
 </ul>-->
 <?php if(!empty($list)):?>
-<div>
+<div id="file_list">
 <?php if($listType=='list'):?>
     <div class="clearfix" style="margin-bottom: 8px;color:#888;font-size:16px;">
         <div style="float:left;width:232px;margin-left: 12px;">文件名</div>

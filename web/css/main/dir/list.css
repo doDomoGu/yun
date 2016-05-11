@@ -4,10 +4,30 @@
 
 #buttons {
     padding: 0 4px;
+
+}
+
+#buttons .btn {
+    display: block;
+    float:left;
+}
+
+#right_btns {
+    float:left;
+    display: block;
+    text-align: right;
+    width:320px;
+    padding-right: 10px;
+    height:35px;
+    line-height:35px;
 }
 
 #file-nav {
     padding: 0 4px;
+}
+
+#file_list {
+    margin-top: 10px;
 }
 
 .file-item {
