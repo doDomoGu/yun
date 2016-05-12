@@ -41,6 +41,8 @@
         <?= $form->field($model, 'gender')->dropDownList([0=>'N/A',1=>'男',2=>'女']) ?>
         <?= $form->field($model, 'mobile') ?>
         <?= $form->field($model, 'phone') ?>
+        <?= $form->field($model, 'birthday')->hint('格式:2010-10-10') ?>
+
         <?= $form->field($model, 'join_date')->hint('格式:2010-10-10') ?>
         <?= $form->field($model, 'contract_date')->hint('格式:2010-10-10') ?>
 

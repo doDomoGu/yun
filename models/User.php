@@ -41,7 +41,7 @@ class User extends \yii\db\ActiveRecord
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
             [['reg_code', 'forgetpw_code'],'default','value'=>''],
-            [['reg_code', 'forgetpw_code', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
+            [['reg_code', 'forgetpw_code', 'birthday', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
 
         ];
     }
