@@ -34,11 +34,9 @@ $('.dir-item .info').mouseenter(function(){
     }
 });*/
 
-$('.clickarea').click(function(){
+/*$('.clickarea').click(function(){
     _this = $(this).parent('.dir-item');
     if(_this.attr('download-check')=='enable'){
-        /*alert('sss');
-        return false;*/
         if(_this.attr('data-is-dir')=='1'){
             location.href='/dir?p_id='+_this.attr('data-id');
         }else{
@@ -53,7 +51,7 @@ $('.clickarea').click(function(){
             alert('没有下载权限');
         }
     }
-});
+});*/
 
 $('.downloadBtn').click(function(){
     if(confirm('确认是否要下载这个文件?')){

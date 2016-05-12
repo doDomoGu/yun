@@ -124,7 +124,33 @@
             <div class="upload_uid">上传用户：<?=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid?></div>
             <div class="upload_type">上传类型：<?=$l->flag==1?'公共':'个人'?></div>
             <div class="download_times">下载次数：<span><?=$l->clicks?></span></div>
+            <div class="click_btns">
+                <?php if($l->filetype>0):?>
+                    <?php if($downloadCheck):?>
+                        <?=Html::Button('下载',['data-id'=>$l->id,'class'=> 'downloadBtn btn btn-success'])?>
+                    <?php else:?>
+                        <?=Html::Button('下载',['class'=> 'btn btn-success disabled'])?>
+                    <?php endif;?>
+                <?php else:?>
+                    <?php if($downloadCheck):?>
+                        <?=Html::Button('打开',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])?>
+                    <?php else:?>
+                        <?=Html::Button('打开',['class'=> 'btn btn-success disabled'])?>
+                    <?php endif;?>
+                <?php endif;?>
+                <?php if(in_array($l->filetype,[])):?>
+                    <?=Html::Button('预览',['class'=> 'btn btn-primary'])?>
+                <?php else:?>
+                    <?=Html::Button('预览',['class'=> 'btn btn-primary disabled'])?>
+                <?php endif;?>
+                <?php if($l->uid==yii::$app->user->id):?>
+                    <?=Html::Button('删除',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn btn-success'])?>
+                <?php else:?>
+                    <?=Html::Button('删除',['class'=> 'btn btn-success disabled'])?>
+                <?php endif;?>
+            </div>
         </div>
+
     </div>
     <?php endforeach;?>
 <?php endif;?>
