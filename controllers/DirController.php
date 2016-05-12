@@ -35,6 +35,8 @@ class DirController extends BaseController
         '下载量从小到大'
     ];
 
+    public $previewTypeArr = [2,3,4,5,6];
+
     public $listTypeArr = ['list','icon'];
 
     public $listTypeNameArr = ['列表','图标'];
@@ -295,27 +297,39 @@ class DirController extends BaseController
     }
 
     public function actionDownload(){
-        $id = yii::$app->request->get('id');
+        $id = yii::$app->request->get('id',0);
+        $preview = yii::$app->request->get('preview',false);
         $file = File::find()->where(['id'=>$id,'status'=>1])->one();
 
         if($file){
             if(PermissionFunc::checkFileDownloadPermission($this->user->position_id,$file)){
+
                 $file_path = FileFrontFunc::getFilePath($file->filename_real,true);
 
-                FileFrontFunc::insertDownloadRecord($file,yii::$app->user->id);
+                if($preview!=false){
+                    if(in_array($file->filetype,$this->previewTypeArr)){
+                        if(in_array($file->filetype,[2,3,4,5,6])){
+                            echo '<img width=100% src="'.$file_path.'" />';
+                        }
 
-                //Header("HTTP/1.1 303 See Other");
-                /*Header("Location: $file_path");
-    var_dump($file_path);exit;
-                Yii::$app->end();*/
+                    }else{
+                        echo '该文件类型暂时不支持预览<br/>'.$file_path;
+                    }
+                }else{
+                    FileFrontFunc::insertDownloadRecord($file,yii::$app->user->id);
 
-                Header("Content-type: application/octet-stream");
-                Header("Accept-Ranges: bytes");
-                //Header("Accept-Length: ".filesize($file_path));
-                Header("Content-Disposition: attachment; filename=" . $file->filename);
+                    //Header("HTTP/1.1 303 See Other");
+                    /*Header("Location: $file_path");
+        var_dump($file_path);exit;
+                    Yii::$app->end();*/
 
-                readfile($file_path);
+                    Header("Content-type: application/octet-stream");
+                    Header("Accept-Ranges: bytes");
+                    //Header("Accept-Length: ".filesize($file_path));
+                    Header("Content-Disposition: attachment; filename=" . $file->filename);
 
+                    readfile($file_path);
+                }
             }else{
                 echo 'no permission';
             }

@@ -96,8 +96,8 @@
                         <?=Html::Button('打开',['class'=> 'btn btn-success disabled'])?>
                     <?php endif;?>
                 <?php endif;?>
-                <?php if(in_array($l->filetype,[])):?>
-                    <?=Html::Button('预览',['class'=> 'btn btn-primary'])?>
+                <?php if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):?>
+                    <?=Html::Button('预览',['data-id'=>$l->id,'class'=> 'previewBtn btn btn-primary'])?>
                 <?php else:?>
                     <?=Html::Button('预览',['class'=> 'btn btn-primary disabled'])?>
                 <?php endif;?>
@@ -140,8 +140,8 @@
                         <?=Html::Button('打开',['class'=> 'btn btn-success disabled'])?>
                     <?php endif;?>
                 <?php endif;?>
-                <?php if(in_array($l->filetype,[])):?>
-                    <?=Html::Button('预览',['class'=> 'btn btn-primary'])?>
+                <?php if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):?>
+                    <?=Html::Button('预览',['data-id'=>$l->id,'class'=> 'previewBtn btn btn-primary'])?>
                 <?php else:?>
                     <?=Html::Button('预览',['class'=> 'btn btn-primary disabled'])?>
                 <?php endif;?>
@@ -179,6 +179,8 @@
 <?=$this->render('modal/upload_person')?>
 <?=$this->render('modal/create_dir_common')?>
 <?=$this->render('modal/create_dir_person')?>
+
+<?=$this->render('modal/preview')?>
 
 <input type="hidden" id="dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="p_id" value="<?=$p_id?>">

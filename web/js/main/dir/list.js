@@ -74,6 +74,21 @@ $('.deleteBtn').click(function(e){
     }
 });
 
+$('.previewBtn').click(function(){
+    $.ajax({
+        url: '/dir/download',
+        type: 'get',
+        data: {
+            id:$(this).attr('data-id'),
+            preview:true
+        },
+        success: function (data) {
+            $('#previewContent').html(data);
+            $('#previewModal').modal('show');
+        }
+    });
+
+});
 
 $('#order_select').change(function(){
     location.href = $('#link_'+$(this).val()).val();
@@ -82,6 +97,8 @@ $('#order_select').change(function(){
 $('#list_type_select').change(function(){
     location.href = $('#link2_'+$(this).val()).val();
 });
+
+
 
 $('#createDirModalContent button.btn').click(function(){
     _dirname = $('#createDirModalContent .dirname').val();
