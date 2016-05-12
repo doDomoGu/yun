@@ -7,7 +7,14 @@
 
 }
 
-#buttons .btn {
+
+#left_btns {
+    float:left;
+    display: block;
+    width:488px;
+}
+
+#left_btns .btn {
     display: block;
     float:left;
     margin-right:4px;
