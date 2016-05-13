@@ -83,7 +83,8 @@
                     <td>
                         <?php if($l->filetype==0):?>
                             <?=BaseHtml::a('进入',['/dir','p_id'=>$l->id],['class'=>'btn btn-success btn-xs'])?>
-                        <?php else:?>
+                        <?php //TODO
+                        else:?>
                             <?=BaseHtml::a('下载',['/dir/download','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                         <?php endif;?>
 
