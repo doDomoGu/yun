@@ -54,6 +54,7 @@
 }
 
 #calendar table{
+
     /*width:500px;*/
 }
 
@@ -62,6 +63,7 @@
     padding:20px;
     width:150px;
     font-size:18px;
+    border: 1px solid #ccc;
 }
 
 /*#calendar table td{
@@ -71,7 +73,7 @@
 }*/
 
 #calendar table td.day{
-    background: #eee;
+    background: #f3f3f3;
     color:#333;
 }
 
@@ -90,3 +92,8 @@
     background: #f39d23;
 }
 
+
+#calendar table td.holiday{
+    background: #fff;
+    color: #ED1B23
+}

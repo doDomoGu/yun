@@ -1,5 +1,6 @@
 <?php
     use yii\helpers\BaseHtml;
+    use app\components\CommonFunc;
     app\assets\AppAsset::addCssFile($this,'css/main/user/sign.css');
     app\assets\AppAsset::addJsFile($this,'js/main/user/sign.js');
 ?>
@@ -7,6 +8,8 @@
     <div class="sign-btn">
     <?php if($signTodayFlag):?>
         <?=BaseHtml::a('今日已签到','',['class'=>'btn btn-primary btn-lg btn-sign disabled'])?>
+    <?php elseif(CommonFunc::isHoliday(date('Y-m-d'))):?>
+        <?=BaseHtml::a('今天是节假日',['/user/sign-in'],['class'=>'btn btn-primary btn-lg btn-sign disabled'])?>
     <?php else:?>
         <?=BaseHtml::a('今日签到',['/user/sign-in'],['class'=>'btn btn-primary btn-lg btn-sign'])?>
     <?php endif;?>
@@ -42,9 +45,14 @@
                         $i=0;
                         echo '<tr>';
                     }
-                    if(in_array($d,$signList)){
+
+                    $isHoliday = CommonFunc::isHoliday($y.'-'.$m.'-'.($d>9?$d:'0'.$d),$i);
+
+                    if($isHoliday){//节假日
+                        echo '<td class="holiday">';
+                    }elseif(in_array($d,$signList)){//已签到
                         echo '<td class="signed">';
-                    }elseif($today==$y.'-'.$m.'-'.$d){
+                    }elseif($today==$y.'-'.$m.'-'.$d){//今天
                         echo '<td class="today">';
                     }else{
                         echo '<td class="day">';
@@ -66,4 +74,5 @@
 
             <?php endfor;?>
     </table>
+    <div style="text-align: right;">* 白底红字的日期为节假日，无需签到</div>
 </section>

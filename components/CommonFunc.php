@@ -5,6 +5,8 @@ use yii\base\Component;
 use yii;
 
 class CommonFunc extends Component {
+
+
     public static function getGender($type){
         if($type==1){
             return '男';
@@ -96,5 +98,66 @@ class CommonFunc extends Component {
             $i++;
         }
         return $arr_obj;
+    }
+
+
+    /*
+     * isHoliday 检查这个日期是不是节假日
+     * 参数: date
+     */
+    public static function isHoliday($date,$weekday=false){
+        $holidayArr = self::getHolidayArr();
+        $workdayArr = self::getWorkdayArr();
+        //var_dump($date.'='.$weekday);
+        if(in_array($date,$holidayArr)){
+            return true;
+        }elseif(in_array($date,$workdayArr)){
+            return false;
+        }else{
+            if($weekday===false && !in_array($weekday,[0,1,2,3,4,5,6])){
+                $weekday = date('w',strtotime($date));
+            }
+            $weekday = intval($weekday);
+            //$weekday: 0 - 6  0和6分别为 周日 周六
+            if($weekday === 0 || $weekday === 6){
+                return true;
+            }
+        }
+
+
+
+        return false;
+    }
+
+    public static function getHolidayArr(){
+        $arr = [
+            '2016-04-30',
+            '2016-05-01',
+            '2016-05-02',
+            '2016-06-09',
+            '2016-06-10',
+            '2016-06-11',
+            '2016-09-15',
+            '2016-09-16',
+            '2016-09-17',
+            '2016-10-01',
+            '2016-10-02',
+            '2016-10-03',
+            '2016-10-04',
+            '2016-10-05',
+            '2016-10-06',
+            '2016-10-07'
+        ];
+        return $arr;
+    }
+
+    public static function getWorkdayArr(){
+        $arr = [
+            '2016-06-12',
+            '2016-09-18',
+            '2016-10-08',
+            '2016-10-09',
+        ];
+        return $arr;
     }
 }

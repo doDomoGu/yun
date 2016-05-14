@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\CommonFunc;
 use app\components\DirFunc;
 use app\models\Dir;
 use app\models\DownloadRecord;
@@ -225,24 +226,30 @@ class UserController extends BaseController
 
     public function actionSignIn(){
         $this->view->title = '每日签到';
+        $date = date('Y-m-d');
         $y = date('Y');
         $m = date('m');
         $d = date('d');
-        $result = false;
-        $sign = UserSign::find()->where(['uid'=>$this->user->id,'y'=>$y,'m'=>$m,'d'=>$d])->one();
-        if($sign!=NULL){
-            $result = 2;
+        $isHoliday = CommonFunc::isHoliday($date);
+        if($isHoliday){
+            $result = 3;
         }else{
-            $newSign = new UserSign();
-            $newSign->uid = $this->user->id;
-            $newSign->y = $y;
-            $newSign->m = $m;
-            $newSign->d = $d;
-            $newSign->point = 1;
-            $newSign->sign_time = date('Y-m-d H:i:s');
-            $newSign->save();
-            $result = 1;
+            $sign = UserSign::find()->where(['uid'=>$this->user->id,'y'=>$y,'m'=>$m,'d'=>$d])->one();
+            if($sign!=NULL){
+                $result = 2;
+            }else{
+                $newSign = new UserSign();
+                $newSign->uid = $this->user->id;
+                $newSign->y = $y;
+                $newSign->m = $m;
+                $newSign->d = $d;
+                $newSign->point = 1;
+                $newSign->sign_time = date('Y-m-d H:i:s');
+                $newSign->save();
+                $result = 1;
+            }
         }
+
         $params['result'] = $result;
         return $this->render('sign_in',$params);
     }
