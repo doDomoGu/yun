@@ -114,7 +114,7 @@ class CommonFunc extends Component {
         }elseif(in_array($date,$workdayArr)){
             return false;
         }else{
-            if($weekday===false && !in_array($weekday,[0,1,2,3,4,5,6])){
+            if($weekday===false || !in_array($weekday,[0,1,2,3,4,5,6])){
                 $weekday = date('w',strtotime($date));
             }
             $weekday = intval($weekday);

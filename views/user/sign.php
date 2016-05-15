@@ -45,14 +45,14 @@
                         $i=0;
                         echo '<tr>';
                     }
-
-                    $isHoliday = CommonFunc::isHoliday($y.'-'.$m.'-'.($d>9?$d:'0'.$d),$i);
+                $thisDay = $y.'-'.$m.'-'.($d>9?$d:'0'.$d);
+                $isHoliday = CommonFunc::isHoliday($thisDay,$i);
 
                     if($isHoliday){//节假日
                         echo '<td class="holiday">';
                     }elseif(in_array($d,$signList)){//已签到
                         echo '<td class="signed">';
-                    }elseif($today==$y.'-'.$m.'-'.$d){//今天
+                    }elseif($today==$thisDay){//今天
                         echo '<td class="today">';
                     }else{
                         echo '<td class="day">';

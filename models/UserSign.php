@@ -39,6 +39,6 @@ PRIMARY KEY (`id`)
 
     public function getUser()
     {
-        return $this->hasOne('app\models\User', array('id' => 'uid'));
+        return $this->hasOne(User::className(), ['id' => 'uid']);
     }
 }

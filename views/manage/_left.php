@@ -21,7 +21,7 @@
             <a class="list-group-item <?=strpos($route,'manage/file')===0?'active':''?>" href="/manage/file">
                 文件列表
             </a>
-            <a class="list-group-item <?=strpos($route,'manage/user')===0?'active':''?>" href="/manage/user">
+            <a class="list-group-item <?=strpos($route,'manage/user')===0 && strpos($route,'manage/user-sign')!==0?'active':''?>" href="/manage/user">
                 公司职员
             </a>
             <a class="list-group-item <?=strpos($route,'manage/admin')===0?'active':''?>" href="/manage/admin">
@@ -29,6 +29,9 @@
             </a>
             <a class="list-group-item <?=strpos($route,'manage/message')===0?'active':''?>" href="/manage/message">
                 消息通知
+            </a>
+            <a class="list-group-item <?=strpos($route,'manage/user-sign')===0?'active':''?>" href="/manage/user-sign">
+                职员签到
             </a>
         <?php elseif($this->context->checkIsUserAdmin()):?>
             <button class="list-group-item disabled">首页新闻</button>
@@ -41,6 +44,7 @@
             </a>
             <button class="list-group-item disabled">管理员授权</button>
             <button class="list-group-item disabled">消息通知</button>
+            <button class="list-group-item disabled">职员签到</button>
         <?php endif;?>
 
     </div>
