@@ -17,7 +17,11 @@
         ]); ?>
 <input style="display:none">
         <?/*= $form->field($model, 'username') */?>
-        <?= $form->field($model, 'username',['inputOptions'=>['autocomplete'=>'off']]) ?>
+        <?php if($model->getScenario()=='create'):?>
+            <?= $form->field($model, 'username',['inputOptions'=>['autocomplete'=>'off']]) ?>
+        <?php else:?>
+            <?= $form->field($model, 'username',['inputOptions'=>['autocomplete'=>'off','disabled'=>true]]) ?>
+        <?php endif;?>
 <input style="display:none">
         <?/*= $form->field($model, 'password')->passwordInput() */?>
         <?= $form->field($model, 'password',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>

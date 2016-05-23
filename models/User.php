@@ -40,6 +40,7 @@ class User extends \yii\db\ActiveRecord
             ['username','unique'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','email'],
+            ['username','unique','on'=>'create', 'targetClass' => 'app\models\User', 'message' => '此用户名已经被使用。'],
             [['reg_code', 'forgetpw_code'],'default','value'=>''],
             [['reg_code', 'forgetpw_code', 'birthday', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
 

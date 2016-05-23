@@ -122,6 +122,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
             [['password','password2'],'required','on'=>'create'],
             [['username', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
+            ['username','unique','on'=>'create', 'targetClass' => 'app\models\User', 'message' => '此用户名已经被使用。'],
             ['username','email'],
             ['password2', 'compare','compareAttribute'=>'password'],
             [['reg_code', 'forgetpw_code', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
