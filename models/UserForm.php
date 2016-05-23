@@ -119,7 +119,7 @@ UNIQUE KEY `username_UNIQUE` (`username`)
     public function rules()
     {
         return [
-            [['password','password2'],'required','on'=>'create'],
+            /*[['password','password2'],'required','on'=>'create'],*/
             [['username', 'name', 'ord', 'status'], 'required'],
             [['id', 'ord', 'status', 'position_id', 'gender'], 'integer'],
             ['username','unique','on'=>'create', 'targetClass' => 'app\models\User', 'message' => '此用户名已经被使用。'],

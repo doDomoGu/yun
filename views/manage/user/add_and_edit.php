@@ -23,12 +23,21 @@
             <?= $form->field($model, 'username',['inputOptions'=>['autocomplete'=>'off','disabled'=>true]]) ?>
         <?php endif;?>
 <input style="display:none">
-        <?/*= $form->field($model, 'password')->passwordInput() */?>
-        <?= $form->field($model, 'password',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>
-<input style="display:none">
-        <?/*= $form->field($model, 'password2')->passwordInput() */?>
-        <?= $form->field($model, 'password2',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>
 
+        <?php if($model->getScenario()=='create'):?>
+            <div class="form-group field-userform-position_id">
+                <label for="userform-position_id" class="col-lg-2 control-label">密码</label>
+                <div class="col-lg-10">
+                    自动随机创建，在添加职员成功后，在给职员邮箱发送的邮件中查看密码
+                </div>
+            </div>
+        <?php else:?>
+            <?/*= $form->field($model, 'password')->passwordInput() */?>
+            <?= $form->field($model, 'password',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>
+            <input style="display:none">
+            <?/*= $form->field($model, 'password2')->passwordInput() */?>
+            <?= $form->field($model, 'password2',['inputOptions'=>['autocomplete'=>'off']])->passwordInput() ?>
+        <?php endif;?>
         <?= $form->field($model, 'name') ?>
 
         <?/*= $form->field($model, 'position_id') */?>

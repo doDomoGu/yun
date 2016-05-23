@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\manage\user;
 
+use app\components\CommonFunc;
 use app\components\MyMail;
 use Yii;
 use yii\base\Action;
@@ -35,9 +36,13 @@ class UserAddAndEditAction extends Action{
                 $user = new User();
                 //$user->setScenario('create');
             }
-            if($model->getScenario()=='update' && ($model->password=='' || $model->password2=='')){
-                $model->password = $user->password;
-                $updatePassword = false;
+            if($model->getScenario()=='update'){
+                if($model->password=='' || $model->password2==''){
+                    $model->password = $user->password;
+                    $updatePassword = false;
+                }
+            }elseif($model->getScenario()=='create'){
+                $model->password = CommonFunc::generateCode(); //新增职员 自动创建随机密码
             }
 
             $user->setAttributes($model->attributes);
@@ -45,6 +50,7 @@ class UserAddAndEditAction extends Action{
             if($updatePassword===true){
                 $passwordTmp = $user->password;
                 $user->password = md5($user->password);
+
             }
 
             if($user->save()){
