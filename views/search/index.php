@@ -3,6 +3,7 @@
     use app\components\DirFunc;
     use app\components\CommonFunc;
     use app\components\PositionFunc;
+    use app\components\PermissionFunc;
 
     //app\assets\AppAsset::addJsFile($this,'js/main/manage/user/index.js');
 ?>
@@ -58,13 +59,14 @@
                     <th>文件夹路径</th>
                     <th>上传职员</th>
                     <th>上传时间</th>
-                    <th>下载次数</th>
-                    <th>操作</th>
+                    <th width="100">下载次数</th>
+                    <th width="200">操作</th>
                 </tr>
             </thead>
             <tbody>
             <?php if(!empty($list)):?>
             <?php foreach($list as $l):?>
+                    <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
                 <tr>
                     <th scope="row"><?=$l->id?></th>
                     <td><?=$l->filename?> <?=$l->filetype==0?'<span class="label label-primary">文件夹</span>':''?></td>
@@ -81,14 +83,30 @@
                     <td><?=$l->add_time?></td>
                     <td><?=$l->filetype==0?'--':$l->clicks?></td>
                     <td>
-                        <?php if($l->filetype==0):?>
-                            <?=BaseHtml::a('进入',['/dir','p_id'=>$l->id],['class'=>'btn btn-success btn-xs'])?>
-                        <?php //TODO
-                        else:?>
-                            <?=BaseHtml::a('下载',['/dir/download','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
-                        <?php endif;?>
-
-
+                        <?php /*if($l->filetype>0):*/?><!--
+                            <?php /*if($downloadCheck):*/?>
+                                <?/*=BaseHtml::Button('下载',['data-id'=>$l->id,'class'=> 'downloadBtn btn btn-xs btn-success'])*/?>
+                            <?php /*else:*/?>
+                                <?/*=BaseHtml::Button('下载',['class'=> 'btn btn-xs btn-success disabled'])*/?>
+                            <?php /*endif;*/?>
+                        <?php /*else:*/?>
+                            <?php /*if($downloadCheck):*/?>
+                                <?/*=BaseHtml::Button('打开',['data-id'=>$l->id,'class'=> 'openBtn btn btn-xs btn-success'])*/?>
+                            <?php /*else:*/?>
+                                <?/*=BaseHtml::Button('打开',['class'=> 'btn btn-xs btn-success disabled'])*/?>
+                            <?php /*endif;*/?>
+                        <?php /*endif;*/?>
+                        <?php /*if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):*/?>
+                            <?/*=BaseHtml::Button('预览',['data-id'=>$l->id,'class'=> 'previewBtn btn btn-xs btn-primary'])*/?>
+                        <?php /*else:*/?>
+                            <?/*=BaseHtml::Button('预览',['class'=> 'btn btn-xs btn-primary disabled'])*/?>
+                        <?php /*endif;*/?>
+                        <?php /*if($l->uid==yii::$app->user->id):*/?>
+                            <?/*=BaseHtml::Button('删除',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn btn-xs btn-success'])*/?>
+                        <?php /*else:*/?>
+                            <?/*=BaseHtml::Button('删除',['class'=> 'btn btn-xs btn-success disabled'])*/?>
+                        --><?php /*endif;*/?>
+---
                     </td>
                 </tr>
             <?php endforeach;?>

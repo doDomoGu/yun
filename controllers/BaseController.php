@@ -17,7 +17,7 @@ class BaseController extends Controller
     public $position;
     public $message = [];
     public $messageNum = 0;
-
+    public $previewTypeArr = [2,3,4,5,6];
     //public $layout = 'main';
     public function beforeAction($action){
         if (!parent::beforeAction($action)) {
