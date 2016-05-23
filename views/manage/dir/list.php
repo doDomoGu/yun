@@ -34,7 +34,9 @@
                     <td>
                         <?=BaseHtml::a('编辑',['dir-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                         <?php if($l->is_leaf==0):?>
-                        <?=BaseHtml::a('添加子目录',['dir-add-and-edit','p_id'=>$l->id],['class'=>'btn btn-warning btn-xs'])?>
+                            <?=BaseHtml::a('添加子目录',['dir-add-and-edit','p_id'=>$l->id],['class'=>'btn btn-warning btn-xs'])?>
+                        <?php else:?>
+                            <?=BaseHtml::a('查看对应职位权限',['dir-position-permission','dir_id'=>$l->id],['class'=>'btn btn-success btn-xs'])?>
                         <?php endif;?>
                     </td>
                 </tr>
