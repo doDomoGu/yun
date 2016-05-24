@@ -6,7 +6,8 @@
     app\assets\AppAsset::addJsFile($this,'js/main/manage/user/index.js');
 ?>
 
-        <?=BaseHtml::a('新增职员',['user-add-and-edit'],['class'=>'btn btn-primary'])?>
+        <?=BaseHtml::a('新增职员 >>',['user-add-and-edit'],['class'=>'btn btn-primary'])?>
+        <?=BaseHtml::a('批量导入职员 >>',['user-import'],['class'=>'btn btn-warning'])?>
         <p></p>
         <table class="table table-bordered">
             <thead>

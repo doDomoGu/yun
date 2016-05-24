@@ -109,6 +109,9 @@ class ManageController extends BaseController
             'user-add-and-edit' => [
                 'class' => 'app\controllers\manage\user\UserAddAndEditAction',
             ],
+            'user-import' => [
+                'class' => 'app\controllers\manage\user\UserImportAction',
+            ],
             'user-sign' => [
                 'class' => 'app\controllers\manage\userSign\UserSignAction',
             ],

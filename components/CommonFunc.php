@@ -34,6 +34,16 @@ class CommonFunc extends Component {
         }
     }
 
+    public static function getGender2($n){
+        if($n=='男'){
+            return 1;
+        }elseif($n=='女'){
+            return 2;
+        }else{
+            return 0;
+        }
+    }
+
     public static function getJoinDay($join_date){
         $arr = ['day'=>null,'yearMonth'=>null];
         $joinTimestamp = strtotime($join_date);
@@ -176,5 +186,18 @@ class CommonFunc extends Component {
             '2016-10-09',
         ];
         return $arr;
+    }
+
+    public static function input_csv($handle) {
+        $out = array ();
+        $n = 0;
+        while ($data = fgetcsv($handle, 10000)) {
+            $num = count($data);
+            for ($i = 0; $i < $num; $i++) {
+                $out[$n][$i] = $data[$i];
+            }
+            $n++;
+        }
+        return $out;
     }
 }
