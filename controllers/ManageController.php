@@ -112,6 +112,9 @@ class ManageController extends BaseController
             'user-import' => [
                 'class' => 'app\controllers\manage\user\UserImportAction',
             ],
+            'user-import-complete' => [
+                'class' => 'app\controllers\manage\user\UserImportCompleteAction',
+            ],
             'user-sign' => [
                 'class' => 'app\controllers\manage\userSign\UserSignAction',
             ],
