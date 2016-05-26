@@ -13,7 +13,7 @@ class Position extends \yii\db\ActiveRecord
             [['name', 'alias'], 'required'],
             [['id', 'status', 'p_id', 'ord', 'is_leaf', 'is_last', 'level', 'is_class'], 'integer'],
             ['name', 'string', 'max'=>100],
-            [['describe','shuoming','zhiquan','zhize','zhibiao'],'safe']
+            [['describe', 'full_alias', 'shuoming','zhiquan','zhize','zhibiao'],'safe']
         ];
     }
 
@@ -21,6 +21,7 @@ class Position extends \yii\db\ActiveRecord
         return [
             'name' => '名称',
             'alias' => '别名',
+            'full_alias' => '完整别名',
             'describe' => '描述',
             'p_id' => '父级',
             'level' => '层级',
@@ -59,6 +60,8 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
 
 
 /*ALTER TABLE `position` ADD `alias` VARCHAR(255) DEFAULT NULL AFTER `name`;*/
+
+/*ALTER TABLE `position` ADD `full_alias` VARCHAR(255) DEFAULT NULL AFTER `alias`;*/
 
     public $zhiji1;
     public $zhiji2;
@@ -236,12 +239,12 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 ]],
                 ['n'=>'无锡汉佑房屋','a'=>'wx']
             ]],
-            ['n'=>'致秦经纪','a'=>'zqjj','c'=>[
-               ['n'=>'上海致秦经纪','a'=>'sh','c'=>$this->bumen2],
-               ['n'=>'苏州致秦经纪','a'=>'sz','c'=>$this->bumen2_2],
-               ['n'=>'无锡致秦经纪','a'=>'wx','c'=>$this->bumen2_2],
-               ['n'=>'南京致秦经纪','a'=>'nj','c'=>$this->bumen2_2],
-               ['n'=>'合肥致秦经纪','a'=>'hf','c'=>$this->bumen2_2],
+            ['n'=>'鸿汉经纪','a'=>'hhjj','c'=>[
+               ['n'=>'上海鸿汉经纪','a'=>'sh','c'=>$this->bumen2],
+               ['n'=>'苏州鸿汉经纪','a'=>'sz','c'=>$this->bumen2_2],
+               ['n'=>'无锡鸿汉经纪','a'=>'wx','c'=>$this->bumen2_2],
+               ['n'=>'南京鸿汉经纪','a'=>'nj','c'=>$this->bumen2_2],
+               ['n'=>'合肥鸿汉经纪','a'=>'hf','c'=>$this->bumen2_2],
             ]],
             ['n'=>'明致置业','a'=>'mzzy','c'=>[
                ['n'=>'上海明致置业','a'=>'sh'],

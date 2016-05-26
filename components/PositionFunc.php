@@ -5,6 +5,7 @@ use app\models\Position;
 use yii\base\Component;
 use yii\helpers\ArrayHelper;
 use yii\helpers\BaseArrayHelper;
+use yii;
 
 class PositionFunc extends Component {
     /*
@@ -29,6 +30,14 @@ class PositionFunc extends Component {
         }
     }
 
+
+    /*
+     * 函数getRouteArr , 根据职位id 获取 1业态 2地方 3部门（多层级） 4职位
+     *
+     * @param $position_id 职位id
+     * @param $separator 分隔符
+     * return array
+     */
     public static function getRouteArr($position_id,$separator=' > '){
         $arr = [
             1 => '--',
@@ -326,5 +335,41 @@ class PositionFunc extends Component {
             }
         }
         return $returnId;
+    }
+
+    //更新职位的full_alias 字段 全部
+    public static function updateAllFullAlias(){
+        for($i=1;$i<10;$i++){
+            self::updateFullAlias($i);
+        }
+        exit;
+    }
+
+
+    //更新职位的full_alias 字段 （单个）
+    public static function updateFullAlias($position_id){
+        $parents = self::getParents($position_id);
+        $fullAlias = '';
+        $fullAliasTmp = [];
+        if(!empty($parents)){
+            foreach($parents as $p){
+                $fullAliasTmp[] = $p->alias;
+            }
+            $fullAlias = implode('/',$fullAliasTmp);
+        }
+        Position::updateAll(['full_alias'=>$fullAlias],'id = :id',[':id'=>$position_id]);
+
+        echo '<br/><br/>-----------<br/><br/>';
+    }
+
+    public static function checkAlias(){
+        $db = yii::$app->db;
+        $command  = $db->createCommand('SELECT count(id) as ct,id,alias,p_id FROM `position` group by alias , p_id HAVING ct>1 ');
+        $result = $command->queryAll();
+        foreach($result as $r){
+            var_dump($r);
+            echo '<br/><Br/>';
+        }
+        echo 'end ';exit;
     }
 }

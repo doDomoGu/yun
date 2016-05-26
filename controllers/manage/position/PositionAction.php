@@ -50,6 +50,18 @@ class PositionAction extends Action{
             exit;
         }
 
+        if(Yii::$app->request->get('updateFullAlias')){
+            PositionFunc::updateAllFullAlias();
+            Yii::$app->response->redirect('position')->send();
+            exit;
+        }
+
+        if(Yii::$app->request->get('checkAlias')){
+            PositionFunc::checkAlias();
+            //Yii::$app->response->redirect('position')->send();
+            exit;
+        }
+
 
         $this->controller->view->title = '职位/部门 - 列表';
 
