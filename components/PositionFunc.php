@@ -339,9 +339,13 @@ class PositionFunc extends Component {
 
     //更新职位的full_alias 字段 全部
     public static function updateAllFullAlias(){
-        for($i=1;$i<10;$i++){
-            self::updateFullAlias($i);
+        $db = yii::$app->db;
+        $command  = $db->createCommand('SELECT id FROM `position`');
+        $result = $command->queryAll();
+        foreach($result as $r){
+            self::updateFullAlias($r['id']);
         }
+        echo 'updateAllFullAlias ok';
         exit;
     }
 
