@@ -13,6 +13,7 @@ use Yii;
 use app\components\MyMail;
 
 class UserImportCompleteAction extends Action{
+    public $sendMail = false;
     public function run(){
         if(!empty($_POST)){
             $post = true;
@@ -37,15 +38,17 @@ class UserImportCompleteAction extends Action{
                     $user->contract_date = $val[8];
                     $password = CommonFunc::generateCode();
                     $user->password = md5($password);
+                    $user->password_true = $password;
                     $user->ord = 1;
                     $user->status = 1;
                     if($user->save()){
-                        $mail = new MyMail();
-                        $mail->to = $user->username;
-                        $mail->subject = '【颂唐云】新职员注册成功';
-                        $mail->htmlBody = '职员['.$user->name.'],您好：<br/>颂唐云网址为：http://yun.songtang.net 您的登录用户名为 '.$user->username.' 密码为 '.$password;
-                        $mail->send();
-
+                        if($this->sendMail){
+                            $mail = new MyMail();
+                            $mail->to = $user->username;
+                            $mail->subject = '【颂唐云】新职员注册成功';
+                            $mail->htmlBody = '职员['.$user->name.'],您好：<br/>颂唐云网址为：http://yun.songtang.net 您的登录用户名为 '.$user->username.' 密码为 '.$password;
+                            $mail->send();
+                        }
                         $list[] = $user;
                     }
                 }

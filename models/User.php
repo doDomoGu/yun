@@ -42,7 +42,7 @@ class User extends \yii\db\ActiveRecord
             ['username','email'],
             ['username','unique','on'=>'create', 'targetClass' => 'app\models\User', 'message' => '此用户名已经被使用。'],
             [['reg_code', 'forgetpw_code'],'default','value'=>''],
-            [['reg_code', 'forgetpw_code', 'birthday', 'join_date', 'contract_date', 'mobile', 'phone', 'describe'], 'safe']
+            [['reg_code', 'forgetpw_code', 'birthday', 'join_date', 'contract_date', 'mobile', 'phone', 'describe','password_true'], 'safe']
 
         ];
     }
@@ -72,6 +72,8 @@ UNIQUE KEY `username_UNIQUE` (`username`)
     /*ALTER TABLE `user`
      ADD `contract_date` DATE DEFAULT NULL AFTER `join_date`,
      ADD `head_img` VARCHAR(255) DEFAULT NULL AFTER `contract_date`;*/
+
+    /*ALTER TABLE `user` ADD `password_true` VARCHAR(255) DEFAULT NULL AFTER `password`;*/
 
     public function getPosition()
     {

@@ -9,6 +9,7 @@ use app\models\UserForm;
 use app\models\User;
 
 class UserAddAndEditAction extends Action{
+    public $sendMail = false;
     public function run(){
         $model = new UserForm();
         $user = null;
@@ -49,33 +50,35 @@ class UserAddAndEditAction extends Action{
 
             if($updatePassword===true){
                 $passwordTmp = $user->password;
+                $user->password_true = $user->password;
                 $user->password = md5($user->password);
 
             }
 
             if($user->save()){
-                //发送邮件
-                if($model->getScenario()=='create'){
-                    $mail = new MyMail();
-                    $mail->to = $user->username;
-                    $mail->subject = '【颂唐云】新职员注册成功';
-                    $mail->htmlBody = '职员['.$user->name.'],您好：<br/>颂唐云网址为：http://yun.songtang.net 您的登录用户名为 '.$user->username.' 密码为 '.$passwordTmp;
-                    $mail->send();
-                }elseif($model->getScenario()=='update'){
-                    $mail = new MyMail();
-                    $mail->to = $user->username;
-                    if($updatePassword==true){
-                        $mail->subject = '【颂唐云】职员信息变更(包括密码)';
-                    }else{
-                        $mail->subject = '【颂唐云】职员信息变更';
+                if($this->sendMail){
+                    //发送邮件
+                    if($model->getScenario()=='create'){
+                        $mail = new MyMail();
+                        $mail->to = $user->username;
+                        $mail->subject = '【颂唐云】新职员注册成功';
+                        $mail->htmlBody = '职员['.$user->name.'],您好：<br/>颂唐云网址为：http://yun.songtang.net 您的登录用户名为 '.$user->username.' 密码为 '.$passwordTmp;
+                        $mail->send();
+                    }elseif($model->getScenario()=='update'){
+                        $mail = new MyMail();
+                        $mail->to = $user->username;
+                        if($updatePassword==true){
+                            $mail->subject = '【颂唐云】职员信息变更(包括密码)';
+                        }else{
+                            $mail->subject = '【颂唐云】职员信息变更';
+                        }
+                        $mail->htmlBody = '职员['.$user->name.'],您好：<br/> 您的职员信息发生了更改。';
+                        if($updatePassword==true){
+                            $mail->htmlBody.=' <br/>您的登录密码变为 '.$passwordTmp;
+                        }
+                        $mail->send();
                     }
-                    $mail->htmlBody = '职员['.$user->name.'],您好：<br/> 您的职员信息发生了更改。';
-                    if($updatePassword==true){
-                        $mail->htmlBody.=' <br/>您的登录密码变为 '.$passwordTmp;
-                    }
-                    $mail->send();
                 }
-
                 Yii::$app->response->redirect('user')->send();
             }
         }
