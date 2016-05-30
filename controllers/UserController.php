@@ -35,6 +35,7 @@ class UserController extends BaseController
         $model->id = $user->id;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $user->password = md5($model->password_new);
+            $user->password_true = $model->password_new;
             if($user->save()){
                 Yii::$app->user->logout();
                 Yii::$app->response->redirect('/site/login')->send();

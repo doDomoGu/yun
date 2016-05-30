@@ -29,6 +29,10 @@ class UserImportAction extends Action{
                 if($len_result>0){
                     //用户名(邮箱)、姓名、职位、性别、生日、手机、座机、入职日期、合同到期日期
                     for ($i = 1; $i < $len_result; $i++) { //循环获取各字段值
+                        foreach($result[$i] as $j => $v){
+                            $result[$i][$j] = iconv(mb_detect_encoding($v, mb_detect_order(), true), 'utf-8', $v);
+                        }
+
                         $usernameWrong = false;
                         $username = $result[$i][0];
                         //检查用户名（邮箱）
@@ -47,28 +51,46 @@ class UserImportAction extends Action{
                             }
                         }
                         $nameWrong = false;
-                        $name = iconv('gb2312', 'utf-8', $result[$i][1]); //中文转码
+                        //$name = iconv('gb2312', 'utf-8', $result[$i][1]); //中文转码
+                        $name = $result[$i][1]; //中文转码
                         if($name==''){
                             $nameWrong = 1; //不能为空
                         }
 
                         $positionWrong = false;
                         $position_id = $result[$i][2];
-                        if($position_id==''){
-                            $positionWrong = 1; //不能为空
-                        }else{
+                        $positionName = $result[$i][3];
+                        if($position_id!=''){
                             $posExist = Position::find()->where(['id'=>$position_id,'is_leaf'=>1])->one();
                             if(!$posExist){  //职位不存在
                                 $positionWrong = 2;
                             }
+                        }elseif($positionName!=''){
+                            $positionNameTmp = explode('-',$positionName);
+                            $p_id=0;
+                            for($ii=0;$ii<count($positionNameTmp);$ii++){
+                                $posTmp = Position::find()->where(['p_id'=>$p_id,'name'=>$positionNameTmp[$ii]])->one();
+                                if($posTmp){
+                                    $p_id = $posTmp->id;
+                                }else{
+                                    $positionWrong = 3;
+                                }
+                            }
+                            if($positionWrong != 3){
+                                $position_id = $p_id;
+                            }
+                        }else{
+                            $positionWrong = 1; //不能为空
                         }
 
-                        $gender = CommonFunc::getGender2(iconv('gb2312', 'utf-8', $result[$i][3]));
-                        $birthday = strtotime($result[$i][4])>0?date('Y-m-d',strtotime($result[$i][4])):'';
-                        $mobile = $result[$i][5];
-                        $phone = $result[$i][6];
-                        $join_date = strtotime($result[$i][7])>0?date('Y-m-d',strtotime($result[$i][7])):'';
-                        $contract_date = strtotime($result[$i][8])>0?date('Y-m-d',strtotime($result[$i][8])):'';
+
+                        //$gender = CommonFunc::getGender2(iconv('gb2312', 'utf-8', $result[$i][3]));
+                        $gender = CommonFunc::getGender2($result[$i][5]);
+                        $birthday = strtotime($result[$i][6])>0?date('Y-m-d',strtotime($result[$i][6])):'';
+                        $mobile = $result[$i][7];
+                        $phone = $result[$i][8];
+                        $join_date = strtotime($result[$i][9])>0?date('Y-m-d',strtotime($result[$i][9])):'';
+                        $contract_date = strtotime($result[$i][10])>0?date('Y-m-d',strtotime($result[$i][10])):'';
                         //$data_values .= "('$name','$sex','$age'),";
                         $list[] = [
                             'username' => $username,
@@ -77,6 +99,7 @@ class UserImportAction extends Action{
                             'nameWrong' => $nameWrong,
                             'position_id' => $position_id,
                             'positionWrong' => $positionWrong,
+                            'positionName' => $positionName,
                             'gender' => $gender,
                             'birthday' => $birthday,
                             'mobile' => $mobile,

@@ -20,18 +20,19 @@
             <button style="display: block;float:right;" onclick="$('#importForm').submit();" class="btn btn-success">确认导入 >></button>
         </p>
         <form id="importForm" method="post" action="/manage/user-import-complete">
-        <table class="table table-bordered">
+        <table class="table table-bordered" >
             <thead>
             <tr>
                 <th>用户名(邮箱)<span style="color:red;">*</span></th>
-                <th width="60">姓名<span style="color:red;">*</span></th>
-                <th width="200">职位<span style="color:red;">*</span></th>
-                <th width="50">性别</th>
-                <th width="100">生日</th>
-                <th width="100">手机</th>
-                <th width="100">座机</th>
-                <th width="100">入职日期</th>
-                <th width="100">合同到期</th>
+                <th>姓名<span style="color:red;">*</span></th>
+                <th>职位<span style="color:red;">*</span></th>
+                <th>职位全称</th>
+                <th>性别</th>
+                <th>生日</th>
+                <th>手机</th>
+                <th >座机</th>
+                <th>入职日期</th>
+                <th>合同到期</th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +41,13 @@
                     <tr>
                         <!--<th scope="row"><?/*=$l->id*/?></th>-->
                         <td>
+                            <?php
+                                if(strpos($l['username'],'@')>-1){
+                                    $lun1 = substr($l['username'],0,strpos($l['username'],'@'));
+                                    $lun2 = substr($l['username'],strpos($l['username'],'@'));
+                                    $l['username'] = $lun1.'<br/>'.$lun2;
+                                }
+                            ?>
                             <?php if($l['usernameWrong']==1):?>
                                 <span class="label label-danger">不能为空</span>
                             <?php elseif($l['usernameWrong']==2):?>
@@ -57,18 +65,19 @@
                         <td>
                             <?php if($l['positionWrong']==1):?>
                                 <span class="label label-danger">不能为空</span>
-                            <?php elseif($l['positionWrong']==2):?>
-                                <?=$l['position_id']?> <span class="label label-danger">职位ID错误</span>
+                            <?php elseif($l['positionWrong']==2 || $l['positionWrong']==3):?>
+                                <?=$l['position_id']?> <span class="label label-danger">职位错误</span>
                             <?php else:?>
                                 <?=PositionFunc::getFullRoute($l['position_id'])?>
                             <?php endif;?>
                         </td>
+                        <td><?=$l['positionName']?></td>
                         <td><?=CommonFunc::getGender($l['gender'])?></td>
-                        <td><?=$l['birthday']!=''?$l['birthday']:'<span class="label label-warning">格式错误或为空</span>'?></td>
+                        <td><?=$l['birthday']!=''?$l['birthday']:'<span class="label label-warning">格式错误</span>'?></td>
                         <td><?=$l['mobile']?></td>
                         <td><?=$l['phone']?></td>
-                        <td><?=$l['join_date']!=''?$l['join_date']:'<span class="label label-warning">格式错误或为空</span>'?></td>
-                        <td><?=$l['contract_date']!=''?$l['contract_date']:'<span class="label label-warning">格式错误或为空</span>'?></td>
+                        <td><?=$l['join_date']!=''?$l['join_date']:'<span class="label label-warning">格式错误</span>'?></td>
+                        <td><?=$l['contract_date']!=''?$l['contract_date']:'<span class="label label-warning">格式错误</span>'?></td>
                         <?php if($l['usernameWrong']==false && $l['nameWrong']==false && $l['positionWrong']==false):?>
                         <input type="hidden" name="data[]" value='<?=$l['data']?>' />
                         <?php endif;?>
