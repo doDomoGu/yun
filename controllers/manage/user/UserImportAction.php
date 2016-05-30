@@ -30,7 +30,8 @@ class UserImportAction extends Action{
                     //用户名(邮箱)、姓名、职位、性别、生日、手机、座机、入职日期、合同到期日期
                     for ($i = 1; $i < $len_result; $i++) { //循环获取各字段值
                         foreach($result[$i] as $j => $v){
-                            $result[$i][$j] = iconv(mb_detect_encoding($v, mb_detect_order(), true), 'utf-8', $v);
+                            //$result[$i][$j] = iconv(mb_detect_encoding($v, mb_detect_order(), true), 'utf-8', $v);
+                            $result[$i][$j] = iconv('gbk', 'utf-8', $v);
                         }
 
                         $usernameWrong = false;
