@@ -124,6 +124,9 @@ class ManageController extends BaseController
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',
             ],
+            'positionTest' => [
+                'class' => 'app\controllers\manage\position\PositionTestAction',
+            ],
             'position-add-and-edit' => [
                 'class' => 'app\controllers\manage\position\PositionAddAndEditAction',
             ],

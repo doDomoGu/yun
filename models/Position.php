@@ -68,19 +68,21 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
     public $zhiji2_2;
     public $zhiji3;
     public $zhiji4;
+    public $zhiji_zjb;
     public $zhiji_zgb;
     public $anchang1;
     public $anchang2;
     public $guanggao;
     public $bumen1;
     public $bumen1_2;
-    public $bumen1_stdc_sh;
-    public $bumen1_stdc_wx;
-    public $bumen1_rxsy_sh;
     public $bumen2;
     public $bumen2_2;
     public $bumen3;
     public $bumen3_2;
+    public $bumen_base;
+    public $bumen_stdc_sh;
+    public $bumen_stdc_wx;
+    public $bumen_rxsy_sh;
     public $arr;
 
     public function __construct(){
@@ -122,6 +124,13 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
             ['n'=>'助理','a'=>'zl','l'=>true]
         ];
 
+        $this->zhiji_zjb = [
+            ['n'=>'董事长','a'=>'dsz','l'=>true],
+            ['n'=>'总经理','a'=>'zjl','l'=>true],
+            ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+            ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+            ['n'=>'司机','a'=>'sj','l'=>true]
+        ];
 
         $this->zhiji_zgb = [
             ['n'=>'总监','a'=>'zj','l'=>true],
@@ -236,71 +245,6 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
             ]]
         ];
 
-        $this->bumen1_stdc_sh = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'总经理','a'=>'zjl','l'=>true],
-                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                ['n'=>'总监','a'=>'zj','l'=>true],
-                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'宝山上坤上街案场','a'=>'bssksjac','c'=>$this->anchang1],
-                ['n'=>'绍兴锦园案场','a'=>'sxjyac','c'=>$this->anchang1],
-                ['n'=>'天津麦谷案场','a'=>'tjmgac','c'=>$this->anchang1],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
-                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
-            ]]
-        ];
-
-        $this->bumen1_stdc_wx = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'总经理','a'=>'zjl','l'=>true],
-                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                ['n'=>'总监','a'=>'zj','l'=>true],
-                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'国信世家案场','a'=>'gxsjac','c'=>$this->anchang2],
-                ['n'=>'君悦案场','a'=>'jyac','c'=>$this->anchang2],
-                ['n'=>'天氿御城案场','a'=>'tgycac','c'=>$this->anchang2],
-                ['n'=>'中交上东湾案场','a'=>'zjsdwac','c'=>$this->anchang2],
-                ['n'=>'天御广场案场','a'=>'tygcac','c'=>$this->anchang2],
-                ['n'=>'星湖花海案场','a'=>'xhhhac','c'=>$this->anchang2],
-                ['n'=>'赛维拉案场','a'=>'slwac','c'=>$this->anchang2],
-                ['n'=>'城开国际案场','a'=>'ckgjac','c'=>$this->anchang2],
-                ['n'=>'金鑫广场案场','a'=>'jxgcac','c'=>$this->anchang2],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang2],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang2],
-                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang2]
-            ]]
-        ];
-
-        $this->bumen1_rxsy_sh = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'总经理','a'=>'zjl','l'=>true],
-                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                ['n'=>'总监','a'=>'zj','l'=>true],
-                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'吴江案场','a'=>'wjac','c'=>$this->anchang1],
-                ['n'=>'阜阳案场','a'=>'fyac','c'=>$this->anchang1],
-                ['n'=>'彩生活案场','a'=>'cshac','c'=>$this->anchang1],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
-                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
-            ]]
-        ];
 
         $this->bumen2 = [
             //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
@@ -348,32 +292,97 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
         ];
 
 
+        $this->bumen_base = [
+            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
+            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
+            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1]
+        ];
+
+
+        $this->bumen_stdc_sh = [
+            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
+            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
+            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'宝山上坤上街案场','a'=>'bssksjac','c'=>$this->anchang1],
+                ['n'=>'绍兴锦园案场','a'=>'sxjyac','c'=>$this->anchang1],
+                ['n'=>'天津麦谷案场','a'=>'tjmgac','c'=>$this->anchang1],
+                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
+                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
+                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
+            ]]
+        ];
+
+        $this->bumen_stdc_wx = [
+            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
+            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
+            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'国信世家案场','a'=>'gxsjac','c'=>$this->anchang2],
+                ['n'=>'君悦案场','a'=>'jyac','c'=>$this->anchang2],
+                ['n'=>'天氿御城案场','a'=>'tgycac','c'=>$this->anchang2],
+                ['n'=>'中交上东湾案场','a'=>'zjsdwac','c'=>$this->anchang2],
+                ['n'=>'天御广场案场','a'=>'tygcac','c'=>$this->anchang2],
+                ['n'=>'星湖花海案场','a'=>'xhhhac','c'=>$this->anchang2],
+                ['n'=>'赛维拉案场','a'=>'slwac','c'=>$this->anchang2],
+                ['n'=>'城开国际案场','a'=>'ckgjac','c'=>$this->anchang2],
+                ['n'=>'金鑫广场案场','a'=>'jxgcac','c'=>$this->anchang2],
+                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang2],
+                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang2],
+                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang2]
+            ]]
+        ];
+
+        $this->bumen_rxsy_sh = [
+            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
+            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
+            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
+            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'吴江案场','a'=>'wjac','c'=>$this->anchang1],
+                ['n'=>'阜阳案场','a'=>'fyac','c'=>$this->anchang1],
+                ['n'=>'彩生活案场','a'=>'cshac','c'=>$this->anchang1],
+                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
+                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
+                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
+            ]]
+        ];
 
         $this->arr = [
             ['n'=>'管理员','l'=>true,'a'=>'admin'],
             ['n'=>'颂唐机构','a'=>'stjg','c'=>[
                 ['n'=>'上海','a'=>'sh','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>[
-                        ['n'=>'董事长','a'=>'dsz','l'=>true],
-                        ['n'=>'总经理','a'=>'zjl','l'=>true],
-                        ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                        ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                        ['n'=>'司机','a'=>'sj','l'=>true]
-                    ]],
+                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji_zjb],
                     ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
-                    /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
+                    ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
                     ['n'=>'发展管控中心','a'=>'fzgkzx','c'=>$this->zhiji1],
                     ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>$this->zhiji1],
-                    ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1]*/
+                    ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1]
                 ]]
             ]],
             ['n'=>'市场策略中心','a'=>'scclzx','c'=>[
-                ['n'=>'上海总部平台','a'=>'shzbpt','c'=>$this->zhiji1]
+                ['n'=>'上海','a'=>'sh','c'=>$this->zhiji1]
             ]],
 
             ['n'=>'颂唐地产','a'=>'stdc','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->bumen1_stdc_sh],
-                ['n'=>'无锡','a'=>'wx','c'=>$this->bumen1_stdc_wx],
+                ['n'=>'上海','a'=>'sh','c'=>$this->bumen_stdc_sh],
+                ['n'=>'无锡','a'=>'wx','c'=>$this->bumen_stdc_wx],
                 /*['n'=>'苏州','a'=>'sz','c'=>$this->bumen1_2],
                 ['n'=>'南京','a'=>'nj','c'=>$this->bumen1_2],
                 ['n'=>'安徽','a'=>'ah','c'=>$this->bumen1_2],
@@ -388,7 +397,7 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
             ]],
 
             ['n'=>'日鑫商业','a'=>'rxsy','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->bumen1_rxsy_sh],
+                ['n'=>'上海','a'=>'sh','c'=>$this->bumen_rxsy_sh],
                 /*['n'=>'苏州','a'=>'sz','c'=>$this->bumen1_2],
                 ['n'=>'无锡','a'=>'wx','c'=>$this->bumen1_2],
                 ['n'=>'南京','a'=>'nj','c'=>$this->bumen1_2],
