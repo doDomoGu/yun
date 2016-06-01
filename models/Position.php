@@ -129,15 +129,27 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
             ['n'=>'经理','a'=>'jl','l'=>true],
             ['n'=>'主管','a'=>'zg','l'=>true],
             ['n'=>'专员','a'=>'zy','l'=>true],
-            ['n'=>'行政主管','a'=>'xzzg','l'=>true],
-            ['n'=>'财务总监','a'=>'cwzj','l'=>true],
-            ['n'=>'主办会计','a'=>'zbkj','l'=>true],
-            ['n'=>'会计','a'=>'kj','l'=>true],
-            ['n'=>'出纳','a'=>'cn','l'=>true],
-            ['n'=>'人事经理','a'=>'rsjl','l'=>true],
-            ['n'=>'人事主管','a'=>'rszg','l'=>true],
-            ['n'=>'人事专员','a'=>'rszy','l'=>true],
-            ['n'=>'前台','a'=>'qt','l'=>true],
+            ['n'=>'行政部','a'=>'xzb','c'=>[
+                ['n'=>'行政主管','a'=>'xzzg','l'=>true],
+                ['n'=>'行政专员','a'=>'xzzy','l'=>true],
+                ['n'=>'前台','a'=>'qt','l'=>true],
+            ]],
+            ['n'=>'财务部','a'=>'cwb','c'=>[
+                ['n'=>'财务总监','a'=>'cwzj','l'=>true],
+                ['n'=>'主办会计','a'=>'zbkj','l'=>true],
+                ['n'=>'会计','a'=>'kj','l'=>true],
+                ['n'=>'出纳','a'=>'cn','l'=>true],
+            ]],
+            ['n'=>'人事部','a'=>'rsb','c'=>[
+                ['n'=>'人事经理','a'=>'rsjl','l'=>true],
+                ['n'=>'人事主管','a'=>'rszg','l'=>true],
+                ['n'=>'人事专员','a'=>'rszy','l'=>true],
+            ]],
+            /*['n'=>'企宣部','a'=>'qxb','c'=>[
+                ['n'=>'企宣经理','a'=>'qxjl','l'=>true],
+                ['n'=>'企宣主管','a'=>'qxzg','l'=>true],
+                ['n'=>'企宣专员','a'=>'qxzy','l'=>true],
+            ]],*/
         ];
 
 
@@ -340,20 +352,19 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
         $this->arr = [
             ['n'=>'管理员','l'=>true,'a'=>'admin'],
             ['n'=>'颂唐机构','a'=>'stjg','c'=>[
-                ['n'=>'上海总部平台','a'=>'shzbpt','c'=>[
+                ['n'=>'上海','a'=>'sh','c'=>[
                     ['n'=>'总经办','a'=>'zjb','c'=>[
                         ['n'=>'董事长','a'=>'dsz','l'=>true],
                         ['n'=>'总经理','a'=>'zjl','l'=>true],
                         ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                        ['n'=>'总监','a'=>'zj','l'=>true],
                         ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
                         ['n'=>'司机','a'=>'sj','l'=>true]
                     ]],
                     ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiji_zgb],
-                    ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
+                    /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
                     ['n'=>'发展管控中心','a'=>'fzgkzx','c'=>$this->zhiji1],
                     ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>$this->zhiji1],
-                    ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1]
+                    ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1]*/
                 ]]
             ]],
             ['n'=>'市场策略中心','a'=>'scclzx','c'=>[
