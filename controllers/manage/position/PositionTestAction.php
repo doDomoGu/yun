@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers\manage\position;
 
+use app\components\DirFrontFunc;
 use app\components\PositionFunc;
 use yii\base\Action;
 use app\models\Position;
@@ -10,174 +11,30 @@ use Yii;
 
 class PositionTestAction extends Action{
     public function run(){
-       /* if(Yii::$app->request->get('install')){
-            $p = new Position();
-            $p->install();
-            exit;
-        }*/
-//var_dump(PositionFunc::getIdByAlias('stjg'));exit;
-
-        if(Yii::$app->request->get('get-num')){
-            $dir = new Dir();
-            $this->getNum();
-            foreach($dir->ytArr as $y){
-                echo $y;
-                $this->getNum($y);
-                foreach($dir->localArr as $l){
-                    echo ' - '.$l;
-                    $this->getNum($y,$l);
-                    foreach($dir->positionArr as $p){
-                        echo ' - '.$p;
-                        $this->getNum($y,$l,$p);
-                    }
-                }
-            }
+        if(Yii::$app->request->get('clear')){
+            $cache = Yii::$app->cache;
+            unset($cache['posTreeData']);
+            Yii::$app->response->redirect('positionTest')->send();
             exit;
         }
 
 
-
-        if(Yii::$app->request->get('install2')){
-            $p = new Position();
-            $p->install2();
-            Yii::$app->response->redirect('position')->send();
-            exit;
-        }
-
-        if(Yii::$app->request->get('handle')){
-            PositionFunc::handleIsLastAndIsLeaf();
-            Yii::$app->response->redirect('position')->send();
-            exit;
-        }
-
-        if(Yii::$app->request->get('updateFullAlias')){
-            PositionFunc::updateAllFullAlias();
-            Yii::$app->response->redirect('position')->send();
-            exit;
-        }
-
-        if(Yii::$app->request->get('checkAlias')){
-            PositionFunc::checkAlias();
-            //Yii::$app->response->redirect('position')->send();
-            exit;
-        }
+        /*$treeData = DirFrontFunc::getTreeData(1);
+        var_dump($treeData);
+        echo '<br/>================<br/>';
+        $treeData = PositionFunc::getTreeData();
+        var_dump($treeData);
+        echo '<br/>================<br/>';
+        exit;*/
 
 
-        $this->controller->view->title = '职位/部门 - 列表';
+        $treeData = PositionFunc::getTreeData();
 
-        $p_id = Yii::$app->request->get('p_id',false);
+        /*$this->controller->view->title = '职位/部门 - 列表';
 
-        $posList_1 = PositionFunc::getDropDownList(0,true,false,1);
-
-        $posList_2 = [];
-
-        $list = [];
-
-        $curPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
-
-        if($curPos){
-            $parents = PositionFunc::getParents($p_id);
-            $posLvl_1 = isset($parents[1])?$parents[1]:null;
-            $posLvl_2 = isset($parents[2]) && $posLvl_1?$parents[2]:null;
-            if($posLvl_1){
-               $posList_2 = PositionFunc::getDropDownList($posLvl_1->id,true,false,1);
-            }
-        }else{
-            $posLvl_1 = null;
-            $posLvl_2 = null;
-        }
-
-        if($curPos){
-            if($curPos->level==2){
-                $list = PositionFunc::getListArr($p_id,true,true,true);
-                //$where = ['p_id'=>$p_id];
-            }else{
-                $list = PositionFunc::getListArr($p_id,true,true,true,0);
-            }
-        }
-
-        //$list = Position::find()->where($where)->orderBy('ord desc,id desc')->limit(10)->all();
-
-        $params['list'] = $list;
-        $params['posList_1'] = $posList_1;
-        $params['posList_2'] = $posList_2;
-        $params['posLvl_1'] = $posLvl_1;
-        $params['posLvl_2'] = $posLvl_2;
-
-
-        return $this->controller->render('position/list',$params);
-    }
-
-    public function getNum($yt='',$local='',$position=''){
-        if($yt!=''){
-            $pos1 = Position::find()->where(['alias'=>$yt])->one();
-            echo $yt;
-            if($pos1){
-                if($local!=''){
-                    $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
-                    echo  ' - '.$local;
-                    if($pos2){
-                        if($position!=''){
-                            $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
-                            echo ' - '.$position;
-                            if($pos3){
-                                echo '('.$pos3->name.')';
-                                $pArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
-                                echo ' : '.count($pArr).'<br/>';
-                            }else{
-                                echo ' : null<br/>';
-                            }
-                        }else{
-                            echo '('.$pos2->name.')';
-                            $pArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
-                            echo ' : '.count($pArr).'<br/>';
-                        }
-
-
-                    }else{
-                        echo ' : null<br/>';
-                    }
-                }else{
-                    echo '('.$pos1->name.')';
-                    $pArr = PositionFunc::getAllLeafChildrenIds($pos1->id);
-                    echo ' : '.count($pArr).'<br/>';
-                }
-
-            }else{
-                echo ' : null<br/>';
-            }
-        }else{
-            $pArr = PositionFunc::getAllLeafChildrenIds(0);
-            echo 'All : '.count($pArr).'<br/>';
-        }
-
-
-
-
-        /*$pos1 = Position::find()->where(['alias'=>$yt])->one();
-        echo $yt;
-        if($pos1){
-            echo '('.$pos1->name.')<br/>';
-            $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos1->id);
-            echo ' : '.count($pYtLocalArr);
-            //业态的下面一层就是地方公司
-            echo ' - '.$local;
-            $pos2 = Position::find()->where(['alias'=>$local,'p_id'=>$pos1->id])->one();
-            if($pos2){
-                echo '('.$pos2->name.')';
-                $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
-                echo ' : '.count($pYtLocalArr);
-                $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
-                if($pos3){
-                    echo '('.$pos2->name.')';
-                    $pYtLocalArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
-                    echo ' : '.count($pYtLocalArr);
-                }
-            }
-        }else{
-            echo ' : null';
-        }
-        echo '<br/>';*/
-
+        $list = PositionFunc::getListArr(0,true,true,true);
+        $params['list'] = $list;*/
+        $params['treeData'] = $treeData;
+        return $this->controller->render('position/list_test',$params);
     }
 }
