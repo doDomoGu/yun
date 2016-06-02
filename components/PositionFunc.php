@@ -462,7 +462,7 @@ class PositionFunc extends Component {
 
                 $arr = self::getChildrenArr(0,true,false,false);
 
-                $treeData .=self::createTreeJson($arr,0,[]);
+                $treeData .=self::createTreeJson($arr,0,1);
 
 
                 //$data = '[{ name:"父节点1 - 展开", open:true,isParent:true}]';
@@ -475,9 +475,10 @@ class PositionFunc extends Component {
         return $treeData;
     }
 
-    public static function createTreeJson($arr,$dir_id,$p_ids){
+    public static function createTreeJson($arr,$dir_id,$level){
         $data = null;
         $i=1;
+        $level2 = $level;
         if(!empty($arr)){
             $data .= '[';
             foreach($arr as $l){
@@ -488,11 +489,12 @@ class PositionFunc extends Component {
                 $data.="name:'".$l->name."'";
                 if($l->id == $dir_id){
                     $data.=",font:{'background-color':'black', 'color':'white'}";
-                }else if(in_array($l->id,$p_ids)){
+                }else if($level<2){
                     $data.=',open:true';
                 }
                 if(!empty($l->childrenList)){
-                    $data.=',children: '.self::createTreeJson($l->childrenList,$dir_id,$p_ids);
+                    $level2++;
+                    $data.=',children: '.self::createTreeJson($l->childrenList,$dir_id,$level2);
                 }
 
 
