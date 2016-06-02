@@ -88,6 +88,7 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
     public $bumen_stdc_wx;
     public $bumen_rxsy_sh;
     public $arr;
+    public $arr2;
 
     public function __construct(){
         $this->zhiji1 = [
@@ -148,11 +149,11 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
         ];
 
         $this->zhiwei_zgb = [
-            ['n'=>'总监','a'=>'zj','l'=>true],
+            /*['n'=>'总监','a'=>'zj','l'=>true],
             ['n'=>'副总监','a'=>'fzj','l'=>true],
             ['n'=>'经理','a'=>'jl','l'=>true],
             ['n'=>'主管','a'=>'zg','l'=>true],
-            ['n'=>'专员','a'=>'zy','l'=>true],
+            ['n'=>'专员','a'=>'zy','l'=>true],*/
             ['n'=>'行政部','a'=>'xzb','c'=>[
                 ['n'=>'行政主管','a'=>'xzzg','l'=>true],
                 ['n'=>'行政专员','a'=>'xzzy','l'=>true],
@@ -376,6 +377,42 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
         ];
 
         $this->arr = [
+            ['n'=>'管理员','l'=>true,'a'=>'admin'],
+            ['n'=>'颂唐机构','a'=>'stjg','c'=>[
+                ['n'=>'发展管控中心','a'=>'fzgkzx','c'=>$this->zhiji1],
+                ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>$this->zhiji1],
+                ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1],
+                ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
+                ['n'=>'市场策略中心','a'=>'scclzx','c'=>$this->zhiji1],
+                ['n'=>'上海','a'=>'sh','c'=>[
+                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb],
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
+                    ['n'=>'颂唐地产','a'=>'stdc','c'=>$this->bumen_stdc_sh],
+                    ['n'=>'颂唐广告','a'=>'stgg','c'=>$this->bumen3_2],
+                    ['n'=>'日鑫商业','a'=>'rxsy','c'=>$this->bumen_rxsy_sh]
+                ]],
+                ['n'=>'苏州','a'=>'sz','c'=>[
+                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
+                ]],
+                ['n'=>'无锡','a'=>'wx','c'=>[
+                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
+                    ['n'=>'颂唐地产','a'=>'stdc','c'=>$this->bumen_stdc_wx],
+                    ['n'=>'颂唐广告','a'=>'stgg','c'=>$this->bumen3_2],
+                ]],
+                ['n'=>'南京','a'=>'nj','c'=>[
+                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
+                ]],
+                ['n'=>'合肥','a'=>'hf','c'=>[
+                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
+                ]]
+            ]],
+        ];
+
+        $this->arr2 = [
             ['n'=>'管理员','l'=>true,'a'=>'admin'],
             ['n'=>'颂唐机构','a'=>'stjg','c'=>[
                 ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
