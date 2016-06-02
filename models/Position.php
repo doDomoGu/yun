@@ -64,126 +64,58 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
 
 /*ALTER TABLE `position` ADD `full_alias` VARCHAR(255) DEFAULT NULL AFTER `alias`;*/
 
-    public $zhiji1;
-    public $zhiji2;
-    public $zhiji2_2;
-    public $zhiji3;
-    public $zhiji4;
-    public $zhiwei_zjb;
-    public $zhiwei_zjb_2;
-    public $zhiwei_zgb;
-    public $zhiwei_chb;
-    public $zhiwei_zxch;
-    public $anchang1;
-    public $anchang2;
-    public $guanggao;
-    public $bumen1;
-    public $bumen1_2;
-    public $bumen2;
-    public $bumen2_2;
-    public $bumen3;
-    public $bumen3_2;
-    public $bumen_base;
-    public $bumen_stdc_sh;
-    public $bumen_stdc_wx;
-    public $bumen_rxsy_sh;
-    public $arr;
-    public $arr2;
+    public $installArr;
 
     public function __construct(){
-        $this->zhiji1 = [
+        //职位 普通设置1
+        $zw_1 = [
             ['n'=>'总监','a'=>'zj','l'=>true],
             ['n'=>'副总监','a'=>'fzj','l'=>true],
             ['n'=>'经理','a'=>'jl','l'=>true],
             ['n'=>'主管','a'=>'zg','l'=>true],
             ['n'=>'专员','a'=>'zy','l'=>true]
         ];
-
-        $this->zhiji2 = [
-            ['n'=>'总经理','a'=>'zjl','l'=>true],
-            ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-            ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
-            ['n'=>'总监','a'=>'zj','l'=>true],
-            ['n'=>'总经理助理','a'=>'zjlzl','l'=>true]
-        ];
-
-        $this->zhiji2_2 = [
-            ['n'=>'总经理','a'=>'zjl','l'=>true],
-            ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-            ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
-            ['n'=>'总监','a'=>'zj','l'=>true],
-            ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-            ['n'=>'司机','a'=>'sj','l'=>true]
-        ];
-
-        $this->zhiji3 = [
+        //职位 普通设置2
+        $zw_2 = [
             ['n'=>'总监','a'=>'zj','l'=>true],
             ['n'=>'副总监','a'=>'fzj','l'=>true],
             ['n'=>'经理','a'=>'jl','l'=>true]
         ];
-
-        $this->zhiji4 = [
+        //职位 普通设置3
+        $zw_3 = [
             ['n'=>'指导','a'=>'zd','l'=>true],
             ['n'=>'师','a'=>'s','l'=>true],
             ['n'=>'专员','a'=>'zy','l'=>true],
             ['n'=>'助理','a'=>'zl','l'=>true]
         ];
 
-        $this->zhiwei_zjb = [
-            ['n'=>'董事长','a'=>'dsz','l'=>true],
-            ['n'=>'总经理','a'=>'zjl','l'=>true],
-            ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-            ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
-            ['n'=>'策划总监','a'=>'chzj','l'=>true],
-            ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-            ['n'=>'司机','a'=>'sj','l'=>true]
-        ];
-
-        $this->zhiwei_zjb_2 = [
-            ['n'=>'总经理','a'=>'zjl','l'=>true],
-            ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-            ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
-            ['n'=>'策划总监','a'=>'chzj','l'=>true],
-            ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-            ['n'=>'司机','a'=>'sj','l'=>true]
-        ];
-
-        $this->zhiwei_zgb = [
-            /*['n'=>'总监','a'=>'zj','l'=>true],
+        //职位 各个中心
+        $zw_zx = [
+            ['n'=>'总监','a'=>'zj','l'=>true],
             ['n'=>'副总监','a'=>'fzj','l'=>true],
             ['n'=>'经理','a'=>'jl','l'=>true],
             ['n'=>'主管','a'=>'zg','l'=>true],
-            ['n'=>'专员','a'=>'zy','l'=>true],*/
-            ['n'=>'行政部','a'=>'xzb','c'=>[
-                ['n'=>'行政主管','a'=>'xzzg','l'=>true],
-                ['n'=>'行政专员','a'=>'xzzy','l'=>true],
-                ['n'=>'前台','a'=>'qt','l'=>true],
-            ]],
-            ['n'=>'财务部','a'=>'cwb','c'=>[
-                ['n'=>'财务总监','a'=>'cwzj','l'=>true],
-                ['n'=>'主办会计','a'=>'zbkj','l'=>true],
-                ['n'=>'会计','a'=>'kj','l'=>true],
-                ['n'=>'出纳','a'=>'cn','l'=>true],
-            ]],
-            ['n'=>'人事部','a'=>'rsb','c'=>[
-                ['n'=>'人事经理','a'=>'rsjl','l'=>true],
-                ['n'=>'人事主管','a'=>'rszg','l'=>true],
-                ['n'=>'人事专员','a'=>'rszy','l'=>true],
-            ]]
-        ];
-
-        $this->zhiwei_zxch = [
-            ['n'=>'执行策划','a'=>'zxch','l'=>true],
-        ];
-
-        $this->zhiwei_chb = [
-            ['n'=>'经理','a'=>'jl','l'=>true],
-            ['n'=>'策划师','a'=>'chs','l'=>true],
-            ['n'=>'策划助理','a'=>'chzl','l'=>true],
             ['n'=>'专员','a'=>'zy','l'=>true]
         ];
+        //职位 综合管理部
+        $zw_zgb = [
+            ['n'=>'行政主管','a'=>'xzzg','l'=>true],
+            ['n'=>'行政专员','a'=>'xzzy','l'=>true],
+            ['n'=>'前台','a'=>'qt','l'=>true],
+            ['n'=>'人事经理','a'=>'rsjl','l'=>true],
+            ['n'=>'人事主管','a'=>'rszg','l'=>true],
+            ['n'=>'人事专员','a'=>'rszy','l'=>true],
+        ];
+        //职位 财务部
+        $zw_cwb = [
+            ['n'=>'财务总监','a'=>'cwzj','l'=>true],
+            ['n'=>'主办会计','a'=>'zbkj','l'=>true],
+            ['n'=>'会计','a'=>'kj','l'=>true],
+            ['n'=>'出纳','a'=>'cn','l'=>true]
+        ];
 
-        $this->anchang1 = [
+        //职位 上海颂唐地产 案场
+        $zw_shstdc_ac = [
             ['n'=>'项目管理','a'=>'xmgl','c'=>[
                 ['n'=>'总监','a'=>'zj','l'=>true],
                 ['n'=>'副总监','a'=>'fzj','l'=>true],
@@ -217,8 +149,8 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 ['n'=>'专员','a'=>'zy','l'=>true]
             ]]
         ];
-
-        $this->anchang2 = [
+        //职位 无锡颂唐地产 案场
+        $zw_wxstdc_ac = [
             ['n'=>'总监','a'=>'zj','l'=>true],
             ['n'=>'副总监','a'=>'fzj','l'=>true],
             ['n'=>'经理','a'=>'jl','l'=>true],
@@ -228,279 +160,172 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
             ['n'=>'置业顾问','a'=>'zygw','l'=>true],
             ['n'=>'实习生','a'=>'sxs','l'=>true]
         ];
-
-        $this->guanggao = [
-            ['n'=>'部门管理','a'=>'bmgl','c'=>$this->zhiji3],
-            ['n'=>'设计','a'=>'sjs','c'=>$this->zhiji4],
-            ['n'=>'美术','a'=>'ms','c'=>$this->zhiji4],
-            ['n'=>'文案','a'=>'wa','c'=>$this->zhiji4],
+        //职位 上海颂唐广告 创作部
+        $zw_shstgg_czb = [
+            ['n'=>'部门管理','a'=>'bmgl','c'=>$zw_2],
+            ['n'=>'设计','a'=>'sjs','c'=>$zw_3],
+            ['n'=>'美术','a'=>'ms','c'=>$zw_3],
+            ['n'=>'文案','a'=>'wa','c'=>$zw_3],
         ];
 
-        $this->bumen1 = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+        //职位 上海颂唐广告 策划部
+        $zw_shstgg_chb = [
+            ['n'=>'策划经理','a'=>'chjl','l'=>true],
+            ['n'=>'策划师','a'=>'chs','l'=>true],
+            ['n'=>'策划助理','a'=>'chzl','l'=>true],
+            ['n'=>'策划专员','a'=>'chzy','l'=>true]
+        ];
+        //职位 上海颂唐广告 执行策划
+        $zw_shstgg_zxch = [
+            ['n'=>'执行策划','a'=>'zxch','l'=>true],
+        ];
+
+        //部门 颂唐地产 上海
+        $bm_dc_sh = [
+            ['n'=>'总经办','a'=>'zjb','c'=>[
                 ['n'=>'总经理','a'=>'zjl','l'=>true],
                 ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
                 ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'策划总监','a'=>'chzj','l'=>true],
                 ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
-                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
-            ]]
-        ];
-        $this->bumen1_2 = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1],
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'总经理','a'=>'zjl','l'=>true],
-                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                ['n'=>'总监','a'=>'zj','l'=>true],
-                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
-                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
-            ]]
-        ];
-
-
-        $this->bumen2 = [
-            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->zhiji1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->zhiji1]
-            ]]
-        ];
-
-        $this->bumen2_2 = [
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->zhiji1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->zhiji1]
-            ]]
-        ];
-
-        $this->bumen3 = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            //['n'=>'财务部','a'=>'cwb','c'=>$this->zhiji1],
-            ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'AE策划部','a'=>'aechb','c'=>$this->zhiji1],
-            ['n'=>'创意部','a'=>'cyb','c'=>$this->guanggao],
-            ['n'=>'创作部','a'=>'czb','c'=>[
-                ['n'=>'创作1部','a'=>'czb_1','c'=>$this->guanggao],
-                ['n'=>'创作2部','a'=>'czb_2','c'=>$this->guanggao],
-                ['n'=>'创作3部','a'=>'czb_3','c'=>$this->guanggao]
+                ['n'=>'司机','a'=>'sj','l'=>true]
             ]],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$zw_1],
+            ['n'=>'市场策划部','a'=>'scchb','c'=>$zw_1],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'宝山上坤上街案场','a'=>'bssksjac','c'=>$zw_shstdc_ac],
+                ['n'=>'绍兴锦园案场','a'=>'sxjyac','c'=>$zw_shstdc_ac],
+                ['n'=>'天津麦谷案场','a'=>'tjmgac','c'=>$zw_shstdc_ac],
+                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$zw_shstdc_ac],
+                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$zw_shstdc_ac]
+            ]]
         ];
 
-        $this->bumen3_2 = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'AE策划部','a'=>'aechb','c'=>$this->zhiwei_chb],
-            ['n'=>'执行策划部','a'=>'zxchb','c'=>$this->zhiwei_zxch],
-            ['n'=>'创意部','a'=>'cyb','c'=>$this->guanggao],
+        //部门 颂唐地产 无锡
+        $bm_dc_wx = [
+            ['n'=>'总经办','a'=>'zjb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
+                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'策划总监','a'=>'chzj','l'=>true],
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'司机','a'=>'sj','l'=>true]
+            ]],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$zw_1],
+            ['n'=>'市场策划部','a'=>'scchb','c'=>$zw_1],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'国信世家案场','a'=>'gxsjac','c'=>$zw_wxstdc_ac],
+                ['n'=>'君悦案场','a'=>'jyac','c'=>$zw_wxstdc_ac],
+                ['n'=>'天氿御城案场','a'=>'tgycac','c'=>$zw_wxstdc_ac],
+                ['n'=>'中交上东湾案场','a'=>'zjsdwac','c'=>$zw_wxstdc_ac],
+                ['n'=>'天御广场案场','a'=>'tygcac','c'=>$zw_wxstdc_ac],
+                ['n'=>'星湖花海案场','a'=>'xhhhac','c'=>$zw_wxstdc_ac],
+                ['n'=>'赛维拉案场','a'=>'slwac','c'=>$zw_wxstdc_ac],
+                ['n'=>'城开国际案场','a'=>'ckgjac','c'=>$zw_wxstdc_ac],
+                ['n'=>'金鑫广场案场','a'=>'jxgcac','c'=>$zw_wxstdc_ac],
+                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$zw_wxstdc_ac],
+                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$zw_wxstdc_ac]
+            ]]
+        ];
+
+        //部门 颂唐广告 上海
+        $bm_gg_sh = [
+            ['n'=>'总经办','a'=>'zjb','c'=>[
+                ['n'=>'总经理','a'=>'zjl','l'=>true],
+                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+                ['n'=>'运营副总经理','a'=>'yyfzjl','l'=>true],
+                ['n'=>'常务副总经理','a'=>'cwfzjl','l'=>true],
+                /*['n'=>'办公室主任','a'=>'bgszr','l'=>true],*/
+                /*['n'=>'总监','a'=>'zj','l'=>true],*/
+                /*['n'=>'策划总监','a'=>'chzj','l'=>true],*/
+                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+                ['n'=>'司机','a'=>'sj','l'=>true]
+            ]],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$zw_1],
+            ['n'=>'AE策划部','a'=>'aechb','c'=>$zw_shstgg_chb],
+            ['n'=>'执行策划部','a'=>'zxchb','c'=>$zw_shstgg_zxch],
+            ['n'=>'创意部','a'=>'cyb','c'=>$zw_shstgg_czb],
             ['n'=>'创作部','a'=>'czb','c'=>[
                 ['n'=>'平面设计','a'=>'pmsj','l'=>true],
                 ['n'=>'美术指导','a'=>'mszd','l'=>true],
                 ['n'=>'文案','a'=>'wa','l'=>true],
-                ['n'=>'创作1部','a'=>'czb_1','c'=>$this->guanggao],
-                ['n'=>'创作2部','a'=>'czb_2','c'=>$this->guanggao],
-                ['n'=>'创作3部','a'=>'czb_3','c'=>$this->guanggao]
+                ['n'=>'创作1部','a'=>'czb_1','c'=>$zw_shstgg_czb],
+                ['n'=>'创作2部','a'=>'czb_2','c'=>$zw_shstgg_czb],
+                ['n'=>'创作3部','a'=>'czb_3','c'=>$zw_shstgg_czb]
             ]],
         ];
-
-
-        $this->bumen_base = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiji2_2],
-            //['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$this->zhiji1],
-            ['n'=>'市场策划部','a'=>'scchb','c'=>$this->zhiji1]
-        ];
-
-
-        $this->bumen_stdc_sh = array_merge($this->bumen_base,[
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
+        //部门 日鑫商业 上海
+        $bm_rx_sh = [
+            ['n'=>'总经办','a'=>'zjb','c'=>[
                 ['n'=>'总经理','a'=>'zjl','l'=>true],
                 ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                ['n'=>'总监','a'=>'zj','l'=>true],
+                ['n'=>'办公室主任','a'=>'bgszr','l'=>true],
+                /*['n'=>'总监','a'=>'zj','l'=>true],*/
+                /*['n'=>'策划总监','a'=>'chzj','l'=>true],*/
+                ['n'=>'拓展总监','a'=>'tzzj','l'=>true],
                 ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'宝山上坤上街案场','a'=>'bssksjac','c'=>$this->anchang1],
-                ['n'=>'绍兴锦园案场','a'=>'sxjyac','c'=>$this->anchang1],
-                ['n'=>'天津麦谷案场','a'=>'tjmgac','c'=>$this->anchang1],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1]
-            ]]
-        ]);
-
-        $this->bumen_stdc_wx = array_merge($this->bumen_base,[
-            ['n'=>'销售业务部','a'=>'xsywb','c'=>[
-                ['n'=>'总经理','a'=>'zjl','l'=>true],
-                ['n'=>'副总经理','a'=>'fzjl','l'=>true],
-                ['n'=>'总监','a'=>'zj','l'=>true],
-                ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'国信世家案场','a'=>'gxsjac','c'=>$this->anchang2],
-                ['n'=>'君悦案场','a'=>'jyac','c'=>$this->anchang2],
-                ['n'=>'天氿御城案场','a'=>'tgycac','c'=>$this->anchang2],
-                ['n'=>'中交上东湾案场','a'=>'zjsdwac','c'=>$this->anchang2],
-                ['n'=>'天御广场案场','a'=>'tygcac','c'=>$this->anchang2],
-                ['n'=>'星湖花海案场','a'=>'xhhhac','c'=>$this->anchang2],
-                ['n'=>'赛维拉案场','a'=>'slwac','c'=>$this->anchang2],
-                ['n'=>'城开国际案场','a'=>'ckgjac','c'=>$this->anchang2],
-                ['n'=>'金鑫广场案场','a'=>'jxgcac','c'=>$this->anchang2],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang2],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang2]
-            ]]
-        ]);
-
-        $this->bumen_rxsy_sh = [
-            ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-            ['n'=>'品牌拓展部','a'=>'pptzb','c'=>$this->zhiji1],
-            ['n'=>'商业策划部','a'=>'sychb','c'=>$this->zhiji1],
+                ['n'=>'司机','a'=>'sj','l'=>true]
+            ]],
+            ['n'=>'品牌拓展部','a'=>'pptzb','c'=>$zw_1],
+            ['n'=>'商业策划部','a'=>'sychb','c'=>$zw_1],
             ['n'=>'商业招商部','a'=>'syzsb','c'=>[
                 ['n'=>'总经理','a'=>'zjl','l'=>true],
                 ['n'=>'副总经理','a'=>'fzjl','l'=>true],
                 ['n'=>'总监','a'=>'zj','l'=>true],
                 ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
-                ['n'=>'吴江案场','a'=>'wjac','c'=>$this->anchang1],
-                ['n'=>'阜阳案场','a'=>'fyac','c'=>$this->anchang1],
-                ['n'=>'彩生活案场','a'=>'cshac','c'=>$this->anchang1],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$this->anchang1],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$this->anchang1],
-                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$this->anchang1]
+                ['n'=>'吴江案场','a'=>'wjac','c'=>$zw_shstdc_ac],
+                ['n'=>'阜阳案场','a'=>'fyac','c'=>$zw_shstdc_ac],
+                ['n'=>'彩生活案场','a'=>'cshac','c'=>$zw_shstdc_ac],
+                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$zw_shstdc_ac],
+                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$zw_shstdc_ac],
+                ['n'=>'项目案场[C]','a'=>'xmac_3','c'=>$zw_shstdc_ac]
             ]]
         ];
 
-        $this->arr = [
-            ['n'=>'管理员','l'=>true,'a'=>'admin'],
+        $this->installArr = [
+            ['n'=>'系统管理员','l'=>true,'a'=>'admin'],
             ['n'=>'颂唐机构','a'=>'stjg','c'=>[
-                ['n'=>'发展管控中心','a'=>'fzgkzx','c'=>$this->zhiji1],
-                ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>$this->zhiji1],
-                ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1],
-                ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
-                ['n'=>'市场策略中心','a'=>'scclzx','c'=>$this->zhiji1],
+                ['n'=>'发展管控中心','a'=>'fzgkzx','c'=>$zw_zx],
+                ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>$zw_zx],
+                ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$zw_zx],
+                ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$zw_zx],
+                ['n'=>'市场策略中心','a'=>'scclzx','c'=>$zw_zx],
                 ['n'=>'上海','a'=>'sh','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-                    ['n'=>'颂唐地产','a'=>'stdc','c'=>$this->bumen_stdc_sh],
-                    ['n'=>'颂唐广告','a'=>'stgg','c'=>$this->bumen3_2],
-                    ['n'=>'日鑫商业','a'=>'rxsy','c'=>$this->bumen_rxsy_sh]
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
+                    ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
+                    ['n'=>'颂唐地产','a'=>'stdc','c'=>$bm_dc_sh],
+                    ['n'=>'颂唐广告','a'=>'stgg','c'=>$bm_gg_sh],
+                    ['n'=>'日鑫商业','a'=>'rxsy','c'=>$bm_rx_sh]
                 ]],
                 ['n'=>'苏州','a'=>'sz','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
+                    ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                 ]],
                 ['n'=>'无锡','a'=>'wx','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb],
-                    ['n'=>'颂唐地产','a'=>'stdc','c'=>$this->bumen_stdc_wx],
-                    ['n'=>'颂唐广告','a'=>'stgg','c'=>$this->bumen3_2],
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
+                    ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
+                    ['n'=>'颂唐地产','a'=>'stdc','c'=>$bm_dc_wx],
+                    ['n'=>'颂唐广告','a'=>'stgg','c'=>$bm_gg_sh],
                 ]],
                 ['n'=>'南京','a'=>'nj','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
+                    ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                 ]],
                 ['n'=>'合肥','a'=>'hf','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
+                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
+                    ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                 ]]
             ]],
-        ];
-
-        $this->arr2 = [
-            ['n'=>'管理员','l'=>true,'a'=>'admin'],
-            ['n'=>'颂唐机构','a'=>'stjg','c'=>[
-                ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>$this->zhiji1],
-                ['n'=>'发展管控中心','a'=>'fzgkzx','c'=>$this->zhiji1],
-                ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>$this->zhiji1],
-                ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>$this->zhiji1],
-                ['n'=>'上海','a'=>'sh','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
-                ]],
-                ['n'=>'苏州','a'=>'sz','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
-                ]],
-                ['n'=>'无锡','a'=>'wx','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
-                ]],
-                ['n'=>'南京','a'=>'nj','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
-                ]],
-                ['n'=>'合肥','a'=>'hf','c'=>[
-                    ['n'=>'总经办','a'=>'zjb','c'=>$this->zhiwei_zjb_2],
-                    ['n'=>'综合管理部','a'=>'zhglb','c'=>$this->zhiwei_zgb]
-                ]]
-            ]],
-            ['n'=>'市场策略中心','a'=>'scclzx','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->zhiji1]
-            ]],
-
-            ['n'=>'颂唐地产','a'=>'stdc','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->bumen_stdc_sh],
-                ['n'=>'无锡','a'=>'wx','c'=>$this->bumen_stdc_wx],
-                /*['n'=>'苏州','a'=>'sz','c'=>$this->bumen1_2],
-                ['n'=>'南京','a'=>'nj','c'=>$this->bumen1_2],
-                ['n'=>'安徽','a'=>'ah','c'=>$this->bumen1_2],
-                ['n'=>'苏北','a'=>'sb','c'=>$this->bumen1_2],*/
-            ]],
-
-            ['n'=>'颂唐广告','a'=>'stgg','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->bumen3_2],
-                ['n'=>'无锡','a'=>'wx','c'=>$this->bumen3_2],
-                /*['n'=>'苏州','a'=>'sz','c'=>$this->bumen3_2],
-                ['n'=>'南京','a'=>'nj','c'=>$this->bumen3_2],
-                ['n'=>'安徽','a'=>'ah','c'=>$this->bumen3_2]*/
-            ]],
-
-            ['n'=>'日鑫商业','a'=>'rxsy','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->bumen_rxsy_sh],
-                /*['n'=>'苏州','a'=>'sz','c'=>$this->bumen1_2],
-                ['n'=>'无锡','a'=>'wx','c'=>$this->bumen1_2],
-                ['n'=>'南京','a'=>'nj','c'=>$this->bumen1_2],
-                ['n'=>'安徽','a'=>'ah','c'=>$this->bumen1_2],
-                ['n'=>'苏北','a'=>'sb','c'=>$this->bumen1_2],*/
-            ]],            /*
-            ['n'=>'华麦建筑','a'=>'hmjz','c'=>[
-                ['n'=>'上海','a'=>'sh']
-            ]],
-            ['n'=>'汉佑房屋','a'=>'hyfw','c'=>[
-                ['n'=>'苏州','a'=>'sz','c'=>[
-                    ['n'=>'新湖明珠店','a'=>'xhmzd','c'=>$this->zhiji1],
-                    ['n'=>'石湖店','a'=>'shd','c'=>$this->zhiji1]
-                ]],
-                ['n'=>'无锡','a'=>'wx']
-            ]],
-            ['n'=>'鸿汉经纪','a'=>'hhjj','c'=>[
-               ['n'=>'上海','a'=>'sh','c'=>$this->bumen2],
-               ['n'=>'苏州','a'=>'sz','c'=>$this->bumen2_2],
-               ['n'=>'无锡','a'=>'wx','c'=>$this->bumen2_2],
-               ['n'=>'南京','a'=>'nj','c'=>$this->bumen2_2],
-               ['n'=>'合肥','a'=>'hf','c'=>$this->bumen2_2],
-            ]],
-            ['n'=>'明致置业','a'=>'mzzy','c'=>[
-               ['n'=>'上海','a'=>'sh'],
-               ['n'=>'南京','a'=>'nj']
-            ]],
-
-
-            ['n'=>'尚晋公关','a'=>'sjgg','c'=>[
-                ['n'=>'苏州','a'=>'sz','c'=>$this->zhiji1],
-            ]],
-            ['n'=>'元素互动','a'=>'yshd','c'=>[
-                ['n'=>'上海','a'=>'sh','c'=>$this->zhiji1],
-            ]],
-            ['n'=>'周道物业','a'=>'zdwy','c'=>[
-                ['n'=>'苏州','a'=>'sz','c'=>$this->zhiji1],
-            ]]*/
         ];
     }
 
@@ -517,7 +342,7 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
 
 
 
-            $this->array2value($this->arr,0,1);
+            $this->array2value($this->installArr,0,1);
             return true;
         }catch (\Exception $e)
         {
