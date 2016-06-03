@@ -53,15 +53,16 @@ class FileFrontFunc extends Component {
         $dir_id = intval($dir_id);
         $p_id = intval($p_id);
         if($p_id>0)
-            $files = $files->where(['p_id'=>$p_id,'status'=>1]);
+            $files = $files->where(['file.p_id'=>$p_id,'file.status'=>1]);
         else
-            $files = $files->where(['dir_id'=>$dir_id,'p_id'=>0,'status'=>1]);
+            $files = $files->where(['file.dir_id'=>$dir_id,'file.p_id'=>0,'file.status'=>1]);
 
 /*        $files = $files->where(['dir_id'=>$dir_id,'status'=>1]);
         $files = $files->andWhere(['p_id'=>$p_id,'status'=>1]);*/
         if($search!==false)
-            $files = $files->andWhere(['like','filename',$search]);
-        $files = $files->orderBy($order)
+            $files = $files->andWhere(['like','file.filename',$search]);
+        $files = $files->innerJoinWith('user')
+            ->orderBy($order)
             ->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
