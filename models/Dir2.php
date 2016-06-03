@@ -38,7 +38,7 @@ PRIMARY KEY (`id`)
 
     public $arr0;
 
-    /*public $arr_yt1;
+    public $arr_yt1;
 
     public $arr_yt2;
 
@@ -48,7 +48,7 @@ PRIMARY KEY (`id`)
 
     public $arr_xiangmu;
 
-    public $arr_yt3;*/
+    public $arr_yt3;
 
     public $arr1;
 
@@ -60,13 +60,13 @@ PRIMARY KEY (`id`)
 
     public $arr5;
 
-    /*public $localArr;
+    public $localArr;
 
     public $ytArr;
 
     public $positionArr;
 
-    public $localPositionArr;*/
+    public $localPositionArr;
 
     public function __construct(){
         $this->localArr = [
