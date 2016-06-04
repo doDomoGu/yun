@@ -69,7 +69,7 @@ PRIMARY KEY (`id`)
     public $localPositionArr;*/
 
     public function __construct(){
-        $this->localArr = [
+        /*$this->localArr = [
             'shzbpt','sh','sz','wx','hf','sb','ah','nj'
         ];
 
@@ -144,7 +144,7 @@ PRIMARY KEY (`id`)
             'zdwy'=>[
                 ['n'=>'苏州周道物业','a'=>'sz','l'=>true]
             ]
-        ];
+        ];*/
 
         $this->arr0 = [
             ['n'=>'企业运营中心','a'=>'zyfzzx','c'=>[]],
@@ -154,16 +154,15 @@ PRIMARY KEY (`id`)
             ['n'=>'学习共享中心','a'=>'xxgxzx','c'=>[]]
         ];
 
-        $this->arr_yt1 = [
+        /*$this->arr_yt1 = [
             ['n'=>'颂唐机构','a'=>'stjg','l'=>true],
-            ['n'=>'市场策略中心','a'=>'scclzx','l'=>true],
-            ['n'=>'华麦建筑','a'=>'hmjz','l'=>true],
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
-            ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
-            ['n'=>'致秦经纪','a'=>'zqjj','l'=>true],
-            ['n'=>'明致置业','a'=>'mzzy','l'=>true],
-            ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
             ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
+            ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
+            ['n'=>'鸿汉经纪','a'=>'hhjj','l'=>true],
+            ['n'=>'明致置业','a'=>'mzzy','l'=>true],
+            ['n'=>'华麦建筑','a'=>'hmjz','l'=>true],
             ['n'=>'尚晋公关','a'=>'sjgg','l'=>true],
             ['n'=>'元素互动','a'=>'yshd','l'=>true],
             ['n'=>'周道物业','a'=>'zdwy','l'=>true]
@@ -210,23 +209,69 @@ PRIMARY KEY (`id`)
             ['n'=>'尚晋公关','a'=>'sjgg','c'=>$this->arr_company],
             ['n'=>'元素互动','a'=>'yshd','c'=>$this->arr_company],
             ['n'=>'周道物业','a'=>'ydwy','c'=>$this->arr_company]
+        ];*/
+
+
+        $city = [
+            //['n'=>'颂唐机构','a'=>'stjg','l'=>true],
+            ['n'=>'上海','a'=>'sh','l'=>true],
+            ['n'=>'苏州','a'=>'sz','l'=>true],
+            ['n'=>'无锡','a'=>'wx','l'=>true],
+            ['n'=>'南京','a'=>'nj','l'=>true],
+            ['n'=>'合肥','a'=>'hf','l'=>true],
+            ['n'=>'呼和浩特','a'=>'hhht','l'=>true],
+        ];
+
+        $yt = [
+            ['n'=>'颂唐机构','a'=>'stjg','l'=>true],
+            ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+            ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
+        ];
+
+        $city_yt = [
+            ['n'=>'颂唐机构','a'=>'stjg','l'=>true],
+            ['n'=>'上海','a'=>'sh','c'=>[
+                ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+                ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+                ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
+            ]],
+            ['n'=>'苏州','a'=>'sz','c'=>[
+                ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+                ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ]],
+            ['n'=>'无锡','a'=>'wx','c'=>[
+                ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+                ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ]],
+            ['n'=>'南京','a'=>'nj','c'=>[
+                ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+                ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ]],
+            ['n'=>'合肥','a'=>'hf','c'=>[
+                ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+                ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ]],
+            ['n'=>'呼和浩特','a'=>'hhht','c'=>[
+                ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+            ]],
         ];
 
         $this->arr1 = [
             ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
-                ['n'=>'公司简介','a'=>'gsjj','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt1],
-                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[11=>['single'=>['admin']],12=>'all'],'c'=>$this->arr_yt2]
+                ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$city_yt],
+                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
             ]],
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
-                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
-                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
-                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[11=>['single'=>['admin']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt1],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$this->arr_yt2],
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
+                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
+                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
+                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>['ytlocal'=>'all']],'c'=>$city_yt],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
             ]],
             ['n'=>'财务管控中心','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb','sh/cwb']]],'c'=>[
-                ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$this->arr_yt1],
-                ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$this->arr_yt1]
+                ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city],
+                ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city]
             ]],
             ['n'=>'法务管控中心','a'=>'fwgkzx','pm'=>[
                 11=>['single'=>['admin']],
@@ -235,13 +280,13 @@ PRIMARY KEY (`id`)
                     ]
                 ],
                 'c'=>[
-                    ['n'=>'合同范本','a'=>'htfb','c'=>$this->arr_yt1],
-                    ['n'=>'信函范本','a'=>'xhfb','c'=>$this->arr_yt1]
+                    ['n'=>'合同范本','a'=>'htfb','c'=>$city],
+                    ['n'=>'信函范本','a'=>'xhfb','c'=>$city]
                 ]
             ]
         ];
 
-        $this->arr2 = [
+        /*$this->arr2 = [
             ['n'=>'颂唐-人才资源中心','pm'=>[
                 11=>['ytlocal2'=>['sh/zhglb']],
                 12=>[
@@ -408,7 +453,7 @@ PRIMARY KEY (`id`)
         $this->arr5 = [
             ['n'=>'公司推荐学习资料库','a'=>'gstjxxzlk','pm'=>[11=>['single'=>'admin'],12=>'all'],'l'=>true],
             ['n'=>'员工推荐学习资料库','a'=>'ygtjxxzlk','pm'=>[11=>'all',12=>'all'],'l'=>true],
-        ];
+        ];*/
     }
     public function install() {
         try {
@@ -421,13 +466,13 @@ PRIMARY KEY (`id`)
 
             $this->initDir($this->arr1,1,2,1);
 
-            $this->initDir($this->arr2,2,2,2);
+            /*$this->initDir($this->arr2,2,2,2);
 
             $this->initDir($this->arr3,3,2,3);
 
             $this->initDir($this->arr4,4,2,4);
 
-            $this->initDir($this->arr5,5,2,5);
+            $this->initDir($this->arr5,5,2,5);*/
             return true;
         }catch (\Exception $e)
         {
@@ -476,7 +521,7 @@ PRIMARY KEY (`id`)
                     $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
                 }
             }else{
-                $this->initPm($lastId,$pm,$yt,$local,$position);
+                //$this->initPm($lastId,$pm,$yt,$local,$position);
             }
 
 

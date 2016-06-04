@@ -29,6 +29,8 @@ class DirDeployCacheAction extends Action{
             $this->controller->view->title = '重新生成“文件目录结构”缓存';
             $cache = Yii::$app->getCache();
             unset($cache['treeDataId']);
+            unset($cache['dirDataId']);
+            unset($cache['dirChildrenDataId']);
 
             $dirList = Dir::find()->all();
             $dirIds = [];
