@@ -31,6 +31,14 @@ class DirAction extends Action{
             exit;
         }
 
+        if(Yii::$app->request->get('install222')){
+            $s = DirFunc::getChildren(1);
+
+            foreach($s as $ss){
+                var_dump($ss);echo '<br/><BR/>';
+            }exit;
+        }
+
         $this->controller->view->title = '板块目录 - 列表';
 
         $dir_id = Yii::$app->request->get('dir_id',false);  //目录

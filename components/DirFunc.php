@@ -329,7 +329,14 @@ class DirFunc extends Component {
         /*if($orderBy==1){
             $orderByStr = self::ORDER_TYPE_1;
         }*/
-        return Dir::find()->where($where)->orderBy($orderByStr)->limit($limit)->all();
+        $result = [];
+        $list = Dir::find()->where($where)->orderBy($orderByStr)->limit($limit)->asArray()->all();
+        if(!empty($list)){
+            foreach($list as $l){
+                $result[] = (object)$l;
+            }
+        }
+        return $result;
     }
 
 
@@ -392,7 +399,7 @@ class DirFunc extends Component {
             $cacheExist = false;
         }
         if($cacheExist == false){
-            $dirData = Dir::find()->where(['id'=>$id])->one();
+            $dirData = (object)(Dir::find()->where(['id'=>$id])->one()->toArray());
 
             $cache['dirDataId'] = \yii\helpers\ArrayHelper::merge($dirDataId,[$id=>1]);
 
