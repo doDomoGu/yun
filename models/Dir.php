@@ -212,7 +212,7 @@ PRIMARY KEY (`id`)
         ];*/
 
 
-        $city = [
+        /*$city = [
             //['n'=>'颂唐机构','a'=>'stjg','l'=>true],
             ['n'=>'上海','a'=>'sh','l'=>true],
             ['n'=>'苏州','a'=>'sz','l'=>true],
@@ -223,14 +223,12 @@ PRIMARY KEY (`id`)
         ];
 
         $yt = [
-            ['n'=>'颂唐机构','a'=>'stjg','l'=>true],
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
             ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
-        ];
+        ];*/
 
         $city_yt = [
-            ['n'=>'颂唐机构','a'=>'stjg','l'=>true],
             ['n'=>'上海','a'=>'sh','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
                 ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
@@ -258,18 +256,18 @@ PRIMARY KEY (`id`)
         ];
 
         $this->arr1 = [
-            ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
+            /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
                 ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$city_yt],
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
-            ]],
+            ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['city_yt']],'c'=>$city_yt],
-                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['city_yt'=>'all']],'c'=>$city_yt],
+                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
                 ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>['ytlocal'=>'all']],'c'=>$city_yt],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],*/
             ]],
-            ['n'=>'财务管控中心','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb','sh/cwb']]],'c'=>[
+           /* ['n'=>'财务管控中心','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb','sh/cwb']]],'c'=>[
                 ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city],
                 ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city]
             ]],
@@ -283,7 +281,7 @@ PRIMARY KEY (`id`)
                     ['n'=>'合同范本','a'=>'htfb','c'=>$city],
                     ['n'=>'信函范本','a'=>'xhfb','c'=>$city]
                 ]
-            ]
+            ]*/
         ];
 
         /*$this->arr2 = [
@@ -490,7 +488,7 @@ PRIMARY KEY (`id`)
         }
     }
 
-    public function initDir($arr,$pid,$level,$type,$pm=[],$yt='',$local='',$position=''){
+    public function initDir($arr,$pid,$level,$type,$pm=[],$posRoute=''){
         $sqlbase = "INSERT IGNORE INTO `dir`(`name`,`alias`,`p_id`,`type`,`is_leaf`,`level`,`is_last`,`ord`,`status`)
                 VALUES";
         $ord = 99;
@@ -502,6 +500,7 @@ PRIMARY KEY (`id`)
             $alias = isset($a['a']) && $a['a']!=''?$a['a']:'默认别名';
             if(isset($a['pm']))
                 $pm = $a['pm'];
+
 
             /*if(in_array($alias,$this->ytArr))
                 $yt = $alias;
@@ -516,12 +515,21 @@ PRIMARY KEY (`id`)
             $cmd = Yii::$app->db->createCommand($sql);
             $cmd->execute();
             $lastId = Yii::$app->db->lastInsertID;
+            $curPosRoute = '';
+            if(isset($pm) && !empty($pm) && $posRoute!=''){
+                $curPosRoute = $posRoute.'/'.$alias;
+            }
+
             if($leaf==0){
                 if(isset($a['c']) && !empty($a['c'])){
-                    $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
+                    if(isset($a['pm']) && $curPosRoute==''){
+                        $curPosRoute = 'stjg';
+                    }
+                    $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$curPosRoute);
+                    //$this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
                 }
             }else{
-                $this->initPm($lastId,$pm);
+                $this->initPm($lastId,$pm,$curPosRoute);
                 //$this->initPm($lastId,$pm,$yt,$local,$position);
             }
 
@@ -531,7 +539,7 @@ PRIMARY KEY (`id`)
         }
     }
 
-    public function initPm($dir_id,$pmArr,$yt='',$local='',$position=''){
+    public function initPm($dir_id,$pmArr,$posRoute){
         if(!empty($pmArr)){
             $pAll = [];
             $positionAll = Position::find()->where(['is_leaf'=>1])->all();
@@ -549,13 +557,35 @@ PRIMARY KEY (`id`)
                     $sql .= implode(',',$sqlValueArr);
                     $cmd = Yii::$app->db->createCommand($sql);
                     $cmd->execute();
-                }elseif($pmItem=='city_yt'){
+                }/*elseif($pmItem=='city_yt'){
                     
-                }elseif(is_array($pmItem) && !empty($pmItem)){
+                }*/elseif(is_array($pmItem) && !empty($pmItem)){
                     foreach($pmItem as $type => $pmItem2){
                         /*if($type == 'city_yt'){
                             if($pmItem2=='all'){}
                         }*/
+
+                        if($type == 'city_yt'){
+                            if($pmItem2=='all'){
+                                /*var_dump($dir_id);echo '<Br/><br/>';
+                                var_dump($posRoute);echo '<Br/><br/>';
+                                var_dump($posRoute);echo '<Br/><br/>';*/
+
+                                $posId = PositionFunc::getIdByAlias($posRoute);
+                                //var_dump($posId);echo '<Br/><br/>';
+                                //exit;
+                                $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                if(!empty($pArr)){
+                                    $sqlValueArr = [];
+                                    foreach($pArr as $p){
+                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                    }
+                                    $sql = $sqlBase . implode(',',$sqlValueArr);
+                                    $cmd = Yii::$app->db->createCommand($sql);
+                                    $cmd->execute();
+                                }
+                            }
+                        }
                     }
                 }
             }

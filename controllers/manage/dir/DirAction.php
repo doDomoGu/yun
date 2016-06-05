@@ -22,6 +22,7 @@ class DirAction extends Action{
             set_time_limit(0);
             $p = new Dir();
             $p->install();
+            exit;
             Yii::$app->response->redirect('dir')->send();
             exit;
         }

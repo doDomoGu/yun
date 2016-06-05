@@ -40,6 +40,8 @@ class PositionAction extends Action{
         if(Yii::$app->request->get('install2')){
             $p = new Position();
             $p->install2();
+            PositionFunc::handleIsLastAndIsLeaf();
+            PositionFunc::updateAllFullAlias();
             Yii::$app->response->redirect('position')->send();
             exit;
         }
