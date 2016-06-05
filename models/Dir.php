@@ -503,14 +503,14 @@ PRIMARY KEY (`id`)
             if(isset($a['pm']))
                 $pm = $a['pm'];
 
-            if(in_array($alias,$this->ytArr))
+            /*if(in_array($alias,$this->ytArr))
                 $yt = $alias;
 
             if(in_array($alias,$this->localArr))
                 $local = $alias;
 
             if(in_array($alias,$this->positionArr))
-                $position = $alias;
+                $position = $alias;*/
 
             $sql = $sqlbase."('".$name."','".$alias."',$pid,$type,$leaf,$level,$isLast,$ord,1)";
             $cmd = Yii::$app->db->createCommand($sql);
