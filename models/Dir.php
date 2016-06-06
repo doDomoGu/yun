@@ -148,7 +148,13 @@ PRIMARY KEY (`id`)
                 ['n'=>'苏州周道物业','a'=>'sz','l'=>true]
             ]
         ];*/
-
+        $xiangmu = [
+            ['n'=>'项目A','a'=>'xm_a','l'=>true],
+            ['n'=>'项目B','a'=>'xm_b','l'=>true],
+            ['n'=>'项目C','a'=>'xm_c','l'=>true],
+            ['n'=>'项目D','a'=>'xm_d','l'=>true],
+            ['n'=>'项目E','a'=>'xm_e','l'=>true]
+        ];
         $this->arr0 = [
             ['n'=>'企业运营中心','a'=>'zyfzzx','c'=>[]],
             ['n'=>'发展资源中心','a'=>'fzzyzx','c'=>[]],
@@ -331,133 +337,151 @@ PRIMARY KEY (`id`)
         $this->arr3 = [
             ['n'=>'颂唐地产','a'=>'stdc','c'=>[
                 ['n'=>'开发拓展部工具箱','a'=>'kftzbgjx','c'=>[
-                    /*['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[12=>['city'=>'stdc/zjb']],'l'=>true],
-                    ['n'=>'工作文件范本','a'=>'gzwjfb','pm'=>[12=>['city'=>'stdc/zjb']],'l'=>true],*/
+                    ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[
+                        12=>[
+                            'city'=>
+                                [
+                                    'stdc/zjb',
+                                    'stdc/kftzb/zj',
+                                    'stdc/kftzb/fzj',
+                                    'stdc/kftzb/jl'
+                                ]
+                            ]
+                        ]
+                        ,'l'=>true],
+                    ['n'=>'工作文件范本','a'=>'gzwjfb','pm'=>[
+                        12=>[
+                            'city'=>
+                                [
+                                    'stdc/zjb',
+                                    'stdc/kftzb/zj',
+                                    'stdc/kftzb/fzj',
+                                    'stdc/kftzb/jl'
+                                ]
+                            ]
+                        ]
+                        ,'l'=>true],
                     ['n'=>'工作文件档案','a'=>'gzwjda','pm'=>[
-                        11=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['kftzb'])],
-                    ],'c'=>$this->arr_diyu['stdc']]
+                        11=>['city'=>['stdc/zjb','stdc/kftzb']],
+                    ],'l'=>true],
                 ]],
-                /*['n'=>'市场策划部工具箱','a'=>'scchbgjx','c'=>[
+                ['n'=>'市场策划部工具箱','a'=>'scchbgjx','c'=>[
                     ['n'=>'工作流程规范','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','stdc/scchb']]
                     ],'a'=>'gzlcgf','l'=>true],
                     ['n'=>'工作报告模板','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','stdc/scchb']]
                     ],'a'=>'gzbgmb','l'=>true],
                     ['n'=>'工作表单范本','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','stdc/scchb']]
                     ],'a'=>'gzbdfb','l'=>true],
                     ['n'=>'产品定位资源库','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','stdc/scchb']]
                     ],'a'=>'cpdwzyk','l'=>true],
                     ['n'=>'工作报告档案库','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],ArrayHelper::merge($this->localPositionArr['scchb'],$this->localPositionArr['kftzb']))]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','stdc/scchb','stdc/kftzb']]
                     ],'a'=>'gzbgdak','l'=>true]
                 ]],
                 ['n'=>'销售业务部工具箱','a'=>'xsywbgjx','c'=>[
                     ['n'=>'工作流程规范','pm'=>[
-                        11=>['single'=>'admin'],
-                        12=>['ytlocal2'=>$this->localPositionArr['zjb']]
+                        12=>['city'=>['stdc/zjb']]
                     ],'a'=>'gzlcgf','l'=>true],
                     ['n'=>'工作报告范本','pm'=>[
-                        11=>['single'=>'admin'],
-                        12=>['ytlocal2'=>$this->localPositionArr['zjb']]
+                        12=>['city'=>['stdc/zjb']]
                     ],'a'=>'gzbgfb','l'=>true],
                     ['n'=>'工作表单范本','pm'=>[
-                        11=>['single'=>'admin'],
-                        12=>['ytlocal2'=>$this->localPositionArr['zjb']]
+                        12=>['city'=>['stdc/zjb']]
                     ],'a'=>'gzbdfb','l'=>true],
                     ['n'=>'活动方案资源库','pm'=>[
-                        11=>['single'=>'admin'],
-                        12=>['ytlocal2'=>$this->localPositionArr['zjb']]
+                        12=>['city'=>['stdc/zjb']]
                     ],'a'=>'hdfazyk','l'=>true]
-                ]]*/
-            ]],
-            /*['n'=>'颂唐广告','a'=>'stgg','pm'=>[
-                11=>['single'=>'admin'],
-                12=>['single'=>'stgg']
-            ],'c'=>[
-                ['n'=>'AE策划部工具箱','a'=>'aechbgjx','c'=>[
-                    ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
-                    ['n'=>'工作报告模板','a'=>'gzbgmb','l'=>true],
-                    ['n'=>'工作表单范本','a'=>'gzbdfb','l'=>true]
-                ]],
-                ['n'=>'创作部工具箱','a'=>'czbgjx','c'=>[
-                    ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
-                    ['n'=>'工作报告模板','a'=>'gzbgmb','l'=>true],
-                    ['n'=>'工作表单范本','a'=>'gzbdfb','l'=>true]
                 ]]
             ]],
+            ['n'=>'颂唐广告','a'=>'stgg','pmx'=>[
+                    12=>['city'=>['stgg']]
+                ],'c'=>[
+                    ['n'=>'AE策划部工具箱','a'=>'aechbgjx','c'=>[
+                        ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
+                        ['n'=>'工作报告模板','a'=>'gzbgmb','l'=>true],
+                        ['n'=>'工作表单范本','a'=>'gzbdfb','l'=>true]
+                    ]],
+                    ['n'=>'创作部工具箱','a'=>'czbgjx','c'=>[
+                        ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
+                        ['n'=>'工作报告模板','a'=>'gzbgmb','l'=>true],
+                        ['n'=>'工作表单范本','a'=>'gzbdfb','l'=>true]
+                    ]]
+                ]
+            ],
             ['n'=>'日鑫商业','a'=>'rxsy','c'=>[
                 ['n'=>'商业策划部工具箱','a'=>'sychbgjx','c'=>[
                     ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'工作报告模板','a'=>'gzbgmb','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'工作表单范本','a'=>'gzbdfb','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'商业定位资源库','a'=>'sydwzyk','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'工作报告档案库','a'=>'gzbgdak','pm'=>[
-                        11=>['single'=>'scclzx/shzbpt/zj'],
-                        12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],ArrayHelper::merge($this->localPositionArr['scchb'],$this->localPositionArr['kftzb']))]
+                        11=>['single'=>'stjg/scclzx/zj'],
+                        12=>['city'=>['stdc/zjb','rxsy/sychb','rxsy/pptzb']]
                     ],'l'=>true]
                 ]],
                 ['n'=>'商业招商部工具箱','a'=>'syzsbgjx','pm'=>[
-                    11=>['single'=>'admin'],
-                    12=>['ytlocal2'=>$this->localPositionArr['zjb']]
-                ],'c'=>[
-                    ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
-                    ['n'=>'工作文件模板','a'=>'gzwjmb','l'=>true],
-                    ['n'=>'工作表单范本','a'=>'gzbdgf','l'=>true]
-                ]]
+                    12=>['city'=>['stdc/zjb','rxsy/syzsb/zjl','rxsy/syzsb/fzjl','rxsy/syzsb/zj']]
+                    ],'c'=>[
+                        ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
+                        ['n'=>'工作文件模板','a'=>'gzwjmb','l'=>true],
+                        ['n'=>'工作表单范本','a'=>'gzbdgf','l'=>true]
+                    ]
+                ]
             ]],
-            ['n'=>'华麦建筑','a'=>'hmjz','c'=>[]],
+            ['n'=>'迈华建筑','a'=>'mhjz','c'=>[]],
             ['n'=>'汉佑房屋','a'=>'hyfw','c'=>[]],
-            ['n'=>'致秦经纪','a'=>'zqjj','c'=>[]],
+            ['n'=>'鸿汉经纪','a'=>'hhjj','c'=>[]],
             ['n'=>'明致置业','a'=>'mzzy','c'=>[]],
             ['n'=>'尚晋公关','a'=>'sjgg','c'=>[]],
             ['n'=>'元素互动','a'=>'yshd','c'=>[]],
-            ['n'=>'周道物业','a'=>'zdwy','c'=>[]]*/
+            ['n'=>'周道物业','a'=>'zdwy','c'=>[]]
         ];
 
 
-        /*$this->arr4 = [
+        $this->arr4 = [
             ['n'=>'执行项目资料中心','a'=>'zxxmzlzx','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','pm'=>[
-                    12=>['single'=>'stdc']
-                ],'c'=>$this->arr_xiangmu],
+                    12=>'all'
+                ],'c'=>$xiangmu],
                 ['n'=>'颂唐广告','a'=>'stgg','pm'=>[
-                    12=>['single'=>'stgg']
-                ],'c'=>$this->arr_xiangmu],
+                    12=>'all'
+                ],'c'=>$xiangmu],
                 ['n'=>'日鑫商业','a'=>'rxsy','pm'=>[
-                    12=>['single'=>'rxsy']
-                ],'c'=>$this->arr_xiangmu],
+                    12=>'all'
+                ],'c'=>$xiangmu],
                 ['n'=>'明致置业','a'=>'mzzy','pm'=>[
-                    12=>['single'=>'mzzy']
-                ],'c'=>$this->arr_xiangmu],
+                    12=>'all'
+                ],'c'=>$xiangmu],
             ]],
-            ['n'=>'历史项目资料中心','a'=>'lsxmzlzx','pm'=>[],'c'=>$this->arr_xiangmu]
+            ['n'=>'历史项目资料中心','a'=>'lsxmzlzx','pm'=>[12=>'all'],'c'=>$xiangmu]
         ];
 
 
         $this->arr5 = [
-            ['n'=>'公司推荐学习资料库','a'=>'gstjxxzlk','pm'=>[11=>['single'=>'admin'],12=>'all'],'l'=>true],
+            ['n'=>'公司推荐学习资料库','a'=>'gstjxxzlk','pm'=>[12=>'all'],'l'=>true],
             ['n'=>'员工推荐学习资料库','a'=>'ygtjxxzlk','pm'=>[11=>'all',12=>'all'],'l'=>true],
-        ];*/
+        ];
     }
     public function install() {
         try {
@@ -468,15 +492,15 @@ PRIMARY KEY (`id`)
 
             self::initDirTop($this->arr0);
 
-            //$this->initDir($this->arr1,1,2,1);
+            $this->initDir($this->arr1,1,2,1);
 
-            //$this->initDir($this->arr2,2,2,2);
+            $this->initDir($this->arr2,2,2,2);
 
             $this->initDir($this->arr3,3,2,3);
 
-            //$this->initDir($this->arr4,4,2,4);
+            $this->initDir($this->arr4,4,2,4);
 
-            //$this->initDir($this->arr5,5,2,5);
+            $this->initDir($this->arr5,5,2,5);
             return true;
         }catch (\Exception $e)
         {
@@ -570,14 +594,23 @@ PRIMARY KEY (`id`)
                     $sql .= implode(',',$sqlValueArr);
                     $cmd = Yii::$app->db->createCommand($sql);
                     $cmd->execute();
-                }/*elseif($pmItem=='city_yt'){
-                    
-                }*/elseif(is_array($pmItem) && !empty($pmItem)){
+                }elseif(is_array($pmItem) && !empty($pmItem)){
                     foreach($pmItem as $type => $pmItem2){
-                        /*if($type == 'city_yt'){
-                            if($pmItem2=='all'){}
-                        }*/
-                        if($type == 'city_zhglb'){
+                        if($type == 'single'){
+                            $posId = PositionFunc::getIdByAlias($pmItem2);
+                            /*var_dump($posRoute2);echo '<Br/><br/>';
+                            exit;*/
+                            $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                            if(!empty($pArr)){
+                                $sqlValueArr = [];
+                                foreach($pArr as $p){
+                                    $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                }
+                                $sql = $sqlBase . implode(',',$sqlValueArr);
+                                $cmd = Yii::$app->db->createCommand($sql);
+                                $cmd->execute();
+                            }
+                        }elseif($type == 'city_zhglb'){
                             if($pmItem2=='all'){
                                 $posTmp = explode('/',$posRoute);
                                 $posRoute2 = $posTmp[0].'/'.$posTmp[1].'/zhglb';
@@ -687,7 +720,31 @@ PRIMARY KEY (`id`)
                                 }
                             }
                         }elseif($type == 'city'){
-                            if(in_array($pmItem2 , ['stdc/zjb','stgg/zjb','rxsy/zjb'])){
+                            if(is_array($pmItem2) && !empty($pmItem2)){
+                                foreach($pmItem2 as $pi2){
+                                    if(in_array($pi2 ,
+                                        ['stdc/zjb','stgg/zjb','rxsy/zjb','stdc/scchb','stdc/kftzb/zj','stdc/kftzb/fzj','stdc/kftzb/jl','stdc/kftzb','stgg','rxsy/sychb','rxsy/pptzb','rxsy/syzsb/zjl','rxsy/syzsb/fzjl','rxsy/syzsb/zj']
+                                    )){
+                                        foreach($this->city as $cityAlias){
+                                            $posRoute2 = $posRoute.'/'.$cityAlias.'/'.$pi2;
+                                            //var_dump($posRoute2);echo '<Br/><br/>';exit;
+                                            $posId = PositionFunc::getIdByAlias($posRoute2);
+                                            //var_dump($posId);echo '<Br/><br/>';
+                                            //exit;
+                                            $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                            if(!empty($pArr)){
+                                                $sqlValueArr = [];
+                                                foreach($pArr as $p){
+                                                    $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                                }
+                                                $sql = $sqlBase . implode(',',$sqlValueArr);
+                                                $cmd = Yii::$app->db->createCommand($sql);
+                                                $cmd->execute();
+                                            }
+                                        }
+                                    }
+                                }
+                            }elseif(in_array($pmItem2 , ['stdc/zjb','stgg/zjb','rxsy/zjb'])){
                                 foreach($this->city as $cityAlias){
                                     $posRoute2 = $posRoute.'/'.$cityAlias.'/'.$pmItem2;
                                     //var_dump($posRoute2);echo '<Br/><br/>';exit;
