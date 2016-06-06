@@ -212,7 +212,7 @@ PRIMARY KEY (`id`)
         ];*/
 
 
-        /*$city = [
+        $city = [
             //['n'=>'颂唐机构','a'=>'stjg','l'=>true],
             ['n'=>'上海','a'=>'sh','l'=>true],
             ['n'=>'苏州','a'=>'sz','l'=>true],
@@ -222,7 +222,7 @@ PRIMARY KEY (`id`)
             ['n'=>'呼和浩特','a'=>'hhht','l'=>true],
         ];
 
-        $yt = [
+        /*$yt = [
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
             ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
@@ -262,16 +262,16 @@ PRIMARY KEY (`id`)
             ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
                 ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
-                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
-                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
-                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>['ytlocal'=>'all']],'c'=>$city_yt],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],*/
+                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
+                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
+                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'c'=>$city_yt],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],*/
             ]],
-           /* ['n'=>'财务管控中心','pm'=>[11=>['single'=>['admin']],12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb','sh/cwb']]],'c'=>[
-                ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city],
-                ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city]
+            ['n'=>'财务管控中心','pm'=>[12=>['city_cwb'=>'all'/*,'city_yt'=>'zjb']*/]],'c'=>[
+                //['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city],
+                //['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city]
             ]],
-            ['n'=>'法务管控中心','a'=>'fwgkzx','pm'=>[
+            /*['n'=>'法务管控中心','a'=>'fwgkzx','pm'=>[
                 11=>['single'=>['admin']],
                 12=>[
                     'ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']
@@ -516,12 +516,11 @@ PRIMARY KEY (`id`)
             $cmd->execute();
             $lastId = Yii::$app->db->lastInsertID;
             $curPosRoute = '';
-            if(isset($pm) && !empty($pm) && $posRoute!=''){
-                $curPosRoute = $posRoute.'/'.$alias;
-            }
-
             if($leaf==0){
                 if(isset($a['c']) && !empty($a['c'])){
+                    if(isset($pm) && !empty($pm) && $posRoute!=''){
+                        $curPosRoute = $posRoute.'/'.$alias;
+                    }
                     if(isset($a['pm']) && $curPosRoute==''){
                         $curPosRoute = 'stjg';
                     }
@@ -529,6 +528,7 @@ PRIMARY KEY (`id`)
                     //$this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
                 }
             }else{
+                $curPosRoute = $posRoute.'/'.$alias;
                 $this->initPm($lastId,$pm,$curPosRoute);
                 //$this->initPm($lastId,$pm,$yt,$local,$position);
             }
@@ -571,6 +571,24 @@ PRIMARY KEY (`id`)
                                 $posId = PositionFunc::getIdByAlias($posRoute2);
                                 /*var_dump($posRoute2);echo '<Br/><br/>';
                                 exit;*/
+                                $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                if(!empty($pArr)){
+                                    $sqlValueArr = [];
+                                    foreach($pArr as $p){
+                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                    }
+                                    $sql = $sqlBase . implode(',',$sqlValueArr);
+                                    $cmd = Yii::$app->db->createCommand($sql);
+                                    $cmd->execute();
+                                }
+                            }
+                        }elseif($type == 'city_cwb'){
+                            if($pmItem2=='all'){
+                                $posTmp = explode('/',$posRoute);
+                                $posRoute2 = $posTmp[0].'/'.$posTmp[1].'/cwb';
+                                $posId = PositionFunc::getIdByAlias($posRoute2);
+                                var_dump($posRoute2);echo '<Br/><br/>';
+                                exit;
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
