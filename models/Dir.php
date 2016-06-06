@@ -60,6 +60,9 @@ PRIMARY KEY (`id`)
 
     public $arr5;
 
+    public $city;
+
+    public $yt;
     /*public $localArr;
 
     public $ytArr;
@@ -222,11 +225,11 @@ PRIMARY KEY (`id`)
             ['n'=>'呼和浩特','a'=>'hhht','l'=>true],
         ];
 
-        /*$yt = [
+        $yt = [
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
             ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
-        ];*/
+        ];
 
         $city_yt = [
             ['n'=>'上海','a'=>'sh','c'=>[
@@ -254,19 +257,27 @@ PRIMARY KEY (`id`)
                 ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ]],
         ];
+        foreach($city as $c){
+            $this->city[] = $c['a'];
+        }
+        foreach($city_yt as $cy){
+            foreach($cy['c'] as $cy2){
+                $this->yt[$cy['a']][]=$cy2['a'];
+            }
+        }
 
         $this->arr1 = [
             /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
                 ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$city_yt],
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
             ]],*/
-            ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
+            /*['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
                 ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
-                /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
+                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
                 ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'c'=>$city_yt],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],*/
-            ]],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
+            ]],*/
             ['n'=>'财务管控中心','pm'=>[12=>['city_cwb'=>'all'/*,'city_yt'=>'zjb']*/]],'c'=>[
                 //['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city],
                 //['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city]

@@ -35,9 +35,34 @@ class PositionAction extends Action{
             exit;
         }
 
+        if(Yii::$app->request->get('get-num2')){
+            set_time_limit(0);
+            $dir = new Dir();
+            $this->getNum2();
+            foreach($dir->city as $c){
+                echo $c.' @ ';
+                $this->getNum2($c);
+                echo ' - zhglb @ ';
+                $this->getNum2($c,'zhglb');
+                echo ' - cwb @ ';
+                $this->getNum2($c,'cwb');
+                foreach($dir->yt[$c] as $yt){
+                    echo ' - '.$yt.' @ ';
+                    $this->getNum2($c,$yt);
+                    /*foreach($dir->positionArr as $p){
+                        echo ' - '.$p;
+                        $this->getNum($y,$l,$p);
+                    }*/
+                }
+
+
+            }
+            exit;
+        }
 
 
         if(Yii::$app->request->get('install2')){
+            set_time_limit(0);
             $p = new Position();
             $p->install2();
             PositionFunc::handleIsLastAndIsLeaf();
@@ -110,7 +135,56 @@ class PositionAction extends Action{
         return $this->controller->render('position/list',$params);
     }
 
-    public function getNum($yt='',$local='',$position=''){
+    public function getNum2($city='',$yt=''){
+        $alias = 'stjg';
+        echo 'stjg';
+        if($city!=''){
+            $alias .='/'.$city;
+            $pos1 = Position::find()->where(['full_alias'=>$alias])->one();
+            echo  '/'.$city;
+            if($pos1){
+                if($yt!=''){
+                    $alias .= '/'.$yt;
+                    $pos2 = Position::find()->where(['full_alias'=>$alias])->one();
+                    echo  '/'.$yt;
+                    if($pos2){
+                        /*if($position!=''){
+                            $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
+                            echo ' - '.$position;
+                            if($pos3){
+                                echo '('.$pos3->name.')';
+                                $pArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
+                                echo ' : '.count($pArr).'<br/>';
+                            }else{
+                                echo ' : null<br/>';
+                            }
+                        }else{*/
+                            echo '('.$pos2->name.')';
+                            $pArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
+                            echo ' : '.count($pArr).'<br/>';
+                        //}
+
+
+                    }else{
+                        echo ' : null<br/>';
+                    }
+                }else{
+                    echo '('.$pos1->name.')';
+                    $pArr = PositionFunc::getAllLeafChildrenIds($pos1->id);
+                    echo ' : '.count($pArr).'<br/>';
+                }
+
+            }else{
+                echo ' : null<br/>';
+            }
+        }else{
+            $pArr = PositionFunc::getAllLeafChildrenIds(0);
+            echo 'All : '.count($pArr).'<br/>';
+        }
+
+    }
+
+        public function getNum($yt='',$local='',$position=''){
         if($yt!=''){
             $pos1 = Position::find()->where(['alias'=>$yt])->one();
             echo $yt;
