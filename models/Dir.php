@@ -228,7 +228,14 @@ PRIMARY KEY (`id`)
         $yt = [
             ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
             ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+            ['n'=>'尚晋公关','a'=>'sjgg','l'=>true],
+            ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
+            ['n'=>'鸿汉经纪','a'=>'hhjj','l'=>true],
+            ['n'=>'明致置业','a'=>'mzzy','l'=>true],
             ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
+            ['n'=>'迈华建筑','a'=>'mhjz','l'=>true],
+            ['n'=>'周道物业','a'=>'ydwy','l'=>true],
+            ['n'=>'元素互动','a'=>'yshd','l'=>true]
         ];
 
         $city_yt = [
@@ -267,49 +274,51 @@ PRIMARY KEY (`id`)
         }
 
         $this->arr1 = [
-            /*['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
+            ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
                 ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$city_yt],
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
-            ]],*/
-            /*['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
+            ]],
+            ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
                 ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
                 ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
                 ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'c'=>$city_yt],
                 ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
-            ]],*/
-            /*['n'=>'财务管控中心','pmx'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>[
+            ]],
+            ['n'=>'财务管控中心','pmx'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>[
                 ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city_yt],
                 ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city_yt]
-            ]],*/
-            /*['n'=>'法务管控中心','a'=>'fwgkzx','pmx'=>[12=>['city_yt'=>'zjb']],'c'=>[
+            ]],
+            ['n'=>'法务管控中心','a'=>'fwgkzx','pmx'=>[12=>['city_yt'=>'zjb']],'c'=>[
                 ['n'=>'合同范本','a'=>'htfb','c'=>$city_yt],
                 ['n'=>'信函范本','a'=>'xhfb','c'=>$city_yt],
-            ]]*/
+            ]]
         ];
 
         $this->arr2 = [
-            ['n'=>'颂唐-人才资源中心','pm'=>[
-                11=>['ytlocal2'=>['sh/zhglb']],
+            ['n'=>'颂唐-人才资源中心','pmx'=>[
+                11=>[
+                    'city_zhglb'=>'all'
+                ],
                 12=>[
-                    'ytlocal2'=>['sh/zhglb'],
-                    'ytlocal'=>['zjb']
+                    'city_yt'=>'zjb',
+                    'city_zhglb'=>'all'
                     ]
                 ],'a'=>'st-rczyzx','c'=>[
-                    ['n'=>'在职员工档案','a'=>'zzygda','c'=>$this->arr_yt2],
-                    ['n'=>'离职员工档案','a'=>'lzygda','c'=>$this->arr_yt2],
-                    ['n'=>'应聘员工档案','a'=>'ypygda','c'=>$this->arr_yt2],
-                    ['n'=>'行业人才档案','a'=>'hyrcda','c'=>$this->arr_yt2]
+                    ['n'=>'在职员工档案','a'=>'zzygda','c'=>$city_yt],
+                    ['n'=>'离职员工档案','a'=>'lzygda','c'=>$city_yt],
+                    ['n'=>'应聘员工档案','a'=>'ypygda','c'=>$city_yt],
+                    ['n'=>'行业人才档案','a'=>'hyrcda','c'=>$city_yt],
                 ]
             ],
             ['n'=>'颂唐-客户资源中心','a'=>'st-khzyzx','c'=>[
-                ['n'=>'甲方人员档案','a'=>'jfryda','c'=>$this->arr_company]
+                ['n'=>'甲方人员档案','a'=>'jfryda','l'=>true]
             ]],
-            ['n'=>'颂唐-供应商资源中心','a'=>'st-gyszyzx','pm'=>[
-                    11=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']],
-                    12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']]
+            ['n'=>'颂唐-供应商资源中心','a'=>'st-gyszyzx','pmx'=>[
+                    11=>['yt'=>'zjb'],
+                    12=>['yt'=>'zjb'],
                 ],'c'=>[
-                ['n'=>'供应商档案','a'=>'gysda','c'=>$this->arr_yt3]
+                ['n'=>'供应商档案','a'=>'gysda','c'=>$yt]
             ]],
             ['n'=>'颂唐地产-客户资源中心','a'=>'stdc-khzyzx','c'=>[
                 ['n'=>'购房客户档案','a'=>'gfkhda','l'=>true]
@@ -468,13 +477,13 @@ PRIMARY KEY (`id`)
 
             //$this->initDir($this->arr1,1,2,1);
 
-            $this->initDir($this->arr2,2,2,2);
+            //$this->initDir($this->arr2,2,2,2);
 
-            /*$this->initDir($this->arr3,3,2,3);
+            $this->initDir($this->arr3,3,2,3);
 
-            $this->initDir($this->arr4,4,2,4);
+            //$this->initDir($this->arr4,4,2,4);
 
-            $this->initDir($this->arr5,5,2,5);*/
+            //$this->initDir($this->arr5,5,2,5);
             return true;
         }catch (\Exception $e)
         {
@@ -639,6 +648,45 @@ PRIMARY KEY (`id`)
                                     $cmd = Yii::$app->db->createCommand($sql);
                                     $cmd->execute();
                                 }
+                            }
+                        }elseif($type == 'yt'){
+                            /*if($pmItem2=='all'){
+
+                                $posId = PositionFunc::getIdByAlias($posRoute);
+                                //var_dump($posId);echo '<Br/><br/>';
+                                //exit;
+                                $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                if(!empty($pArr)){
+                                    $sqlValueArr = [];
+                                    foreach($pArr as $p){
+                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                    }
+                                    $sql = $sqlBase . implode(',',$sqlValueArr);
+                                    $cmd = Yii::$app->db->createCommand($sql);
+                                    $cmd->execute();
+                                }
+                            }else*/if($pmItem2 == 'zjb'){
+                                foreach($this->city as $cityAlias){
+                                    $posRoute2 = str_replace('stjg/','stjg/'.$cityAlias.'/',$posRoute);
+                                    $posRoute2 = $posRoute2 .'/zjb';
+                                    //var_dump($posRoute2);echo '<Br/><br/>';
+
+
+                                    $posId = PositionFunc::getIdByAlias($posRoute2);
+                                    //var_dump($posId);echo '<Br/><br/>';
+                                    //exit;
+                                    $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                    if(!empty($pArr)){
+                                        $sqlValueArr = [];
+                                        foreach($pArr as $p){
+                                            $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                        }
+                                        $sql = $sqlBase . implode(',',$sqlValueArr);
+                                        $cmd = Yii::$app->db->createCommand($sql);
+                                        $cmd->execute();
+                                    }
+                                }
+
                             }
                         }
                     }
