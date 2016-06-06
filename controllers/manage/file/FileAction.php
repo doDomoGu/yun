@@ -54,7 +54,7 @@ class FileAction extends Action{
                 }*/
             }
         }
-
+        $list->innerJoinWith('user');
 
 
         $count = $list->count();

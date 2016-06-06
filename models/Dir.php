@@ -261,7 +261,7 @@ PRIMARY KEY (`id`)
                 ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
             ]],*/
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['city_yt'=>'all']],'c'=>$city_yt],
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
                 /*['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
                 ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['ytlocal2'=>['sh/zhglb']],12=>['ytlocal'=>'all']],'c'=>$city_yt],
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>['ytlocal'=>'all']],'c'=>$city_yt],
@@ -564,8 +564,25 @@ PRIMARY KEY (`id`)
                         /*if($type == 'city_yt'){
                             if($pmItem2=='all'){}
                         }*/
-
-                        if($type == 'city_yt'){
+                        if($type == 'city_zhglb'){
+                            if($pmItem2=='all'){
+                                $posTmp = explode('/',$posRoute);
+                                $posRoute2 = $posTmp[0].'/'.$posTmp[1].'/zhglb';
+                                $posId = PositionFunc::getIdByAlias($posRoute2);
+                                /*var_dump($posRoute2);echo '<Br/><br/>';
+                                exit;*/
+                                $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                if(!empty($pArr)){
+                                    $sqlValueArr = [];
+                                    foreach($pArr as $p){
+                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                    }
+                                    $sql = $sqlBase . implode(',',$sqlValueArr);
+                                    $cmd = Yii::$app->db->createCommand($sql);
+                                    $cmd->execute();
+                                }
+                            }
+                        }elseif($type == 'city_yt'){
                             if($pmItem2=='all'){
                                 /*var_dump($dir_id);echo '<Br/><br/>';
                                 var_dump($posRoute);echo '<Br/><br/>';
