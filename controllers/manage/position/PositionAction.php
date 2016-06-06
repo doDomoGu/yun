@@ -49,12 +49,13 @@ class PositionAction extends Action{
                 foreach($dir->yt[$c] as $yt){
                     echo ' - '.$yt.' @ ';
                     $this->getNum2($c,$yt);
-                    /*foreach($dir->positionArr as $p){
-                        echo ' - '.$p;
-                        $this->getNum($y,$l,$p);
-                    }*/
-                }
 
+                    ####################
+                    echo '&emsp;&emsp; - zjb @ ';
+                    $this->getNum2($c,$yt,'zjb');
+
+                }
+echo '<br/>===========================<br/><br/>';
 
             }
             exit;
@@ -135,7 +136,7 @@ class PositionAction extends Action{
         return $this->controller->render('position/list',$params);
     }
 
-    public function getNum2($city='',$yt=''){
+    public function getNum2($city='',$yt='',$pos=''){
         $alias = 'stjg';
         echo 'stjg';
         if($city!=''){
@@ -148,9 +149,10 @@ class PositionAction extends Action{
                     $pos2 = Position::find()->where(['full_alias'=>$alias])->one();
                     echo  '/'.$yt;
                     if($pos2){
-                        /*if($position!=''){
-                            $pos3 = Position::find()->where(['alias'=>$position,'p_id'=>$pos2->id])->one();
-                            echo ' - '.$position;
+                        if($pos!=''){
+                            $alias .= '/'.$pos;
+                            $pos3 = Position::find()->where(['full_alias'=>$alias])->one();
+                            echo ' / '.$pos;
                             if($pos3){
                                 echo '('.$pos3->name.')';
                                 $pArr = PositionFunc::getAllLeafChildrenIds($pos3->id);
@@ -158,11 +160,11 @@ class PositionAction extends Action{
                             }else{
                                 echo ' : null<br/>';
                             }
-                        }else{*/
+                        }else{
                             echo '('.$pos2->name.')';
                             $pArr = PositionFunc::getAllLeafChildrenIds($pos2->id);
                             echo ' : '.count($pArr).'<br/>';
-                        //}
+                        }
 
 
                     }else{

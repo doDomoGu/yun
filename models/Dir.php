@@ -278,24 +278,17 @@ PRIMARY KEY (`id`)
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'c'=>$city_yt],
                 ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
             ]],*/
-            ['n'=>'财务管控中心','pm'=>[12=>['city_cwb'=>'all'/*,'city_yt'=>'zjb']*/]],'c'=>[
-                //['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city],
-                //['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city]
-            ]],
-            /*['n'=>'法务管控中心','a'=>'fwgkzx','pm'=>[
-                11=>['single'=>['admin']],
-                12=>[
-                    'ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']
-                    ]
-                ],
-                'c'=>[
-                    ['n'=>'合同范本','a'=>'htfb','c'=>$city],
-                    ['n'=>'信函范本','a'=>'xhfb','c'=>$city]
-                ]
-            ]*/
+            /*['n'=>'财务管控中心','pmx'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>[
+                ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city_yt],
+                ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city_yt]
+            ]],*/
+            /*['n'=>'法务管控中心','a'=>'fwgkzx','pmx'=>[12=>['city_yt'=>'zjb']],'c'=>[
+                ['n'=>'合同范本','a'=>'htfb','c'=>$city_yt],
+                ['n'=>'信函范本','a'=>'xhfb','c'=>$city_yt],
+            ]]*/
         ];
 
-        /*$this->arr2 = [
+        $this->arr2 = [
             ['n'=>'颂唐-人才资源中心','pm'=>[
                 11=>['ytlocal2'=>['sh/zhglb']],
                 12=>[
@@ -326,7 +319,7 @@ PRIMARY KEY (`id`)
             ]]
         ];
 
-        $this->arr3 = [
+        /*$this->arr3 = [
             ['n'=>'颂唐地产','a'=>'stdc','c'=>[
                 ['n'=>'开发拓展部工具箱','a'=>'kftzbgjx','c'=>[
                     ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[
@@ -473,11 +466,11 @@ PRIMARY KEY (`id`)
 
             self::initDirTop($this->arr0);
 
-            $this->initDir($this->arr1,1,2,1);
+            //$this->initDir($this->arr1,1,2,1);
 
-            /*$this->initDir($this->arr2,2,2,2);
+            $this->initDir($this->arr2,2,2,2);
 
-            $this->initDir($this->arr3,3,2,3);
+            /*$this->initDir($this->arr3,3,2,3);
 
             $this->initDir($this->arr4,4,2,4);
 
@@ -509,9 +502,10 @@ PRIMARY KEY (`id`)
             $leaf = isset($a['l']) && $a['l']==1?1:0;
             $name = isset($a['n']) && $a['n']!=''?$a['n']:'默认名称';
             $alias = isset($a['a']) && $a['a']!=''?$a['a']:'默认别名';
+            if(isset($a['pmx']))
+                $pm = $a['pmx'];
             if(isset($a['pm']))
                 $pm = $a['pm'];
-
 
             /*if(in_array($alias,$this->ytArr))
                 $yt = $alias;
@@ -529,10 +523,10 @@ PRIMARY KEY (`id`)
             $curPosRoute = '';
             if($leaf==0){
                 if(isset($a['c']) && !empty($a['c'])){
-                    if(isset($pm) && !empty($pm) && $posRoute!=''){
+                    if(isset($pm) && !empty($pm) && !isset($a['pmx']) && $posRoute!=''){
                         $curPosRoute = $posRoute.'/'.$alias;
                     }
-                    if(isset($a['pm']) && $curPosRoute==''){
+                    if(isset($pm) && !empty($pm) && !isset($a['pmx']) && $curPosRoute==''){
                         $curPosRoute = 'stjg';
                     }
                     $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$curPosRoute);
@@ -598,8 +592,8 @@ PRIMARY KEY (`id`)
                                 $posTmp = explode('/',$posRoute);
                                 $posRoute2 = $posTmp[0].'/'.$posTmp[1].'/cwb';
                                 $posId = PositionFunc::getIdByAlias($posRoute2);
-                                var_dump($posRoute2);echo '<Br/><br/>';
-                                exit;
+                                /*var_dump($posRoute2);echo '<Br/><br/>';
+                                exit;*/
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
@@ -617,6 +611,21 @@ PRIMARY KEY (`id`)
                                 var_dump($posRoute);echo '<Br/><br/>';
                                 var_dump($posRoute);echo '<Br/><br/>';*/
 
+                                $posId = PositionFunc::getIdByAlias($posRoute);
+                                //var_dump($posId);echo '<Br/><br/>';
+                                //exit;
+                                $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                if(!empty($pArr)){
+                                    $sqlValueArr = [];
+                                    foreach($pArr as $p){
+                                        $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                    }
+                                    $sql = $sqlBase . implode(',',$sqlValueArr);
+                                    $cmd = Yii::$app->db->createCommand($sql);
+                                    $cmd->execute();
+                                }
+                            }elseif($pmItem2 == 'zjb'){
+                                $posRoute .='/zjb';
                                 $posId = PositionFunc::getIdByAlias($posRoute);
                                 //var_dump($posId);echo '<Br/><br/>';
                                 //exit;
