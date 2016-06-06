@@ -328,23 +328,16 @@ PRIMARY KEY (`id`)
             ]]
         ];
 
-        /*$this->arr3 = [
+        $this->arr3 = [
             ['n'=>'颂唐地产','a'=>'stdc','c'=>[
                 ['n'=>'开发拓展部工具箱','a'=>'kftzbgjx','c'=>[
-                    ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[
-                        11=>['single'=>'admin'],
-                        12=>['ytlocal2'=>['sh/zjb','sz/zjb','wx/zjb','nj/zjb','sb/zjb','ah/zjb','hf/zjb']],
-                    ],'l'=>true],
-                    ['n'=>'工作文件范本','a'=>'gzwjfb','pm'=>[
-                        11=>['single'=>'admin'],
-                        12=>['ytlocal2'=>$this->localPositionArr['zjb']],
-                    ],'l'=>true],
+                    /*['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[12=>['city'=>'stdc/zjb']],'l'=>true],
+                    ['n'=>'工作文件范本','a'=>'gzwjfb','pm'=>[12=>['city'=>'stdc/zjb']],'l'=>true],*/
                     ['n'=>'工作文件档案','a'=>'gzwjda','pm'=>[
                         11=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['kftzb'])],
-                        //12=>['ytlocal2'=>$this->localPositionArr['zjb']]
                     ],'c'=>$this->arr_diyu['stdc']]
                 ]],
-                ['n'=>'市场策划部工具箱','a'=>'scchbgjx','c'=>[
+                /*['n'=>'市场策划部工具箱','a'=>'scchbgjx','c'=>[
                     ['n'=>'工作流程规范','pm'=>[
                         11=>['single'=>'scclzx/shzbpt/zj'],
                         12=>['ytlocal2'=>ArrayHelper::merge($this->localPositionArr['zjb'],$this->localPositionArr['scchb'])]
@@ -383,9 +376,9 @@ PRIMARY KEY (`id`)
                         11=>['single'=>'admin'],
                         12=>['ytlocal2'=>$this->localPositionArr['zjb']]
                     ],'a'=>'hdfazyk','l'=>true]
-                ]]
+                ]]*/
             ]],
-            ['n'=>'颂唐广告','a'=>'stgg','pm'=>[
+            /*['n'=>'颂唐广告','a'=>'stgg','pm'=>[
                 11=>['single'=>'admin'],
                 12=>['single'=>'stgg']
             ],'c'=>[
@@ -438,11 +431,11 @@ PRIMARY KEY (`id`)
             ['n'=>'明致置业','a'=>'mzzy','c'=>[]],
             ['n'=>'尚晋公关','a'=>'sjgg','c'=>[]],
             ['n'=>'元素互动','a'=>'yshd','c'=>[]],
-            ['n'=>'周道物业','a'=>'zdwy','c'=>[]]
+            ['n'=>'周道物业','a'=>'zdwy','c'=>[]]*/
         ];
 
 
-        $this->arr4 = [
+        /*$this->arr4 = [
             ['n'=>'执行项目资料中心','a'=>'zxxmzlzx','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','pm'=>[
                     12=>['single'=>'stdc']
@@ -511,9 +504,11 @@ PRIMARY KEY (`id`)
             $leaf = isset($a['l']) && $a['l']==1?1:0;
             $name = isset($a['n']) && $a['n']!=''?$a['n']:'默认名称';
             $alias = isset($a['a']) && $a['a']!=''?$a['a']:'默认别名';
-            if(isset($a['pmx']))
+            if(isset($a['pmx']))//继承父级目录
                 $pm = $a['pmx'];
-            if(isset($a['pm']))
+            if(isset($a['pmx2']))//当前已经为叶级目录
+                $pm = $a['pmx2'];
+            if(isset($a['pm']))//传递给子级目录
                 $pm = $a['pm'];
 
             /*if(in_array($alias,$this->ytArr))
@@ -542,7 +537,11 @@ PRIMARY KEY (`id`)
                     //$this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
                 }
             }else{
-                $curPosRoute = $posRoute.'/'.$alias;
+                if(isset($pm) && !empty($pm) && !isset($a['pmx2']) && $curPosRoute==''){
+                    $curPosRoute = 'stjg';
+                }else{
+                    $curPosRoute = $posRoute.'/'.$alias;
+                }
                 $this->initPm($lastId,$pm,$curPosRoute);
                 //$this->initPm($lastId,$pm,$yt,$local,$position);
             }
@@ -669,7 +668,7 @@ PRIMARY KEY (`id`)
                                 foreach($this->city as $cityAlias){
                                     $posRoute2 = str_replace('stjg/','stjg/'.$cityAlias.'/',$posRoute);
                                     $posRoute2 = $posRoute2 .'/zjb';
-                                    //var_dump($posRoute2);echo '<Br/><br/>';
+                                    //var_dump($posRoute2);echo '<Br/><br/>';exit;
 
 
                                     $posId = PositionFunc::getIdByAlias($posRoute2);
@@ -686,7 +685,26 @@ PRIMARY KEY (`id`)
                                         $cmd->execute();
                                     }
                                 }
-
+                            }
+                        }elseif($type == 'city'){
+                            if(in_array($pmItem2 , ['stdc/zjb','stgg/zjb','rxsy/zjb'])){
+                                foreach($this->city as $cityAlias){
+                                    $posRoute2 = $posRoute.'/'.$cityAlias.'/'.$pmItem2;
+                                    //var_dump($posRoute2);echo '<Br/><br/>';exit;
+                                    $posId = PositionFunc::getIdByAlias($posRoute2);
+                                    //var_dump($posId);echo '<Br/><br/>';
+                                    //exit;
+                                    $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                    if(!empty($pArr)){
+                                        $sqlValueArr = [];
+                                        foreach($pArr as $p){
+                                            $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                        }
+                                        $sql = $sqlBase . implode(',',$sqlValueArr);
+                                        $cmd = Yii::$app->db->createCommand($sql);
+                                        $cmd->execute();
+                                    }
+                                }
                             }
                         }
                     }
