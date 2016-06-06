@@ -291,40 +291,29 @@ PRIMARY KEY (`id`)
                 ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'c'=>$city_yt],
                 ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
             ]],
-            ['n'=>'财务管控中心','pmx'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>[
-                ['n'=>'财务管理制度','a'=>'cwglzd','c'=>$city_yt],
-                ['n'=>'财务表单范本','a'=>'cwbdfb','c'=>$city_yt]
+            ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>[
+                ['n'=>'财务管理制度','a'=>'cwglzd','pm'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>$city_yt],
+                ['n'=>'财务表单范本','a'=>'cwbdfb','pm'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>$city_yt]
             ]],
-            ['n'=>'法务管控中心','a'=>'fwgkzx','pmx'=>[12=>['city_yt'=>'zjb']],'c'=>[
-                ['n'=>'合同范本','a'=>'htfb','c'=>$city_yt],
-                ['n'=>'信函范本','a'=>'xhfb','c'=>$city_yt],
+            ['n'=>'法务管控中心','a'=>'fwgkzx','c'=>[
+                ['n'=>'合同范本','a'=>'htfb','pm'=>[12=>['city_yt'=>'zjb']],'c'=>$city_yt],
+                ['n'=>'信函范本','a'=>'xhfb','pm'=>[12=>['city_yt'=>'zjb']],'c'=>$city_yt],
             ]]
         ];
 
         $this->arr2 = [
-            ['n'=>'颂唐-人才资源中心','pmx'=>[
-                11=>[
-                    'city_zhglb'=>'all'
-                ],
-                12=>[
-                    'city_yt'=>'zjb',
-                    'city_zhglb'=>'all'
-                    ]
-                ],'a'=>'st-rczyzx','c'=>[
-                    ['n'=>'在职员工档案','a'=>'zzygda','c'=>$city_yt],
-                    ['n'=>'离职员工档案','a'=>'lzygda','c'=>$city_yt],
-                    ['n'=>'应聘员工档案','a'=>'ypygda','c'=>$city_yt],
-                    ['n'=>'行业人才档案','a'=>'hyrcda','c'=>$city_yt],
+            ['n'=>'颂唐-人才资源中心','a'=>'st-rczyzx','c'=>[
+                    ['n'=>'在职员工档案','a'=>'zzygda','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'zjb','city_zhglb'=>'all']],'c'=>$city_yt],
+                    ['n'=>'离职员工档案','a'=>'lzygda','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'zjb','city_zhglb'=>'all']],'c'=>$city_yt],
+                    ['n'=>'应聘员工档案','a'=>'ypygda','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'zjb','city_zhglb'=>'all']],'c'=>$city_yt],
+                    ['n'=>'行业人才档案','a'=>'hyrcda','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'zjb','city_zhglb'=>'all']],'c'=>$city_yt],
                 ]
             ],
             ['n'=>'颂唐-客户资源中心','a'=>'st-khzyzx','c'=>[
                 ['n'=>'甲方人员档案','a'=>'jfryda','l'=>true]
             ]],
-            ['n'=>'颂唐-供应商资源中心','a'=>'st-gyszyzx','pmx'=>[
-                    11=>['yt'=>'zjb'],
-                    12=>['yt'=>'zjb'],
-                ],'c'=>[
-                ['n'=>'供应商档案','a'=>'gysda','c'=>$yt]
+            ['n'=>'颂唐-供应商资源中心','a'=>'st-gyszyzx','c'=>[
+                ['n'=>'供应商档案','a'=>'gysda','pm'=>[11=>['yt'=>'zjb'],12=>['yt'=>'zjb']],'c'=>$yt]
             ]],
             ['n'=>'颂唐地产-客户资源中心','a'=>'stdc-khzyzx','c'=>[
                 ['n'=>'购房客户档案','a'=>'gfkhda','l'=>true]
@@ -402,18 +391,16 @@ PRIMARY KEY (`id`)
                     ],'a'=>'hdfazyk','l'=>true]
                 ]]
             ]],
-            ['n'=>'颂唐广告','a'=>'stgg','pmx'=>[
-                    12=>['city'=>['stgg']]
-                ],'c'=>[
+            ['n'=>'颂唐广告','a'=>'stgg','c'=>[
                     ['n'=>'AE策划部工具箱','a'=>'aechbgjx','c'=>[
-                        ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
-                        ['n'=>'工作报告模板','a'=>'gzbgmb','l'=>true],
-                        ['n'=>'工作表单范本','a'=>'gzbdfb','l'=>true]
+                        ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[12=>['city'=>['stgg']]],'l'=>true],
+                        ['n'=>'工作报告模板','a'=>'gzbgmb','pm'=>[12=>['city'=>['stgg']]],'l'=>true],
+                        ['n'=>'工作表单范本','a'=>'gzbdfb','pm'=>[12=>['city'=>['stgg']]],'l'=>true]
                     ]],
                     ['n'=>'创作部工具箱','a'=>'czbgjx','c'=>[
-                        ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
-                        ['n'=>'工作报告模板','a'=>'gzbgmb','l'=>true],
-                        ['n'=>'工作表单范本','a'=>'gzbdfb','l'=>true]
+                        ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[12=>['city'=>['stgg']]],'l'=>true],
+                        ['n'=>'工作报告模板','a'=>'gzbgmb','pm'=>[12=>['city'=>['stgg']]],'l'=>true],
+                        ['n'=>'工作表单范本','a'=>'gzbdfb','pm'=>[12=>['city'=>['stgg']]],'l'=>true]
                     ]]
                 ]
             ],
@@ -508,10 +495,10 @@ PRIMARY KEY (`id`)
             $message = $e->getMessage() . "\n";
             $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
             echo $message;
-            echo '<br/><br/>';
+            /*echo '<br/><br/>';
             var_dump($e);
             echo '<br/><br/>';
-            var_dump($errorInfo);
+            var_dump($errorInfo);*/
 
             //throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
             return false;
@@ -528,11 +515,11 @@ PRIMARY KEY (`id`)
             $leaf = isset($a['l']) && $a['l']==1?1:0;
             $name = isset($a['n']) && $a['n']!=''?$a['n']:'默认名称';
             $alias = isset($a['a']) && $a['a']!=''?$a['a']:'默认别名';
-            if(isset($a['pmx']))//继承父级目录
-                $pm = $a['pmx'];
-            if(isset($a['pmx2']))//当前已经为叶级目录
-                $pm = $a['pmx2'];
-            if(isset($a['pm']))//传递给子级目录
+            /*if(isset($a['pmx']))//继承父级目录
+                $pm = $a['pmx'];*/
+           /* if(isset($a['pmx2']))//当前已经为叶级目录
+                $pm = $a['pmx2'];*/
+            if(isset($a['pm']) && !empty($a['pm']))//传递给子级目录
                 $pm = $a['pm'];
 
             /*if(in_array($alias,$this->ytArr))
@@ -551,21 +538,29 @@ PRIMARY KEY (`id`)
             $curPosRoute = '';
             if($leaf==0){
                 if(isset($a['c']) && !empty($a['c'])){
-                    if(isset($pm) && !empty($pm) && !isset($a['pmx']) && $posRoute!=''){
-                        $curPosRoute = $posRoute.'/'.$alias;
+                    if(isset($pm) && !empty($pm)){
+                        if($posRoute!=''){
+                            $curPosRoute = $posRoute.'/'.$alias;
+                        }
+                        if( $curPosRoute==''){
+                            $curPosRoute = 'stjg';
+                        }
                     }
-                    if(isset($pm) && !empty($pm) && !isset($a['pmx']) && $curPosRoute==''){
-                        $curPosRoute = 'stjg';
-                    }
+                    /*echo 'leaf0<br/><br/>';
+                    var_dump($curPosRoute);
+                    echo '<br/><br/>';*/
                     $this->initDir($a['c'],$lastId,$level+1,$type,$pm,$curPosRoute);
                     //$this->initDir($a['c'],$lastId,$level+1,$type,$pm,$yt,$local,$position);
                 }
             }else{
-                if(isset($pm) && !empty($pm) && !isset($a['pmx2']) && $curPosRoute==''){
+                if(isset($pm) && !empty($pm) && $posRoute==''){
                     $curPosRoute = 'stjg';
                 }else{
                     $curPosRoute = $posRoute.'/'.$alias;
                 }
+                /*echo 'leaf1<br/><br/>';
+                var_dump($curPosRoute);
+                echo '<br/><br/>';*/
                 $this->initPm($lastId,$pm,$curPosRoute);
                 //$this->initPm($lastId,$pm,$yt,$local,$position);
             }
@@ -612,11 +607,15 @@ PRIMARY KEY (`id`)
                             }
                         }elseif($type == 'city_zhglb'){
                             if($pmItem2=='all'){
+
+                                $posRoute2 = '';
                                 $posTmp = explode('/',$posRoute);
-                                $posRoute2 = $posTmp[0].'/'.$posTmp[1].'/zhglb';
+                                if(count($posTmp)>=2){
+                                    $posRoute2 = $posTmp[0].'/'.$posTmp[1].'/zhglb';
+                                }
+
                                 $posId = PositionFunc::getIdByAlias($posRoute2);
-                                /*var_dump($posRoute2);echo '<Br/><br/>';
-                                exit;*/
+
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
