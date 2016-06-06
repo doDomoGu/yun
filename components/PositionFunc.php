@@ -431,7 +431,7 @@ class PositionFunc extends Component {
         }
         Position::updateAll(['full_alias'=>$fullAlias],'id = :id',[':id'=>$position_id]);
 
-        echo '<br/><br/>-----------<br/><br/>';
+       // echo '<br/><br/>-----------<br/><br/>';
     }
 
     public static function checkAlias(){
