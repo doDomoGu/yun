@@ -414,11 +414,6 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 throw new yii\base\Exception('Position has installed');
             }
 
-
-
-
-
-
             $this->array2value($this->installArr,0,1);
             return true;
         }catch (\Exception $e)
