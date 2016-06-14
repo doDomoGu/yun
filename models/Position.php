@@ -208,8 +208,6 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 ['n'=>'宝山上坤上街案场','a'=>'bssksjac','c'=>$zw_stdc_ac],
                 ['n'=>'绍兴锦园案场','a'=>'sxjyac','c'=>$zw_stdc_ac],
                 ['n'=>'天津麦谷案场','a'=>'tjmgac','c'=>$zw_stdc_ac],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$zw_stdc_ac],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$zw_stdc_ac]
             ],$zw_stdc_xsywb)]
         ]);
 
@@ -300,55 +298,71 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 ['n'=>'吴江案场','a'=>'wjac','c'=>$zw_shrxsy_ac],
                 ['n'=>'阜阳案场','a'=>'fyac','c'=>$zw_shrxsy_ac],
                 ['n'=>'彩生活案场','a'=>'cshac','c'=>$zw_shrxsy_ac],
-                ['n'=>'项目案场[A]','a'=>'xmac_1','c'=>$zw_shrxsy_ac],
-                ['n'=>'项目案场[B]','a'=>'xmac_2','c'=>$zw_shrxsy_ac],
             ]]
         ];
 
         //职位  汉佑房屋 门店
-        $zw_fw = [
-            ['n'=>'店长','a'=>'xmzj','l'=>true],
-            ['n'=>'店长助理','a'=>'xmjl','l'=>true],
-            ['n'=>'置业顾问','a'=>'xmfjl','l'=>true],
+        $zw_fw_md = [
+            ['n'=>'店长','a'=>'dz','l'=>true],
+            ['n'=>'店长助理','a'=>'dzzl','l'=>true],
+            ['n'=>'置业顾问','a'=>'zygw','l'=>true],
         ];
-        //部门 汉佑房屋 上海
+        //部门 汉佑房屋
         $bm_fw = [
             ['n'=>'总经办','a'=>'zjb','c'=>$zw_zjb],
-            ['n'=>'开发拓展部','a'=>'pptzb','c'=>$zw_1],
-            ['n'=>'门店','a'=>'syzsb','c'=>[
-                ['n'=>'门店一','a'=>'wjac','c'=>$zw_fw],
-                ['n'=>'门店二','a'=>'fyac','c'=>$zw_shrxsy_ac],
+            ['n'=>'开发拓展部','a'=>'kftzb','c'=>$zw_1],
+            ['n'=>'门店','a'=>'md','c'=>[
+                ['n'=>'门店一','a'=>'md_1','c'=>$zw_fw_md],
+                ['n'=>'门店二','a'=>'md_2','c'=>$zw_fw_md],
             ]]
         ];
 
 
-        //职位  汉佑房屋 门店
-        $zw_jj = [
-            ['n'=>'店长','a'=>'xmzj','l'=>true],
-            ['n'=>'店长助理','a'=>'xmjl','l'=>true],
-            ['n'=>'置业顾问','a'=>'xmfjl','l'=>true],
+        //职位  鸿汉经纪 总经办
+        $zw_jj_zjb = [
+            ['n'=>'总经理','a'=>'zjl','l'=>true],
+            ['n'=>'副总经理','a'=>'fzjl','l'=>true],
+            ['n'=>'区域总监','a'=>'qyzj','l'=>true],
+            ['n'=>'总经理助理','a'=>'zjlzl','l'=>true],
+            ['n'=>'专员','a'=>'zy','l'=>true],
         ];
-        //部门 鸿汉经纪
-        $bm_jj = [
-            ['n'=>'总经办','a'=>'zjb','c'=>[
-                ['n'=>'总经理','a'=>'zjl','l'=>true],
-                ['n'=>'店长助理','a'=>'xmjl','l'=>true],
-                ['n'=>'置业顾问','a'=>'xmfjl','l'=>true],
-                ['n'=>'置业顾问','a'=>'xmfjl','l'=>true],
-                ['n'=>'置业顾问','a'=>'xmfjl','l'=>true],
-               /* 1总经理
-        2副总经理
-        3区域总监
-        4总经理助理
-        5专员*/
 
-            ]],
+        //职位 鸿汉经纪 销售业务部
+        $zw_jj_xsywb = [
+            ['n'=>'其他','a'=>'qt','l'=>true],
+        ];
 
-        //项目   最后的 销售代表
-            ['n'=>'门店','a'=>'syzsb','c'=>[
-                ['n'=>'门店一','a'=>'wjac','c'=>$zw_fw],
-                ['n'=>'门店二','a'=>'fyac','c'=>$zw_shrxsy_ac],
-            ]]
+        //职位 鸿汉经纪 销售业务部 项目
+        $zw_jj_xm = [
+            ['n'=>'项目总监','a'=>'xmzj','l'=>true],
+            ['n'=>'项目经理','a'=>'xmjl','l'=>true],
+            ['n'=>'项目主管','a'=>'xmzg','l'=>true],
+            ['n'=>'项目策划','a'=>'xmch','l'=>true],
+            ['n'=>'项目行政','a'=>'xmxz','l'=>true],
+            ['n'=>'销售代表','a'=>'xsdb','l'=>true],
+        ];
+
+        //部门 鸿汉经纪 苏州
+        $bm_jj_sz = [
+            ['n'=>'总经办','a'=>'zjb','c'=>$zw_jj_zjb],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>array_merge([
+                ['n'=>'项目一','a'=>'xm_1','c'=>$zw_jj_xm],
+                ['n'=>'项目二','a'=>'xm_2','c'=>$zw_jj_xm],
+            ],$zw_jj_xsywb)]
+        ];
+
+        //部门 鸿汉经纪 无锡
+        $bm_jj_wx = [
+            ['n'=>'总经办','a'=>'zjb','c'=>$zw_jj_zjb],
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>array_merge([
+                ['n'=>'苏宁天氿项目','a'=>'sntjxm','c'=>$zw_jj_xm],
+                ['n'=>'君悦项目','a'=>'sntjxm','c'=>$zw_jj_xm],
+                ['n'=>'金水名都项目','a'=>'jsmdxm','c'=>$zw_jj_xm],
+                ['n'=>'中交上东湾项目','a'=>'zjsdwxm','c'=>$zw_jj_xm],
+                ['n'=>'赛维拉项目','a'=>'swlxm','c'=>$zw_jj_xm],
+                ['n'=>'国信世家项目','a'=>'gxsjxm','c'=>$zw_jj_xm],
+                ['n'=>'城开国际项目','a'=>'ckgjxm','c'=>$zw_jj_xm],
+            ],$zw_jj_xsywb)]
         ];
 
         $this->installArr = [
@@ -372,15 +386,16 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                     ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                     ['n'=>'颂唐地产','a'=>'stdc','c'=>$bm_dc_sz],
                     ['n'=>'颂唐广告','a'=>'stgg','c'=>$bm_gg_2],
-                    //['n'=>'汉佑房屋','a'=>'hyfw','c'=>$bm_fw],
-                    //['n'=>'鸿汉经纪','a'=>'hyfw','c'=>$bm_jj],
+                    ['n'=>'汉佑房屋','a'=>'hyfw','c'=>$bm_fw],
+                    ['n'=>'鸿汉经纪','a'=>'hyfw','c'=>$bm_jj_sz],
                 ]],
                 ['n'=>'无锡','a'=>'wx','c'=>[
                     ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
                     ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                     ['n'=>'颂唐地产','a'=>'stdc','c'=>$bm_dc_wx],
                     ['n'=>'颂唐广告','a'=>'stgg','c'=>$bm_gg],
-                    //['n'=>'汉佑房屋','a'=>'hyfw','c'=>$bm_fw],
+                    ['n'=>'汉佑房屋','a'=>'hyfw','c'=>$bm_fw],
+                    ['n'=>'鸿汉经纪','a'=>'hyfw','c'=>$bm_jj_wx],
                 ]],
                 ['n'=>'南京','a'=>'nj','c'=>[
                     ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
