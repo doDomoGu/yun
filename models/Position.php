@@ -210,6 +210,12 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 ['n'=>'天津麦谷案场','a'=>'tjmgac','c'=>$zw_stdc_ac],
             ],$zw_stdc_xsywb)]
         ]);
+        $bm_dc_sh_2 = array_merge($bm_stdc,[
+            ['n'=>'销售业务部','a'=>'xsywb','c'=>array_merge([
+                ['n'=>'默认案场一','a'=>'ac_1','c'=>$zw_stdc_ac],
+                ['n'=>'默认案场二','a'=>'ac_2','c'=>$zw_stdc_ac],
+            ],$zw_stdc_xsywb)]
+        ]);
 
         //部门 颂唐地产 无锡
         $bm_dc_wx = array_merge($bm_stdc,[
@@ -377,7 +383,7 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                     ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
                     ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                     ['n'=>'颂唐地产','a'=>'stdc','c'=>$bm_dc_sh],
-                    ['n'=>'颂唐地产(二)','a'=>'stdc','c'=>$bm_dc_sh],
+                    ['n'=>'颂唐地产(二)','a'=>'stdc','c'=>$bm_dc_sh_2],
                     ['n'=>'颂唐广告','a'=>'stgg','c'=>$bm_gg],
                     ['n'=>'日鑫商业','a'=>'rxsy','c'=>$bm_rx_sh]
                 ]],
