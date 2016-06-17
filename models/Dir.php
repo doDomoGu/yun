@@ -253,10 +253,14 @@ PRIMARY KEY (`id`)
             ['n'=>'苏州','a'=>'sz','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
                 ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+                ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
+                ['n'=>'鸿汉经纪','a'=>'hhjj','l'=>true],
             ]],
             ['n'=>'无锡','a'=>'wx','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
                 ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
+                ['n'=>'汉佑房屋','a'=>'hyfw','l'=>true],
+                ['n'=>'鸿汉经纪','a'=>'hhjj','l'=>true],
             ]],
             ['n'=>'南京','a'=>'nj','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
@@ -479,15 +483,15 @@ PRIMARY KEY (`id`)
 
             self::initDirTop($this->arr0);
 
-            $this->initDir($this->arr1,1,2,1);
+            //$this->initDir($this->arr1,1,2,1);
 
             $this->initDir($this->arr2,2,2,2);
 
-            $this->initDir($this->arr3,3,2,3);
+            //$this->initDir($this->arr3,3,2,3);
 
-            $this->initDir($this->arr4,4,2,4);
+            //$this->initDir($this->arr4,4,2,4);
 
-            $this->initDir($this->arr5,5,2,5);
+            //$this->initDir($this->arr5,5,2,5);
             return true;
         }catch (\Exception $e)
         {
@@ -646,6 +650,8 @@ PRIMARY KEY (`id`)
                                 }
                             }
                         }elseif($type == 'city_yt'){
+
+
                             if($pmItem2=='all'){
                                 /*var_dump($dir_id);echo '<Br/><br/>';
                                 var_dump($posRoute);echo '<Br/><br/>';
@@ -655,6 +661,14 @@ PRIMARY KEY (`id`)
                                 //var_dump($posId);echo '<Br/><br/>';
                                 //exit;
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                if($posRoute=='stjg/sh/stdc'){
+                                    $posRoute='stjg/sh/stdc_2';
+                                    $posId2 = PositionFunc::getIdByAlias($posRoute);
+                                    $pArr2 = PositionFunc::getAllLeafChildrenIds($posId2);
+
+                                    $pArr = array_merge($pArr,$pArr2);
+                                }
+
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
                                     foreach($pArr as $p){
@@ -670,6 +684,15 @@ PRIMARY KEY (`id`)
                                 //var_dump($posId);echo '<Br/><br/>';
                                 //exit;
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+
+                                if($posRoute=='stjg/sh/stdc/zjb'){
+                                    $posRoute='stjg/sh/stdc_2/zjb';
+                                    $posId2 = PositionFunc::getIdByAlias($posRoute);
+                                    $pArr2 = PositionFunc::getAllLeafChildrenIds($posId2);
+
+                                    $pArr = array_merge($pArr,$pArr2);
+                                }
+
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
                                     foreach($pArr as $p){

@@ -383,7 +383,12 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                     ['n'=>'综合管理部','a'=>'zhglb','c'=>$zw_zgb],
                     ['n'=>'财务部','a'=>'cwb','c'=>$zw_cwb],
                     ['n'=>'颂唐地产','a'=>'stdc','c'=>$bm_dc_sh],
-                    ['n'=>'颂唐地产(二)','a'=>'stdc','c'=>$bm_dc_sh_2],
+                    ['n'=>'颂唐地产(二)','a'=>'stdc_2','c'=>$bm_dc_sh_2],
+                    /*['n'=>'颂唐地产','a'=>'stdc','c'=>[
+                        ['n'=>'一部','a'=>'yb','c'=>$bm_dc_sh],
+                        ['n'=>'二部','a'=>'eb','c'=>$bm_dc_sh_2]
+                        ]
+                    ],*/
                     ['n'=>'颂唐广告','a'=>'stgg','c'=>$bm_gg],
                     ['n'=>'日鑫商业','a'=>'rxsy','c'=>$bm_rx_sh]
                 ]],
