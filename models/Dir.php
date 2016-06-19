@@ -247,6 +247,7 @@ PRIMARY KEY (`id`)
         $city_yt = [
             ['n'=>'上海','a'=>'sh','c'=>[
                 ['n'=>'颂唐地产','a'=>'stdc','l'=>true],
+                ['n'=>'颂唐地产（二）','a'=>'stdc_2','l'=>true],
                 ['n'=>'颂唐广告','a'=>'stgg','l'=>true],
                 ['n'=>'日鑫商业','a'=>'rxsy','l'=>true],
             ]],
@@ -285,15 +286,17 @@ PRIMARY KEY (`id`)
 
         $this->arr1 = [
             ['n'=>'企宣管控中心','a'=>'qxgkzx','c'=>[
-                ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$city_yt],
-                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
+                ['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'l'=>true],
+                ['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'l'=>true],
+                //['n'=>'公司简介','a'=>'gsjj','pm'=>[12=>'all'],'c'=>$city_yt],
+                //['n'=>'VI应用标准模板','a'=>'vi','pm'=>[12=>'all'],'c'=>$city_yt]
             ]],
             ['n'=>'行政管控中心','a'=>'xzgkzx','c'=>[
-                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
-                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
-                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
-                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'c'=>$city_yt],
-                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all']],'c'=>$city_yt],
+                ['n'=>'公告通知','a'=>'ggtz','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all','city_zhglb'=>'all']],'c'=>$city_yt],
+                ['n'=>'行政管理制度','a'=>'xzglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all','city_zhglb'=>'all']],'c'=>$city_yt],
+                ['n'=>'人事管理制度','a'=>'rsglzd','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all','city_zhglb'=>'all']],'c'=>$city_yt],
+                ['n'=>'管理表单范本','a'=>'glbdfb','pm'=>[12=>'all'],'l'=>true],
+                ['n'=>'制度培训模板','a'=>'zdpxmb','pm'=>[11=>['city_zhglb'=>'all'],12=>['city_yt'=>'all','city_zhglb'=>'all']],'c'=>$city_yt],
             ]],
             ['n'=>'财务管控中心','a'=>'cwgkzx','c'=>[
                 ['n'=>'财务管理制度','a'=>'cwglzd','pm'=>[12=>['city_cwb'=>'all','city_yt'=>'zjb']],'c'=>$city_yt],
@@ -661,13 +664,13 @@ PRIMARY KEY (`id`)
                                 //var_dump($posId);echo '<Br/><br/>';
                                 //exit;
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
-                                if($posRoute=='stjg/sh/stdc'){
+                                /*if($posRoute=='stjg/sh/stdc'){
                                     $posRoute='stjg/sh/stdc_2';
                                     $posId2 = PositionFunc::getIdByAlias($posRoute);
                                     $pArr2 = PositionFunc::getAllLeafChildrenIds($posId2);
 
                                     $pArr = array_merge($pArr,$pArr2);
-                                }
+                                }*/
 
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
@@ -685,13 +688,13 @@ PRIMARY KEY (`id`)
                                 //exit;
                                 $pArr = PositionFunc::getAllLeafChildrenIds($posId);
 
-                                if($posRoute=='stjg/sh/stdc/zjb'){
+                                /*if($posRoute=='stjg/sh/stdc/zjb'){
                                     $posRoute='stjg/sh/stdc_2/zjb';
                                     $posId2 = PositionFunc::getIdByAlias($posRoute);
                                     $pArr2 = PositionFunc::getAllLeafChildrenIds($posId2);
 
                                     $pArr = array_merge($pArr,$pArr2);
-                                }
+                                }*/
 
                                 if(!empty($pArr)){
                                     $sqlValueArr = [];
