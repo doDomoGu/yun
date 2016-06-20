@@ -67,8 +67,9 @@ echo '<br/>===========================<br/><br/>';
             $p = new Position();
             $p->install2();
             PositionFunc::handleIsLastAndIsLeaf();
+
+            PositionFunc::updateAllFullAlias();
             exit;
-            //PositionFunc::updateAllFullAlias();
             Yii::$app->response->redirect('position')->send();
             exit;
         }

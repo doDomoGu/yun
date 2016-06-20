@@ -290,10 +290,10 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
         $zw_shrxsy_ac = [
             ['n'=>'项目总监','a'=>'xmzj','l'=>true],
             ['n'=>'项目经理','a'=>'xmjl','l'=>true],
-            ['n'=>'项目主管','a'=>'xmfjl','l'=>true],
-            ['n'=>'项目策划','a'=>'ch','l'=>true],
+            ['n'=>'项目主管','a'=>'xmzg','l'=>true],
+            ['n'=>'项目策划','a'=>'xmch','l'=>true],
             ['n'=>'项目行政','a'=>'acxz','l'=>true],
-            ['n'=>'招商代表','a'=>'sxs','l'=>true]
+            ['n'=>'招商代表','a'=>'zsdb','l'=>true]
         ];
         //部门 日鑫商业 上海
         $bm_rx_sh = [

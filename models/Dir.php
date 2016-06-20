@@ -339,8 +339,10 @@ PRIMARY KEY (`id`)
                                 [
                                     'stdc/zjb',
                                     'stdc/kftzb/zj',
-                                    'stdc/kftzb/fzj',
-                                    'stdc/kftzb/jl'
+                                    'stdc/kftzb/jl',
+                                    'stdc_2/zjb',
+                                    'stdc_2/kftzb/zj',
+                                    'stdc_2/kftzb/jl'
                                 ]
                             ]
                         ]
@@ -351,50 +353,53 @@ PRIMARY KEY (`id`)
                                 [
                                     'stdc/zjb',
                                     'stdc/kftzb/zj',
-                                    'stdc/kftzb/fzj',
-                                    'stdc/kftzb/jl'
+                                    'stdc/kftzb/jl',
+                                    'stdc_2/zjb',
+                                    'stdc_2/kftzb/zj',
+                                    'stdc_2/kftzb/jl'
                                 ]
                             ]
                         ]
                         ,'l'=>true],
                     ['n'=>'工作文件档案','a'=>'gzwjda','pm'=>[
-                        11=>['city'=>['stdc/zjb','stdc/kftzb']],
-                    ],'l'=>true],
+                        //11=>['city'=>['stdc/zjb','stdc/kftzb','stdc_2/zjb','stdc_2/kftzb']],
+                        //12=>['city_child'=>['stdc/zjb','stdc/kftzb','stdc_2/zjb','stdc_2/kftzb']],
+                    ],'c'=>$city],
                 ]],
                 ['n'=>'市场策划部工具箱','a'=>'scchbgjx','c'=>[
                     ['n'=>'工作流程规范','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','stdc/scchb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['stdc/zjb','stdc/scchb','stdc_2/zjb','stdc_2/scchb']]
                     ],'a'=>'gzlcgf','l'=>true],
                     ['n'=>'工作报告模板','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','stdc/scchb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['stdc/zjb','stdc/scchb','stdc_2/zjb','stdc_2/scchb']]
                     ],'a'=>'gzbgmb','l'=>true],
                     ['n'=>'工作表单范本','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','stdc/scchb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['stdc/zjb','stdc/scchb','stdc_2/zjb','stdc_2/scchb']]
                     ],'a'=>'gzbdfb','l'=>true],
                     ['n'=>'产品定位资源库','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','stdc/scchb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['stdc/zjb','stdc/scchb','stdc_2/zjb','stdc_2/scchb']]
                     ],'a'=>'cpdwzyk','l'=>true],
                     ['n'=>'工作报告档案库','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','stdc/scchb','stdc/kftzb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['stdc/zjb','stdc/scchb','stdc/kftzb','stdc_2/zjb','stdc_2/scchb','stdc_2/kftzb']]
                     ],'a'=>'gzbgdak','l'=>true]
                 ]],
                 ['n'=>'销售业务部工具箱','a'=>'xsywbgjx','c'=>[
                     ['n'=>'工作流程规范','pm'=>[
-                        12=>['city'=>['stdc/zjb']]
+                        12=>['city'=>['stdc/zjb','stdc_2/zjb'],'stdc_xsywb'=>['xmzj','xmjl','xmzg']]
                     ],'a'=>'gzlcgf','l'=>true],
                     ['n'=>'工作报告范本','pm'=>[
-                        12=>['city'=>['stdc/zjb']]
+                        12=>['city'=>['stdc/zjb','stdc_2/zjb'],'stdc_xsywb'=>['xmzj','xmjl','xmzg']]
                     ],'a'=>'gzbgfb','l'=>true],
                     ['n'=>'工作表单范本','pm'=>[
-                        12=>['city'=>['stdc/zjb']]
+                        12=>['city'=>['stdc/zjb','stdc_2/zjb'],'stdc_xsywb'=>['xmzj','xmjl','xmzg']]
                     ],'a'=>'gzbdfb','l'=>true],
                     ['n'=>'活动方案资源库','pm'=>[
-                        12=>['city'=>['stdc/zjb']]
+                        12=>['city'=>['stdc/zjb','stdc_2/zjb','stdc/scchb','stdc_2/scchb'],'stdc_xsywb'=>['xmzj','xmjl','xmzg']]
                     ],'a'=>'hdfazyk','l'=>true]
                 ]]
             ]],
@@ -415,27 +420,27 @@ PRIMARY KEY (`id`)
                 ['n'=>'商业策划部工具箱','a'=>'sychbgjx','c'=>[
                     ['n'=>'工作流程规范','a'=>'gzlcgf','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['rxsy/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'工作报告模板','a'=>'gzbgmb','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['rxsy/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'工作表单范本','a'=>'gzbdfb','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['rxsy/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'商业定位资源库','a'=>'sydwzyk','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','rxsy/sychb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['rxsy/zjb','rxsy/sychb']]
                     ],'l'=>true],
                     ['n'=>'工作报告档案库','a'=>'gzbgdak','pm'=>[
                         11=>['single'=>'stjg/scclzx/zj'],
-                        12=>['city'=>['stdc/zjb','rxsy/sychb','rxsy/pptzb']]
+                        12=>['single'=>'stjg/scclzx/zj','city'=>['rxsy/zjb','rxsy/sychb','rxsy/pptzb']]
                     ],'l'=>true]
                 ]],
                 ['n'=>'商业招商部工具箱','a'=>'syzsbgjx','pm'=>[
-                    12=>['city'=>['stdc/zjb','rxsy/syzsb/zjl','rxsy/syzsb/fzjl','rxsy/syzsb/zj']]
+                    12=>['city'=>['rxsy/zjb'],'rxsy_syzsb'=>['xmzj','xmjl','xmzg']]
                     ],'c'=>[
                         ['n'=>'工作流程规范','a'=>'gzlcgf','l'=>true],
                         ['n'=>'工作文件模板','a'=>'gzwjmb','l'=>true],
@@ -443,13 +448,13 @@ PRIMARY KEY (`id`)
                     ]
                 ]
             ]],
-            ['n'=>'迈华建筑','a'=>'mhjz','c'=>[]],
+            /*['n'=>'迈华建筑','a'=>'mhjz','c'=>[]],
             ['n'=>'汉佑房屋','a'=>'hyfw','c'=>[]],
             ['n'=>'鸿汉经纪','a'=>'hhjj','c'=>[]],
             ['n'=>'明致置业','a'=>'mzzy','c'=>[]],
             ['n'=>'尚晋公关','a'=>'sjgg','c'=>[]],
             ['n'=>'元素互动','a'=>'yshd','c'=>[]],
-            ['n'=>'周道物业','a'=>'zdwy','c'=>[]]
+            ['n'=>'周道物业','a'=>'zdwy','c'=>[]]*/
         ];
 
 
@@ -464,9 +469,9 @@ PRIMARY KEY (`id`)
                 ['n'=>'日鑫商业','a'=>'rxsy','pm'=>[
                     12=>'all'
                 ],'c'=>$xiangmu],
-                ['n'=>'明致置业','a'=>'mzzy','pm'=>[
+                /*['n'=>'明致置业','a'=>'mzzy','pm'=>[
                     12=>'all'
-                ],'c'=>$xiangmu],
+                ],'c'=>$xiangmu],*/
             ]],
             ['n'=>'历史项目资料中心','a'=>'lsxmzlzx','pm'=>[12=>'all'],'c'=>$xiangmu]
         ];
@@ -486,15 +491,15 @@ PRIMARY KEY (`id`)
 
             self::initDirTop($this->arr0);
 
-            //$this->initDir($this->arr1,1,2,1);
+            $this->initDir($this->arr1,1,2,1);
 
             $this->initDir($this->arr2,2,2,2);
 
-            //$this->initDir($this->arr3,3,2,3);
+            $this->initDir($this->arr3,3,2,3);
 
-            //$this->initDir($this->arr4,4,2,4);
+            $this->initDir($this->arr4,4,2,4);
 
-            //$this->initDir($this->arr5,5,2,5);
+            $this->initDir($this->arr5,5,2,5);
             return true;
         }catch (\Exception $e)
         {
@@ -652,6 +657,72 @@ PRIMARY KEY (`id`)
                                     $cmd->execute();
                                 }
                             }
+                        }elseif($type == 'stdc_xsywb'){
+                            $pArr =[];
+
+                            foreach($this->city as $cityAlias){
+                                $posRoute2 = 'stjg/'.$cityAlias.'/stdc/xsywb';
+                                $posId = PositionFunc::getIdByAlias($posRoute2);
+                                if($posId!=false){
+                                    $anchangList = Position::find()->where(['p_id'=>$posId,'is_leaf'=>0])->all();
+                                    foreach($anchangList as $ac){
+                                        foreach($pmItem2 as $pi2){
+                                            $posRoute3 = $posRoute2.'/'.$ac->alias.'/'.$pi2;
+                                            $posId3 = PositionFunc::getIdByAlias($posRoute3);
+                                            if($posId3)
+                                                $pArr[] = $posId3;
+                                        }
+                                    }
+                                }
+                                $posRoute2 = 'stjg/'.$cityAlias.'/stdc_2/xsywb';
+                                $posId = PositionFunc::getIdByAlias($posRoute2);
+                                if($posId!=false){
+                                    $anchangList = Position::find()->where(['p_id'=>$posId,'is_leaf'=>0])->all();
+                                    foreach($anchangList as $ac){
+                                        foreach($pmItem2 as $pi2){
+                                            $posRoute3 = $posRoute2.'/'.$ac->alias.'/'.$pi2;
+                                            $posId3 = PositionFunc::getIdByAlias($posRoute3);
+                                            if($posId3)
+                                                $pArr[] = $posId3;
+                                        }
+                                    }
+                                }
+                            }
+                            if(!empty($pArr)){
+                                $sqlValueArr = [];
+                                foreach($pArr as $p){
+                                    $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                }
+                                $sql = $sqlBase . implode(',',$sqlValueArr);
+                                $cmd = Yii::$app->db->createCommand($sql);
+                                $cmd->execute();
+                            }
+                        }elseif($type == 'rxsy_syzsb'){
+                            $pArr =[];
+                            foreach($this->city as $cityAlias){
+                                $posRoute2 = 'stjg/'.$cityAlias.'/rxsy/syzsb';
+                                $posId = PositionFunc::getIdByAlias($posRoute2);
+                                if($posId!=false){
+                                    $anchangList = Position::find()->where(['p_id'=>$posId,'is_leaf'=>0])->all();
+                                    foreach($anchangList as $ac){
+                                        foreach($pmItem2 as $pi2){
+                                            $posRoute3 = $posRoute2.'/'.$ac->alias.'/'.$pi2;
+                                            $posId3 = PositionFunc::getIdByAlias($posRoute3);
+                                            if($posId3)
+                                                $pArr[] = $posId3;
+                                        }
+                                    }
+                                }
+                            }
+                            if(!empty($pArr)){
+                                $sqlValueArr = [];
+                                foreach($pArr as $p){
+                                    $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                }
+                                $sql = $sqlBase . implode(',',$sqlValueArr);
+                                $cmd = Yii::$app->db->createCommand($sql);
+                                $cmd->execute();
+                            }
                         }elseif($type == 'city_yt'){
 
 
@@ -747,11 +818,12 @@ PRIMARY KEY (`id`)
                         }elseif($type == 'city'){
                             if(is_array($pmItem2) && !empty($pmItem2)){
                                 foreach($pmItem2 as $pi2){
-                                    if(in_array($pi2 ,
+                                    /*if(in_array($pi2 ,
                                         ['stdc/zjb','stgg/zjb','rxsy/zjb','stdc/scchb','stdc/kftzb/zj','stdc/kftzb/fzj','stdc/kftzb/jl','stdc/kftzb','stgg','rxsy/sychb','rxsy/pptzb','rxsy/syzsb/zjl','rxsy/syzsb/fzjl','rxsy/syzsb/zj']
-                                    )){
+                                    )){*/
                                         foreach($this->city as $cityAlias){
-                                            $posRoute2 = $posRoute.'/'.$cityAlias.'/'.$pi2;
+                                            //$posRoute2 = $posRoute.'/'.$cityAlias.'/'.$pi2;
+                                            $posRoute2 = 'stjg/'.$cityAlias.'/'.$pi2;
                                             //var_dump($posRoute2);echo '<Br/><br/>';exit;
                                             $posId = PositionFunc::getIdByAlias($posRoute2);
                                             //var_dump($posId);echo '<Br/><br/>';
@@ -767,7 +839,7 @@ PRIMARY KEY (`id`)
                                                 $cmd->execute();
                                             }
                                         }
-                                    }
+                                    /*}*/
                                 }
                             }elseif(in_array($pmItem2 , ['stdc/zjb','stgg/zjb','rxsy/zjb'])){
                                 foreach($this->city as $cityAlias){
@@ -786,6 +858,32 @@ PRIMARY KEY (`id`)
                                         $cmd = Yii::$app->db->createCommand($sql);
                                         $cmd->execute();
                                     }
+                                }
+                            }
+                        }elseif($type == 'city_child'){
+                            /*var_dump($posRoute);echo '<br/>===<br/>';
+                            var_dump($pmItem2);exit;*/
+                            if(is_array($pmItem2) && !empty($pmItem2)){
+                                foreach($pmItem2 as $pi2){
+                                    /*if(in_array($pi2 ,
+                                        ['stdc/zjb','stgg/zjb','rxsy/zjb','stdc/scchb','stdc/kftzb/zj','stdc/kftzb/fzj','stdc/kftzb/jl','stdc/kftzb','stgg','rxsy/sychb','rxsy/pptzb','rxsy/syzsb/zjl','rxsy/syzsb/fzjl','rxsy/syzsb/zj']
+                                    )){*/
+                                        $posRoute2 = $posRoute.'/'.$pi2;
+                                        //var_dump($posRoute2);echo '<Br/><br/>';exit;
+                                        $posId = PositionFunc::getIdByAlias($posRoute2);
+                                        //var_dump($posId);echo '<Br/><br/>';
+                                        //exit;
+                                        $pArr = PositionFunc::getAllLeafChildrenIds($posId);
+                                        if(!empty($pArr)){
+                                            $sqlValueArr = [];
+                                            foreach($pArr as $p){
+                                                $sqlValueArr[] = '("'.$p.'","'.$dir_id.'","'.$k.'")';
+                                            }
+                                            $sql = $sqlBase . implode(',',$sqlValueArr);
+                                            $cmd = Yii::$app->db->createCommand($sql);
+                                            $cmd->execute();
+                                    }
+                                    /*}*/
                                 }
                             }
                         }
