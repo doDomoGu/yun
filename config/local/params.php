@@ -7,5 +7,5 @@ return [
     'qiniu-domain' => 'http://7xoavb.com1.z0.glb.clouddn.com/',
     'qiniu-domain-beaut' => 'http://7xoavb.com1.z0.glb.clouddn.com/',
 
-    //'mailFrom' => '71936410@qq.com'
+    'mailFrom' => '71936410@qq.com'
 ];

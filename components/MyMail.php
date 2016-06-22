@@ -11,13 +11,13 @@ class MyMail extends Component {
     public $htmlBody;
 
     public function __construct(){
-        //$this->from = yii::$app->params['mailFrom'];
+        $this->from = yii::$app->params['mailFrom'];
     }
 
     public function send(){
         $sendResult = false;
         $mail = Yii::$app->mailer->compose();
-        //$mail->setFrom($this->from);
+        $mail->setFrom($this->from);
         $mail->setTo($this->to);
         $mail->setSubject($this->subject);
         //$mail->setTextBody('zheshisha ');   //发布纯文字文本
