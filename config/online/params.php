@@ -7,5 +7,5 @@ return [
     'qiniu-domain' => 'http://7xnt87.com1.z0.glb.clouddn.com/',
     'qiniu-domain-beaut' => 'http://source.songtang.net/',
 
-    'mailFrom' => 'yun@songtang.net'
+    //'mailFrom' => 'yun@songtang.net'
 ];

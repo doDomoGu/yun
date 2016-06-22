@@ -18,4 +18,8 @@ return [
         'port' => '25',
         'encryption' => 'ssl'*/
     ],
+    'messageConfig'=>[
+        'charset'=>'UTF-8',
+        'from'=>['71936410@qq.com'=>'songtangyun']
+    ],
 ];

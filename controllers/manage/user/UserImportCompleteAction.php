@@ -46,7 +46,10 @@ class UserImportCompleteAction extends Action{
                             $mail = new MyMail();
                             $mail->to = $user->username;
                             $mail->subject = '【颂唐云】新职员注册成功';
-                            $mail->htmlBody = '职员['.$user->name.'],您好：<br/>颂唐云网址为：http://yun.songtang.net 您的登录用户名为 '.$user->username.' 密码为 '.$password;
+                            $mail->htmlBody = '职员['.$user->name.'],您好：<br/>';
+                            $mail->htmlBody .= '&nbsp;&nbsp;&nbsp;&nbsp;颂唐云网址为：http://yun.songtang.net<br/>';
+                            $mail->htmlBody .= '&nbsp;&nbsp;&nbsp;&nbsp;您的登录用户名为 '.$user->username.'<br/>';
+                            $mail->htmlBody .= '&nbsp;&nbsp;&nbsp;&nbsp;密码为 '.$password;
                             $mail->send();
                         }
                         $list[] = $user;
