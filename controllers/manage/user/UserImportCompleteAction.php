@@ -13,7 +13,7 @@ use Yii;
 use app\components\MyMail;
 
 class UserImportCompleteAction extends Action{
-    public $sendMail = false;
+    public $sendMail = true;
     public function run(){
         if(!empty($_POST)){
             $post = true;

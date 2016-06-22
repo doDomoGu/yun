@@ -9,7 +9,7 @@ use app\models\UserForm;
 use app\models\User;
 
 class UserAddAndEditAction extends Action{
-    public $sendMail = false;
+    public $sendMail = true;
     public function run(){
         $model = new UserForm();
         $user = null;
