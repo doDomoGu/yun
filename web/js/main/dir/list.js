@@ -173,20 +173,25 @@ $('#createDirModalContent2 button.btn').click(function(){
     }
 });
 
-
+var _dir_id = $('#dir_id').val();
+var _p_id = $('#p_id').val();
+var _dir_route = $('#dir_route').val();
 var qiniuDomain = $('#qiniuDomain').val();
 var pickfileId = $('#pickfileId').val();
 var fileurlId = $('#fileurlId').val();
 var uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',    //上传模式,依次退化
     browse_button: pickfileId,       //上传选择的点选按钮，**必需**
-    uptoken_url: '/dir/get-uptoken',
+    //uptoken_url: '/dir/get-uptoken',
+    uptoken_url: '/dir/get-uptoken?saveKey=file:'+_dir_route+'$(fname)',
     //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
     // uptoken : '<Your upload token>',
     //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
-    unique_names: true,
+    unique_names: false,
+    //unique_names: true,
     // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
-    // save_key: true,
+    save_key: false,
+    //save_key: true,
     // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
     domain: qiniuDomain,
     //bucket 域名，下载资源时用到，**必需**
@@ -227,12 +232,14 @@ var uploader = Qiniu.uploader({
             $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...&nbsp;&nbsp;'+file.loaded+'/'+file.size+'</span>');
         },
         'FileUploaded': function(up, file, info) {
-            var res = $.parseJSON(info);
-            /*alert(res.key);
-             alert(info);*/
-            $('#'+fileurlId+'').val(res.key);
+            /*var res = $.parseJSON(info);
+            console.log(info);
+            console.log(res.key);*/
+
+
+            ////$('#'+fileurlId+'').val(res.key);
             //$('#'+fileurlId+'_preview').attr('src','').attr('src',qiniu_domain+res.key);
-            $('#'+fileurlId+'_upload_txt').html('<span style="color:green;">上传成功</span>');
+            ////$('#'+fileurlId+'_upload_txt').html('<span style="color:green;">上传成功</span>');
             // 每个文件上传成功后,处理相关的事情
             // 其中 info 是文件上传成功后，服务端返回的json，形式如
             // {
@@ -246,11 +253,11 @@ var uploader = Qiniu.uploader({
             //$('#save-submit').click();
 
 //console.log(res);
-            _dir_id = $('#dir_id').val();
-            _p_id = $('#p_id').val();
+            /*
             $.ajax({
                 url: '/dir/save',
                 type: 'post',
+                async: false,
                 data: {
                     dir_id:_dir_id,
                     filename_real:res.key,
@@ -261,18 +268,21 @@ var uploader = Qiniu.uploader({
                 },
                 dataType:'json',
                 success: function (data) {
+                    //console.log(res.key);
                     if(data.result){
-                        if(_dir_id>0){
-                            location.href='/dir?dir_id='+_dir_id;
-                        }
                         if(_p_id>0){
-                            location.href='/dir?p_id='+_p_id;
-                        }
+                            //console.log('/dir?p_id='+_p_id);
+                            //location.href='/dir?p_id='+_p_id;
+                        }else if(_dir_id>0){
+                         //console.log('/dir?dir_id='+_dir_id);
+
+                         //location.href='/dir?dir_id='+_dir_id;
+                         }
                     }else{
                         $('#'+fileurlId+'_upload_txt').html('<span style="color:red;">没有上传权限</span>');
                     }
                 }
-            });
+            });*/
 
 
         },
@@ -283,20 +293,24 @@ var uploader = Qiniu.uploader({
              console.log(err);
              console.log(errTip);*/
         },
-        'UploadComplete': function() {
+        'UploadComplete': function(up, files) {
+
+            /*plupload.each(files, function(file) {
+
+                console.log(file);
+            });*/
+
+
             //队列文件处理完毕后,处理相关的事情
         },
-        'Key': function(up, file) {
-            // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-            // 该配置必须要在 unique_names: false , save_key: false 时才生效
-            //var key = "";
-            // do something with key here
-            //return key
+        'Key': function(up, files) {
+
         }
     }
 });
 
 
+/*
 var pickfileId2 = $('#pickfileId2').val();
 var fileurlId2 = $('#fileurlId2').val();
 
@@ -342,8 +356,10 @@ var uploader2 = Qiniu.uploader({
         },
         'FileUploaded': function(up, file, info) {
             var res = $.parseJSON(info);
-            /*alert(res.key);
-             alert(info);*/
+            */
+/*alert(res.key);
+             alert(info);*//*
+
             $('#'+fileurlId2+'').val(res.key);
             //$('#'+fileurlId+'_preview').attr('src','').attr('src',qiniu_domain+res.key);
             $('#'+fileurlId2+'_upload_txt').html('<span style="color:green;">上传成功</span>');
@@ -393,9 +409,11 @@ var uploader2 = Qiniu.uploader({
         'Error': function(up, err, errTip) {
             //上传出错时,处理相关的事情
             $('#'+fileurlId2+'_upload_txt').html('<span style="color:red">上传出错</span>');
-            /*console.log(up);
+            */
+/*console.log(up);
              console.log(err);
-             console.log(errTip);*/
+             console.log(errTip);*//*
+
         },
         'UploadComplete': function() {
             //队列文件处理完毕后,处理相关的事情
@@ -408,4 +426,4 @@ var uploader2 = Qiniu.uploader({
             //return key
         }
     }
-});
+});*/

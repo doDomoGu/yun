@@ -78,14 +78,17 @@ class DirController extends BaseController
 
         if($curDir){
             $this->dir_id = $dir_id;
-            //面包屑
+            $dirRoute = '';
+            //面包屑 & 文件路径
             $parents = DirFunc::getParents($dir_id);
             foreach($parents as $parent){
                 $this->view->params['breadcrumbs'][] = ['label'=>$parent->name,'url'=>['/dir','dir_id'=>$parent->id]];
+                $dirRoute .= $parent->name.'/';
             }
             $parents2 = FileFrontFunc::getParents($p_id);
             foreach($parents2 as $parent){
                 $this->view->params['breadcrumbs'][] = ['label'=>$parent->filename,'url'=>['/dir','p_id'=>$parent->id]];
+                $dirRoute .= $parent->filename.'/';
             }
             if($parDir)
                 $this->view->title = $parDir->filename.$this->titleSuffix;
@@ -223,6 +226,7 @@ class DirController extends BaseController
                 $params['listType'] = $listType;
                 $params['listTypeNum'] = $listTypeNum;
                 $params['listTypeDropdown'] = $listTypeDropdown;
+
             }else{
                 $list = DirFunc::getChildren($dir_id);
                 $viewName = 'index';
@@ -230,6 +234,7 @@ class DirController extends BaseController
             $params['list'] = $list;
             $params['dir_id'] = $dir_id;
             $params['p_id'] = $p_id;
+            $params['dirRoute'] = $dirRoute;
             $this->view->params['dir_id'] = $dir_id;
             $params['route'] = $viewName;
             $params['count'] = $count;

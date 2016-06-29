@@ -28,13 +28,13 @@
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
         <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])?>
     <?php endif;?>
-    <?php if(PermissionFunc::isAllowUploadPerson($dir_id)):?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton2','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])?>
-        <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirPersonModal"])?>
-    <?php else:?>
-        <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])*/?><!--
-        --><?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])*/?>
-    <?php endif;?>
+    <?php /*if(PermissionFunc::isAllowUploadPerson($dir_id)):*/?><!--
+        <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton2','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])*/?>
+        <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirPersonModal"])*/?>
+    --><?php /*else:*/?>
+        <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])*/?>
+        <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])*/?>
+    <?php /*endif;*/?>
     </div>
     <div id="right_btns">排序：<?=Html::dropDownList('order_select',$orderNum,$orderDropdown,['id'=>'order_select'])?>
         <?php foreach($links as $link_key => $li):?>
@@ -176,12 +176,14 @@
 
 
 <?=$this->render('modal/upload_common')?>
-<?=$this->render('modal/upload_person')?>
+<?/*=$this->render('modal/upload_person')*/?>
 <?=$this->render('modal/create_dir_common')?>
-<?=$this->render('modal/create_dir_person')?>
+<?/*=$this->render('modal/create_dir_person')*/?>
 
 <?=$this->render('modal/preview')?>
 
 <input type="hidden" id="dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="p_id" value="<?=$p_id?>">
+<input type="hidden" id="dir_route" value="<?=$dirRoute?>">
+
 <?/*=Html::a('提交',['/dir/save'],['id'=>'save-submit','data-method'=>'post'])*/?>
