@@ -172,7 +172,7 @@ $('#createDirModalContent2 button.btn').click(function(){
         $('#createDirModalContent2 .create-dir-error').html('<span style="color:red;">文件夹名不能为空！</span>');
     }
 });
-
+var progress_html = '';
 var _dir_id = $('#dir_id').val();
 var _p_id = $('#p_id').val();
 var _dir_route = $('#dir_route').val();
@@ -205,16 +205,21 @@ var uploader = Qiniu.uploader({
     auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
     init: {
         'FilesAdded': function(up, files) {
-
+            // 文件添加进队列后,处理相关的事情
             plupload.each(files, function(file) {
-                // 文件添加进队列后,处理相关的事情
-                _file = file;
-                /*console.log('11111');
-                console.log(up);
-                console.log(file);*/
+                progress_html = '<div class="progress-item">'+
+                    '<div class="progress-title">'+
+                    file.name+
+                    '</div>'+
+                    '<div class="progress-striped active progress" id="upload-progress-'+file.id+'">'+
+                        '<div style="width:0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar">上传中<span class="sr-only">0% Complete</span></div>'+
+                    '</div>'+
+                    '</div>';
+                $('#upload_progress').append(progress_html);
+
             });
-            $('#upload-progress-1').show();
-            $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');
+            /*$('#upload-progress-1').show();
+            $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');*/
 
         },
         'BeforeUpload': function(up, file) {
@@ -222,18 +227,19 @@ var uploader = Qiniu.uploader({
 
         },
         'UploadProgress': function(up, file) {
+
             // 每个文件上传时,处理相关的事情
-            //console.log('22222');
-            //console.log(up);
-            //console.log(file);
-            $('#upload-progress-1 .progress-bar').css('width',file.percent+'%');
-            $('#upload-progress-1 .progress-bar').html(file.percent+'% <span class="sr-only"></span>');
+                $('#upload-progress-'+file.id+' .progress-bar').css('width',file.percent+'%');
+                $('#upload-progress-'+file.id+' .progress-bar').html(file.percent+'% <span class="sr-only"></span>');
+                $('#upload-progress-'+file.id+' .progress-bar .sr-only').html(file.percent+'%');
+            //$('#upload-progress-1 .progress-bar').css('width',file.percent+'%');
+            //$('#upload-progress-1 .progress-bar').html(file.percent+'% <span class="sr-only"></span>');
             //$('#upload-progress-1 .progress-bar .sr-only').html(file.percent+'%');
-            $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...&nbsp;&nbsp;'+file.loaded+'/'+file.size+'</span>');
+            //$('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...&nbsp;&nbsp;'+file.loaded+'/'+file.size+'</span>');
         },
         'FileUploaded': function(up, file, info) {
-            /*var res = $.parseJSON(info);
-            console.log(info);
+            var res = $.parseJSON(info);
+            /*console.log(info);
             console.log(res.key);*/
 
 
@@ -253,7 +259,6 @@ var uploader = Qiniu.uploader({
             //$('#save-submit').click();
 
 //console.log(res);
-            /*
             $.ajax({
                 url: '/dir/save',
                 type: 'post',
@@ -261,8 +266,8 @@ var uploader = Qiniu.uploader({
                 data: {
                     dir_id:_dir_id,
                     filename_real:res.key,
-                    filename:_file.name,
-                    filesize:_file.size,
+                    filename:file.name,
+                    filesize:file.size,
                     flag:1,
                     p_id:_p_id
                 },
@@ -282,13 +287,13 @@ var uploader = Qiniu.uploader({
                         $('#'+fileurlId+'_upload_txt').html('<span style="color:red;">没有上传权限</span>');
                     }
                 }
-            });*/
+            });
 
 
         },
         'Error': function(up, err, errTip) {
             //上传出错时,处理相关的事情
-            $('#'+fileurlId+'_upload_txt').html('<span style="color:red">上传出错</span>');
+            //$('#'+fileurlId+'_upload_txt').html('<span style="color:red">上传出错</span>');
             /*console.log(up);
              console.log(err);
              console.log(errTip);*/
@@ -299,6 +304,15 @@ var uploader = Qiniu.uploader({
 
                 console.log(file);
             });*/
+
+            if(_p_id>0){
+                //console.log('/dir?p_id='+_p_id);
+                location.href='/dir?p_id='+_p_id;
+            }else if(_dir_id>0){
+                //console.log('/dir?dir_id='+_dir_id);
+
+                location.href='/dir?dir_id='+_dir_id;
+            }
 
 
             //队列文件处理完毕后,处理相关的事情
