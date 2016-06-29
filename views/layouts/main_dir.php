@@ -40,7 +40,7 @@ use app\assets\AppAsset;
     </div>
     <div class="clearfix"></div>
 </div>
-<?=$this->render('footer')?>
+<?/*=$this->render('footer')*/?>
 <?php $this->endBody(); /* body结束标志位 */ ?>
 </body>
 </html>
