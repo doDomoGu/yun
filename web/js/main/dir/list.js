@@ -304,15 +304,17 @@ var uploader = Qiniu.uploader({
 
                 console.log(file);
             });*/
+setTimeout(function(){
+    if(_p_id>0){
+        //console.log('/dir?p_id='+_p_id);
+        location.href='/dir?p_id='+_p_id;
+    }else if(_dir_id>0){
+        //console.log('/dir?dir_id='+_dir_id);
 
-            if(_p_id>0){
-                //console.log('/dir?p_id='+_p_id);
-                location.href='/dir?p_id='+_p_id;
-            }else if(_dir_id>0){
-                //console.log('/dir?dir_id='+_dir_id);
+        location.href='/dir?dir_id='+_dir_id;
+    }
+},1000);
 
-                location.href='/dir?dir_id='+_dir_id;
-            }
 
 
             //队列文件处理完毕后,处理相关的事情
