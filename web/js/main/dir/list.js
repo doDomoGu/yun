@@ -182,8 +182,9 @@ var fileurlId = $('#fileurlId').val();
 var uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',    //上传模式,依次退化
     browse_button: pickfileId,       //上传选择的点选按钮，**必需**
-    //uptoken_url: '/dir/get-uptoken',
-    uptoken_url: '/dir/get-uptoken?saveKey=file:'+_dir_route+'$(fname)',
+    uptoken_url: '/dir/get-uptoken',
+    //uptoken_url: '/dir/get-uptoken?saveKey=file:'+_dir_route+'$(year)$(mon)$(day)$(hour)$(min)$(sec)$(ext)',
+    //uptoken_url: '/dir/get-uptoken?saveKey=file:'+_dir_route+'$(key)$(ext)',
     //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
     // uptoken : '<Your upload token>',
     //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
@@ -218,8 +219,8 @@ var uploader = Qiniu.uploader({
                 $('#upload_progress').append(progress_html);
 
             });
-            $('#upload_progress').append('<div>上传的文件中，有文件名已存在，取消上传</div>');
-            uploader.stop();
+            /*$('#upload_progress').append('<div>上传的文件中，有文件名已存在，取消上传</div>');
+            uploader.stop();*/
             /*$('#upload-progress-1').show();
             $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');*/
 
@@ -241,6 +242,7 @@ var uploader = Qiniu.uploader({
         },
         'FileUploaded': function(up, file, info) {
             var res = $.parseJSON(info);
+            //console.log(res.key);
             /*console.log(info);
             console.log(res.key);*/
 
@@ -322,7 +324,10 @@ setTimeout(function(){
             //队列文件处理完毕后,处理相关的事情
         },
         'Key': function(up, files) {
+            //console.log(up);
+            //console.log(files);
 
+            return 'file:'+_dir_route+files.id;
         }
     }
 });
