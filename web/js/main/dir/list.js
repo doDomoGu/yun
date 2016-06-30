@@ -218,6 +218,8 @@ var uploader = Qiniu.uploader({
                 $('#upload_progress').append(progress_html);
 
             });
+            $('#upload_progress').append('<div>上传的文件中，有文件名已存在，取消上传</div>');
+            uploader.stop();
             /*$('#upload-progress-1').show();
             $('#'+fileurlId+'_upload_txt').html('<span style="color:#894A38">上传中,请稍等...</span>');*/
 
