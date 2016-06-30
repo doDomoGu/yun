@@ -173,6 +173,7 @@ $('#createDirModalContent2 button.btn').click(function(){
     }
 });
 var progress_html = '';
+var filename_list = [];
 var _dir_id = $('#dir_id').val();
 var _p_id = $('#p_id').val();
 var _dir_route = $('#dir_route').val();
@@ -207,17 +208,42 @@ var uploader = Qiniu.uploader({
     init: {
         'FilesAdded': function(up, files) {
             // 文件添加进队列后,处理相关的事情
+            //查询目录下文件名，防止重名
+            $.ajax({
+                url: '/dir/get-filename-list',
+                type: 'post',
+                async: false,
+                data: {
+                    dir_id:_dir_id,
+                    p_id:_p_id
+                },
+                dataType:'json',
+                success: function (data) {
+                    filename_list = data;
+                }
+            });
             plupload.each(files, function(file) {
-                progress_html = '<div class="progress-item">'+
-                    '<div class="progress-title">'+
-                    file.name+
-                    '</div>'+
-                    '<div class="progress-striped active progress" id="upload-progress-'+file.id+'">'+
+                if(filename_list.indexOf(file.name)>-1){
+                    progress_html = '<div class="progress-item">'+
+                        '<div class="progress-title">'+
+                        file.name+
+                        '</div>'+
+                        '<div class="progress-striped active progress" style="color:red;">文件名已存在，取消上传</div>'+
+                        '</div>';
+                    $('#upload_progress').append(progress_html);
+                    uploader.stop();
+                    return false;
+                }else{
+                    progress_html = '<div class="progress-item">'+
+                        '<div class="progress-title">'+
+                        file.name+
+                        '</div>'+
+                        '<div class="progress-striped active progress" id="upload-progress-'+file.id+'">'+
                         '<div style="width:0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar">上传中<span class="sr-only">0% Complete</span></div>'+
-                    '</div>'+
-                    '</div>';
-                $('#upload_progress').append(progress_html);
-
+                        '</div>'+
+                        '</div>';
+                    $('#upload_progress').append(progress_html);
+                }
             });
             /*$('#upload_progress').append('<div>上传的文件中，有文件名已存在，取消上传</div>');
             uploader.stop();*/

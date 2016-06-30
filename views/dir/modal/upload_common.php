@@ -19,7 +19,8 @@ Modal::begin([
                 <input type="hidden" id="fileurl" name="fileurl" value="" class="col-lg-6" />
             </p>
             <div class="alert alert-danger" role="alert">
-                *上传文件较大时，进度条完成前，请勿操作当前页面
+                * 上传文件较大时，请耐心等待进度条完成，请勿操作当前页面
+                <br/>* 一旦上传列表中有一个文件的文件名已存在，此次上传会被立刻取消
             </div>
             <div class="clearfix" id="fileurl_upload_txt"></div>
             <div id="upload_progress" style="display:non33e;">

@@ -378,6 +378,22 @@ class DirController extends BaseController
         echo json_encode(['uptoken'=>$upToken]);exit;
     }
 
+    public function actionGetFilenameList(){
+        $post = yii::$app->request->post();
+
+        $dir_id = isset($post['dir_id'])?$post['dir_id']:0;
+        $p_id = isset($post['p_id'])?$post['p_id']:0;
+
+        /*$dir_id = 7;
+        $p_id = 131;*/
+        $files = File::find()->select('filename')->where(['dir_id'=>$dir_id,'p_id'=>$p_id])->all();
+        $arr = [];
+        foreach($files as $f){
+            $arr[] = $f->filename;
+        }
+        echo json_encode($arr);
+
+    }
 }
 
 
