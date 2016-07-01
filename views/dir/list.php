@@ -2,7 +2,7 @@
     use yii\bootstrap\Html;
     use app\components\FileFrontFunc;
     use app\components\PermissionFunc;
-
+use yii\widgets\Breadcrumbs;
     app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
 
     if($route=='list'){
@@ -19,6 +19,10 @@
 <input type="hidden" id="fileurlId" value="fileurl" />
 <input type="hidden" id="pickfileId2" value="pickfile2" />
 <input type="hidden" id="fileurlId2" value="fileurl2" />
+<div id="list-head">
+<?= Breadcrumbs::widget([
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
 <div id='buttons' class="clearfix">
     <div id="left_btns">
     <?php if(PermissionFunc::isAllowUploadCommon($dir_id)):?>
@@ -46,8 +50,15 @@
         <?php endforeach;?>
     </div>
 </div>
-
-
+    <div class="clearfix" style="margin-bottom: 8px;color:#888;font-size:16px;">
+        <div style="float:left;width:232px;margin-left: 12px;">文件名</div>
+        <div style="float:left;width:80px;margin-left: 10px;">大小</div>
+        <div style="float:left;width:120px;margin-left: 20px;">上传时间</div>
+        <div style="float:left;width:64px;margin-left: 10px;">上传职员</div>
+        <div style="float:left;width:64px;margin-left: 10px;">下载次数</div>
+        <div style="float:left;width:168px;margin-left: 10px;">操作</div>
+    </div>
+</div>
 <!--<p>
     <?/*=PermissionFunc::testShow($this->context->user->position_id,$dir_id)*/?>
 </p>-->
@@ -62,14 +73,7 @@
 <?php if(!empty($list)):?>
 <div id="file_list">
 <?php if($listType=='list'):?>
-    <div class="clearfix" style="margin-bottom: 8px;color:#888;font-size:16px;">
-        <div style="float:left;width:232px;margin-left: 12px;">文件名</div>
-        <div style="float:left;width:80px;margin-left: 10px;">大小</div>
-        <div style="float:left;width:120px;margin-left: 20px;">上传时间</div>
-        <div style="float:left;width:64px;margin-left: 10px;">上传职员</div>
-        <div style="float:left;width:64px;margin-left: 10px;">下载次数</div>
-        <div style="float:left;width:168px;margin-left: 10px;">操作</div>
-    </div>
+
     <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <div class="dir-item <?=$route=='list'?'file-item2':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">

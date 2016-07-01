@@ -1,6 +1,6 @@
 <?php
     use app\components\PositionFunc;
-    app\assets\AppAsset::addCssFile($this,'css/dir-right.css');
+    app\assets\AppAsset::addCssFile($this,'css/main/dir/_right.css');
     $user = $this->context->user;
     $position = $this->context->position;
     $routeArr = PositionFunc::getRouteArr($user->position_id);
