@@ -11,7 +11,7 @@
 
     app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
     app\assets\AppAsset::addJsFile($this,'js/qiniu/qiniu.js');
-    app\assets\AppAsset::addJsFile($this,'js/main/dir/list.js');
+    app\assets\AppAsset::addJsFile($this,'js/main/dir/list.js?v=20160701');
 
 ?>
 <input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
