@@ -2,7 +2,7 @@
     /*background: #f5f5f5;*/
     overflow: hidden;
     overflow-x: scroll;
-    min-height: 400px;
+    height:100%;
 
 }
 #tree-div h3 {

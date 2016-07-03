@@ -2,8 +2,8 @@
 
 #right-info-table {
     width:100%;
-    border-left:1px solid #dddddd;
-    border-right:1px solid #dddddd;
+    /*border-left:1px solid #dddddd;
+    border-right:1px solid #dddddd;*/
 }
 
 #right-info-table th{
@@ -13,7 +13,7 @@
 }
 
 #right-info-table td {
-    border:1px solid #dddddd;
+    /*border:1px solid #dddddd;*/
     padding:6px;
 }
 
