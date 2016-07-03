@@ -81,15 +81,37 @@ class DirController extends BaseController
             $dirRoute = '';
             //面包屑 & 文件路径
             $parents = DirFunc::getParents($dir_id);
-            foreach($parents as $parent){
-                $this->view->params['breadcrumbs'][] = ['label'=>$parent->name,'url'=>['/dir','dir_id'=>$parent->id]];
-                $dirRoute .= $parent->name.'/';
-            }
             $parents2 = FileFrontFunc::getParents($p_id);
-            foreach($parents2 as $parent){
-                $this->view->params['breadcrumbs'][] = ['label'=>$parent->filename,'url'=>['/dir','p_id'=>$parent->id]];
-                $dirRoute .= $parent->filename.'/';
+            if(!empty($parents2)){
+                foreach($parents as $parent){
+                    $this->view->params['breadcrumbs'][] = ['label'=>$parent->name,'url'=>['/dir','dir_id'=>$parent->id]];
+                    $dirRoute .= $parent->name.'>';
+                }
+                $i=0;
+                foreach($parents2 as $parent){
+                    $i++;
+                    if($i<count($parents2)){
+                        $this->view->params['breadcrumbs'][] = ['label'=>$parent->filename,'url'=>['/dir','p_id'=>$parent->id]];
+                    }else{
+                        $this->view->params['breadcrumbs'][] = ['label'=>$parent->filename];
+                    }
+                    $dirRoute .= $parent->filename.'>';
+                }
+            }else{
+                $i=0;
+                foreach($parents as $parent){
+                    $i++;
+                    if($i<count($parents)){
+                        $this->view->params['breadcrumbs'][] = ['label'=>$parent->name,'url'=>['/dir','dir_id'=>$parent->id]];
+                    }else{
+                        $this->view->params['breadcrumbs'][] = ['label'=>$parent->name];
+                    }
+                    $dirRoute .= $parent->name.'>';
+                }
             }
+
+
+
             if($parDir)
                 $this->view->title = $parDir->filename.$this->titleSuffix;
             else

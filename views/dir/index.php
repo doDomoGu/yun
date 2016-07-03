@@ -1,4 +1,12 @@
-<?php \app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');?>
+<?php
+    use yii\widgets\Breadcrumbs;
+
+    app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
+
+?>
+<?= Breadcrumbs::widget([
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+]) ?>
 <div class="clearfix"></div>
 <?php foreach($list as $l):?>
 <div class="dir-item text-center">

@@ -5,13 +5,16 @@
 }
 
 .breadcrumb {
-    margin-bottom: 10px;
+    margin-bottom: 0;
 
 }
 
-#buttons {
-    padding: 0 4px;
 
+#buttons {
+    background: #f7f7f7;
+    border-bottom: solid #d2d2d2 1px;
+    height: 51px;
+    padding: 11px 20px;
 
 }
 
@@ -19,33 +22,70 @@
 #left_btns {
     float:left;
     display: block;
-    width:488px;
+    width:400px;
 }
 
 #left_btns .btn {
     display: block;
     float:left;
     margin-right:4px;
+    padding:3px 12px;
 }
 
 #right_btns {
     float:left;
     display: block;
     text-align: right;
-    width:304px;
+    width:360px;
     padding-right: 10px;
     height:35px;
     line-height:35px;
 }
 
-#file-nav {
-    padding: 0 4px;
+#file_head {
+    padding-left:15px;
 }
 
+#file_head ul {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border: 1px solid #d2d2d2;
+    border-radius: 2px;
+    color: #888;
+    height: 41px;
+    line-height: 41px;
+    overflow: hidden;
+    list-style: none;
+    padding-left: 0;
+}
+
+#file_head ul li {
+    border-right: 1px solid #e5e5e5;
+    cursor: pointer;
+    float: left;
+    text-indent: 10px;
+}
+
+#file_head ul li.head_col_filename{
+    width:60%;
+
+}
+
+#file_head ul li.head_col_filesize{
+    width:20%;
+}
+
+#file_head ul li.head_col_uploadtime{
+    width:20%;
+}
+/*#file-nav {
+    padding: 0 4px;
+}*/
+
 #file_list {
-    margin-top:110px;
+    margin-top:138px;
     z-index: -1;
     overflow: hidden;
+    padding-left: 15px;
     /*margin-top: 10px;*/
 }
 
@@ -94,30 +134,18 @@
 }
 
 .file-item2 {
-    height:25px;
-    line-height: 25px;
-    float:none;
-    width:auto;
-    margin-bottom: 10px;
-
-}
-
-
-/*.file-item:hover{
-    background: #f5f5f5;
-}*/
-
-/*.file-item .info.hover {
-    color:#337ab7;
-}*/
-
-.file-item2 .icon {
-    display: block;
-    width:20px;
-    margin-left:12px;
-    overflow: hidden;
+    height:38px;
+    line-height: 38px;
     float:left;
+    display: block;
+    margin-bottom: 10px;
+    overflow: hidden;
+    width:100%;
+    border-bottom: 1px solid #EBEBEB;
 }
+
+
+
 
 .file-item2 .icon img{
     border-radius: 4px;
@@ -127,36 +155,44 @@
     margin-top:2px;
     display: block;
     float:left;
-    width: auto;
+    width: 100%;
     overflow: hidden;
 }
 
 .file-item2 .info .filename {
-    width:200px;
+    width:60%;
     float:left;
     text-align: left;
-    margin-left: 10px;
+
     overflow: hidden;
+    word-break: break-all;
+}
+.file-item2 .info .filename .icon {
+    display: block;
+    width:20px;
+    overflow: hidden;
+    float:left;
+    margin-right:10px;
 }
 
 .file-item2 .info .filesize {
-    width:80px;
+    width:20%;
+    padding-left:10px;
     float:left;
-    margin-left: 10px;
-    text-align: right;
+    text-align: left;
 }
 
 .file-item2 .info .upload_time {
-    width:120px;
+    width:20%;
+    padding-left:10px;
     float:left;
-    text-align: right;
-    margin-left: 20px;
+    text-align: left;
 }
 
 .file-item2 .info .upload_uid {
     width:64px;
     float:left;
-    text-align: right;
+    text-align: left;
     margin-left: 10px;
 }
 

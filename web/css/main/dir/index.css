@@ -10,8 +10,13 @@
 
 .breadcrumb {
     border-radius: 0;
+    background-color: #fff;
 }
-
+.breadcrumb > li + li::before  {
+    color: #ccc;
+    content: ">";
+    padding: 0 2px 0 0;
+}
 .dir-item:hover{
     /*background: #f5f5f5;*/
 }
