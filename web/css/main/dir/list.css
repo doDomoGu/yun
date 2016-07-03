@@ -178,9 +178,12 @@
     width:20px;
     overflow: hidden;
     float:left;
-    margin-right:10px;
+    margin-right:4px;
 }
-
+.file-item2 .info .filename a {
+    width:200px;
+    overflow: hidden;
+}
 .file-item2 .info .filesize {
     width:120px;
     padding-left:10px;

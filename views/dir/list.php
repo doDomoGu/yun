@@ -72,7 +72,11 @@
                 <span class="icon">
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
                 </span>
-                <?=$l->filename?>
+                <?php if($l->filetype == 0):?>
+                    <?=Html::a($l->filename,['/dir','p_id'=>$l->id])?>
+                <?php else:?>
+                    <?=$l->filename?>
+                <?php endif;?>
             </div>
             <div class="filesize"><?=$l->filetype>0?FileFrontFunc::sizeFormat($l->filesize):'--'?></div>
             <div class="upload_time"><?=date('Y-m-d H:i',strtotime($l->add_time))?></div>

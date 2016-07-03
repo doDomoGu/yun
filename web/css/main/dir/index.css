@@ -32,8 +32,6 @@
 
 .dir-item a {
     display: block;
-    width:128px;
-    margin-left:36px;
     overflow: hidden;
     color:#000;
 }
@@ -50,7 +48,7 @@
 
 .dir-item a:hover {
     text-decoration: none;
-    color:#fff;
+    color:#337ab7;
 }
 
 .dir-item a:hover .name {
