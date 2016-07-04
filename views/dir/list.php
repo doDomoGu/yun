@@ -150,10 +150,13 @@
     <?php endforeach;?>
 <?php else:?>
     <?php foreach($list as $l):?>
-    <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
+    <?php
+        $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);
+        $filethumb = ($downloadCheck && in_array($l->filetype,$this->context->thumbTypeArr))?true:false;
+        ?>
     <div class="dir-item <?=$route=='list'?'file-item':''?>  <?=$downloadCheck?'dl_enable':'dl_disable'?> <?=$l->filetype==0?'is-dir':'is-file'?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
-        <div class="icon clickarea">
-            <?php if($downloadCheck && in_array($l->filetype,$this->context->thumbTypeArr)):?>
+        <div class="icon clickarea <?=$filethumb?'filethumb_icon':''?>">
+            <?php if($filethumb):?>
                 <span class="filethumb" data-id="<?=$l->id?>">
                     <img class="filethumb-<?=$l->id?>" src="" style="width:100%;">
                 </span>
