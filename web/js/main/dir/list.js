@@ -23,10 +23,35 @@ $('.filetype').mouseenter(function(){
 });
 
 
-$('.dir-item .icon').mouseenter(function(){
+$('.dir-item.file-item').mouseenter(function(){
+    $(this).find('.icon').addClass('hover');
     $(this).find('.file-check').show();
 }).mouseleave(function(){
-    $(this).find('.file-check').hide();
+    if($(this).hasClass('file-checked')==false){
+        $(this).find('.icon').removeClass('hover');
+        $(this).find('.file-check').hide();
+    }
+});
+
+$('.file-check').click(function(){
+
+
+    if($(this).prop('checked')==false){
+        $('.file-item').removeClass('file-checked');
+        $('.file-check').prop('checked',false);
+        /*$(this).find('.icon').removeClass('hover');
+        $(this).find('.file-check').hide();*/
+    }else{
+        $('.file-item').removeClass('file-checked');
+        $('.file-check').prop('checked',false);
+        $(this).prop('checked',true);
+        $(this).parents('.file-item').addClass('file-checked');
+    }
+
+    //$('.file-check').attr('checked',false);
+    //$('.file-item').removeClass('file-checked');
+
+        //$(this).attr('checked',true);
 });
 
 /*$('.dir-item').click(function(){

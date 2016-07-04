@@ -133,7 +133,7 @@
     padding:20px 16px;
     position: relative;
 }
-.file-item .icon:hover {
+.file-item .icon.hover {
     border: 1px solid #666;
 }
 .file-item .icon img{
@@ -155,8 +155,12 @@
     width:100%;
     text-align: center;
 }
-
-
+.file-item.file-checked .icon {
+    border: 1px solid #666;
+}
+.file-item.file-checked .icon .file-check {
+    display: block;
+}
 .file-item.hover{
     cursor: pointer;
 }
