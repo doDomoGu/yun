@@ -1,6 +1,7 @@
 <?php
+use yii\bootstrap\Html;
     app\assets\AppAsset::addCssFile($this,'css/main/site/_recruitment.css');
-    $list = app\models\Recruitment::find()->where(['status'=>1])->orderBy('ord desc,edit_time desc')->limit(10)->all();
+    $list = app\models\Recruitment::find()->where(['status'=>1])->orderBy('ord desc,edit_time desc')->limit(8)->all();
 ?>
 <section id="recruitment-section" >
     <div class="recruit-heading">
@@ -11,7 +12,11 @@
         <ul class="list-unstyled">
             <?php foreach($list as $l):?>
             <li>
-                <?=$l->title?>
+                <?php if($l->link_url!=''):?>
+                    <?=Html::a($l->title,$l->link_url,['target'=>'_blank'])?>
+                <?php else:?>
+                    <?=$l->title?>
+                <?php endif;?>
             </li>
             <?php endforeach;?>
         </ul>
