@@ -83,24 +83,24 @@
                             <?php if($downloadCheck):?>
                                 <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'downloadBtn btn '])?>
                             <?php else:?>
-                                <?=Html::Button('下',['class'=> 'btn btn-success disabled'])?>
+                                <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
                             <?php endif;?>
                         <?php else:?>
                             <?php if($downloadCheck):?>
                                 <?=Html::Button('打',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])?>
                             <?php else:?>
-                                <?=Html::Button('打',['class'=> 'btn btn-success disabled'])?>
+                                <?=Html::Button('打',['class'=> 'btn disabled'])?>
                             <?php endif;?>
                         <?php endif;?>
                         <?php if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):?>
                             <?=Html::Button('<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'previewBtn btn'])?>
                         <?php else:?>
-                            <?=Html::Button('预',['class'=> 'btn btn-primary disabled'])?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
                         <?php endif;?>
                         <?php if($l->uid==yii::$app->user->id):?>
                             <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn'])?>
                         <?php else:?>
-                            <?=Html::Button('删',['class'=> 'btn btn-success disabled'])?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
                         <?php endif;?>
                     </div>
                 <?php endif;?>
