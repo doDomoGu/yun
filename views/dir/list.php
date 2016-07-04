@@ -75,15 +75,9 @@
     <div class="dir-item <?=$route=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
             <div class="filename" style="">
-                <?php if($downloadCheck && in_array($l->filetype,$this->context->thumbTypeArr)):?>
-                <span class="filethumb" data-id="<?=$l->id?>">
-
-                </span>
-                <?php else:?>
                 <span class="icon">
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
                 </span>
-                <?php endif;?>
                 <span class="filename_txt" title="<?=$l->filename?>" alt="<?=$l->filename?>">
                 <?php if($l->filetype == 0):?>
                     <?=Html::a(CommonFunc::mySubstr($l->filename,30),['/dir','p_id'=>$l->id])?>
