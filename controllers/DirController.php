@@ -228,14 +228,20 @@ class DirController extends BaseController
                 $links2 = [];
 
                 foreach($this->orderArr as $orderOne){
-                    $linkTmp = '/dir?dir_id='.$dir_id;
+                    if($p_id>0)
+                        $linkTmp = '/dir?p_id='.$p_id;
+                    else
+                        $linkTmp = '/dir?dir_id='.$dir_id;
                     $linkTmp .= $page>1?'&page='.$page:'';
                     $linkTmp .= '&order='.$orderOne;
                     $links[] = $linkTmp;
                 }
 
                 foreach($this->listTypeArr as $ltOne){
-                    $linkTmp = '/dir?dir_id='.$dir_id;
+                    if($p_id>0)
+                        $linkTmp = '/dir?p_id='.$p_id;
+                    else
+                        $linkTmp = '/dir?dir_id='.$dir_id;
                     $linkTmp .= $page>1?'&page='.$page:'';
                     $linkTmp .= '&list_type='.$ltOne;
                     $links2[] = $linkTmp;
