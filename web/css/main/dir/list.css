@@ -4,13 +4,9 @@
     background: #FFF;
 }
 
-.breadcrumb {
-    margin-bottom: 0;
-}
 
-.breadcrumb a {
-    color:#23527c;
-}
+
+
 #breadcrumbs {
     position: relative;
 }
@@ -115,6 +111,7 @@
     text-align: center;
     width:152px;
     margin:5px 5px 0 0;
+    padding:0;
 }
 
 
@@ -188,10 +185,13 @@
     overflow: hidden;
     width:100%;
     border-bottom: 1px solid #EBEBEB;
+    padding:0;
 }
 
 
-
+.file-item2 .icon {
+    margin:0;
+}
 
 .file-item2 .icon img{
     border-radius: 4px;
