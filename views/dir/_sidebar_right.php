@@ -23,11 +23,11 @@
     </tr>
     <tr>
         <td>地方</td>
-        <td><?=$routeArr[2]?></td>
+        <td><?=$routeArr[1]?></td>
     </tr>
     <tr>
         <td>业态</td>
-        <td><?=$routeArr[1]?></td>
+        <td><?=$routeArr[2]?></td>
     </tr>
     <tr>
         <td>部门</td>

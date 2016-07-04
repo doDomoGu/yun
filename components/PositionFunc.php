@@ -32,7 +32,7 @@ class PositionFunc extends Component {
 
 
     /*
-     * 函数getRouteArr , 根据职位id 获取 1业态 2地方 3部门（多层级） 4职位
+     * 函数getRouteArr , 根据职位id 获取 1地方 2业态 3部门（多层级） 4职位
      *
      * @param $position_id 职位id
      * @param $separator 分隔符
@@ -51,11 +51,52 @@ class PositionFunc extends Component {
             $parents = self::getParents($position_id);
             for($i=1;$i<=count($parents);$i++){
                 if(isset($parents[$i])){
-                    $temp[$i] = $parents[$i]->name;
+                    $temp[$i-1] = $parents[$i]->name;
                 }
             }
 
-            $count = count($temp);
+
+
+
+            $cityArr = [
+                '上海','苏州','无锡','南京','合肥','呼和浩特'
+            ];
+            //如果第二个是城市 ，
+            if(in_array($temp[1],$cityArr)){
+                array_shift($temp);
+                asort($temp);
+                $count = count($temp);
+                if($count==1){
+                    $arr[4] = $temp[0];
+                }elseif($count==2){
+                    $arr[3] = $temp[0];
+                    $arr[4] = $temp[1];
+                }elseif($count==3){
+                    $arr[2] = $temp[0];
+                    $arr[3] = $temp[1];
+                    $arr[4] = $temp[2];
+                }elseif($count==4){
+                    $arr[1] = $temp[0];
+                    $arr[2] = $temp[1];
+                    $arr[3] = $temp[2];
+                    $arr[4] = $temp[3];
+                }elseif($count>4){
+                    $arr[1] = $temp[0];
+                    $arr[2] = $temp[1];
+                    $arr[3] = $temp[2];
+                    for($j=3;$j<$count-1;$j++)
+                        $arr[3] .= $separator . $temp[$j];
+                    $arr[4] = $temp[$count-1];
+                }
+            }else{
+                //各个中心
+                $arr[2] = $temp[0];
+                $arr[3] = $temp[1];
+                $arr[4] = $temp[2];
+            }
+
+
+            /*$count = count($temp);
 
             if($count==1){
                 $arr[4] = $temp[1];
@@ -78,7 +119,7 @@ class PositionFunc extends Component {
                 for($j=4;$j<$count;$j++)
                     $arr[3] .= $separator . $temp[$j];
                 $arr[4] = $temp[$count];
-            }
+            }*/
         }
         return $arr;
     }
