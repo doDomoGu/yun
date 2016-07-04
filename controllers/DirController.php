@@ -37,6 +37,8 @@ class DirController extends BaseController
 
     public $previewTypeArr = [2,3,4,5,6];
 
+    public $thumbTypeArr = [2,3,4,5,6];
+
     public $listTypeArr = ['list','icon'];
 
     public $listTypeNameArr = ['列表','图标'];
@@ -326,6 +328,7 @@ class DirController extends BaseController
     public function actionDownload(){
         $id = yii::$app->request->get('id',0);
         $preview = yii::$app->request->get('preview',false);
+        $imgUrl = yii::$app->request->get('imgUrl',false);
         $file = File::find()->where(['id'=>$id,'status'=>1])->one();
 
         if($file){
@@ -336,7 +339,11 @@ class DirController extends BaseController
                 if($preview!=false){
                     if(in_array($file->filetype,$this->previewTypeArr)){
                         if(in_array($file->filetype,[2,3,4,5,6])){
-                            echo '<img width=100% src="'.$file_path.'" />';
+                            if($imgUrl!=false){
+                                echo $file_path;
+                            }else{
+                                echo '<img width=100% src="'.$file_path.'" />';
+                            }
                         }
 
                     }else{

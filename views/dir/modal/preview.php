@@ -10,7 +10,7 @@ Modal::begin([
 ]);
 ?>
     <div id="previewContent">
-        ddd
+        请稍后
     </div>
 
 <?php

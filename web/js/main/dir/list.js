@@ -126,7 +126,25 @@ $('.previewBtn').click(function(){
             $('#previewModal').modal('show');
         }
     });
+});
 
+$(function(){
+   $('.filethumb').each(function(){
+       _filethumbId = $(this).attr('data-id');
+       $.ajax({
+           url: '/dir/download',
+           type: 'get',
+           async : false,
+           data: {
+               id:_filethumbId,
+               preview:true,
+               imgUrl:true
+           },
+           success: function (data) {
+                $('.filethumb-'+_filethumbId).attr('src',data);
+           }
+       });
+   })
 });
 
 $('#order_select').change(function(){
@@ -389,10 +407,10 @@ setTimeout(function(){
             //队列文件处理完毕后,处理相关的事情
         },
         'Key': function(up, files) {
-            //console.log(up);
-            //console.log(files);
+            /*console.log(up);
+            console.log(files);*/
 
-            return 'file:'+_dir_route+files.id;
+            return 'file:'+_dir_route+files.id+files.name;
         }
     }
 });
