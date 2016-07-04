@@ -15,12 +15,17 @@
 #right-info-table td {
     /*border:1px solid #dddddd;*/
     padding:6px;
+    height:50px;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    overflow: hidden;
 }
 
 #right-info-table tr td:first-child{
     text-align: right;
     width:42px;
-    color:#666;
+    color:#999;
+
 }
 
 #right-info-table tr td:nth-child(2) {

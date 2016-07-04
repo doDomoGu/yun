@@ -14,39 +14,35 @@
         <td><?=$user->name?></td>
     </tr>
     <tr>
-        <td>入职日期</td>
+        <td>入职</td>
         <td><?=$user->join_date?></td>
     </tr>
     <tr>
-        <td>合同到期</td>
+        <td>合同</td>
         <td><?=$user->contract_date?></td>
     </tr>
     <tr>
-        <td>地方公司</td>
+        <td>地方</td>
         <td><?=$routeArr[2]?></td>
     </tr>
     <tr>
-        <td>业务平台</td>
+        <td>业态</td>
         <td><?=$routeArr[1]?></td>
     </tr>
     <tr>
-        <td>所属部门</td>
+        <td>部门</td>
         <td><?=$routeArr[3]?></td>
     </tr>
     <tr>
-        <td>个人职位</td>
+        <td>职位</td>
         <td><?=$routeArr[4]?></td>
     </tr>
     <tr>
-        <td>岗位说明</td>
-        <td><?=$position->shuoming?></td>
+        <td>职责</td>
+        <td>查看详情</td>
     </tr>
     <tr>
-        <td>岗位职权</td>
-        <td><?=$position->zhiquan?></td>
-    </tr>
-    <tr>
-        <td>岗位职责</td>
-        <td><?=$position->zhize?></td>
+        <td>积分</td>
+        <td>0</td>
     </tr>
 </table>
