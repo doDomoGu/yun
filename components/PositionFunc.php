@@ -62,7 +62,7 @@ class PositionFunc extends Component {
                 '上海','苏州','无锡','南京','合肥','呼和浩特'
             ];
             //如果第二个是城市 ，
-            if(in_array($temp[1],$cityArr)){
+            if(count($temp)>1 && in_array($temp[1],$cityArr)){
                 array_shift($temp);
                 asort($temp);
                 $count = count($temp);
@@ -88,6 +88,8 @@ class PositionFunc extends Component {
                         $arr[3] .= $separator . $temp[$j];
                     $arr[4] = $temp[$count-1];
                 }
+            }elseif(count($temp)==1){
+                $arr[4] = $temp[0];
             }else{
                 //各个中心
                 $arr[2] = $temp[0];
