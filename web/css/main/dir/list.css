@@ -140,7 +140,7 @@
 }
 
 .file-item2 {
-    height:38px;
+    height:40px;
     line-height: 38px;
     float:left;
     display: block;
@@ -169,7 +169,7 @@
     width:500px;
     float:left;
     text-align: left;
-
+    position: relative;
     overflow: hidden;
     word-break: break-all;
 }
@@ -181,9 +181,14 @@
     margin-right:4px;
 }
 .file-item2 .info .filename a {
-    width:200px;
-    overflow: hidden;
+    /*width:200px;
+    overflow: hidden;*/
+    display: inline;
 }
+.file-item2 .info .filename a:hover {
+    text-decoration: underline;
+}
+
 .file-item2 .info .filesize {
     width:120px;
     padding-left:10px;
@@ -212,11 +217,12 @@
     margin-left: 10px;
 }
 
-.file-item2 .info .click_btns {
-    width:168px;
-    float:left;
+.file-item2 .info .filename .click_btns {
+    position: absolute;
     text-align: left;
-    margin-left: 10px;
+    right:10px;
+    clear:both;
+    top:0;
 }
 
 .file-item.hover{
@@ -264,13 +270,15 @@
     background-color: #365a7f;
     border-color: #46828c;
 }
-
+.click_btns {
+    display: none;
+}
 
 .click_btns .btn {
-    padding:0 10px;
-    line-height: 16px;
-
-
+    padding:0 2px;
+    line-height: 12px;
+    font-size: 12px;
+    background: transparent;
 }
 
 .pagination {

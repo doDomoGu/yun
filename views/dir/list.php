@@ -65,9 +65,8 @@
 
     <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
-    <div class="dir-item <?=$route=='list'?'file-item2':''?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+    <div class="dir-item <?=$route=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
-
             <div class="filename" style="">
                 <span class="icon">
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
@@ -77,9 +76,38 @@
                 <?php else:?>
                     <?=$l->filename?>
                 <?php endif;?>
+
+                <?php if($l->filetype!=0):?>
+                    <div class="click_btns">
+                        <?php if($l->filetype>0):?>
+                            <?php if($downloadCheck):?>
+                                <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'downloadBtn btn '])?>
+                            <?php else:?>
+                                <?=Html::Button('下',['class'=> 'btn btn-success disabled'])?>
+                            <?php endif;?>
+                        <?php else:?>
+                            <?php if($downloadCheck):?>
+                                <?=Html::Button('打',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])?>
+                            <?php else:?>
+                                <?=Html::Button('打',['class'=> 'btn btn-success disabled'])?>
+                            <?php endif;?>
+                        <?php endif;?>
+                        <?php if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'previewBtn btn'])?>
+                        <?php else:?>
+                            <?=Html::Button('预',['class'=> 'btn btn-primary disabled'])?>
+                        <?php endif;?>
+                        <?php if($l->uid==yii::$app->user->id):?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn'])?>
+                        <?php else:?>
+                            <?=Html::Button('删',['class'=> 'btn btn-success disabled'])?>
+                        <?php endif;?>
+                    </div>
+                <?php endif;?>
             </div>
             <div class="filesize"><?=$l->filetype>0?FileFrontFunc::sizeFormat($l->filesize):'--'?></div>
             <div class="upload_time"><?=date('Y-m-d H:i',strtotime($l->add_time))?></div>
+
             <!--<div class="upload_uid"><?/*=$l->user->name*/?></div>
             <div class="download_times"><?/*=$l->clicks*/?></div>-->
             <!--<div class="click_btns">
