@@ -229,6 +229,12 @@
     text-decoration: underline;
 }
 
+.file-item2 .info .filename .filename_txt{
+    width:300px;
+    overflow: hidden;
+    display: inline-block;
+}
+
 .file-item2 .info .filesize {
     width:120px;
     padding-left:10px;
@@ -346,4 +352,8 @@
 #upload_progress .progress-item .progress {
     width:668px;
     float:left;
+}
+
+.dir-item.dl_enable.is-dir {
+    cursor: pointer;
 }

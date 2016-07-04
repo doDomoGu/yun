@@ -34,8 +34,6 @@ $('.dir-item.file-item').mouseenter(function(){
 });
 
 $('.file-check').click(function(){
-
-
     if($(this).prop('checked')==false){
         $('.file-item').removeClass('file-checked');
         $('.file-check').prop('checked',false);
@@ -54,6 +52,9 @@ $('.file-check').click(function(){
         //$(this).attr('checked',true);
 });
 
+$('.dir-item.dl_enable.is-dir').click(function(){
+    location.href='/dir?p_id='+$(this).attr('data-id');
+})
 /*$('.dir-item').click(function(){
     if($(this).attr('download-check')=='enable'){
         if($(this).attr('data-is-dir')=='1'){
