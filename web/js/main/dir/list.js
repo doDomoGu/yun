@@ -4,7 +4,7 @@
     $(this).find('.info').removeClass('hover');
 });*/
 
-$('.dir-item .icon').mouseenter(function(){
+/*$('.dir-item .icon').mouseenter(function(){
     $(this).parent('.dir-item').addClass('hover');
 }).mouseleave(function(){
     $(this).parent('.dir-item').removeClass('hover');
@@ -14,12 +14,19 @@ $('.dir-item .info').mouseenter(function(){
     $(this).parent('.dir-item').addClass('hover');
 }).mouseleave(function(){
     $(this).parent('.dir-item').removeClass('hover');
-});
+});*/
 
 $('.filetype').mouseenter(function(){
     $(this).find('.click_btns').show();
 }).mouseleave(function(){
     $(this).find('.click_btns').hide();
+});
+
+
+$('.dir-item .icon').mouseenter(function(){
+    $(this).find('.file-check').show();
+}).mouseleave(function(){
+    $(this).find('.file-check').hide();
 });
 
 /*$('.dir-item').click(function(){

@@ -48,14 +48,21 @@
             <?php endforeach;?>
         </div>
     </div>
-    <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]) ?>
+    <div id="breadcrumbs">
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
+        <span class="total_count">
+            共<?=$pages->totalCount?>个
+        </span>
+    </div>
     <div id="file_head" class="clearfix">
         <ul class="head_cols">
+            <?php if($listType=='list'):?>
             <li class="head_col_filename">文件名</li>
             <li class="head_col_filesize">大小</li>
             <li class="head_col_uploadtime">上传时间</li>
+            <?php endif;?>
         </ul>
     </div>
 </div>
@@ -146,39 +153,42 @@
     <div class="dir-item <?=$route=='list'?'file-item':''?> text-center" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="icon clickarea">
             <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
+            <input type="checkbox" name="cb[]" class="file-check" value="<?=$l->id?>" />
         </div>
         <div class="info clickarea">
-            <div class="filename" style="height:40px;overflow: hidden;word-break: break-all;"><?=$l->filename?></div>
-            <div class="filesize">文件大小：<?=FileFrontFunc::sizeFormat($l->filesize)?></div>
-            <div class="upload_time">时间：<?=$l->add_time?></div>
-            <div class="upload_uid">上传用户：<?=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid?></div>
-            <div class="upload_type">上传类型：<?=$l->flag==1?'公共':'个人'?></div>
-            <div class="download_times">下载次数：<span><?=$l->clicks?></span></div>
-            <div class="click_btns">
-                <?php if($l->filetype>0):?>
-                    <?php if($downloadCheck):?>
-                        <?=Html::Button('下载',['data-id'=>$l->id,'class'=> 'downloadBtn btn btn-success'])?>
-                    <?php else:?>
-                        <?=Html::Button('下载',['class'=> 'btn btn-success disabled'])?>
-                    <?php endif;?>
-                <?php else:?>
-                    <?php if($downloadCheck):?>
-                        <?=Html::Button('打开',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])?>
-                    <?php else:?>
-                        <?=Html::Button('打开',['class'=> 'btn btn-success disabled'])?>
-                    <?php endif;?>
-                <?php endif;?>
-                <?php if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):?>
-                    <?=Html::Button('预览',['data-id'=>$l->id,'class'=> 'previewBtn btn btn-primary'])?>
-                <?php else:?>
-                    <?=Html::Button('预览',['class'=> 'btn btn-primary disabled'])?>
-                <?php endif;?>
-                <?php if($l->uid==yii::$app->user->id):?>
-                    <?=Html::Button('删除',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn btn-success'])?>
-                <?php else:?>
-                    <?=Html::Button('删除',['class'=> 'btn btn-success disabled'])?>
-                <?php endif;?>
+            <div class="filename" >
+                <?=\app\components\CommonFunc::mySubstr($l->filename,12);?>
             </div>
+            <!--<div class="filesize">文件大小：<?/*=$l->filetype>0?FileFrontFunc::sizeFormat($l->filesize):'--'*/?></div>
+            <div class="upload_time">时间：<?/*=$l->add_time*/?></div>
+            <div class="upload_uid">上传用户：<?/*=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid*/?></div>
+            <div class="upload_type">上传类型：<?/*=$l->flag==1?'公共':'个人'*/?></div>
+            <div class="download_times">下载次数：<span><?/*=$l->clicks*/?></span></div>-->
+            <!--<div class="click_btns">
+                <?php /*if($l->filetype>0):*/?>
+                    <?php /*if($downloadCheck):*/?>
+                        <?/*=Html::Button('下载',['data-id'=>$l->id,'class'=> 'downloadBtn btn btn-success'])*/?>
+                    <?php /*else:*/?>
+                        <?/*=Html::Button('下载',['class'=> 'btn btn-success disabled'])*/?>
+                    <?php /*endif;*/?>
+                <?php /*else:*/?>
+                    <?php /*if($downloadCheck):*/?>
+                        <?/*=Html::Button('打开',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])*/?>
+                    <?php /*else:*/?>
+                        <?/*=Html::Button('打开',['class'=> 'btn btn-success disabled'])*/?>
+                    <?php /*endif;*/?>
+                <?php /*endif;*/?>
+                <?php /*if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):*/?>
+                    <?/*=Html::Button('预览',['data-id'=>$l->id,'class'=> 'previewBtn btn btn-primary'])*/?>
+                <?php /*else:*/?>
+                    <?/*=Html::Button('预览',['class'=> 'btn btn-primary disabled'])*/?>
+                <?php /*endif;*/?>
+                <?php /*if($l->uid==yii::$app->user->id):*/?>
+                    <?/*=Html::Button('删除',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn btn-success'])*/?>
+                <?php /*else:*/?>
+                    <?/*=Html::Button('删除',['class'=> 'btn btn-success disabled'])*/?>
+                <?php /*endif;*/?>
+            </div>-->
         </div>
 
     </div>
@@ -189,7 +199,7 @@
 <div class="clearfix text-center">
     <?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); ?>
     <!--<div style="display: inline-block;padding:6px;"><?/*=$pages->totalCount*/?> 个</div>-->
-    <div style="background: #d7d7d7;padding:4px;"><?=$pages->totalCount?> 个</div>
+    <!--<div id="total_count"> 个</div>-->
 </div>
 
 
