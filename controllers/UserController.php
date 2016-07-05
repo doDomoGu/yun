@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\CommonFunc;
 use app\components\DirFunc;
+use app\components\FileFrontFunc;
 use app\models\Dir;
 use app\models\DownloadRecord;
 use app\models\File;
@@ -126,7 +127,7 @@ class UserController extends BaseController
     public function actionRecycle(){
         $this->view->title = '回收站';
         //$list = File::find()->where(['uid'=>$this->user->id])->andWhere(['>','filetype',0]);
-        $list = File::find()->where(['uid'=>$this->user->id])->andWhere(['status'=>0])/*->andWhere(['>','filetype',0])*/;
+        $list = File::find()->where(['uid'=>$this->user->id])->andWhere('status <2 and (status = 0 or parent_status = 0)')/*->andWhere(['>','filetype',0])*/;
         $count = $list->count();
         $pageSize = 10;
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
@@ -147,6 +148,7 @@ class UserController extends BaseController
         if($file){
             $file->status = 1;
             if($file->save()){
+                FileFrontFunc::updateParentStatus($file->id);
                 Yii::$app->response->redirect('/user/recycle')->send();
             }
         }else{
@@ -160,6 +162,7 @@ class UserController extends BaseController
         if($file){
             $file->status = 2;
             if($file->save()){
+                FileFrontFunc::updateDeleteStatus($file->id);
                 Yii::$app->response->redirect('/user/recycle')->send();
             }
         }else{

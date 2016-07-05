@@ -36,6 +36,7 @@ PRIMARY KEY (`id`)
 
 /*ALTER TABLE `dir` ADD `alias` VARCHAR(255) DEFAULT NULL AFTER `name`;*/
 
+
     public $arr0;
 
     /*public $arr_yt1;

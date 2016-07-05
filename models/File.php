@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\components\FileFrontFunc;
+
 class File extends \yii\db\ActiveRecord
 {
     //public $childrenIds;
@@ -42,4 +44,28 @@ class File extends \yii\db\ActiveRecord
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 */
+
+    /*ALTER TABLE `file` ADD `parent_status` tinyint(1) unsigned DEFAULT '1' COMMENT '0:删除;1:正常' AFTER `status`;*/
+
+    public static function handleDeleteStatus(){
+        $files = File::find()->all();
+        foreach($files as $f){
+            $delete_status = FileFrontFunc::getParentDeleteStatus($f->p_id);
+            if($delete_status==false){
+                $f->status = 2;
+                $f->save();
+            }
+        }
+    }
+
+    public static function handleParentStatus(){
+        $files = File::find()->all();
+        foreach($files as $f){
+            $parent_status = FileFrontFunc::getParentStatus($f->p_id);
+            if($parent_status==false){
+                $f->parent_status = 0;
+                $f->save();
+            }
+        }
+    }
 }

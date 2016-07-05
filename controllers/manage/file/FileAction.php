@@ -10,6 +10,15 @@ use yii\helpers\ArrayHelper;
 
 class FileAction extends Action{
     public function run(){
+        if(Yii::$app->request->get('handleParentStatus')){
+            File::handleDeleteStatus();
+            File::handleParentStatus();
+            echo 'end';
+            exit;
+            /*Yii::$app->response->redirect('dir')->send();
+            exit;*/
+        }
+
         $this->controller->view->title = '文件列表 - 管理中心';
         $search = [
             'filename' => '',

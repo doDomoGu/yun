@@ -356,7 +356,7 @@ class DirController extends BaseController
         $id = yii::$app->request->get('id',0);
         $preview = yii::$app->request->get('preview',false);
         $imgUrl = yii::$app->request->get('imgUrl',false);
-        $file = File::find()->where(['id'=>$id,'status'=>1])->one();
+        $file = File::find()->where(['id'=>$id,'status'=>1,'parent_status'=>1])->one();
 
         if($file){
             if(PermissionFunc::checkFileDownloadPermission($this->user->position_id,$file)){
@@ -420,6 +420,7 @@ class DirController extends BaseController
         if($file){
             $file->status = 0;
             if($file->save()){
+                FileFrontFunc::updateParentStatus2($file->id);
                 Yii::$app->response->redirect(Yii::$app->request->referrer)->send();
             }
         }else{

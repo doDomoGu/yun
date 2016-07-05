@@ -137,6 +137,108 @@ class FileFrontFunc extends Component {
         return $arr;
     }
 
+    /*
+     * 函数getParentStatus ,实现根据 当前p_id 递归获取全部父层级 一旦有父层为删除状态（status = 0） 则返回false ,直到p_id = 0 为止
+     *
+     * @param integer p_id
+     * return array
+     */
+    public static function getParentStatus($p_id){
+        if($p_id==0){
+            return true;
+        }else{
+            $curDir = File::find()->where(['id'=>$p_id])->one();
+            if($curDir && $curDir->status==1){
+                return self::getParentStatus($curDir->p_id);
+            }else{
+                return false;
+            }
+        }
+    }
+
+    /*
+     * 函数getParentDeleteStatus ,实现根据 当前p_id 递归获取全部父层级 一旦有父层为删除状态（status = 2） 则返回false ,直到p_id = 0 为止
+     *
+     * @param integer p_id
+     * return array
+     */
+    public static function getParentDeleteStatus($p_id){
+        if($p_id==0){
+            return true;
+        }else{
+            $curDir = File::find()->where(['id'=>$p_id])->one();
+            if($curDir && $curDir->status<2){
+                return self::getParentDeleteStatus($curDir->p_id);
+            }else{
+                return false;
+            }
+        }
+    }
+
+    /*
+     * 函数updateParentStatus ,当在回收站做了还原操作，如果是一个文件夹而且下面有文件 会更新parent_status
+     *             但是如果其下面有文件夹，文件夹的status是0 这个文件夹下面的不会更新，仍然是在回收站中的状态
+     *
+     * @param integer id
+     * return array
+     */
+    public static function updateParentStatus($id){
+        $children = File::find()->where(['p_id'=>$id])->all();
+        foreach($children as $c){
+            if($c->filetype==0){
+                if($c->status==1){
+                    $c->parent_status = 1;
+                    $c->save();
+                    self::updateParentStatus($c->id);
+                }
+            }else{
+                $c->parent_status = 1;
+                $c->save();
+            }
+        }
+    }
+
+    /*
+     * 函数updateParentStatus2 ,当在目录页面做了删除操作（移入回收站），如果是一个文件夹而且下面有文件 会更新parent_status
+     *
+     * @param integer id
+     * return array
+     */
+    public static function updateParentStatus2($id){
+        $children = File::find()->where(['p_id'=>$id])->all();
+        foreach($children as $c){
+            if($c->filetype==0){
+                if($c->status==1){
+                    $c->parent_status = 0;
+                    $c->save();
+                    self::updateParentStatus2($c->id);
+                }
+            }else{
+                $c->parent_status = 0;
+                $c->save();
+            }
+        }
+    }
+
+    /*
+         * 函数updateDelete,在回收站中做删除操作（即彻底删除操作） 如果是一个文件夹更新其下文件的状态
+         *
+         * @param integer id
+         * return array
+         */
+    public static function updateDeleteStatus($id){
+        $children = File::find()->where(['p_id'=>$id])->all();
+        foreach($children as $c){
+            if($c->filetype==0){
+                $c->status = 2;
+                $c->save();
+                self::updateDeleteStatus($c->id);
+            }else{
+                $c->status = 2;
+                $c->save();
+            }
+        }
+    }
 
     public static function getDownloadList($dir_ids,$limit=10){
         $files = File::find()
