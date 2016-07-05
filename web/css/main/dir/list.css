@@ -256,7 +256,14 @@
     text-decoration: underline;
 }
 
-
+.file-item2.download-disable .info .filename .filename_txt,
+.file-item2.download-disable .info .filename .filename_txt a{
+    color:#999;
+}
+.file-item2.download-disable .info .filename .filename_txt a:hover{
+    text-decoration: none;
+    cursor:default;
+}
 
 .file-item2 .info .filesize {
     width:120px;

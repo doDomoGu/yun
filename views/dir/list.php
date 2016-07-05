@@ -76,16 +76,16 @@
 
     <?php foreach($list as $l):?>
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
-    <div class="dir-item <?=$route=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+    <div class="dir-item <?=$route=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?> <?=$downloadCheck?'download-enable':'download-disable'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
             <div class="filename" style="">
                 <span class="file-checkbox">
-                    <input type="checkbox" >
+                    <input type="checkbox" <?=$downloadCheck?'':'disabled="disabled"'?> >
                 </span>
                 <span class="icon">
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
                 </span>
-                <span class="filename_txt" title="<?=$l->filename?>" alt="<?=$l->filename?>">
+                <span class="filename_txt " title="<?=$l->filename?>" alt="<?=$l->filename?>">
                 <?php if($l->filetype == 0):?>
                     <?=Html::a(CommonFunc::mySubstr($l->filename,30),['/dir','p_id'=>$l->id])?>
                 <?php else:?>
