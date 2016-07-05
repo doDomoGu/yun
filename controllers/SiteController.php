@@ -6,7 +6,7 @@ use app\components\DirFunc;
 use app\models\News;
 use app\models\Dir;
 use app\models\Recruitment;
-use Yii;
+use yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -41,10 +41,10 @@ class SiteController extends BaseController
     public function actions()
     {
         return [
-            'error' => [
+            /*'error' => [
                 'class' => 'yii\web\ErrorAction',
-                /*'view' => 'error'*/
-            ],
+                'view' => 'error'
+            ],*/
             /*'test' => [
                 'class' => 'app\controllers\site\TestAction',
             ],*/
@@ -114,4 +114,9 @@ class SiteController extends BaseController
         return $this->goHome();
     }
 
+    public function actionError()
+    {
+        yii::$app->response->statusCode = 404;
+        return $this->render('error');
+    }
 }

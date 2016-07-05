@@ -65,6 +65,11 @@ class DirController extends BaseController
         //url参数 p_id & dir_id 两者只存在一个 先取p_id
         $p_id = Yii::$app->request->get('p_id',false);
 
+        if($p_id!=false && $p_id != (string)intval($p_id)){
+            //验证dir_id的值是不是为纯数字  当有错误时报错
+            return yii::$app->runAction('/site/error');
+        }
+
         $parDir = File::find()->where(['id'=>$p_id,'status'=>1])->one();
 
         //如果parDir存在 , 给dir_id赋值
@@ -72,6 +77,10 @@ class DirController extends BaseController
             $dir_id = $parDir->dir_id;
         }else{
             $dir_id = Yii::$app->request->get('dir_id',false);
+            if($dir_id!=false && $dir_id != (string)intval($dir_id)){
+                //验证dir_id的值是不是为纯数字  当有错误时报错
+                return yii::$app->runAction('/site/error');
+            }
             $p_id = 0;
         }
 

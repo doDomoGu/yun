@@ -6,22 +6,23 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
-
-$this->title = $name;
+$this->title = '出错了';
 ?>
-<div class="site-error">
+<div class="site-error text-center" >
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <img src="/images/404.png"  />
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
-    </div>
+    <!--<h1><?/*= Html::encode($this->title) */?></h1>-->
 
-    <p>
+    <!--<div class="alert alert-danger">
+        <?/*= nl2br(Html::encode($message)) */?>
+    </div>-->
+
+   <!-- <p>
         The above error occurred while the Web server was processing your request.
     </p>
     <p>
         Please contact us if you think this is a server error. Thank you.
-    </p>
+    </p>-->
 
 </div>
