@@ -127,7 +127,8 @@ class UserController extends BaseController
     public function actionRecycle(){
         $this->view->title = '回收站';
         //$list = File::find()->where(['uid'=>$this->user->id])->andWhere(['>','filetype',0]);
-        $list = File::find()->where(['uid'=>$this->user->id])->andWhere('status <2 and (status = 0 or parent_status = 0)')/*->andWhere(['>','filetype',0])*/;
+        //$list = File::find()->where(['uid'=>$this->user->id])->andWhere('status <2 and (status = 0 or parent_status = 0)')/*->andWhere(['>','filetype',0])*/;
+        $list = File::find()->where(['uid'=>$this->user->id])->andWhere('status = 0  and  parent_status = 1')/*->andWhere(['>','filetype',0])*/;
         $count = $list->count();
         $pageSize = 10;
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
@@ -140,6 +141,10 @@ class UserController extends BaseController
         $params['list'] = $list;
         $params['pages'] = $pages;
         return $this->render('recycle',$params);
+    }
+
+    public function actionRecycle2(){
+
     }
 
     public function actionDoRecycle(){
