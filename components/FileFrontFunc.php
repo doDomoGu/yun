@@ -261,4 +261,20 @@ class FileFrontFunc extends Component {
             ->all();
         return $files;
     }
+
+    public static function getFileNum($p_id,$status=false){
+        $num = 0;
+        $children = File::find()->where(['p_id'=>$p_id]);
+        if($status!==false && in_array($status,[0,1]))
+            $children->andWhere(['status'=>$status]);
+        $children = $children->all();
+        foreach($children as $c){
+            if($c->filetype==0){
+                $num += self::getFileNum($c->id,$status);
+            }else{
+                $num++;
+            }
+        }
+        return $num;
+    }
 }

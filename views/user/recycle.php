@@ -1,17 +1,22 @@
 <?php
     use app\components\DirFunc;
     use yii\bootstrap\BaseHtml;
+    use app\components\FileFrontFunc;
     app\assets\AppAsset::addCssFile($this,'css/main/user/file.css');
     app\assets\AppAsset::addJsFile($this,'js/main/user/recycle.js');
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading"><h1><?=$this->title?></h1></div>
+    <div class="panel-heading"><h1><?=$this->title?></h1>
+        *只显示最顶层的文件夹和文件<br/>
+        如果是文件夹类型，在“文件数”一栏中会显示其下文件数<br/>
+        x / y ; x:处于正常状态的文件; y:总数
+    </div>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>#</th>
             <th>文件名</th>
-            <th>是否文件夹</th>
+            <th>文件数</th>
             <th>所在目录</th>
             <th>上传时间</th>
             <th>操作</th>
@@ -27,7 +32,13 @@
                             <?=\app\components\CommonFunc::mySubstr($l->filename,18)?>
                         </span>
                     </td>
-                    <td><?=$l->filetype==0?'是':''?></td>
+                    <td><?php if($l->filetype==0):?>
+                        <?=FileFrontFunc::getFileNum($l->id,1)?> /
+                        <?=FileFrontFunc::getFileNum($l->id)?>
+                        <?php else:?>
+                        --
+                        <?php endif;?>
+                    </td>
                     <td>
                         <?php $dirRoute = DirFunc::getFileFullRoute($l->dir_id,$l->p_id);?>
                         <span title="<?=$dirRoute?>">

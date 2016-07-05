@@ -143,10 +143,6 @@ class UserController extends BaseController
         return $this->render('recycle',$params);
     }
 
-    public function actionRecycle2(){
-
-    }
-
     public function actionDoRecycle(){
         $file_id = yii::$app->request->get('id',false);
         $file = File::find()->where(['uid'=>$this->user->id,'status'=>0,'id'=>$file_id])->one();
