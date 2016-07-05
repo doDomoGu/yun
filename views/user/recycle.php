@@ -37,9 +37,8 @@
                         }
                         ?>
                         <?=BaseHtml::a('进入目录',$link,['target'=>'_blank','class'=>'btn btn-primary btn-xs'])?>
-
-                        <?/*=BaseHtml::Button('还原',['class'=>'recycleBtn2 btn btn-danger btn-xs','data-toggle'=>'modal','data-target'=>'#recycleModal'])*/?>
-                        <?=BaseHtml::a('还原',['/user/do-recycle','id'=>$l->id],['class'=>'recycleBtn btn btn-danger btn-xs'])?>
+                        <?=BaseHtml::a('还原',['/user/do-recycle','id'=>$l->id],['class'=>'recycleBtn btn btn-success btn-xs'])?>
+                        <?=BaseHtml::a('删除',['/user/do-recycle-delete','id'=>$l->id],['class'=>'recycleDeleteBtn btn btn-danger btn-xs'])?>
                     </td>
                 </tr>
             <?php endforeach;?>

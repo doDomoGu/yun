@@ -154,6 +154,19 @@ class UserController extends BaseController
         }
 
     }
+    public function actionDoRecycleDelete(){
+        $file_id = yii::$app->request->get('id',false);
+        $file = File::find()->where(['uid'=>$this->user->id,'status'=>0,'id'=>$file_id])->one();
+        if($file){
+            $file->status = 2;
+            if($file->save()){
+                Yii::$app->response->redirect('/user/recycle')->send();
+            }
+        }else{
+            echo '文件不存在';
+        }
+
+    }
 
 
     public function actionSign(){

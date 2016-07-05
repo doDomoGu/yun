@@ -421,7 +421,7 @@ class DirController extends BaseController
 
         /*$dir_id = 7;
         $p_id = 131;*/
-        $files = File::find()->select('filename')->where(['dir_id'=>$dir_id,'p_id'=>$p_id])->all();
+        $files = File::find()->select('filename')->where(['dir_id'=>$dir_id,'p_id'=>$p_id])->andWhere('status < 2 ')->all();
         $arr = [];
         foreach($files as $f){
             $arr[] = $f->filename;
