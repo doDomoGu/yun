@@ -38,7 +38,7 @@
                         <?=$l->add_time?>
                     </td>
                     <td>
-                        <?php if($l->status==1 && $l->parent_status == 0):?>
+                        <?php if($l->parent_status == 0):?>
                             所在文件夹被移入回收站
                         <?php else:?>
                             <?php
