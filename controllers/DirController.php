@@ -8,6 +8,7 @@ use app\components\FileFrontFunc;
 use app\components\PermissionFunc;
 use app\models\Dir;
 use app\models\File;
+use app\models\SystemLog;
 use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use Yii;
@@ -213,8 +214,14 @@ class DirController extends BaseController
                     $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
                 }*/
                 if($parDir){
-                    if(!PermissionFunc::checkFileDownloadPermission($this->user->position_id,$parDir))
+                    if(!PermissionFunc::checkFileDownloadPermission($this->user->position_id,$parDir)){
+                        SystemLog::user_log(
+                            SystemLog::LEVEL_WARN,
+                            'dir',
+                            '没有权限打开目录('.$parDir->id.':'.DirFunc::getFileFullRoute($parDir->id).')'
+                        );
                         yii::$app->response->redirect('/')->send();
+                    }
                 }
 
                 $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);

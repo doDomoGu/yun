@@ -92,21 +92,14 @@
                     <?=CommonFunc::mySubstr($l->filename,30)?>
                 <?php endif;?>
                 </span>
+                <div class="click_btns">
                 <?php if($l->filetype!=0):?>
-                    <div class="click_btns">
-                        <?php if($l->filetype>0):?>
-                            <?php if($downloadCheck):?>
-                                <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'downloadBtn btn '])?>
-                            <?php else:?>
-                                <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
-                            <?php endif;?>
+                        <?php if($downloadCheck):?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'downloadBtn btn '])?>
                         <?php else:?>
-                            <?php if($downloadCheck):?>
-                                <?=Html::Button('打',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])?>
-                            <?php else:?>
-                                <?=Html::Button('打',['class'=> 'btn disabled'])?>
-                            <?php endif;?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
                         <?php endif;?>
+
                         <?php if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):?>
                             <?=Html::Button('<span class="glyphicon glyphicon-picture" aria-hidden="true"></span>',['data-id'=>$l->id,'class'=> 'previewBtn btn'])?>
                         <?php else:?>
@@ -117,8 +110,15 @@
                         <?php else:?>
                             <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
                         <?php endif;?>
-                    </div>
+
+                <?php else:?>
+                    <?php if($l->uid==yii::$app->user->id):?>
+                        <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn'])?>
+                    <?php else:?>
+                        <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>
+                    <?php endif;?>
                 <?php endif;?>
+                </div>
             </div>
             <div class="filesize"><?=$l->filetype>0?FileFrontFunc::sizeFormat($l->filesize):'--'?></div>
             <div class="upload_time"><?=date('Y-m-d H:i',strtotime($l->add_time))?></div>

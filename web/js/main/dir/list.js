@@ -16,7 +16,7 @@ $('.dir-item .info').mouseenter(function(){
     $(this).parent('.dir-item').removeClass('hover');
 });*/
 
-$('.filetype').mouseenter(function(){
+$('.dir-item.file-item2').mouseenter(function(){
     $(this).find('.click_btns').show();
 }).mouseleave(function(){
     $(this).find('.click_btns').hide();
