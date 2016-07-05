@@ -5,8 +5,8 @@
 Modal::begin([
     'header' => '文件预览',
     'id'=>'previewModal',
-    /*'size'=>'modal-lg',*/
-    'options'=>['style'=>'margin-top:120px;']
+    'size'=>'modal-lg',
+    'options'=>['style'=>'margin-top:80px;']
 ]);
 ?>
     <div id="previewContent">

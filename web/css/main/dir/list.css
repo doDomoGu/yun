@@ -185,11 +185,10 @@
 }
 
 .file-item2 {
-    height:40px;
+    height:39px;
     line-height: 38px;
     float:left;
     display: block;
-    margin-bottom: 10px;
     overflow: hidden;
     width:100%;
     border-bottom: 1px solid #EBEBEB;
@@ -197,20 +196,19 @@
 }
 
 
-.file-item2 .icon {
-    margin:0;
-}
-
 .file-item2 .icon img{
     border-radius: 4px;
 }
 
 .file-item2 .info {
-    margin-top:2px;
     display: block;
     float:left;
     width: 785px;
     overflow: hidden;
+}
+
+.file-item2 .info:hover {
+    background: #F0F8FD;
 }
 
 .file-item2 .info .filename {
@@ -220,21 +218,26 @@
     position: relative;
     overflow: hidden;
     word-break: break-all;
+    height:38px;
 }
+
+.file-item2 .info .filename .file-checkbox {
+    display: block;
+    width:20px;
+    overflow: hidden;
+    float:left;
+    margin-right:4px;
+    margin-left:11px;
+}
+
 .file-item2 .info .filename .icon {
     display: block;
     width:20px;
     overflow: hidden;
     float:left;
     margin-right:4px;
-}
-.file-item2 .info .filename a {
-    /*width:200px;
-    overflow: hidden;*/
-    display: inline;
-}
-.file-item2 .info .filename a:hover {
-    text-decoration: underline;
+    margin-left:0;
+    height:38px;
 }
 
 .file-item2 .info .filename .filename_txt{
@@ -242,6 +245,18 @@
     overflow: hidden;
     display: inline-block;
 }
+
+.file-item2 .info .filename .filename_txt a {
+    /*width:200px;
+    overflow: hidden;*/
+    display: inline;
+}
+
+.file-item2 .info .filename .filename_txt a:hover {
+    text-decoration: underline;
+}
+
+
 
 .file-item2 .info .filesize {
     width:120px;

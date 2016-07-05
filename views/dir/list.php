@@ -79,9 +79,9 @@
     <div class="dir-item <?=$route=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
             <div class="filename" style="">
-                <!--<span class="file-check">
+                <span class="file-checkbox">
                     <input type="checkbox" >
-                </span>-->
+                </span>
                 <span class="icon">
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
                 </span>
