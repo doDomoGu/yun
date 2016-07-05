@@ -163,6 +163,9 @@ class ManageController extends BaseController
             'cache-dir-clear' => [
                 'class' => 'app\controllers\manage\cache\CacheDirClearAction',
             ],
+            'systemlog' => [
+                'class' => 'app\controllers\manage\systemlog\SystemlogAction',
+            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,

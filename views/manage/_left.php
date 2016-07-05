@@ -33,6 +33,9 @@
             <a class="list-group-item <?=strpos($route,'manage/user-sign')===0?'active':''?>" href="/manage/user-sign">
                 职员签到
             </a>
+            <a class="list-group-item <?=strpos($route,'manage/systemlog')===0?'active':''?>" href="/manage/systemlog">
+                网站日志
+            </a>
         <?php elseif($this->context->checkIsUserAdmin()):?>
             <button class="list-group-item disabled">首页新闻</button>
             <button class="list-group-item disabled">招聘信息</button>
@@ -45,6 +48,7 @@
             <button class="list-group-item disabled">管理员授权</button>
             <button class="list-group-item disabled">消息通知</button>
             <button class="list-group-item disabled">职员签到</button>
+            <button class="list-group-item disabled">网站日志</button>
         <?php endif;?>
 
     </div>

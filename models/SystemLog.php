@@ -41,6 +41,16 @@ class SystemLog extends \yii\db\ActiveRecord
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8*/
 
+    public function getUser()
+    {
+        return $this->hasOne('app\models\User', array('id' => 'uid'));
+    }
+
+    public function getUser2($name)
+    {
+        return $this->hasOne('app\models\User', array('id' => 'uid'))->where('name like "%'.$name.'%"');
+    }
+
     public static function user_log($level,$category,$message){
         $log = new SystemLog();
         $log->type = 2;
@@ -49,6 +59,61 @@ class SystemLog extends \yii\db\ActiveRecord
         $log->category = $category;
         $log->message = $message;
         $log->save();
+    }
+
+
+    public static function system_log($level,$category,$message){
+        $log = new SystemLog();
+        $log->type = 1;
+        $log->uid = 0;
+        $log->level = $level;
+        $log->category = $category;
+        $log->message = $message;
+        $log->save();
+    }
+
+
+    public static function getLevel($level_id){
+        switch($level_id){
+            case self::LEVEL_TRACE:
+                $level = 'TRACE';
+                break;
+            case self::LEVEL_DEBUG:
+                $level = 'DEBUG';
+                break;
+            case self::LEVEL_INFO:
+                $level = 'INFO';
+                break;
+            case self::LEVEL_NOTICE:
+                $level = 'NOTICE';
+                break;
+            case self::LEVEL_WARN:
+                $level = 'WARN';
+                break;
+            case self::LEVEL_ERROR:
+                $level = 'ERROR';
+                break;
+            case self::LEVEL_FATAL:
+                $level = 'FATAL';
+                break;
+            default:
+                $level = 'N/A';
+        }
+        return $level;
+    }
+
+    public static function getType($type_id){
+        switch($type_id){
+            case self::TYPE_SYSTEM:
+                $level = '系统信息';
+                break;
+            case self::TYPE_USER:
+                $level = '用户记录';
+                break;
+            default:
+                $level = 'N/A';
+        }
+        return $level;
     }
 }
 
