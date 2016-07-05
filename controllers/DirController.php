@@ -288,44 +288,49 @@ class DirController extends BaseController
         $p_id = isset($post['p_id'])?$post['p_id']:'';
         $uid = $this->user->id;
         $flag = isset($post['flag'])?$post['flag']:'';
-        if(PermissionFunc::checkFileUploadPermission($this->user->position_id,$dir_id,$flag)){
-            $file = new File();
-            $insert['filename'] = isset($post['filename'])?$post['filename']:'';
-            $insert['filesize'] = isset($post['filesize'])?$post['filesize']:'';
-            $insert['filetype'] = isset($post['filetype'])?$post['filetype']:FileFrontFunc::getFileType($insert['filename']);
-            $insert['dir_id'] = $dir_id;
-            $insert['p_id'] = $p_id;
-            $insert['filename_real'] = isset($post['filename_real'])?$post['filename_real']:'';
-            $insert['uid'] = $uid;
-            $insert['clicks'] = 0;
-            $insert['ord'] = 1;
-            $insert['status'] = 1;
-            $insert['flag'] = $flag;  //flag ：1 公共  flag :2 个人\私人
+        $filename = isset($post['filename'])?$post['filename']:'';
+        if($dir_id>0 && $filename!='' && PermissionFunc::checkFileUploadPermission($this->user->position_id,$dir_id,$flag)){
+            $fileexist = File::find()->where(['dir_id'=>$dir_id,'p_id'=>$p_id,'filename'=>$filename])->andWhere('status < 2')->one();
+            if($fileexist==false){
+                $file = new File();
+                $insert['filename'] = $filename;
+                $insert['filesize'] = isset($post['filesize'])?$post['filesize']:'';
+                $insert['filetype'] = isset($post['filetype'])?$post['filetype']:FileFrontFunc::getFileType($insert['filename']);
+                $insert['dir_id'] = $dir_id;
+                $insert['p_id'] = $p_id;
+                $insert['filename_real'] = isset($post['filename_real'])?$post['filename_real']:'';
+                $insert['uid'] = $uid;
+                $insert['clicks'] = 0;
+                $insert['ord'] = 1;
+                $insert['status'] = 1;
+                $insert['flag'] = $flag;  //flag ：1 公共  flag :2 个人\私人
 
 
 
-            //$file->insert(true,$insert);
-            $file->setAttributes($insert);
+                //$file->insert(true,$insert);
+                $file->setAttributes($insert);
 
-            /*$file->filename = $post['filename'];
-            $file->filesize = $post['filesize'];
-            $file->filetype = FileFrontFunc::getFileType($post['filename']);
-            $file->dir_id = $post['dir_id'];
-            $file->p_id = $post['p_id'];
-            $file->filename_real = $post['filename_real'];
-            $file->uid = yii::$app->user->id;
-            $file->clicks = 0;
-            $file->ord = 1;
-            $file->status = 1;
-            $file->flag = 1;*/
+                /*$file->filename = $post['filename'];
+                $file->filesize = $post['filesize'];
+                $file->filetype = FileFrontFunc::getFileType($post['filename']);
+                $file->dir_id = $post['dir_id'];
+                $file->p_id = $post['p_id'];
+                $file->filename_real = $post['filename_real'];
+                $file->uid = yii::$app->user->id;
+                $file->clicks = 0;
+                $file->ord = 1;
+                $file->status = 1;
+                $file->flag = 1;*/
 
-            $file->save();
+                $file->save();
+                echo json_encode(['result'=>true]);
+            }else{
+                echo json_encode(['result'=>false,'msg'=>'同名文件已存在']);
+            }
             //yii::$app->response->redirect(['/dir','dir_id'=>$post['dir_id']])->send();
-            echo json_encode(['result'=>true]);
         }else{
-            echo json_encode(['result'=>false]);
+            echo json_encode(['result'=>false,'msg'=>'没有上传权限']);
         }
-
 
         yii::$app->end();
 

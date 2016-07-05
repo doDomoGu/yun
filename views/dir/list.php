@@ -10,8 +10,7 @@
         app\assets\AppAsset::addCssFile($this,'css/main/dir/list.css');
     }
 
-    app\assets\AppAsset::addJsFile($this,'js/qiniu/plupload.full.min.js');
-    app\assets\AppAsset::addJsFile($this,'js/qiniu/qiniu.js');
+
     app\assets\AppAsset::addJsFile($this,'js/main/dir/list.js?v=20160701');
 
 ?>
@@ -59,7 +58,12 @@
     <div id="file_head" class="clearfix">
         <ul class="head_cols">
             <?php if($listType=='list'):?>
-            <li class="head_col_filename">文件名</li>
+            <li class="head_col_filename">
+                <span>
+                    <input type="checkbox" >
+                </span>
+                文件名
+            </li>
             <li class="head_col_filesize">大小</li>
             <li class="head_col_uploadtime">上传时间</li>
             <?php endif;?>
@@ -75,6 +79,9 @@
     <div class="dir-item <?=$route=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
             <div class="filename" style="">
+                <!--<span class="file-check">
+                    <input type="checkbox" >
+                </span>-->
                 <span class="icon">
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
                 </span>
