@@ -19,21 +19,25 @@ class DirController extends BaseController
     public $layout = 'main_dir';
 
     public $orderArr = [
-        'add_time.desc',
-        'add_time.asc',
+        'filename.desc',
+        'filename.asc',
         'filesize.desc',
         'filesize.asc',
-        'clicks.desc',
-        'clicks.asc'
+        'add_time.desc',
+        'add_time.asc',
+        /*'clicks.desc',
+        'clicks.asc'*/
     ];
 
     public $orderNameArr = [
-        '时间从新到旧',
-        '时间从旧到新',
+        '文件名倒序',
+        '文件名正序',
         '文件从大到小',
         '文件从小到大',
-        '下载量从大到小',
-        '下载量从小到大'
+        '时间从新到旧',
+        '时间从旧到新',
+        /*'下载量从大到小',
+        '下载量从小到大'*/
     ];
 
     public $previewTypeArr = [2,3,4,5,6];

@@ -387,3 +387,21 @@
 .dir-item.dl_enable.is-dir {
     cursor: pointer;
 }
+
+#file_head .head_cols li span.order-icon {
+    background: rgba(0, 0, 0, 0) url("../../../images/common/list-view.png") no-repeat scroll -50px -45px;
+    display: none;
+    height: 10px;
+    margin-left: 4px;
+    vertical-align: middle;
+    width: 9px;
+}
+
+#file_head .head_cols li.desend span.order-icon{
+    background-position: -50px -45px;
+    display: inline-block;
+}
+#file_head .head_cols li.ascend span.order-icon{
+    background-position: -60px -45px;
+    display: inline-block;
+}

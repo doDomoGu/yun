@@ -58,14 +58,21 @@
     <div id="file_head" class="clearfix">
         <ul class="head_cols">
             <?php if($listType=='list'):?>
-            <li class="head_col_filename">
+            <li class="head_col_filename <?=$orderNum==0?'desend':''?> <?=$orderNum==1?'ascend':''?>">
                 <span>
                     <input type="checkbox" >
                 </span>
-                文件名
+                <span class="txt">文件名</span>
+                <span class="order-icon"></span>
             </li>
-            <li class="head_col_filesize">大小</li>
-            <li class="head_col_uploadtime">上传时间</li>
+            <li class="head_col_filesize <?=$orderNum==2?'desend':''?> <?=$orderNum==3?'ascend':''?>" data-key="filesize">
+                <span class="txt">大小</span>
+                <span class="order-icon"></span>
+            </li>
+            <li class="head_col_uploadtime <?=$orderNum==4?'desend':''?> <?=$orderNum==5?'ascend':''?>">
+                <span class="txt">上传时间</span>
+                <span class="order-icon"></span>
+            </li>
             <?php endif;?>
         </ul>
     </div>
