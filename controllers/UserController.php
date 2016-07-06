@@ -172,6 +172,18 @@ class UserController extends BaseController
 
     }
 
+    public function actionDoRecycleDeleteAll(){
+        $files = File::find()->where(['uid'=>$this->user->id])->andWhere('status = 0  and  parent_status = 1')->all();
+        foreach($files as $f){
+            $f->status = 2;
+            if($f->save()){
+                FileFrontFunc::updateDeleteStatus($f->id);
+
+            }
+        }
+        Yii::$app->response->redirect('/user/recycle')->send();
+    }
+
 
     public function actionSign(){
         $this->view->title = '每日签到';

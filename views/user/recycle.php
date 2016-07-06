@@ -19,7 +19,11 @@
             <th>文件数</th>
             <th>所在目录</th>
             <th>上传时间</th>
-            <th>操作</th>
+            <th>操作
+                <?php if(!empty($list)):?>
+            <?=BaseHtml::a('！清空回收站！',['/user/do-recycle-delete-all'],['class'=>'recycleDeleteAllBtn btn btn-danger btn-xs'])?>
+                <?php endif;?>
+            </th>
         </tr>
         </thead>
         <tbody>

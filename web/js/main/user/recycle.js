@@ -12,3 +12,10 @@ $('.recycleDeleteBtn').click(function(e){
         window.location = $(this).attr('href');
     }
 });
+
+$('.recycleDeleteAllBtn').click(function(e){
+    e.preventDefault();
+    if(confirm('确认是否要清空回收站?(无法还原)')){
+        window.location = $(this).attr('href');
+    }
+});
