@@ -49,6 +49,7 @@
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <span class="total_count">
+            <span class="loading_num"></span>
             共<?=$count?>个
         </span>
     </div>
@@ -161,8 +162,12 @@
 
 <?=$this->render('modal/preview')?>
 
-<input type="hidden" id="dir_id" value="<?=$dir_id?>">
-<input type="hidden" id="p_id" value="<?=$p_id?>">
-<input type="hidden" id="dir_route" value="<?=$dirRoute?>">
+<input type="hidden" id="var_dir_id" value="<?=$dir_id?>">
+<input type="hidden" id="var_p_id" value="<?=$p_id?>">
+<input type="hidden" id="var_dir_route" value="<?=$dirRoute?>">
+<input type="hidden" id="var_page" value="<?=$page?>">
+<input type="hidden" id="var_page_size" value="<?=$page_size?>">
+<input type="hidden" id="var_page_num" value="<?=$page_num?>">
+<input type="hidden" id="var_count" value="<?=$count?>">
 
 <?/*=Html::a('提交',['/dir/save'],['id'=>'save-submit','data-method'=>'post'])*/?>

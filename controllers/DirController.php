@@ -224,16 +224,6 @@ class DirController extends BaseController
                     $pageSize = 20;
                 }
 
-
-                /*if($parDir){
-
-                }else{
-                    $count = FileFrontFunc::getFilesNumByDirId($dir_id,$search);
-
-                    $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
-
-                    $list = FileFrontFunc::getFilesByDirId($dir_id,$pages,$order,$search);
-                }*/
                 if($parDir){
                     if(!PermissionFunc::checkFileDownloadPermission($this->user->position_id,$parDir)){
                         ## 日志记录 ##
@@ -245,11 +235,10 @@ class DirController extends BaseController
                         yii::$app->response->redirect('/')->send();
                     }
                 }
-                $count = 0;
-$list = [];
-           /*     $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
+                $list = [];
+                $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
 
-                $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+                /*$pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
                 $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$orderTrue,$search);*/
 
@@ -287,6 +276,9 @@ $list = [];
                 $params['listTypeNum'] = $listTypeNum;
                 $params['listTypeSelect'] = $listTypeSelect;
                 $params['count'] = $count;
+                $params['page'] = $page;
+                $params['page_size'] = $pageSize;
+                $params['page_num'] = ceil($count/$pageSize);
                 $params['dirRoute'] = $dirRoute;
                 $viewName = 'list';
             }else{

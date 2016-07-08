@@ -1,18 +1,57 @@
-$(function(){
+var loading_files_flag = true;
+var loading_files = function(){
+    _page = $('#var_page').val();
+    _page_size = $('#var_page_size').val();
+    _count = $('#var_count').val();
     $.ajax({
         url: '/dir/get-files',
         type: 'get',
-        //async: false,
         data: {
-            dir_id:$('#dir_id').val(),
-            p_id:$('#p_id').val(),
+            dir_id:$('#var_dir_id').val(),
+            p_id:$('#var_p_id').val(),
+            page:_page,
+            page_size:_page_size,
             list_type:'list'
         },
         success: function (data) {
             $('#list-main').append(data);
+            loading_num = parseInt(_page) * parseInt(_page_size);
+            if(loading_num>=_count){
+                $('.loading_num').html('加载完毕');
+                loading_files_flag = false;
+            }else{
+                $('.loading_num').html('已加载'+loading_num+'个');
+                $('#var_page').val(_page+1);
+            }
+
+
         }
     });
+};
+
+loading_files();
+
+$(window).scroll( function() {
+    if(loading_files_flag){
+        scroll_loading();
+    }
+
 });
+
+var totalheight = 0;     //定义一个总的高度变量
+function scroll_loading()
+{
+    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+
+    if ($(document).height() <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
+    {
+        //加载数据
+        loading_files();
+    }
+}
+
+
+
 $('#list-main').on('mouseenter','.dir-item.file-item2',function(){
     $(this).find('.click_btns').show();
 }).on('mouseleave','.dir-item.file-item2',function(){
