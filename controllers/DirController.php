@@ -108,7 +108,7 @@ class DirController extends BaseController
 
         if($curDir){
             //$this->dir_id = $dir_id;
-            $dirRoute = '';
+            $dirRoute = ''; //目录路径 用来在七牛上传文件时，拼接文件名
             //面包屑 & 文件路径
             $parents = DirFunc::getParents($dir_id);
             $parents2 = FileFrontFunc::getParents($p_id);
@@ -156,7 +156,9 @@ class DirController extends BaseController
                 $search = yii::$app->request->get('search',false);
 
                 $order = yii::$app->request->get('order',false);
+
                 $orderNum = 0;
+
                 if(!in_array($order,$this->orderArr)){
                     $cache = Yii::$app->cache;
                     $cacheExist = false;
@@ -176,22 +178,20 @@ class DirController extends BaseController
                 }
 
 
-                $orderDropdown = [];
+                $orderSelect = [];
                 foreach($this->orderArr as $n=>$ord){
                     if($order==$ord)
                         $orderNum = $n;
 
-                    $orderDropdown[] = $this->orderNameArr[$n];
+                    $orderSelect[$n] = $this->orderNameArr[$n];
                 }
 
                 $orderTrue = str_replace('.',' ',$order);
 
-
-
-
-
                 $listType = yii::$app->request->get('list_type',false);
+
                 $listTypeNum = 0;
+
                 if(!in_array($listType,$this->listTypeArr)){
                     $cache = Yii::$app->cache;
                     $cacheExist = false;
@@ -212,12 +212,12 @@ class DirController extends BaseController
                 }
 
 
-                $listTypeDropdown = [];
+                $listTypeSelect = [];
                 foreach($this->listTypeArr as $n=>$lT){
                     if($listType==$lT)
                         $listTypeNum = $n;
 
-                    $listTypeDropdown[] = $this->listTypeNameArr[$n];
+                    $listTypeSelect[$n] = $this->listTypeNameArr[$n];
                 }
 
                 if($listType == 'list'){
@@ -279,14 +279,14 @@ class DirController extends BaseController
                 $params['pages'] = $pages;
                 $params['order'] = $order;
                 $params['orderNum'] = $orderNum;
-                $params['orderDropdown'] = $orderDropdown;
+                $params['orderSelect'] = $orderSelect;
                 $params['links'] = $links;
                 $params['links2'] = $links2;
                 $params['listType'] = $listType;
                 $params['listTypeNum'] = $listTypeNum;
-                $params['listTypeDropdown'] = $listTypeDropdown;
+                $params['listTypeSelect'] = $listTypeSelect;
                 $params['count'] = $count;
-
+                $params['dirRoute'] = $dirRoute;
                 $viewName = 'list';
             }else{
                 $list = DirFunc::getChildren($dir_id);
@@ -295,7 +295,7 @@ class DirController extends BaseController
             $params['list'] = $list;
             $params['dir_id'] = $dir_id;
             $params['p_id'] = $p_id;
-            $params['dirRoute'] = $dirRoute;
+
             $this->view->params['dir_id'] = $dir_id;
             //$params['viewType'] = $viewName;
 
