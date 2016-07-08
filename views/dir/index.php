@@ -4,11 +4,15 @@
     app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
 
 ?>
+<div id="list-head">
+    <div id="dir-nav">
 <?= Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
-<div class="clearfix"></div>
-<div class="dir-main">
+    </div>
+</div>
+
+<div id="list-main">
 <?php foreach($list as $l):?>
     <div class="dir-item text-center">
         <a class="alink" href="/dir?dir_id=<?=$l->id?>">

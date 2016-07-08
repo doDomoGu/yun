@@ -1,3 +1,8 @@
+#list-main {
+    border-top:1px solid #999;
+
+}
+
 .dir-item {
     width:200px;
     float:left;
@@ -6,25 +11,6 @@
     overflow: hidden;
     padding-top:20px;
     color:#333;
-}
-
-.breadcrumb {
-    margin-bottom: 0;
-    border-radius: 0;
-    background-color: #fff;
-}
-.breadcrumb a {
-    color:#23527c;
-}
-.breadcrumb > li + li::before  {
-    color: #ccc;
-    content: ">";
-    padding: 0 2px 0 0;
-}
-
-.dir-main {
-    border-top:1px solid #999;
-    overflow: hidden;
 }
 
 .dir-item:hover{

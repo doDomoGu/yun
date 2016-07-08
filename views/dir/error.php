@@ -1,3 +1,3 @@
-<div>
-    <h2>目录不存在或者没有权限操作</h2>
+<div class="alert alert-danger " >
+  目录不存在或者没有操作权限
 </div>

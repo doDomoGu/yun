@@ -33,7 +33,6 @@ use app\assets\AppAsset;
         </div>
         <?php endif;?>
         <div id="dir-main" class="<?=$this->params['dir_id']==5?'dir-study':''?>">
-
             <?= $content ?>
         </div>
     </div>

@@ -71,18 +71,34 @@ class DirController extends BaseController
 
         if($p_id!=false && $p_id != (string)intval($p_id)){
             //验证dir_id的值是不是为纯数字  当有错误时报错
+            ## 日志记录 ##
+            SystemLog::user_log(
+                SystemLog::LEVEL_WARN,
+                'dir',
+                '打开目录参数错误: p_id => '.$p_id
+            );
             return yii::$app->runAction('/site/error');
+        }else{
+            if($p_id==false){
+                $parDir = false;
+            }else{
+                $parDir = File::find()->where(['id'=>$p_id,'status'=>1])->one();
+            }
         }
-
-        $parDir = File::find()->where(['id'=>$p_id,'status'=>1])->one();
 
         //如果parDir存在 , 给dir_id赋值
         if($p_id!==false && $parDir && $parDir->dir_id>0){
             $dir_id = $parDir->dir_id;
-        }else{
+        }else{//如果parDir部存在 , 取url中dir_id参数
             $dir_id = Yii::$app->request->get('dir_id',false);
             if($dir_id!=false && $dir_id != (string)intval($dir_id)){
                 //验证dir_id的值是不是为纯数字  当有错误时报错
+                ## 日志记录 ##
+                SystemLog::user_log(
+                    SystemLog::LEVEL_WARN,
+                    'dir',
+                    '打开目录参数错误: dir_id => '.$dir_id
+                );
                 return yii::$app->runAction('/site/error');
             }
             $p_id = 0;
@@ -90,10 +106,8 @@ class DirController extends BaseController
 
         $curDir = Dir::find()->where(['id'=>$dir_id,'status'=>1])->one();
 
-        $count = 0;
-
         if($curDir){
-            $this->dir_id = $dir_id;
+            //$this->dir_id = $dir_id;
             $dirRoute = '';
             //面包屑 & 文件路径
             $parents = DirFunc::getParents($dir_id);
@@ -134,12 +148,6 @@ class DirController extends BaseController
                 $this->view->title = $curDir->name.$this->titleSuffix;
 
             if($curDir->is_leaf){     //是底层目录 显示文件列表 可以进行上传/新建文件夹等操作
-
-
-
-                //var_dump(FileFrontFunc::getFileType('sss.png'));exit;
-
-                //$list = DirFunc::getChildren($dir_id);
 
                 $pageSize = 12;
 
@@ -228,6 +236,7 @@ class DirController extends BaseController
                 }*/
                 if($parDir){
                     if(!PermissionFunc::checkFileDownloadPermission($this->user->position_id,$parDir)){
+                        ## 日志记录 ##
                         SystemLog::user_log(
                             SystemLog::LEVEL_WARN,
                             'dir',
@@ -243,7 +252,7 @@ class DirController extends BaseController
 
                 $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$orderTrue,$search);
 
-                $viewName = 'list';
+
                 $links = [];
                 $links2 = [];
 
@@ -276,7 +285,9 @@ class DirController extends BaseController
                 $params['listType'] = $listType;
                 $params['listTypeNum'] = $listTypeNum;
                 $params['listTypeDropdown'] = $listTypeDropdown;
+                $params['count'] = $count;
 
+                $viewName = 'list';
             }else{
                 $list = DirFunc::getChildren($dir_id);
                 $viewName = 'index';
@@ -286,12 +297,12 @@ class DirController extends BaseController
             $params['p_id'] = $p_id;
             $params['dirRoute'] = $dirRoute;
             $this->view->params['dir_id'] = $dir_id;
-            $params['route'] = $viewName;
-            $params['count'] = $count;
+            //$params['viewType'] = $viewName;
+
             return $this->render($viewName,$params);
         }else{
-
             $this->layout = 'main';
+            yii::$app->response->statusCode = 404;
             return $this->render('error');
         }
     }
