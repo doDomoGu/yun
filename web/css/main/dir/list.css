@@ -1,3 +1,5 @@
+@import '../../layouts/dir.css';
+
 .dir-item {
     width:200px;
     float:left;

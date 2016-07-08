@@ -245,12 +245,13 @@ class DirController extends BaseController
                         yii::$app->response->redirect('/')->send();
                     }
                 }
-
-                $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
+                $count = 0;
+$list = [];
+           /*     $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
 
                 $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
-                $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$orderTrue,$search);
+                $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$orderTrue,$search);*/
 
 
                 $links = [];
@@ -276,7 +277,7 @@ class DirController extends BaseController
                     $links2[] = $linkTmp;
                 }
 
-                $params['pages'] = $pages;
+//                $params['pages'] = $pages;
                 $params['order'] = $order;
                 $params['orderNum'] = $orderNum;
                 $params['orderSelect'] = $orderSelect;
@@ -307,6 +308,34 @@ class DirController extends BaseController
         }
     }
 
+
+    public function actionGetFiles(){
+        $dir_id = yii::$app->request->get('dir_id',false);
+        $p_id = yii::$app->request->get('p_id',false);
+        //$page = yii::$app->request->get('page',1);
+        $search = yii::$app->request->get('search',false);
+        $order = yii::$app->request->get('order',false);
+
+        $listType = yii::$app->request->get('list_type',false);
+
+
+
+        $pageSize = 20;
+
+        $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
+
+        $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
+
+        $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$order,$search);
+
+        $params['list'] = $list;
+        $params['listType'] = $listType;
+        $params['dir_id'] = $dir_id;
+        $params['p_id'] = $p_id;
+
+        $this->layout = false;
+        return $this->render('_list_data',$params);
+    }
 
    /* public function detail($dir_id,$curDir){
 

@@ -4,7 +4,6 @@
     /*app\assets\AppAsset::addCssFile($this,'css/nestable.css');
     app\assets\AppAsset::addJsFile($this,'js/jquery.nestable.js');*/
 
-
     app\assets\AppAsset::addCssFile($this,'css/ztree/zTreeStyle/zTreeStyle.css');
     app\assets\AppAsset::addJsFile($this,'js/jquery.ztree.core-3.5.min.js');
 

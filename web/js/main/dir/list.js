@@ -1,24 +1,21 @@
-/*$('.dir-item').mouseenter(function(){
-    $(this).find('.info').addClass('hover');
-}).mouseleave(function(){
-    $(this).find('.info').removeClass('hover');
-});*/
-
-/*$('.dir-item .icon').mouseenter(function(){
-    $(this).parent('.dir-item').addClass('hover');
-}).mouseleave(function(){
-    $(this).parent('.dir-item').removeClass('hover');
+$(function(){
+    $.ajax({
+        url: '/dir/get-files',
+        type: 'get',
+        //async: false,
+        data: {
+            dir_id:$('#dir_id').val(),
+            p_id:$('#p_id').val(),
+            list_type:'list'
+        },
+        success: function (data) {
+            $('#list-main').append(data);
+        }
+    });
 });
-
-$('.dir-item .info').mouseenter(function(){
-    $(this).parent('.dir-item').addClass('hover');
-}).mouseleave(function(){
-    $(this).parent('.dir-item').removeClass('hover');
-});*/
-
-$('.dir-item.file-item2').mouseenter(function(){
+$('#list-main').on('mouseenter','.dir-item.file-item2',function(){
     $(this).find('.click_btns').show();
-}).mouseleave(function(){
+}).on('mouseleave','.dir-item.file-item2',function(){
     $(this).find('.click_btns').hide();
 });
 
@@ -37,19 +34,12 @@ $('.file-check').click(function(){
     if($(this).prop('checked')==false){
         $('.file-item').removeClass('file-checked');
         $('.file-check').prop('checked',false);
-        /*$(this).find('.icon').removeClass('hover');
-        $(this).find('.file-check').hide();*/
     }else{
         $('.file-item').removeClass('file-checked');
         $('.file-check').prop('checked',false);
         $(this).prop('checked',true);
         $(this).parents('.file-item').addClass('file-checked');
     }
-
-    //$('.file-check').attr('checked',false);
-    //$('.file-item').removeClass('file-checked');
-
-        //$(this).attr('checked',true);
 });
 
 $('.dir-item.dl_enable.is-dir').click(function(){

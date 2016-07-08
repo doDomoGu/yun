@@ -5,7 +5,6 @@
     use yii\widgets\Breadcrumbs;
 
 //    app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
-
     app\assets\AppAsset::addCssFile($this,'css/main/dir/list.css');
 
 
@@ -22,10 +21,10 @@
         <div id="left_btns">
         <?php if(PermissionFunc::isAllowUploadCommon($dir_id)):?>
             <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#uploadCommonModal"])?>
-            <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-default','id'=>'modalButton','data-toggle'=>"modal",'data-target'=>"#createDirCommonModal"])?>
+            <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-default','id'=>'modalButtonDir','data-toggle'=>"modal",'data-target'=>"#createDirCommonModal"])?>
         <?php else:?>
             <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传',['value'=>'','class'=> 'btn btn-success disabled','id'=>'modalButton'])?>
-            <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-default disabled','id'=>'modalButton'])?>
+            <?=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹',['value'=>'','class'=> 'btn btn-default disabled','id'=>'modalButtonDir'])?>
         <?php endif;?>
         <?php /*if(PermissionFunc::isAllowUploadPerson($dir_id)):*/?><!--
             <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-upload"></span> 上传 (个人)',['value'=>'','class'=> 'btn btn-success','id'=>'modalButton2','data-toggle'=>"modal",'data-target'=>"#uploadPersonModal"])*/?>
@@ -50,7 +49,7 @@
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <span class="total_count">
-            共<?=$pages->totalCount?>个
+            共<?=$count?>个
         </span>
     </div>
     <div id="file_head" class="clearfix">
@@ -75,8 +74,8 @@
         </ul>
     </div>
 </div>
-<?php if(!empty($list)):?>
 <div id="list-main">
+<?php if(!empty($list)):?>
 <?php if($listType=='list'):?>
     <?=$this->context->renderPartial('_list_data',['list'=>$list,'listType'=>$listType])?>
 
@@ -138,7 +137,7 @@
     </div>
     <?php endforeach;?>
 <?php endif;?>
-</div>
+
 <!--<div class="clearfix"></div>
 <div class="clearfix text-center">
     <?/*= \yii\widgets\LinkPager::widget(['pagination' => $pages]); */?>
@@ -153,7 +152,7 @@
     </div>
 </div>-->
 <?php endif;?>
-
+</div>
 
 <?=$this->render('modal/upload_common')?>
 <?/*=$this->render('modal/upload_person')*/?>

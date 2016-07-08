@@ -32,6 +32,7 @@ class AppAsset extends AssetBundle
         $view->registerCssFile($cssfile, ['depends' => 'app\assets\AppAsset']);
     }
 
+
     //导入编辑器
     /*public static function addCkeditor($view) {
         $view->registerJsFile('/public/js/utility/ckeditor/ckeditor.js', [AppAsset::className(), 'depends' => 'app\assets\AppAsset']);
