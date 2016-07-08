@@ -75,12 +75,12 @@ class FileFrontFunc extends Component {
         $dir_id = intval($dir_id);
         $p_id = intval($p_id);
         if($p_id>0)
-            $count = $count->where(['p_id'=>$p_id,'status'=>1]);
+            $count = $count->where(['file.p_id'=>$p_id,'file.status'=>1]);
         else
-            $count = $count->where(['dir_id'=>$dir_id,'p_id'=>0,'status'=>1]);
+            $count = $count->where(['file.dir_id'=>$dir_id,'file.p_id'=>0,'file.status'=>1]);
         if($search!==false)
-            $count = $count->andWhere(['like','filename',$search]);
-        return $count->count();
+            $count = $count->andWhere(['like','file.filename',$search]);
+        return $count->innerJoinWith('user')->count();
     }
 
 

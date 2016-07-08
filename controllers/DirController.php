@@ -186,7 +186,7 @@ class DirController extends BaseController
                     $orderSelect[$n] = $this->orderNameArr[$n];
                 }
 
-                $orderTrue = str_replace('.',' ',$order);
+
 
                 $listType = yii::$app->request->get('list_type',false);
 
@@ -308,6 +308,7 @@ class DirController extends BaseController
         $search = yii::$app->request->get('search',false);
         $order = yii::$app->request->get('order',false);
 
+        $orderTrue = str_replace('.',' ',$order);
         $listType = yii::$app->request->get('list_type',false);
 
 
@@ -318,7 +319,7 @@ class DirController extends BaseController
 
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);
 
-        $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$order,$search);
+        $list = FileFrontFunc::getFiles($dir_id,$p_id,$pages,$orderTrue,$search);
 
         $params['list'] = $list;
         $params['listType'] = $listType;

@@ -9,6 +9,7 @@ var loading_files = function(){
         data: {
             dir_id:$('#var_dir_id').val(),
             p_id:$('#var_p_id').val(),
+            order:$('#var_order').val(),
             page:_page,
             page_size:_page_size,
             list_type:'list'
@@ -32,6 +33,10 @@ var loading_files = function(){
 loading_files();
 
 $(window).scroll( function() {
+    console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+    console.log("页面的文档高度 ："+$(document).height());
+    console.log('浏览器的高度：'+$(window).height());
+
     if(loading_files_flag){
         scroll_loading();
     }

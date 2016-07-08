@@ -168,6 +168,7 @@
 <input type="hidden" id="var_page" value="<?=$page?>">
 <input type="hidden" id="var_page_size" value="<?=$page_size?>">
 <input type="hidden" id="var_page_num" value="<?=$page_num?>">
+<input type="hidden" id="var_order" value="<?=$order?>">
 <input type="hidden" id="var_count" value="<?=$count?>">
 
 <?/*=Html::a('提交',['/dir/save'],['id'=>'save-submit','data-method'=>'post'])*/?>
