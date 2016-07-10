@@ -99,6 +99,10 @@
     top: 8px;
     right: 20px;
 }
+#dir-nav .total_count .loading_num {
+    color:#999;
+}
+
 
 #buttons {
     background: #f7f7f7;
