@@ -22,7 +22,7 @@ var loading_files = function(){
                 loading_files_flag = false;
             }else{
                 $('.loading_num').html('已加载'+loading_num+'个');
-                $('#var_page').val(_page+1);
+                $('#var_page').val(parseInt(_page)+1);
             }
 
 

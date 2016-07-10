@@ -326,6 +326,7 @@ class DirController extends BaseController
         $params['dir_id'] = $dir_id;
         $params['p_id'] = $p_id;
 
+        //$params['start'] = intval($pageSize*($pages->page))+1;
         $this->layout = false;
         return $this->render('_list_data',$params);
     }
