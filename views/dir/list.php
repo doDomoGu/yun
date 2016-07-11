@@ -34,10 +34,11 @@
             <?/*=Html::Button('<span aria-hidden="true" class="glyphicon glyphicon-folder-open"></span> 新建文件夹（个人）',['value'=>'','class'=> 'btn btn-primary disabled','id'=>'modalButton'])*/?>
         <?php /*endif;*/?>
         </div>
-        <div id="right_btns">排序：<?=Html::dropDownList('order_select',$orderNum,$orderSelect,['id'=>'order_select'])?>
-            <?php foreach($links as $link_key => $li):?>
-                <input type="hidden" id="link_<?=$link_key?>" value="<?=$li?>" />
-            <?php endforeach;?>
+        <div id="right_btns">
+            <!--排序：<?/*=Html::dropDownList('order_select',$orderNum,$orderSelect,['id'=>'order_select'])*/?>
+            <?php /*foreach($links as $link_key => $li):*/?>
+                <input type="hidden" id="link_<?/*=$link_key*/?>" value="<?/*=$li*/?>" />
+            --><?php /*endforeach;*/?>
             显示：<?=Html::dropDownList('list_type_select',$listTypeNum,$listTypeSelect,['id'=>'list_type_select'])?>
             <?php foreach($links2 as $link_key => $li):?>
                 <input type="hidden" id="link2_<?=$link_key?>" value="<?=$li?>" />
@@ -56,18 +57,18 @@
     <div id="file_head" class="clearfix">
         <ul class="head_cols">
             <?php if($listType=='list'):?>
-            <li class="head_col_filename <?=$orderNum==0?'desend':''?> <?=$orderNum==1?'ascend':''?>">
-                <span>
-                    <input type="checkbox" >
+            <li class="head_col_filename <?=$orderClass[0]?>" data-url="<?=$orderLink[0]?>" >
+                <span class="list-check">
+                    <input type="checkbox" class="list-checkbox">
                 </span>
                 <span class="txt">文件名</span>
                 <span class="order-icon"></span>
             </li>
-            <li class="head_col_filesize <?=$orderNum==2?'desend':''?> <?=$orderNum==3?'ascend':''?>" data-key="filesize">
+            <li class="head_col_filesize <?=$orderClass[1]?>" data-url="<?=$orderLink[1]?>" >
                 <span class="txt">大小</span>
                 <span class="order-icon"></span>
             </li>
-            <li class="head_col_uploadtime <?=$orderNum==4?'desend':''?> <?=$orderNum==5?'ascend':''?>">
+            <li class="head_col_uploadtime <?=$orderClass[2]?>" data-url="<?=$orderLink[2]?>" >
                 <span class="txt">上传时间</span>
                 <span class="order-icon"></span>
             </li>

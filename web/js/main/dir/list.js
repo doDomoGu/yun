@@ -33,9 +33,9 @@ var loading_files = function(){
 loading_files();
 
 $(window).scroll( function() {
-    console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+    /*console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
     console.log("页面的文档高度 ："+$(document).height());
-    console.log('浏览器的高度：'+$(window).height());
+    console.log('浏览器的高度：'+$(window).height());*/
 
     if(loading_files_flag){
         scroll_loading();
@@ -54,7 +54,15 @@ function scroll_loading()
         loading_files();
     }
 }
+$('.list-checkbox').mouseenter(function(){
+    $('#file_head ul li.head_col_filename').addClass('list-oncheck');
+}).mouseleave(function(){
+    $('#file_head ul li.head_col_filename').removeClass('list-oncheck');
+});
 
+$('#file_head ul ').on('click','li.head_col_filename:not(".list-oncheck"), li.head_col_filesize, li.head_col_uploadtime',function(){
+    location.href = $(this).attr('data-url');
+});
 
 
 $('#list-main').on('mouseenter','.dir-item.file-item2',function(){
@@ -64,7 +72,7 @@ $('#list-main').on('mouseenter','.dir-item.file-item2',function(){
 });
 
 
-$('.dir-item.file-item').mouseenter(function(){
+/*$('.dir-item.file-item').mouseenter(function(){
     $(this).find('.icon').addClass('hover');
     $(this).find('.file-check').show();
 }).mouseleave(function(){
@@ -72,7 +80,7 @@ $('.dir-item.file-item').mouseenter(function(){
         $(this).find('.icon').removeClass('hover');
         $(this).find('.file-check').hide();
     }
-});
+});*/
 
 $('.file-check').click(function(){
     if($(this).prop('checked')==false){
@@ -182,9 +190,9 @@ $(function(){
    })
 });
 
-$('#order_select').change(function(){
+/*$('#order_select').change(function(){
     location.href = $('#link_'+$(this).val()).val();
-});
+});*/
 
 $('#list_type_select').change(function(){
     location.href = $('#link2_'+$(this).val()).val();

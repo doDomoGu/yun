@@ -266,12 +266,41 @@ class DirController extends BaseController
                     $links2[] = $linkTmp;
                 }
 
+
+                $orderLink = [];
+                $orderLink[0] = $links[0];
+                $orderLink[1] = $links[2];
+                $orderLink[2] = $links[4];
+
+                $orderClass = [];
+                $orderClass[0] = '';
+                $orderClass[1] = '';
+                $orderClass[2] = '';
+
+                if($orderNum==0){
+                    $orderLink[0] = $links[1];
+                    $orderClass[0] = 'desend';
+                }elseif($orderNum==1){
+                    $orderClass[0] = 'ascend';
+                }elseif($orderNum==2){
+                    $orderLink[1] = $links[3];
+                    $orderClass[1] = 'desend';
+                }elseif($orderNum==3){
+                    $orderClass[1] = 'ascend';
+                }elseif($orderNum==4){
+                    $orderLink[2] = $links[5];
+                    $orderClass[2] = 'desend';
+                }elseif($orderNum==5){
+                    $orderClass[2] = 'ascend';
+                }
 //                $params['pages'] = $pages;
                 $params['order'] = $order;
                 $params['orderNum'] = $orderNum;
                 $params['orderSelect'] = $orderSelect;
                 $params['links'] = $links;
                 $params['links2'] = $links2;
+                $params['orderLink'] = $orderLink;
+                $params['orderClass'] = $orderClass;
                 $params['listType'] = $listType;
                 $params['listTypeNum'] = $listTypeNum;
                 $params['listTypeSelect'] = $listTypeSelect;

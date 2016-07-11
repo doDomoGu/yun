@@ -164,6 +164,13 @@
 
 #file_head ul li.head_col_filename{
     width:500px;
+    text-indent:35px;
+}
+
+#file_head ul li.head_col_filename .list-check{
+    position: absolute;
+    left:25px;
+    text-indent: 0;
 }
 
 #file_head ul li.head_col_filesize{
