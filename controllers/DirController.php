@@ -44,7 +44,7 @@ class DirController extends BaseController
 
     public $thumbTypeArr = [2,3,4,5,6];
 
-    public $listTypeArr = ['list','icon'];
+    public $listTypeArr = ['list','grid'];
 
     public $listTypeNameArr = ['列表','图标'];
 

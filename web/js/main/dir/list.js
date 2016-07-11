@@ -194,10 +194,13 @@ $(function(){
     location.href = $('#link_'+$(this).val()).val();
 });*/
 
-$('#list_type_select').change(function(){
+/*$('#list_type_select').change(function(){
     location.href = $('#link2_'+$(this).val()).val();
-});
+});*/
 
+$('.list-grid-switch a').click(function(){
+    location.href = $(this).attr('data-url');
+});
 
 
 

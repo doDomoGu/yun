@@ -39,10 +39,14 @@
             <?php /*foreach($links as $link_key => $li):*/?>
                 <input type="hidden" id="link_<?/*=$link_key*/?>" value="<?/*=$li*/?>" />
             --><?php /*endforeach;*/?>
-            显示：<?=Html::dropDownList('list_type_select',$listTypeNum,$listTypeSelect,['id'=>'list_type_select'])?>
-            <?php foreach($links2 as $link_key => $li):?>
-                <input type="hidden" id="link2_<?=$link_key?>" value="<?=$li?>" />
-            <?php endforeach;?>
+            <!--显示：<?/*=Html::dropDownList('list_type_select',$listTypeNum,$listTypeSelect,['id'=>'list_type_select'])*/?>
+            <?php /*foreach($links2 as $link_key => $li):*/?>
+                <input type="hidden" id="link2_<?/*=$link_key*/?>" value="<?/*=$li*/?>" />
+            --><?php /*endforeach;*/?>
+            <div class="list-grid-switch <?=$listTypeNum==0?'list-switched-on':'grid-switched-on'?>">
+                <a href="javascript:void(0)" class="list-switch" data-url="<?=$links2[0]?>"></a>
+                <a href="javascript:void(0)" class="grid-switch" data-url="<?=$links2[1]?>"></a>
+            </div>
         </div>
     </div>
     <div id="dir-nav">

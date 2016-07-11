@@ -127,13 +127,46 @@
 }
 
 #right_btns {
-    float:left;
+    float:right;
     display: block;
     text-align: right;
-    width:360px;
-    padding-right: 10px;
-    height:35px;
-    line-height:35px;
+    width:64px;
+    /*padding-right: 10px;*/
+   /* height:29px;
+    line-height:35px;*/
+}
+
+
+
+#right_btns .list-grid-switch a {
+    background: rgba(0, 0, 0, 0) url("../../../images/common/list-switch.png") no-repeat scroll 0 0;
+    float: left;
+    height: 29px;
+    width: 32px;
+}
+
+#right_btns .list-switched-on .list-switch {
+    background-position: 0 0;
+}
+
+#right_btns .list-switched-on .grid-switch {
+    background-position: right 0;
+}
+
+#right_btns .list-switched-on .grid-switch:hover {
+    background-position: right -70px;
+}
+
+#right_btns .grid-switched-on .list-switch {
+    background-position: 0 -35px;
+}
+
+#right_btns .grid-switched-on .grid-switch {
+    background-position: right -35px;
+}
+
+#right_btns .grid-switched-on .list-switch:hover {
+    background-position: 0 -70px;
 }
 
 #file_head {
@@ -165,11 +198,13 @@
 #file_head ul li.head_col_filename{
     width:500px;
     text-indent:35px;
+    position: relative;
 }
 
 #file_head ul li.head_col_filename .list-check{
     position: absolute;
-    left:25px;
+    left:10px;
+    top:1px;
     text-indent: 0;
 }
 
