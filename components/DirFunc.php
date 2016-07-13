@@ -451,4 +451,31 @@ class DirFunc extends Component {
             //Dir::updateAll(['is_leaf'=>1],['id'=>$p_id]);
         }
     }
+
+    /*
+    * 函数 getIdByRoute , 通过所给路径获取 dir_id
+    *
+    * @param integer route  目录路径
+    * @param integer p_id  父id
+    * @return dir_id
+    */
+    public static function getIdByRoute($route,$p_id=false){
+        $returnId = false;
+        $routeArr = explode('/',$route);
+        if($p_id===false){
+            $p_id = 0;
+            foreach($routeArr as $r){
+                $p_id = self::getIdByRoute($r,$p_id);
+                if($p_id===false)
+                    break;
+            }
+            $returnId = $p_id;
+        }else{
+            $dir = Dir::find()->where(['name'=>$route,'p_id'=>$p_id])->one();
+            if($dir){
+                $returnId = $dir->id;
+            }
+        }
+        return $returnId;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace app\models;
 use app\components\CommonFunc;
+use app\components\DirFunc;
 use app\components\PositionFunc;
 use yii;
 use yii\helpers\ArrayHelper;
@@ -581,6 +582,59 @@ PRIMARY KEY (`id`)
 
             $ord--;
             $i++;
+        }
+    }
+
+    public function insert1(){
+        try {
+            $parDirRoute1 = '企业运营中心/行政管控中心/公告通知';
+            $parDirRoute2 = '企业运营中心/行政管控中心/行政管理制度';
+            $parDirRoute3 = '企业运营中心/行政管控中心/制度培训模板';
+
+            $pid1 = DirFunc::getIdByRoute($parDirRoute1);
+            $pid2 = DirFunc::getIdByRoute($parDirRoute2);
+            $pid3 = DirFunc::getIdByRoute($parDirRoute3);
+/*            var_dump($pid1);
+            echo '<br/>';
+            var_dump($pid2);
+            echo '<br/>';
+            var_dump($pid3);
+            echo '<br/>';*/
+
+            $dirExist1 = Dir::find()->where(['p_id'=>$pid1,'alias'=>'stjg'])->one();
+            $dirExist2 = Dir::find()->where(['p_id'=>$pid2,'alias'=>'stjg'])->one();
+            $dirExist3 = Dir::find()->where(['p_id'=>$pid3,'alias'=>'stjg'])->one();
+
+
+/*            var_dump($dirExist1);
+            echo '<br/>';
+            var_dump($dirExist2);
+            echo '<br/>';
+            var_dump($dirExist3);
+            echo '<br/>';*/
+
+            if($dirExist1!=NULL ||$dirExist2!=NULL ||$dirExist3!=NULL ){
+                throw new yii\base\Exception('Dir has insert  (1)');
+            }
+
+            $this->initDir([['n'=>'颂唐机构','a'=>'stjg','pm'=>[11=>['city_zhglb'=>'all'],12=>'all'],'l'=>true]],$pid1,4,1);
+            $this->initDir([['n'=>'颂唐机构','a'=>'stjg','pm'=>[11=>['city_zhglb'=>'all'],12=>'all'],'l'=>true]],$pid2,4,1);
+            $this->initDir([['n'=>'颂唐机构','a'=>'stjg','pm'=>[11=>['city_zhglb'=>'all'],12=>'all'],'l'=>true]],$pid3,4,1);
+
+            echo 'insert success';exit;
+        }catch (\Exception $e)
+        {
+            echo  'Dir insert (1) failed<br />';
+            $message = $e->getMessage() . "\n";
+            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+            echo $message;
+            /*echo '<br/><br/>';
+            var_dump($e);
+            echo '<br/><br/>';
+            var_dump($errorInfo);*/
+
+            //throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+            return false;
         }
     }
 

@@ -26,6 +26,16 @@ class DirAction extends Action{
             Yii::$app->response->redirect('dir')->send();
             exit;
         }
+
+        if(Yii::$app->request->get('insert1')){
+            set_time_limit(0);
+            $p = new Dir();
+            $p->insert1();
+            exit;
+            Yii::$app->response->redirect('dir')->send();
+            exit;
+        }
+
         if(Yii::$app->request->get('handle')){
             DirFunc::handleIsLastAndIsLeaf();
             Yii::$app->response->redirect('dir')->send();
