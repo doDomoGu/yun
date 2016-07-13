@@ -6,9 +6,17 @@
 
 //    app\assets\AppAsset::addCssFile($this,'css/main/dir/index.css');
     app\assets\AppAsset::addCssFile($this,'css/main/dir/list.css');
-
-
     app\assets\AppAsset::addJsFile($this,'js/main/dir/list.js');
+
+    if($listType=='list'){
+        app\assets\AppAsset::addCssFile($this,'css/main/dir/list/_list_data.css');
+        app\assets\AppAsset::addJsFile($this,'js/main/dir/list/_list_data.js');
+    }elseif($listType=='grid'){
+        app\assets\AppAsset::addCssFile($this,'css/main/dir/list/_grid_data.css');
+        app\assets\AppAsset::addJsFile($this,'js/main/dir/list/_grid_data.js');
+    }
+
+
 
 ?>
 <input type="hidden" id="qiniuDomain" value="<?=yii::$app->params['qiniu-domain']?>" />
@@ -107,36 +115,7 @@
             <div class="filename" title="<?=$l->filename?>" alt="<?=$l->filename?>">
                 <?=\app\components\CommonFunc::mySubstr($l->filename,12);?>
             </div>
-            <!--<div class="filesize">文件大小：<?/*=$l->filetype>0?FileFrontFunc::sizeFormat($l->filesize):'--'*/?></div>
-            <div class="upload_time">时间：<?/*=$l->add_time*/?></div>
-            <div class="upload_uid">上传用户：<?/*=$l->uid==yii::$app->user->id?'自己':'uid: '.$l->uid*/?></div>
-            <div class="upload_type">上传类型：<?/*=$l->flag==1?'公共':'个人'*/?></div>
-            <div class="download_times">下载次数：<span><?/*=$l->clicks*/?></span></div>-->
-            <!--<div class="click_btns">
-                <?php /*if($l->filetype>0):*/?>
-                    <?php /*if($downloadCheck):*/?>
-                        <?/*=Html::Button('下载',['data-id'=>$l->id,'class'=> 'downloadBtn btn btn-success'])*/?>
-                    <?php /*else:*/?>
-                        <?/*=Html::Button('下载',['class'=> 'btn btn-success disabled'])*/?>
-                    <?php /*endif;*/?>
-                <?php /*else:*/?>
-                    <?php /*if($downloadCheck):*/?>
-                        <?/*=Html::Button('打开',['data-id'=>$l->id,'class'=> 'openBtn btn btn-success'])*/?>
-                    <?php /*else:*/?>
-                        <?/*=Html::Button('打开',['class'=> 'btn btn-success disabled'])*/?>
-                    <?php /*endif;*/?>
-                <?php /*endif;*/?>
-                <?php /*if($downloadCheck && in_array($l->filetype,$this->context->previewTypeArr)):*/?>
-                    <?/*=Html::Button('预览',['data-id'=>$l->id,'class'=> 'previewBtn btn btn-primary'])*/?>
-                <?php /*else:*/?>
-                    <?/*=Html::Button('预览',['class'=> 'btn btn-primary disabled'])*/?>
-                <?php /*endif;*/?>
-                <?php /*if($l->uid==yii::$app->user->id):*/?>
-                    <?/*=Html::Button('删除',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn btn-success'])*/?>
-                <?php /*else:*/?>
-                    <?/*=Html::Button('删除',['class'=> 'btn btn-success disabled'])*/?>
-                <?php /*endif;*/?>
-            </div>-->
+
         </div>
 
     </div>

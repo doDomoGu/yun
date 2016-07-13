@@ -3,10 +3,14 @@
     use app\components\FileFrontFunc;
     use app\components\PermissionFunc;
     use app\components\CommonFunc;
+
 ?>
 <?php foreach($list as $l):?>
-    <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
-    <div class="dir-item <?=$listType=='list'?'file-item2':''?> <?=$l->filetype == 0?'dirtype':'filetype'?> <?=$downloadCheck?'download-enable':'download-disable'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
+    <?php
+        $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);
+        $filethumb = ($downloadCheck && in_array($l->filetype,$this->context->thumbTypeArr))?true:false;
+    ?>
+    <div class="dir-item <?=$listType=='list'?'grid-item':''?> <?=$l->filetype == 0?'dirtype':'filetype'?> <?=$downloadCheck?'download-enable':'download-disable'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
             <div class="filename" style="">
                 <span class="file-checkbox">
