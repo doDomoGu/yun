@@ -83,7 +83,6 @@
 <div id="list-main">
 <?php if(!empty($list)):?>
 <?php if($listType=='list'):?>
-    <?=$this->context->renderPartial('_list_data',['list'=>$list,'listType'=>$listType])?>
 
 <?php else:?>
     <?php foreach($list as $l):?>
@@ -169,6 +168,7 @@
 
 <input type="hidden" id="var_dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="var_p_id" value="<?=$p_id?>">
+<input type="hidden" id="var_list_type" value="<?=$listType?>">
 <input type="hidden" id="var_dir_route" value="<?=$dirRoute?>">
 <input type="hidden" id="var_page" value="<?=$page?>">
 <input type="hidden" id="var_page_size" value="<?=$page_size?>">

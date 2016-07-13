@@ -357,7 +357,12 @@ class DirController extends BaseController
 
         //$params['start'] = intval($pageSize*($pages->page))+1;
         $this->layout = false;
-        return $this->render('_list_data',$params);
+        if($listType=='grid'){
+            $viewName = '_grid_data';
+        }else{
+            $viewName = '_list_data';
+        }
+        return $this->render($viewName,$params);
     }
 
    /* public function detail($dir_id,$curDir){

@@ -12,7 +12,7 @@ var loading_files = function(){
             order:$('#var_order').val(),
             page:_page,
             page_size:_page_size,
-            list_type:'list'
+            list_type:$('#var_list_type').val()
         },
         success: function (data) {
             $('#list-main').append(data);
