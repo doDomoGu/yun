@@ -6,7 +6,8 @@
 }
 
 .dir-item {
-    width:200px;
+    width:128px;
+    margin:0 36px;
     float:left;
     /*cursor: pointer;*/
     display: block;
@@ -28,7 +29,6 @@
     height:128px;
     /*margin-left:49px;*/
     overflow: hidden;
-    margin:0 36px;
 }
 .dir-item .icon img{
     width:100%;

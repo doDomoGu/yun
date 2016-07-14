@@ -1,7 +1,9 @@
 @import '../../layouts/dir.css';
 
+/* dir-item */
+
 .dir-item {
-    width:200px;
+    width:400px;
     float:left;
     /*cursor: pointer;*/
     display: block;
@@ -9,25 +11,8 @@
     padding-top:20px;
     color:#333;
 }
-/*
-.breadcrumb {
-    margin-bottom: 0;
-    border-radius: 0;
-    background-color: #fff;
-}
-.breadcrumb a {
-    color:#23527c;
-}
-.breadcrumb > li + li::before  {
-    color: #ccc;
-    content: ">";
-    padding: 0 2px 0 0;
-}*/
 
-.dir-main {
-    border-top:1px solid #999;
-    overflow: hidden;
-}
+
 
 .dir-item:hover{
     /*background: #f5f5f5;*/
@@ -307,122 +292,7 @@
     border-radius: 2px;*/
 }
 
-.file-item2 {
-    height:39px;
-    line-height: 38px;
-    float:left;
-    display: block;
-    overflow: hidden;
-    width:100%;
-    border-bottom: 1px solid #EBEBEB;
-    padding:0;
-}
 
-
-.file-item2 .icon img{
-    border-radius: 4px;
-}
-
-.file-item2 .info {
-    display: block;
-    float:left;
-    width: 785px;
-    overflow: hidden;
-}
-
-.file-item2 .info:hover {
-    background: #F0F8FD;
-}
-
-.file-item2 .info .filename {
-    width:500px;
-    float:left;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    word-break: break-all;
-    height:38px;
-}
-
-.file-item2 .info .filename .file-checkbox {
-    display: block;
-    width:20px;
-    overflow: hidden;
-    float:left;
-    margin-right:4px;
-    margin-left:11px;
-}
-
-.file-item2 .info .filename .icon {
-    display: block;
-    width:20px;
-    overflow: hidden;
-    float:left;
-    margin-right:4px;
-    margin-left:0;
-    height:38px;
-}
-
-.file-item2 .info .filename .filename_txt{
-    width:300px;
-    overflow: hidden;
-    display: inline-block;
-}
-
-.file-item2 .info .filename .filename_txt a {
-    /*width:200px;
-    overflow: hidden;*/
-    display: inline;
-}
-
-.file-item2 .info .filename .filename_txt a:hover {
-    text-decoration: underline;
-}
-
-.file-item2.download-disable .info .filename .filename_txt,
-.file-item2.download-disable .info .filename .filename_txt a{
-    color:#999;
-}
-.file-item2.download-disable .info .filename .filename_txt a:hover{
-    text-decoration: none;
-    cursor:default;
-}
-
-.file-item2 .info .filesize {
-    width:120px;
-    padding-left:10px;
-    float:left;
-    text-align: left;
-}
-
-.file-item2 .info .upload_time {
-    width:165px;
-    padding-left:10px;
-    float:left;
-    text-align: left;
-}
-
-.file-item2 .info .upload_uid {
-    width:64px;
-    float:left;
-    text-align: left;
-    margin-left: 10px;
-}
-
-.file-item2 .info .download_times {
-    width:64px;
-    float:left;
-    text-align: right;
-    margin-left: 10px;
-}
-
-.file-item2 .info .filename .click_btns {
-    position: absolute;
-    text-align: left;
-    right:10px;
-    clear:both;
-    top:0;
-}
 
 .file-item.hover{
     cursor: pointer;

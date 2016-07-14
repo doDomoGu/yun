@@ -15,11 +15,11 @@
 <div id="list-main">
 <?php foreach($list as $l):?>
     <div class="dir-item text-center">
-        <a class="alink" href="/dir?dir_id=<?=$l->id?>">
+        <a class="alink" href="/dir?dir_id=<?=$l->id?>" title="<?=$l->name?>" alt="<?=$l->name?>">
             <div class="icon">
                 <img src="/images/fileicon/documents.png">
             </div>
-            <div class="name">
+            <div class="name" >
                 <?=\app\components\CommonFunc::mySubstr($l->name,14)?>
             </div>
         </a>

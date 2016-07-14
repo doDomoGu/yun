@@ -2,8 +2,8 @@ $('#createDirModalContent button.btn').click(function(){
     _dirname = $('#createDirModalContent .dirname').val();
     /*console.log(_dirname);*/
     if(_dirname!=''){
-        _dir_id = $('#dir_id').val();
-        _p_id = $('#p_id').val();
+        _dir_id = $('#var_dir_id').val();
+        _p_id = $('#var_p_id').val();
         $.ajax({
             url: '/dir/save',
             type: 'post',
