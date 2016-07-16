@@ -48,6 +48,10 @@ class DirController extends BaseController
 
     public $listTypeNameArr = ['列表','图标'];
 
+    public $listStylePageSize = 20;
+
+    public $gridStylePageSize = 12;
+
     public $dir_id;
 
     public function behaviors()
@@ -149,7 +153,7 @@ class DirController extends BaseController
 
             if($curDir->is_leaf){     //是底层目录 显示文件列表 可以进行上传/新建文件夹等操作
 
-                $pageSize = 12;
+                $pageSize = $this->listStylePageSize;
 
                 $page = yii::$app->request->get('page',1);
 
@@ -220,8 +224,8 @@ class DirController extends BaseController
                     $listTypeSelect[$n] = $this->listTypeNameArr[$n];
                 }
 
-                if($listType == 'list'){
-                    $pageSize = 20;
+                if($listType == 'grid'){
+                    $pageSize = $this->gridStylePageSize;
                 }
 
                 if($parDir){
@@ -342,8 +346,9 @@ class DirController extends BaseController
 
 
 
-        $pageSize = 20;
-
+        $pageSize = $this->listStylePageSize;
+        if($listType=='grid')
+            $pageSize = $this->gridStylePageSize;
         $count = FileFrontFunc::getFilesNum($dir_id,$p_id,$search);
 
         $pages = new Pagination(['totalCount' =>$count, 'pageSize' => $pageSize,'pageSizeParam'=>false]);

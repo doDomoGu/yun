@@ -1,3 +1,17 @@
-.dir-item {
-    width:100px;
+.grid-style{
+    float: left;
+    height: 148px;
+    margin: 8px 34px 0;
+    text-align: center;
+    width: 128px;
+    display: block;
+}
+
+.grid-style .icon {
+    width:128px;
+    height:128px;
+}
+
+.grid-style .icon img {
+    width: 100%;
 }
