@@ -1,8 +1,10 @@
 var loading_files_flag = true;
+var list_type = $('#var_list_type').val();
 var loading_files = function(){
     _page = $('#var_page').val();
     _page_size = $('#var_page_size').val();
     _count = $('#var_count').val();
+
     $.ajax({
         url: '/dir/get-files',
         type: 'get',
@@ -12,10 +14,14 @@ var loading_files = function(){
             order:$('#var_order').val(),
             page:_page,
             page_size:_page_size,
-            list_type:$('#var_list_type').val()
+            list_type:list_type
         },
         success: function (data) {
             $('#list-main').append(data);
+            if(list_type=='grid'){
+                grid_file_thumb();
+            }
+
             loading_num = parseInt(_page) * parseInt(_page_size);
             if(loading_num>=_count){
                 $('.loading_num').html('加载完毕');
@@ -122,24 +128,6 @@ $('.dir-item.dl_enable.is-dir').click(function(){
 
 
 
-/*$(function(){
-   $('.filethumb').each(function(){
-       _filethumbId = $(this).attr('data-id');
-       $.ajax({
-           url: '/dir/download',
-           type: 'get',
-           async : false,
-           data: {
-               id:_filethumbId,
-               preview:true,
-               imgUrl:true
-           },
-           success: function (data) {
-                $('.filethumb-'+_filethumbId).attr('src',data);
-           }
-       });
-   })
-});*/
 
 $('.list-grid-switch a').click(function(){
     location.href = $(this).attr('data-url');
