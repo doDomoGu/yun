@@ -50,7 +50,7 @@ class DirController extends BaseController
 
     public $listStylePageSize = 20;
 
-    public $gridStylePageSize = 12;
+    public $gridStylePageSize = 24;
 
     public $dir_id;
 

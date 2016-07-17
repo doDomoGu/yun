@@ -1,17 +1,44 @@
 .grid-style{
     float: left;
-    height: 148px;
-    margin: 8px 34px 0;
+    height: 160px;
     text-align: center;
-    width: 128px;
+    width: 196px;
+    overflow: hidden;
     display: block;
+    margin-top:10px;
+    margin-bottom:10px;
 }
 
 .grid-style .icon {
     width:128px;
     height:128px;
+    padding:10px;
+    margin: 8px 34px 0;
+    position: relative;
+}
+
+.grid-style .icon.filethumb_icon {
+    padding:0;
 }
 
 .grid-style .icon img {
     width: 100%;
+}
+
+
+
+.grid-style .file-check {
+    position: absolute;
+    left:0;
+    top:0;
+    margin:0;
+    padding:0;
+}
+
+.grid-style .filename {
+    width: 196px;
+    text-align: center;
+    padding:0 10px;
+    height:32px;
+    line-height: 32px;
 }
