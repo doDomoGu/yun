@@ -20,7 +20,10 @@
                     <?=Html::img('/images/fileicon/'.FileFrontFunc::getFileExt($l->filetype).'.png')?>
                 </span>
             <?php endif;?>
-            <input type="checkbox" name="cb[]" class="file-check" value="<?=$l->id?>" />
+            <div class="file-check" >
+                <input type="checkbox" name="cb[]" class="file-checkbox" value="<?=$l->id?>" />
+            </div>
+
         </div>
         <div class="filename" title="<?=$l->filename?>" alt="<?=$l->filename?>">
             <?=CommonFunc::mySubstr($l->filename,24);?>

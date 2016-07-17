@@ -7,7 +7,17 @@
     display: block;
     margin-top:10px;
     margin-bottom:10px;
+    cursor: pointer;
 }
+
+/*.grid-style.hover .icon {
+    border: 1px solid #333;
+    padding:9px;
+}
+
+.grid-style.hover .filename {
+    text-decoration: underline;
+}*/
 
 .grid-style .icon {
     width:128px;
@@ -25,14 +35,22 @@
     width: 100%;
 }
 
-
-
 .grid-style .file-check {
     position: absolute;
     left:0;
     top:0;
     margin:0;
     padding:0;
+    width:128px;
+    height:128px;
+    border: 1px solid #333;
+    text-align: left;
+    display: none;
+}
+
+.grid-style .file-check .file-checkbox {
+    padding:0;
+    margin:0;
 }
 
 .grid-style .filename {

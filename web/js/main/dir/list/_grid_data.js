@@ -15,4 +15,10 @@ var grid_file_thumb = function(){
             }
         });
     });
-}
+};
+
+$('#list-main').on('mouseenter','.grid-style',function(){
+    $(this).find('.file-check').show();
+}).on('mouseleave','.grid-style',function(){
+    $(this).find('.file-check').hide();
+});
