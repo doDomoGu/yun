@@ -1,13 +1,33 @@
+var grid_file_thumb = function(){
+    $('.filethumb').each(function(){
+        _filethumbId = $(this).attr('data-id');
+        $.ajax({
+            url: '/dir/download',
+            type: 'get',
+            async : false,
+            data: {
+                id:_filethumbId,
+                preview:true,
+                imgUrl:true
+            },
+            success: function (data) {
+                $('.filethumb-'+_filethumbId).attr('src',data+'?imageView2/1/w/128/h/128/interlace/0/q/70');
+            }
+        });
+    });
+};
+
 var loading_files_flag = true;
 var list_type = $('#var_list_type').val();
 var loading_files = function(){
     _page = $('#var_page').val();
     _page_size = $('#var_page_size').val();
     _count = $('#var_count').val();
-
+    loading_files_flag = false;
     $.ajax({
         url: '/dir/get-files',
         type: 'get',
+        async: false,
         data: {
             dir_id:$('#var_dir_id').val(),
             p_id:$('#var_p_id').val(),
@@ -21,19 +41,20 @@ var loading_files = function(){
             if(list_type=='grid'){
                 grid_file_thumb();
             }
-
             loading_num = parseInt(_page) * parseInt(_page_size);
             if(loading_num>=_count){
                 $('.loading_num').html('加载完毕');
-                loading_files_flag = false;
             }else{
                 $('.loading_num').html('已加载'+loading_num+'个');
                 $('#var_page').val(parseInt(_page)+1);
+                loading_files_flag = true;
             }
 
 
         }
     });
+
+
 };
 
 loading_files();
@@ -52,7 +73,7 @@ $(window).scroll( function() {
 var totalheight = 0;     //定义一个总的高度变量
 function scroll_loading()
 {
-    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());     //浏览器的高度加上滚动条的高度
+    totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) ;     //浏览器的高度加上滚动条的高度
 
     if ($(document).height() <= totalheight)     //当文档的高度小于或者等于总的高度的时候，开始动态加载数据
     {
