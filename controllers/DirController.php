@@ -454,6 +454,7 @@ class DirController extends BaseController
                         echo '该文件类型暂时不支持预览<br/>'.$file_path;
                     }
                 }else{
+
                     FileFrontFunc::insertDownloadRecord($file,yii::$app->user->id);
 
                     //Header("HTTP/1.1 303 See Other");
@@ -472,14 +473,16 @@ class DirController extends BaseController
                     if(preg_match("/MSIE/", $ua)){
                         header('Content-Disposition: attachment; filename="' . $encoded_filename . '"');
                     }/*elseif(preg_match("/Firefox/", $ua)){
-                        header('Content-Disposition: attachment; filename*="utf8"' . $filename . '"');
-                    }*/else{
+                    header('Content-Disposition: attachment; filename*="utf8"' . $filename . '"');
+                }*/else{
                         header('Content-Disposition: attachment; filename="' . $filename . '"');
                     }
-
+                    header("X-Accel-Redirect: $file_path");
                     //Header("Content-Disposition: attachment; filename=" . $file->filename);
+                    //echo $result;
+                    //echo file_get_contents($file_path);
+                    @readfile($file_path);
 
-                    readfile($file_path);
                 }
             }else{
                 echo 'no permission';

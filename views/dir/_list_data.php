@@ -9,7 +9,7 @@ use app\components\CommonFunc;
     <?php $downloadCheck = PermissionFunc::checkFileDownloadPermission($this->context->user->position_id,$l);?>
     <div class="list-style <?=$l->filetype == 0?'dirtype':'filetype'?> <?=$downloadCheck?'download-enable':'download-disable'?>" data-is-dir="<?=$l->filetype==0?'1':'0'?>" data-id="<?=$l->id?>" download-check="<?=$downloadCheck?'enable':'disable'?>">
         <div class="info">
-            <div class="file-check" >
+            <div class="file-check">
                 <input type="checkbox" name="cb[]" class="file-checkbox" value="<?=$l->id?>" />
             </div>
             <div class="filename">

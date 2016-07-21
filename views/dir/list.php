@@ -91,11 +91,11 @@
                 已选中0个文件/文件夹
             </span>
             <div class="btn-box">
-                <button value="" class="btn btn-default" type="button">
+                <button id="head-download-btn" value="" class="btn btn-default" type="button">
                     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
                     下载
                 </button>
-                <button value="" class="btn btn-default" type="button">
+                <button id="head-delete-btn" value="" class="btn btn-default" type="button">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     删除
                 </button>

@@ -1,3 +1,27 @@
+var download_file = function(url,data_id){
+
+    var iframe = document.createElement("iframe");
+    download_file.iframe = iframe;
+    document.body.appendChild(download_file.iframe);
+
+    download_file.iframe.src = url;
+
+    download_file.iframe.style.display = "none";
+
+    /*if(typeof(download_file.iframe)== "undefined")
+    {
+        var iframe = document.createElement("iframe");
+        download_file.iframe = iframe;
+        document.body.appendChild(download_file.iframe);
+    }
+    download_file.iframe.src = url;
+
+    download_file.iframe.style.display = "none";*/
+
+
+
+}
+
 var grid_file_thumb = function(){
     $('.filethumb').each(function(){
         _filethumbId = $(this).attr('data-id');
@@ -82,7 +106,6 @@ function scroll_loading()
     }
 }
 $('#list-main').on('click','.file-check',function(){
-
     _c = $('#list-main .file-checkbox:checked').length;
     if(_c>0){
         $('#list-head .head-btns .count-tips').html('已选中'+_c+'个文件/文件夹');
@@ -92,13 +115,19 @@ $('#list-main').on('click','.file-check',function(){
         $('#list-head .head-btns').hide();
         $('#list-head .head_cols').show();
     }
-
-
-    /*if($(this).prop('checked')==false){
-
-    }*/
 });
 
+$('#head-download-btn').click(function(){
+    _c = $('#list-main .file-checkbox:checked').length;
+    if(_c>0){
+        $('#list-main .file-checkbox:checked').each(function(){
+            _data_id = $(this).parents('.list-style').attr('data-id');
+            download_file('/dir/download?id='+_data_id);
+        })
+    }else{
+        alert('操作错误！');
+    }
+});
 
 /*$('.file-check').click(function(){
     if($(this).prop('checked')==false){
