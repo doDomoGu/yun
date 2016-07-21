@@ -81,20 +81,26 @@ function scroll_loading()
         loading_files();
     }
 }
+$('#list-main').on('click','.file-check',function(){
 
-
-
-/*$('.dir-item.file-item').mouseenter(function(){
-    $(this).find('.icon').addClass('hover');
-    $(this).find('.file-check').show();
-}).mouseleave(function(){
-    if($(this).hasClass('file-checked')==false){
-        $(this).find('.icon').removeClass('hover');
-        $(this).find('.file-check').hide();
+    _c = $('#list-main .file-checkbox:checked').length;
+    if(_c>0){
+        $('#list-head .head-btns .count-tips').html('已选中'+_c+'个文件/文件夹');
+        $('#list-head .head-btns').show();
+        $('#list-head .head_cols').hide();
+    }else{
+        $('#list-head .head-btns').hide();
+        $('#list-head .head_cols').show();
     }
-});*/
 
-$('.file-check').click(function(){
+
+    /*if($(this).prop('checked')==false){
+
+    }*/
+});
+
+
+/*$('.file-check').click(function(){
     if($(this).prop('checked')==false){
         $('.file-item').removeClass('file-checked');
         $('.file-check').prop('checked',false);
@@ -104,7 +110,7 @@ $('.file-check').click(function(){
         $(this).prop('checked',true);
         $(this).parents('.file-item').addClass('file-checked');
     }
-});
+});*/
 
 $('.dir-item.dl_enable.is-dir').click(function(){
     location.href='/dir?p_id='+$(this).attr('data-id');

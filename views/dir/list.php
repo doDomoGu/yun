@@ -71,7 +71,7 @@
             <?php if($listType=='list'):?>
             <li class="head_col_filename <?=$orderClass[0]?>" data-url="<?=$orderLink[0]?>" >
                 <span class="list-check">
-                    <input type="checkbox" class="list-checkbox">
+                    <!--<input type="checkbox" class="list-checkbox">-->
                 </span>
                 <span class="txt">文件名</span>
                 <span class="order-icon"></span>
@@ -86,6 +86,21 @@
             </li>
             <?php endif;?>
         </ul>
+        <div class="head-btns">
+            <span class="count-tips">
+                已选中0个文件/文件夹
+            </span>
+            <div class="btn-box">
+                <button value="" class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                    下载
+                </button>
+                <button value="" class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    删除
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 <div id="list-main">
