@@ -107,10 +107,19 @@ function scroll_loading()
 }
 $('#list-main').on('click','.file-check',function(){
     _c = $('#list-main .file-checkbox:checked').length;
+    _c2 = $('#list-main .filetype .file-checkbox:checked').length;
+    _c3 = $('#list-main .filetype.download-enable .file-checkbox:checked').length;
     if(_c>0){
         $('#list-head .head-btns .count-tips').html('已选中'+_c+'个文件/文件夹');
         $('#list-head .head-btns').show();
         $('#list-head .head_cols').hide();
+        if(_c!=_c2){
+            $('#head-download-btn').attr('disabled',true);
+        }else if(_c!=_c3){
+            $('#head-download-btn').attr('disabled',true);
+        }else{
+            $('#head-download-btn').attr('disabled',false);
+        }
     }else{
         $('#list-head .head-btns').hide();
         $('#list-head .head_cols').show();
@@ -119,11 +128,19 @@ $('#list-main').on('click','.file-check',function(){
 
 $('#head-download-btn').click(function(){
     _c = $('#list-main .file-checkbox:checked').length;
+    _c2 = $('#list-main .filetype .file-checkbox:checked').length;
+    _c3 = $('#list-main .filetype.download-enable .file-checkbox:checked').length;
     if(_c>0){
-        $('#list-main .file-checkbox:checked').each(function(){
-            _data_id = $(this).parents('.list-style').attr('data-id');
-            download_file('/dir/download?id='+_data_id);
-        })
+        if(_c!=_c2){
+            alert('文件夹不能下载');
+        }else if(_c!=_c3){
+            alert('有文件没有下载权限');
+        }else{
+            $('#list-main .file-checkbox:checked').each(function(){
+                _data_id = $(this).parents('.list-style').attr('data-id');
+                download_file('/dir/download?id='+_data_id);
+            })
+        }
     }else{
         alert('操作错误！');
     }
