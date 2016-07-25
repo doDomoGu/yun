@@ -8,9 +8,9 @@
     /*margin-top:10px;
     margin-bottom:10px;*/
     width:128px;
-    height:128px;
+    height:152px;
     /*padding:10px;*/
-    margin: 18px 34px;
+    margin: 18px 34px 10px;
     cursor: pointer;
 }
 
@@ -61,9 +61,8 @@
 }
 
 .grid-style .filename {
-    width: 196px;
+    width: 128px;
     text-align: center;
-    padding:0 10px;
     height:32px;
     line-height: 32px;
 }
