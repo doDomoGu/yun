@@ -158,16 +158,15 @@ $('#head-delete-btn').click(function(){
     //_c2 = $('#list-main .filetype .file-checkbox:checked').length;
     _c4 = $('#list-main .delete-enable .file-checkbox:checked').length;
     if(_c>0){
-        /*if(_c!=_c2){
-            alert('文件夹不能下载');
-        }else*/ if(_c!=_c4){
+        if(_c!=_c4){
             alert('有文件不能删除');
         }else{
-            /*$('#list-main .file-checkbox:checked').each(function(){
+            $('#list-main .file-checkbox:checked').each(function(){
                 _data_id = $(this).parents('.list-style').attr('data-id');
-                download_file('/dir/download?id='+_data_id);
-            })*/
-            alert('delete');
+                download_file('/dir/delete?id='+_data_id);
+            })
+            alert('删除成功');
+            location.href=location.href;
         }
     }else{
         alert('操作错误！');
