@@ -144,7 +144,7 @@ $('#head-download-btn').click(function(){
             alert('有文件没有下载权限');
         }else{
             $('#list-main .file-checkbox:checked').each(function(){
-                _data_id = $(this).parents('.list-style').attr('data-id');
+                _data_id = $(this).parents('.list-item').attr('data-id');
                 download_file('/dir/download?id='+_data_id);
             })
         }
@@ -162,7 +162,7 @@ $('#head-delete-btn').click(function(){
             alert('有文件不能删除');
         }else{
             $('#list-main .file-checkbox:checked').each(function(){
-                _data_id = $(this).parents('.list-style').attr('data-id');
+                _data_id = $(this).parents('.list-item').attr('data-id');
                 download_file('/dir/delete?id='+_data_id);
             })
             alert('删除成功');
@@ -185,9 +185,9 @@ $('#head-delete-btn').click(function(){
     }
 });*/
 
-$('.dir-item.dl_enable.is-dir').click(function(){
+/*$('.dir-item.download_enable.is-dir').click(function(){
     location.href='/dir?p_id='+$(this).attr('data-id');
-});
+});*/
 
 /*$('.dir-item').click(function(){
     if($(this).attr('download-check')=='enable'){
