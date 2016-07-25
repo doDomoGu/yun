@@ -1,13 +1,20 @@
 $('#list-main').on('mouseenter','.grid-style',function(){
-    $(this).find('.file-check').show();
+        $(this).addClass('list-checked');
 }).on('mouseleave','.grid-style',function(){
-    $(this).find('.file-check').hide();
+    if($(this).find('.file-checkbox').prop('checked')==false){
+        $(this).removeClass('list-checked');
+    }
 });
 
 
 var _checkboxClickFlag = false;
 $('#list-main').on('click','.file-checkbox',function(){
     _checkboxClickFlag = true;
+    if($(this).prop('checked')){
+        $(this).parents('.list-item').addClass('list-checked');
+    }else{
+        $(this).parents('.list-item').removeClass('list-checked');
+    }
 });
 
 
