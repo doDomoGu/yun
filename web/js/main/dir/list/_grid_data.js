@@ -1,9 +1,11 @@
 $('#list-main').on('mouseenter','.grid-style',function(){
-        $(this).addClass('list-checked');
+    $(this).addClass('list-checked');
+    $(this).addClass('list-item-hover');
 }).on('mouseleave','.grid-style',function(){
     if($(this).find('.file-checkbox').prop('checked')==false){
         $(this).removeClass('list-checked');
     }
+    $(this).removeClass('list-item-hover');
 });
 
 

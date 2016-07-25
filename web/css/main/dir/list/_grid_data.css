@@ -60,9 +60,14 @@
     margin:0;
 }
 
+
 .grid-style .filename {
     width: 128px;
     text-align: center;
     height:32px;
     line-height: 32px;
+}
+
+.grid-style.list-item-hover .filename {
+    text-decoration: underline;
 }
