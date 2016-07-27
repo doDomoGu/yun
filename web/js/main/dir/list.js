@@ -143,10 +143,12 @@ $('#head-download-btn').click(function(){
         }else if(_c!=_c3){
             alert('有文件没有下载权限');
         }else{
-            $('#list-main .file-checkbox:checked').each(function(){
-                _data_id = $(this).parents('.list-item').attr('data-id');
-                download_file('/dir/download?id='+_data_id);
-            })
+            if(confirm('确认要下载这些文件么？')){
+                $('#list-main .file-checkbox:checked').each(function(){
+                    _data_id = $(this).parents('.list-item').attr('data-id');
+                    download_file('/dir/download?id='+_data_id);
+                });
+            }
         }
     }else{
         alert('操作错误！');
@@ -161,12 +163,16 @@ $('#head-delete-btn').click(function(){
         if(_c!=_c4){
             alert('有文件不能删除');
         }else{
-            $('#list-main .file-checkbox:checked').each(function(){
-                _data_id = $(this).parents('.list-item').attr('data-id');
-                download_file('/dir/delete?id='+_data_id);
-            })
-            alert('删除成功');
-            location.href=location.href;
+            if(confirm('确认要删除这些文件或文件夹么？（移入回收站）')){
+                $('#list-main .file-checkbox:checked').each(function(){
+                    _data_id = $(this).parents('.list-item').attr('data-id');
+                    download_file('/dir/delete?id='+_data_id);
+                })
+                alert('删除成功');
+                location.href=location.href;
+            }else{
+                return false;
+            }
         }
     }else{
         alert('操作错误！');
