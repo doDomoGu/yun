@@ -14,7 +14,7 @@
     <p class="line-2 text-center">China's Glory United</p>-->
     <section id="login-form-section">
         <article class="text-center">
-            <img src="/images/site-login/word.png" style="width:500px;"/>
+            <img src="/images/site-login/word2.png" style="width:500px;"/>
 
 
         <?php $form = ActiveForm::begin([
