@@ -448,6 +448,27 @@ class PositionFunc extends Component {
         return $returnId;
     }
 
+    public static function getIdByName($name,$p_id=false){
+        $returnId = false;
+        $nameArr = explode('-',$name);
+        //if(count($aliasArr)>1){
+        if($p_id===false){
+            $p_id = 0;
+            foreach($nameArr as $n){
+                $p_id = self::getIdByName($n,$p_id);
+                if($p_id===false)
+                    break;
+            }
+            $returnId = $p_id;
+        }else{
+            $pos = Position::find()->where(['name'=>$name,'p_id'=>$p_id])->one();
+            if($pos){
+                $returnId = $pos->id;
+            }
+        }
+        return $returnId;
+    }
+
     //更新职位的full_alias 字段 全部
     public static function updateAllFullAlias(){
         $db = yii::$app->db;

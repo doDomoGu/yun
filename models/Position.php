@@ -1,6 +1,8 @@
 <?php
 
 namespace app\models;
+use app\components\DirFunc;
+use app\components\PositionFunc;
 use yii;
 
 class Position extends \yii\db\ActiveRecord
@@ -468,13 +470,94 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
             $sql = $sqlbase."('".$name."','".$alias."',$pid,$is_leaf,$isLast,$is_class,$level,$ord,1)";
             $cmd = Yii::$app->db->createCommand($sql);
             $cmd->execute();
+            $lastInsertId = Yii::$app->db->lastInsertID;
+            /*if(isset($a['pm']) && !empty($a['pm'])){
+                $this->insertPm($lastInsertId,$a['pm']);
+            }*/
+            if(isset($a['pm2']) && !empty($a['pm2'])){
+                $this->insertPm2($lastInsertId,$a['pm2']);
+            }
 
             //$lastId = Yii::app()->db->lastInsertID;
             if(isset($a['c']) && !empty($a['c'])){
-                $this->array2value($a['c'],Yii::$app->db->lastInsertID,$level+1);
+                $this->array2value($a['c'],$lastInsertId,$level+1);
             }
             $ord--;
             $i++;
         }
+    }
+
+    public function insert1(){
+        //阜阳金悦东湖案场
+        $parent_position = '颂唐机构-合肥-颂唐地产-销售业务部';
+        $p_id = PositionFunc::getIdByName($parent_position);
+        $parentPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
+        if($p_id>0 && $parentPos){
+            /*$pmArr = [
+                11=>[
+
+                ],
+                12=>[
+                    'zyfzzx/qxgkzx/gsjj',
+                    'zyfzzx/qxgkzx/vi',
+                ],
+            ];*/
+
+            $arr = [
+                ['n'=>'阜阳金悦东湖案场','a'=>'fyjydhac','c'=>[
+                        ['n'=>'项目总监','a'=>'xmzj','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-项目总监'],
+                        ['n'=>'项目经理','a'=>'xmjl','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-项目经理'],
+                        ['n'=>'客户主管','a'=>'xmzg','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-客户主管'],
+                        ['n'=>'项目策划','a'=>'xmch','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-项目策划'],
+                        ['n'=>'项目行政','a'=>'xmxz','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-项目行政'],
+                        ['n'=>'客户代表','a'=>'khdb','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-客户代表'],
+                    ]
+                ]
+            ];
+            $this->array2value($arr,$parentPos->id,$parentPos->level+1);
+
+//            $pos1 = Position::find()->where(['p_id'=>$p_id,'a'=>'fyjydhac'])
+        }
+    }
+
+    //insertPm2  用来复制一个其他职位的权限
+    public function insertPm2($posId,$posName2){
+        $posId2 = PositionFunc::getIdByName($posName2);
+        if($posId2){
+            $pmList = PositionDirPermission::find()->where(['position_id'=>$posId2])->all();
+            foreach ($pmList as $l){
+                $newPm = new PositionDirPermission();
+                $newPm->position_id = $posId;
+                $newPm->dir_id = $l->dir_id;
+                $newPm->type = $l->type;
+                $newPm->save();
+            }
+        }
+    }
+
+    public function insertPm($posId,$pmArr){
+        $pm1 = $pmArr[11];
+        $pm2 = $pmArr[12];
+        if(!empty($pm1)){
+            foreach($pm1 as $dir){
+                $dirId = DirFunc::getIdByAliasRoute($dir);
+                $posDirPm = new PositionDirPermission();
+                $posDirPm->position_id = $posId;
+                $posDirPm->dir_id = $dirId;
+                $posDirPm->type = 11;
+                $posDirPm->save();
+            }
+        }
+        if(!empty($pm2)){
+            foreach($pm2 as $dir){
+                $dirId = DirFunc::getIdByAliasRoute($dir);
+                $posDirPm = new PositionDirPermission();
+                $posDirPm->position_id = $posId;
+                $posDirPm->dir_id = $dirId;
+                $posDirPm->type = 12;
+                $posDirPm->save();
+            }
+        }
+
     }
 }

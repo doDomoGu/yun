@@ -91,7 +91,13 @@ echo '<br/>===========================<br/><br/>';
             //Yii::$app->response->redirect('position')->send();
             exit;
         }
-
+        if(Yii::$app->request->get('insert1')){
+            set_time_limit(0);
+            $p = new Position();
+            $p->insert1();
+            //Yii::$app->response->redirect('position')->send();
+            exit;
+        }
 
         $this->controller->view->title = '职位/部门 - 列表';
 
