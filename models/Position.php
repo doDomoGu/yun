@@ -493,16 +493,6 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
         $p_id = PositionFunc::getIdByName($parent_position);
         $parentPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
         if($p_id>0 && $parentPos){
-            /*$pmArr = [
-                11=>[
-
-                ],
-                12=>[
-                    'zyfzzx/qxgkzx/gsjj',
-                    'zyfzzx/qxgkzx/vi',
-                ],
-            ];*/
-
             $arr = [
                 ['n'=>'阜阳金悦东湖案场','a'=>'fyjydhac','c'=>[
                         ['n'=>'项目总监','a'=>'xmzj','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-阜阳金悦国际案场-项目总监'],
@@ -515,8 +505,74 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
                 ]
             ];
             $this->array2value($arr,$parentPos->id,$parentPos->level+1);
+        }
 
-//            $pos1 = Position::find()->where(['p_id'=>$p_id,'a'=>'fyjydhac'])
+        //卧龙湖小镇
+        $parent_position = '颂唐机构-南京-颂唐地产-销售业务部';
+        $p_id = PositionFunc::getIdByName($parent_position);
+        $parentPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
+        if($p_id>0 && $parentPos){
+            $arr = [
+                ['n'=>'卧龙湖小镇','a'=>'wlhxzac','c'=>[
+                    ['n'=>'项目总监','a'=>'xmzj','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目总监'],
+                    ['n'=>'项目经理','a'=>'xmjl','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目经理'],
+                    ['n'=>'客户主管','a'=>'xmzg','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-客户主管'],
+                    ['n'=>'项目策划','a'=>'xmch','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目策划'],
+                    ['n'=>'项目行政','a'=>'xmxz','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目行政'],
+                    ['n'=>'客户代表','a'=>'khdb','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-客户代表'],
+                ]
+                ]
+            ];
+            $this->array2value($arr,$parentPos->id,$parentPos->level+1);
+        }
+
+        //湖南路地下商业街
+        $parent_position = '颂唐机构-南京-颂唐地产-销售业务部';
+        $p_id = PositionFunc::getIdByName($parent_position);
+        $parentPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
+        if($p_id>0 && $parentPos){
+            $arr = [
+                ['n'=>'湖南路地下商业街','a'=>'wlhxzac','c'=>[
+                    ['n'=>'项目总监','a'=>'xmzj','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目总监'],
+                    ['n'=>'项目经理','a'=>'xmjl','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目经理'],
+                    ['n'=>'客户主管','a'=>'xmzg','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-客户主管'],
+                    ['n'=>'项目策划','a'=>'xmch','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目策划'],
+                    ['n'=>'项目行政','a'=>'xmxz','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目行政'],
+                    ['n'=>'客户代表','a'=>'khdb','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-客户代表'],
+                ]
+                ]
+            ];
+            $this->array2value($arr,$parentPos->id,$parentPos->level+1);
+        }
+
+        //镇江朗润园
+        $parent_position = '颂唐机构-南京-颂唐地产-销售业务部';
+        $p_id = PositionFunc::getIdByName($parent_position);
+        $parentPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
+        if($p_id>0 && $parentPos){
+            $arr = [
+                ['n'=>'镇江朗润园','a'=>'wlhxzac','c'=>[
+                    ['n'=>'项目总监','a'=>'xmzj','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目总监'],
+                    ['n'=>'项目经理','a'=>'xmjl','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目经理'],
+                    ['n'=>'客户主管','a'=>'xmzg','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-客户主管'],
+                    ['n'=>'项目策划','a'=>'xmch','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目策划'],
+                    ['n'=>'项目行政','a'=>'xmxz','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-项目行政'],
+                    ['n'=>'客户代表','a'=>'khdb','l'=>true,'pm2'=>'颂唐机构-合肥-颂唐地产-销售业务部-卧龙湖案场-客户代表'],
+                ]
+                ]
+            ];
+            $this->array2value($arr,$parentPos->id,$parentPos->level+1);
+        }
+
+        //创作总监
+        $parent_position = '颂唐机构-苏州-颂唐广告-创作部';
+        $p_id = PositionFunc::getIdByName($parent_position);
+        $parentPos = Position::find()->where(['id'=>$p_id,'status'=>1])->one();
+        if($p_id>0 && $parentPos){
+            $arr = [
+                ['n'=>'创作总监','a'=>'czzj','l'=>true,'pm2'=>'颂唐机构-苏州-颂唐广告-创作部-创作部一组-创作总监']
+            ];
+            $this->array2value($arr,$parentPos->id,$parentPos->level+1);
         }
     }
 
