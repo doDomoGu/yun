@@ -49,7 +49,7 @@ use app\components\CommonFunc;
 
                     <?php else:?>
                         <?php if($l->uid==yii::$app->user->id):?>
-                            <?=Html::Button('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',['link'=>'/dir/delete?id='.$l->id,'class'=> 'editBtn btn','data-filename'=>$l->filename,'data-file-id'=>$l->id,'data-toggle'=>"modal",'data-target'=>"#editModal"])?>
+                            <?=Html::Button('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',['class'=> 'editBtn btn','data-filename'=>$l->filename,'data-file-id'=>$l->id,'data-toggle'=>"modal",'data-target'=>"#editModal"])?>
                             <?=Html::Button('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>',['link'=>'/dir/delete?id='.$l->id,'class'=> 'deleteBtn btn'])?>
                         <?php else:?>
                             <?=Html::Button('<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',['class'=> 'btn disabled'])?>

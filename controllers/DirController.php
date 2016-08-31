@@ -508,6 +508,75 @@ class DirController extends BaseController
         }
     }
 
+    public function actionMoveFile(){
+        $result = false;
+        $error_message='';
+        $new_dir_id = Yii::$app->request->post('new_dir_id');
+        $new_p_id = Yii::$app->request->post('new_p_id');
+        $file_ids = Yii::$app->request->post('file_ids');
+        $permission = false;
+        if($new_p_id>0){
+            $parent_dir = File::find()->where(['id'=>$new_p_id])->one();
+            if($parent_dir){
+                $permission = PermissionFunc::checkFileUploadPermission($this->user->position_id,$parent_dir->dir_id,1);
+            }
+        }else{
+            $parent_dir = Dir::find()->where(['id'=>$new_dir_id])->one();
+            if($parent_dir) {
+                $permission = PermissionFunc::checkFileUploadPermission($this->user->position_id, $parent_dir->id, 1);
+            }
+        }
+        //检查目录是否存在 目录dir 是否有上传权限
+        if($parent_dir && $permission && is_array($file_ids)) {
+            //检查文件名是否重复
+            $filenameExist = false;
+            $files = File::find()->where(['in','id',$file_ids])->all();
+              //files2 代表目标路径下的文件
+            if($new_p_id>0){
+                $files2 = File::find()->where(['p_id'=>$new_p_id])->andWhere('status < 2')->all();
+            }else{
+                $files2 = File::find()->where(['dir_id'=>$new_dir_id])->andWhere('status < 2')->all();
+            }
+            $files2Name = []; //取出所有文件名
+            foreach($files2 as $f2){
+                $files2Name[] = $f2->filename;
+            }
+            //逐一比对是否存在
+            $filenameRepeat = [];
+            foreach($files as $f){
+                if(in_array($f->filename,$files2Name)){
+                    $filenameExist = true;
+                    $filenameRepeat[] = $f->filename;
+                }
+            }
+            if($filenameExist){
+                $error_message = '有文件重名 ('.implode($filenameRepeat,'|').')';
+            }else{
+                if($new_p_id>0) {
+                    foreach ($files as $f) {
+                        $f->dir_id = $parent_dir->dir_id;
+                        $f->p_id = $parent_dir->id;
+                        $f->save();
+                    }
+                }else{
+                    foreach ($files as $f) {
+                        $f->dir_id = $parent_dir->id;
+                        $f->p_id = 0;
+                        $f->save();
+                    }
+                }
+                $result = true;
+            }
+        }else{
+            $error_message = '目标目录不存在或目录权限不正确';
+        }
+        $arr = [];
+        $arr['error'] = $error_message;
+        $arr['result'] = $result;
+        echo json_encode($arr);
+        Yii::$app->end();
+    }
+
     public function actionEditFilename(){
         $result = false;
         $error_message='';

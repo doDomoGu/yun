@@ -123,8 +123,10 @@ $('#list-main').on('click','.file-check',function(){
         }
 
         if(_c!=_c4){
+            $('#head-move-btn').attr('disabled',true);
             $('#head-delete-btn').attr('disabled',true);
         }else{
+            $('#head-move-btn').attr('disabled',false);
             $('#head-delete-btn').attr('disabled',false);
         }
     }else{

@@ -95,6 +95,10 @@
                     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
                     下载
                 </button>
+                <button id="head-move-btn" class="btn btn-default" type="button" data-target="#moveModal" data-toggle="modal" >
+                    <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                    移动
+                </button>
                 <button id="head-delete-btn" value="" class="btn btn-default" type="button">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     删除
@@ -113,8 +117,8 @@
 <?/*=$this->render('modal/create_dir_person')*/?>
 
 <?=$this->render('modal/preview')?>
-
 <?=$this->render('modal/edit')?>
+<?=$this->render('modal/move',['dir_id'=>$dir_id,'p_id'=>$p_id,'dirRoute'=>$dirRoute])?>
 
 <input type="hidden" id="var_dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="var_p_id" value="<?=$p_id?>">
