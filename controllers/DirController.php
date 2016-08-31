@@ -508,6 +508,39 @@ class DirController extends BaseController
         }
     }
 
+    public function actionEditFilename(){
+        $result = false;
+        $error_message='';
+        $file_id = yii::$app->request->post('file_id');
+        $filename_new = yii::$app->request->post('filename_new');
+        $filename_new = trim($filename_new);
+        $file = File::find()->where(['id'=>$file_id,'status'=>1,'uid'=>yii::$app->user->id])->one();
+        if($file && $filename_new!=''){
+            if($file->p_id>0){
+                $exist = File::find()->where(['filename'=>$filename_new,'p_id'=>$file->p_id])->all();
+            }else{
+                $exist = File::find()->where(['filename'=>$filename_new,'dir_id'=>$file->dir_id])->all();
+            }
+            if(!empty($exist)){
+                $error_message = '文件名重名';
+            }else{
+                $file->filename = $filename_new;
+                if($file->save()){
+                    $result = true;
+                }
+            }
+
+
+        }else{
+            $error_message = '文件不存在/没有操作权限';
+        }
+        $arr = [];
+        $arr['error'] = $error_message;
+        $arr['result'] = $result;
+        echo json_encode($arr);
+        Yii::$app->end();
+    }
+
     public function actionGetUptoken(){
         $up=new QiniuUpload(yii::$app->params['qiniu-bucket']);
         $saveKey = yii::$app->request->get('saveKey','');
@@ -531,6 +564,8 @@ class DirController extends BaseController
         echo json_encode($arr);
 
     }
+
+
 }
 
 

@@ -239,3 +239,10 @@ $('.list-grid-switch a').click(function(){
     location.href = $(this).attr('data-url');
 });
 
+
+$('#editModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var modal = $(this);
+    modal.find('.modal-body .filename_old').html(button.data('filename'));
+    modal.find('.modal-body .file_id').val(button.data('file-id'));
+});

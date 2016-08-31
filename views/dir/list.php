@@ -114,6 +114,8 @@
 
 <?=$this->render('modal/preview')?>
 
+<?=$this->render('modal/edit')?>
+
 <input type="hidden" id="var_dir_id" value="<?=$dir_id?>">
 <input type="hidden" id="var_p_id" value="<?=$p_id?>">
 <input type="hidden" id="var_list_type" value="<?=$listType?>">
