@@ -16,7 +16,13 @@ Modal::begin([
             <span class="parent_old"><?=substr($dirRoute,0,-1)?></span>
         </p>
         <p>
-            <label>所在路径（新）：</label>
+            <label style="width:120px;display:block;float:left;">所在路径（新）：</label>
+            <div class="move_dir_route" style="display:block;float:left;">
+
+            </div>
+        </p>
+        <div class="clearfix"></div>
+        <p >
             dir<input class="move_dir_id_new" name="move_dir_id_new" >
             <br/>
             p_id<input class="move_p_id_new" name="move_p_id_new" >

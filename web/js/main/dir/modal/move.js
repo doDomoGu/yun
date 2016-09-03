@@ -48,3 +48,53 @@ $('#moveModalContent button.btn').click(function(){
         $('#moveModalContent .move-error').html('<span style="color:red;">不能为空！</span>');
     }
 });
+
+
+//var p_id;
+var p_id2;
+$(function(){
+    //p_id = $('#s_position_id').val();
+    $.ajax({
+        url: '/dir/ajax-move-select-dir',
+        type: 'get',
+        data: {
+            p_id:0
+        },
+        //dataType:'json',
+        success: function (data) {
+            $('.move_dir_route').html(data);
+        }
+    });
+
+
+    $('.move_dir_route').on('change','.pos-select-group',function(){
+        p_id2 = $(this).val();
+
+        if(p_id2>0){
+
+
+
+            //$(this).nextAll().remove();
+
+            $.ajax({
+                url: '/dir/ajax-move-select-dir',
+                type: 'get',
+                data: {
+                    p_id:p_id2
+                },
+                //dataType:'json',
+                success: function (data) {
+                    $('.move_dir_route').html(data);
+                }
+            });
+        }else{
+            if($(this).index()>0)
+                p_id2 = $(this).prev().val();
+            $(this).nextAll().remove();
+        }
+        //$('#pos_id_div').html(p_id2);
+        $('.move_dir_id_new').val(p_id2);
+        $('.move_dir_id_new').change();
+    });
+});
+

@@ -13,6 +13,7 @@ use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use Yii;
 use app\components\QiniuUpload;
+use app\components\PositionFunc;
 
 class DirController extends BaseController
 {
@@ -575,6 +576,38 @@ class DirController extends BaseController
         $arr['result'] = $result;
         echo json_encode($arr);
         Yii::$app->end();
+    }
+
+    public function actionAjaxMoveSelectDir(){
+        $p_id = Yii::$app->request->get('p_id',0);
+
+        $this->layout = false;
+
+        $parents = DirFunc::getParents($p_id);
+
+
+        $posList = [];
+        $selected = [];
+        if(!empty($parents)){
+            $p_id2 = 0;
+            foreach($parents as $p){
+                $posList[] =DirFunc::getDropDownList($p_id2,true,false,1);
+                $selected[] = $p->id;
+                $p_id2 = $p->id;
+            }
+            $posList[] = DirFunc::getDropDownList($p_id2,true,false,1);
+        }else{
+            $posList[] = DirFunc::getDropDownList($p_id,true,false,1);
+        }
+
+
+        /* if(empty($posList)){
+             yii::$app->end();
+         }*/
+        $params['posList'] = $posList;
+        $params['selected'] = $selected;
+
+        return $this->render('modal/move_dir',$params);
     }
 
     public function actionEditFilename(){
