@@ -27,7 +27,7 @@
         <a class="next" href="javascript:void(0)"></a>
     </section>
     <?php endif;?>
-    <section id="slideCover">
+    <!--<section id="slideCover">
         <img src="/images/site-index/1933.jpg" />
-    </section>
+    </section>-->
 </div>
