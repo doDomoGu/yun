@@ -5,6 +5,7 @@ namespace app\controllers;
 
 use app\components\DirFunc;
 use app\components\FileFrontFunc;
+use app\components\FileFunc;
 use app\components\PermissionFunc;
 use app\models\Dir;
 use app\models\File;
@@ -517,59 +518,67 @@ class DirController extends BaseController
         $file_ids = Yii::$app->request->post('file_ids');
         $permission = false;
         if($new_p_id>0){
-            $parent_dir = File::find()->where(['id'=>$new_p_id])->one();
+            $parent_dir = File::find()->where(['id'=>$new_p_id,'filetype'=>0])->one();
             if($parent_dir){
                 $permission = PermissionFunc::checkFileUploadPermission($this->user->position_id,$parent_dir->dir_id,1);
             }
         }else{
-            $parent_dir = Dir::find()->where(['id'=>$new_dir_id])->one();
+            $parent_dir = Dir::find()->where(['id'=>$new_dir_id,'is_leaf'=>1])->one();
             if($parent_dir) {
                 $permission = PermissionFunc::checkFileUploadPermission($this->user->position_id, $parent_dir->id, 1);
             }
         }
         //检查目录是否存在 目录dir 是否有上传权限
-        if($parent_dir && $permission && is_array($file_ids)) {
-            //检查文件名是否重复
-            $filenameExist = false;
-            $files = File::find()->where(['in','id',$file_ids])->all();
-              //files2 代表目标路径下的文件
-            if($new_p_id>0){
-                $files2 = File::find()->where(['p_id'=>$new_p_id])->andWhere('status < 2')->all();
-            }else{
-                $files2 = File::find()->where(['dir_id'=>$new_dir_id])->andWhere('status < 2')->all();
-            }
-            $files2Name = []; //取出所有文件名
-            foreach($files2 as $f2){
-                $files2Name[] = $f2->filename;
-            }
-            //逐一比对是否存在
-            $filenameRepeat = [];
-            foreach($files as $f){
-                if(in_array($f->filename,$files2Name)){
-                    $filenameExist = true;
-                    $filenameRepeat[] = $f->filename;
-                }
-            }
-            if($filenameExist){
-                $error_message = '有文件重名 ('.implode($filenameRepeat,'|').')';
-            }else{
-                if($new_p_id>0) {
-                    foreach ($files as $f) {
-                        $f->dir_id = $parent_dir->dir_id;
-                        $f->p_id = $parent_dir->id;
-                        $f->save();
+        if($parent_dir){
+            if($permission){
+                if(is_array($file_ids)){
+                    //检查文件名是否重复
+                    $filenameExist = false;
+                    $files = File::find()->where(['in','id',$file_ids])->all();
+                      //files2 代表目标路径下的文件
+                    if($new_p_id>0){
+                        $files2 = File::find()->where(['p_id'=>$new_p_id])->andWhere('status < 2')->all();
+                    }else{
+                        $files2 = File::find()->where(['dir_id'=>$new_dir_id])->andWhere('status < 2')->all();
+                    }
+                    $files2Name = []; //取出所有文件名
+                    foreach($files2 as $f2){
+                        $files2Name[] = $f2->filename;
+                    }
+                    //逐一比对是否存在
+                    $filenameRepeat = [];
+                    foreach($files as $f){
+                        if(in_array($f->filename,$files2Name)){
+                            $filenameExist = true;
+                            $filenameRepeat[] = $f->filename;
+                        }
+                    }
+                    if($filenameExist){
+                        $error_message = '有文件重名 ('.implode($filenameRepeat,'|').')';
+                    }else{
+                        if($new_p_id>0) {
+                            foreach ($files as $f) {
+                                $f->dir_id = $parent_dir->dir_id;
+                                $f->p_id = $parent_dir->id;
+                                $f->save();
+                            }
+                        }else{
+                            foreach ($files as $f) {
+                                $f->dir_id = $parent_dir->id;
+                                $f->p_id = 0;
+                                $f->save();
+                            }
+                        }
+                        $result = true;
                     }
                 }else{
-                    foreach ($files as $f) {
-                        $f->dir_id = $parent_dir->id;
-                        $f->p_id = 0;
-                        $f->save();
-                    }
+                    $error_message = '请选择要移动的文件！';
                 }
-                $result = true;
+            }else{
+                $error_message = '目录没有正确的上传权限';
             }
         }else{
-            $error_message = '目标目录不存在或目录权限不正确';
+            $error_message = '不是底层目录或目标目录不存在';
         }
         $arr = [];
         $arr['error'] = $error_message;
@@ -580,32 +589,51 @@ class DirController extends BaseController
 
     public function actionAjaxMoveSelectDir(){
         $p_id = Yii::$app->request->get('p_id',0);
+        $p_id3 = Yii::$app->request->get('p_id3',0);
 
         $this->layout = false;
 
         $parents = DirFunc::getParents($p_id);
 
 
-        $posList = [];
+        $dirList = [];
         $selected = [];
         if(!empty($parents)){
             $p_id2 = 0;
             foreach($parents as $p){
-                $posList[] =DirFunc::getDropDownList($p_id2,true,false,1);
+                $dirList[] =DirFunc::getDropDownList($p_id2,true,false,1);
                 $selected[] = $p->id;
                 $p_id2 = $p->id;
             }
-            $posList[] = DirFunc::getDropDownList($p_id2,true,false,1);
+            $dirList[] = DirFunc::getDropDownList($p_id2,true,false,1);
         }else{
-            $posList[] = DirFunc::getDropDownList($p_id,true,false,1);
+            $dirList[] = DirFunc::getDropDownList($p_id,true,false,1);
         }
 
 
-        /* if(empty($posList)){
-             yii::$app->end();
-         }*/
-        $params['posList'] = $posList;
+        $dir2List = [];
+        $selected2 = [];
+        $dir = Dir::find()->where(['id'=>$p_id])->one();
+        if($dir && $dir->is_leaf==1){
+            $parents2 = FileFunc::getParents($dir->id,$p_id3);
+            if(!empty($parents2)){
+                $p_id3_2 = 0;
+                foreach($parents2 as $p){
+                    $dir2List[] =FileFunc::getDropDownList($dir->id,$p_id3_2,false,1);
+                    $selected2[] = $p->id;
+                    $p_id3_2 = $p->id;
+                }
+                $dir2List[] = FileFunc::getDropDownList($dir->id,$p_id3,false,1);
+            }else{
+                $dir2List[] = FileFunc::getDropDownList($dir->id,$p_id3,false,1);
+
+            }
+        }
+
+        $params['dirList'] = $dirList;
         $params['selected'] = $selected;
+        $params['dir2List'] = $dir2List;
+        $params['selected2'] = $selected2;
 
         return $this->render('modal/move_dir',$params);
     }

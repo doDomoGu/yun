@@ -51,7 +51,8 @@ $('#moveModalContent button.btn').click(function(){
 
 
 //var p_id;
-var p_id2;
+var p_id2;  //dir表中的 p_id
+var p_id3;  //file表中的p_id
 $(function(){
     //p_id = $('#s_position_id').val();
     $.ajax({
@@ -95,6 +96,39 @@ $(function(){
         //$('#pos_id_div').html(p_id2);
         $('.move_dir_id_new').val(p_id2);
         $('.move_dir_id_new').change();
+
+        $('.move_p_id_new').val('');
+        $('.move_p_id_new').change();
+    });
+
+    $('.move_dir_route').on('change','.pos2-select-group',function(){
+        p_id3 = $(this).val();
+
+        if(p_id3>0){
+
+
+
+            //$(this).nextAll().remove();
+
+            $.ajax({
+                url: '/dir/ajax-move-select-dir',
+                type: 'get',
+                data: {
+                    p_id:p_id2,
+                    p_id3:p_id3
+                },
+                //dataType:'json',
+                success: function (data) {
+                    $('.move_dir_route').html(data);
+                }
+            });
+        }else{
+            if($(this).index()>0)
+                p_id3 = $(this).prev().val();
+            $(this).nextAll().remove();
+        }
+        $('.move_p_id_new').val(p_id3);
+        $('.move_p_id_new').change();
     });
 });
 

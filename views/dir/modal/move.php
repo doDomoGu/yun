@@ -23,9 +23,9 @@ Modal::begin([
         </p>
         <div class="clearfix"></div>
         <p >
-            dir<input class="move_dir_id_new" name="move_dir_id_new" >
+            dir<input type="hidden" class="move_dir_id_new" name="move_dir_id_new" >
             <br/>
-            p_id<input class="move_p_id_new" name="move_p_id_new" >
+            p_id<input  type="hidden" class="move_p_id_new" name="move_p_id_new" >
             <br/>
             <span class="move-error"></span>
         </p>
