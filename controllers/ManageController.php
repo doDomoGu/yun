@@ -121,6 +121,9 @@ class ManageController extends BaseController
             'user-sign-detail' => [
                 'class' => 'app\controllers\manage\userSign\UserSignDetailAction',
             ],
+            'group' => [
+                'class' => 'app\controllers\manage\group\GroupAction',
+            ],
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',
             ],
