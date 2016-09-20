@@ -14,30 +14,18 @@ class Group extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'alias'], 'required'],
-            [['id', 'status', 'p_id', 'ord', 'is_leaf', 'is_last', 'level', 'is_class'], 'integer'],
+            [['name'], 'required'],
+            [['id', 'status'], 'integer'],
             ['name', 'string', 'max'=>100],
-            [['describe', 'full_alias', 'shuoming','zhiquan','zhize','zhibiao'],'safe']
+            [['describe'],'safe']
         ];
     }
 
     public function attributeLabels(){
         return [
-            'name' => '名称',
-            'alias' => '别名',
-            'full_alias' => '完整别名',
+            'name' => '群组名',
             'describe' => '描述',
-            'p_id' => '父级',
-            'level' => '层级',
-            'is_leaf' => '是否叶级',
-            //'is_class' => '是否类',
-            //'is_last' => '最后一个',
-            'ord' => '排序',
-            'status' => '状态',
-            'shuoming' => '个人岗位说明',
-            'zhiquan' => '个人岗位职权',
-            'zhize' => '个人岗位职责',
-            'zhibiao' => '个人绩效指标',
+            'status' => '状态'
         ];
     }
 
