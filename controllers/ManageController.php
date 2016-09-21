@@ -127,6 +127,9 @@ class ManageController extends BaseController
             'group-add-and-edit' => [
                 'class' => 'app\controllers\manage\group\GroupAddAndEditAction',
             ],
+            'group-user' => [
+                'class' => 'app\controllers\manage\group\GroupUserAction',
+            ],
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',
             ],

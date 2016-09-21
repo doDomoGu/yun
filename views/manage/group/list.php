@@ -1,4 +1,5 @@
 <?php
+    $this->title = '群组设置';
     use yii\bootstrap\BaseHtml;
     use app\components\DirFunc;
     //\app\assets\AppAsset::addJsFile($this,'js/manage-dir.js');
@@ -28,6 +29,7 @@
                 <td><?=$l->status?></td>
                 <td>
                     <?=BaseHtml::a('编辑',['group-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
+                    <?=BaseHtml::a('职员列表',['group-user','id'=>$l->id],['class'=>'btn btn-success btn-xs'])?>
                 </td>
             </tr>
         <?php endforeach;?>
