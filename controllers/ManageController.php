@@ -77,6 +77,7 @@ class ManageController extends BaseController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'admin-set' => ['post'],
+                    'group-user-select' => ['get','post'],
                 ],
             ],
         ];
@@ -129,6 +130,9 @@ class ManageController extends BaseController
             ],
             'group-user' => [
                 'class' => 'app\controllers\manage\group\GroupUserAction',
+            ],
+            'group-user-select' => [
+                'class' => 'app\controllers\manage\group\GroupUserSelectAction',
             ],
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',

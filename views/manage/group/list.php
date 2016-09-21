@@ -25,8 +25,8 @@
                 <th scope="row"><?=$l->id?></th>
                 <!--<td><?/*=$l->ord*/?></td>-->
                 <td><?=$l->name?></td>
-                <td>---</td>
-                <td><?=$l->status?></td>
+                <td><?=count($l->user)?></td>
+                <td><?=$l->status==1?'启用':'<span style="color:red;">禁用</span>'?></td>
                 <td>
                     <?=BaseHtml::a('编辑',['group-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                     <?=BaseHtml::a('职员列表',['group-user','id'=>$l->id],['class'=>'btn btn-success btn-xs'])?>

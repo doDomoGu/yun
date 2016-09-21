@@ -49,5 +49,10 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
 
 /*ALTER TABLE `position` ADD `full_alias` VARCHAR(255) DEFAULT NULL AFTER `alias`;*/
 
+    public function getUser()
+    {
+        return $this->hasMany('app\models\GroupUser', array('group_id' => 'id'));
+    }
+
 
 }
