@@ -134,6 +134,9 @@ class ManageController extends BaseController
             'group-user-select' => [
                 'class' => 'app\controllers\manage\group\GroupUserSelectAction',
             ],
+            'group-dir-permission' => [
+                'class' => 'app\controllers\manage\group\GroupDirPermissionAction',
+            ],
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',
             ],

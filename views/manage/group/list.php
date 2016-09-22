@@ -30,6 +30,7 @@
                 <td>
                     <?=BaseHtml::a('编辑',['group-add-and-edit','id'=>$l->id],['class'=>'btn btn-primary btn-xs'])?>
                     <?=BaseHtml::a('职员列表',['group-user','id'=>$l->id],['class'=>'btn btn-success btn-xs'])?>
+                    <?=BaseHtml::a('权限列表',['group-dir-permission','id'=>$l->id],['class'=>'btn btn-warning btn-xs'])?>
                 </td>
             </tr>
         <?php endforeach;?>
