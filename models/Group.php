@@ -2,6 +2,7 @@
 
 namespace app\models;
 use app\components\DirFunc;
+use app\components\PermissionFunc;
 use app\components\PositionFunc;
 use yii;
 
@@ -52,6 +53,16 @@ ADD `zhibiao` VARCHAR(255) DEFAULT NULL ;*/
     public function getUser()
     {
         return $this->hasMany('app\models\GroupUser', array('group_id' => 'id'));
+    }
+
+    public function getPmUpload()
+    {
+        return $this->hasMany('app\models\GroupDirPermission', array('group_id' => 'id'))->where(['group_dir_permission.type'=>PermissionFunc::UPLOAD_COMMON]);
+    }
+
+    public function getPmDownload()
+    {
+        return $this->hasMany('app\models\GroupDirPermission', array('group_id' => 'id'))->where(['group_dir_permission.type'=>PermissionFunc::DOWNLOAD_COMMON]);
     }
 
 
