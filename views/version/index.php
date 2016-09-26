@@ -32,9 +32,9 @@
 ?>
 <p>
 <?php if($reverse==true):?>
-    <a href="/version" class="btn btn-success" >正序查看 >></a>
+    <a href="/version" class="btn btn-success" >倒序查看 >></a>
 <?php else: ?>
-    <a href="/version?order=reverse" class="btn btn-success">倒序查看 >></a>
+    <a href="/version?order=reverse" class="btn btn-success">正序查看 >></a>
 <?php endif;?>
 </p>
 <section class="version-item">
