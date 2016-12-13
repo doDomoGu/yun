@@ -143,13 +143,13 @@
 }
 
 #article-link > #article-link-1 > span > a {
-    background: url('../../../images/site-index/1.jpg');
+    background: url('../../../images/site-index/x1.jpg');
 }
 
 #article-link > #article-link-2 > span > a {
-    background: url('../../../images/site-index/2.jpg');
+    background: url('../../../images/site-index/x2.jpg');
 }
 
 #article-link > #article-link-3 > span > a {
-    background: url('../../../images/site-index/3.jpg');
+    background: url('../../../images/site-index/x3.jpg');
 }
