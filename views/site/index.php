@@ -73,13 +73,13 @@
 
         <section id="article-link">
             <article id="article-link-1">
-                <span><a href="/" target="_blank">唐 讯</a></span>
+                <span><a href="/" target="_blank"></a></span>
             </article>
             <article id="article-link-2">
-                <span><a href="/" target="_blank">唐 刊</a></span>
+                <span><a href="/" target="_blank"></a></span>
             </article>
             <article id="article-link-3">
-                <span><a href="/" target="_blank">唐 鉴</a></span>
+                <span><a href="/" target="_blank"></a></span>
             </article>
         </section>
         </main>
