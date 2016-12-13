@@ -24,6 +24,9 @@
             <a class="list-group-item <?=strpos($route,'manage/user')===0 && strpos($route,'manage/user-sign')!==0?'active':''?>" href="/manage/user">
                 公司职员
             </a>
+            <a class="list-group-item <?=strpos($route,'manage/group')===0 /*&& strpos($route,'manage/user-sign')!==0*/?'active':''?>" href="/manage/group">
+                群组设置
+            </a>
             <a class="list-group-item <?=strpos($route,'manage/admin')===0?'active':''?>" href="/manage/admin">
                 管理员授权
             </a>
@@ -45,6 +48,7 @@
             <a class="list-group-item <?=strpos($route,'manage/user')===0?'active':''?>" href="/manage/user">
                 公司职员
             </a>
+            <button class="list-group-item disabled">群组设置</button>
             <button class="list-group-item disabled">管理员授权</button>
             <button class="list-group-item disabled">消息通知</button>
             <button class="list-group-item disabled">职员签到</button>

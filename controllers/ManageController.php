@@ -77,6 +77,7 @@ class ManageController extends BaseController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'admin-set' => ['post'],
+                    'group-user-select' => ['get','post'],
                 ],
             ],
         ];
@@ -120,6 +121,21 @@ class ManageController extends BaseController
             ],
             'user-sign-detail' => [
                 'class' => 'app\controllers\manage\userSign\UserSignDetailAction',
+            ],
+            'group' => [
+                'class' => 'app\controllers\manage\group\GroupAction',
+            ],
+            'group-add-and-edit' => [
+                'class' => 'app\controllers\manage\group\GroupAddAndEditAction',
+            ],
+            'group-user' => [
+                'class' => 'app\controllers\manage\group\GroupUserAction',
+            ],
+            'group-user-select' => [
+                'class' => 'app\controllers\manage\group\GroupUserSelectAction',
+            ],
+            'group-dir-permission' => [
+                'class' => 'app\controllers\manage\group\GroupDirPermissionAction',
             ],
             'position' => [
                 'class' => 'app\controllers\manage\position\PositionAction',

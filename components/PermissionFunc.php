@@ -1,6 +1,7 @@
 <?php
 namespace app\components;
 
+use app\models\Group;
 use app\models\User;
 use yii\base\Component;
 use app\models\PositionDirPermission;
@@ -125,7 +126,7 @@ class PermissionFunc extends Component {
         //获取拥有的权限数组
         $typeArr = [];
 
-        $adminId = yii::$app->controller->user->is_admin;
+        $adminId = Yii::$app->controller->user->is_admin;
         if($adminId==User::SUPER_ADMIN){
             return true;
         }else{
@@ -135,6 +136,10 @@ class PermissionFunc extends Component {
                 foreach($pm as $p)
                     $typeArr[] = $p->type;
             }
+
+            $typeArr2 = GroupFunc::getOneDirPermissionTypes(Yii::$app->controller->user->id,$dir_id);
+
+            $typeArr = yii\helpers\ArrayHelper::merge($typeArr,$typeArr2);
         }
 
         if(in_array($permission_type,$typeArr)){
@@ -200,19 +205,24 @@ class PermissionFunc extends Component {
             $dir_id = $file->dir_id;
             $flag = $file->flag;
             $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
+            $typeArr = [];
             if(!empty($pm)){
                 //获取拥有的权限数组
-                $typeArr = [];
                 foreach($pm as $p){
                     $typeArr[] = $p->type;
                 }
-                if($flag==1){
-                    if(in_array(self::DOWNLOAD_COMMON,$typeArr))
-                        return true;
-                }elseif($flag==2){
-                    if($file->uid == yii::$app->user->id || in_array(self::DOWNLOAD_ALL,$typeArr))
-                        return true;
-                }
+            }
+
+            $typeArr2 = GroupFunc::getOneDirPermissionTypes(Yii::$app->controller->user->id,$dir_id);
+
+            $typeArr = yii\helpers\ArrayHelper::merge($typeArr,$typeArr2);
+
+            if($flag==1){
+                if(in_array(self::DOWNLOAD_COMMON,$typeArr))
+                    return true;
+            }elseif($flag==2){
+                if($file->uid == yii::$app->user->id || in_array(self::DOWNLOAD_ALL,$typeArr))
+                    return true;
             }
         }
         return false;
@@ -223,20 +233,25 @@ class PermissionFunc extends Component {
         if($adminId==User::SUPER_ADMIN){
             return true;
         }else{
+            $typeArr = [];
             $pm = PositionDirPermission::find()->where(['position_id'=>$position_id,'dir_id'=>$dir_id])->all();
             if(!empty($pm)){
                 //获取拥有的权限数组
-                $typeArr = [];
                 foreach($pm as $p){
                     $typeArr[] = $p->type;
                 }
-                if($flag==1){
-                    if(in_array(self::UPLOAD_COMMON,$typeArr))
-                        return true;
-                }elseif($flag==2){
-                    if(in_array(self::UPLOAD_PERSON,$typeArr))
-                        return true;
-                }
+            }
+
+            $typeArr2 = GroupFunc::getOneDirPermissionTypes(Yii::$app->controller->user->id,$dir_id);
+
+            $typeArr = yii\helpers\ArrayHelper::merge($typeArr,$typeArr2);
+
+            if($flag==1){
+                if(in_array(self::UPLOAD_COMMON,$typeArr))
+                    return true;
+            }elseif($flag==2){
+                if(in_array(self::UPLOAD_PERSON,$typeArr))
+                    return true;
             }
         }
         return false;
